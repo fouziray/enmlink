@@ -20,6 +20,175 @@ nlu:
     - goodevening
     - good afternoon
 
+- intent: inform
+  examples: |
+    - I'm available [LBB3402](code_site)
+    - Cell ID [887303](cell_id) 
+    - Site [4745](code_site)
+    - the site has congested
+
+- intent: ask_help_connection
+  examples: |
+    - failed to connect 
+    - connection failed 
+    - i can't connect to the site [14559](code_site) 
+    - can't connect to [S2](Sector) and [L2100](Tech4g) 
+    - cannot connect to [U2100](Tech3g)
+
+- intent: inform_conditions
+  examples: |
+    - [Bad](Rsrp)
+    - Rsrq [12](Rsrq)
+    - Sinr [28](Sinr)
+    - rsrp [68](Rsrp)
+
+- intent: ask_status
+  examples: |
+    - check the status of the network [2G](Tech2g) for me
+    - what is the current status of all the existing technologies [2g](Tech2g)[3g](Tech3g) [4g](Tech4g)
+
+- intent: ask_lock
+  examples: |
+    - lock [S1](Sector)
+    - can you lock [S2](Sector) 
+    - please to lock [S3](Sector) 
+    - can you lock [G900](Tech2g)
+    - i need to lock [U900](Tech3g)
+    - i want to lock [L2100](Tech4g)
+    - lock the [ca](CA) please 
+
+- intent: ask_unlock
+  examples: |
+    - unlock [S1](Sector)
+    - can you unlock [S2](Sector) 
+    - please to unlock [S3](Sector) 
+    - can you unlock [G900](Tech2g)
+    - i need to unlock [U900](Tech3g)
+    - i want to unlock [L2100](Tech4g)
+    - unlock [s3](Sector) please
+    - keep the [ca](CA) unlocked
+
+- intent: ask_ret
+  examples: |
+    - maxtilt [S1](sector)
+    - downtilt [S1](Sector)
+    - maxtilt [G900](Tech2g) [S1](Sector)
+    - maxtilt [U2100](Tech3g) [S2](Sector)
+    - maxtilt [L2100](Tech4g) [S1](Sector)
+    - downtilt [G900](Tech2g) or [S1](Sector)
+    - downtilt [U2100](Tech3g) , [S3](Sector)
+    - downtilt [L2100](Tech4g) and [S2](Sector)
+    - maxtilt all [G900](Tech2g) , [G900](Tech2g)
+    - maxtilt all [U2100](Tech3g)
+    - maxtilt all [L1800](Tech4g)
+    - maxtilt all [G900](Tech2g)
+    - maxtilt all [U2100](Tech3g)
+    - maxtilt all [L1800](Tech4g)
+
+- intent: check_request
+  examples: |
+    - Do yo unlock all sector ?
+    - [L2100](tech4g) locked ? 
+    - please check sector [1](sector) locked ? 
+    - [s1](sector) ? 
+    - sector [2](sector) ? 
+    - please check site [42105](code_site) [sector 1](Sector) [L2100](Tech4g)
+    - verify if there is [carrier aggregation](ca) in the site 
+    - does the site have [ca](ca)?
+
+- intent: ask_csrf
+  examples: |
+    - what about csrf 
+    - Also issue of CSFB about the site [LAI4315](code_site) 
+
+
+- intent: ask_pci
+  examples: |
+    - Please send me the pci 
+    - i need the pci 
+    - please i need the pci 
+    - pci please
+    - can you send me the pci 
+
+
+- intent: inform_throughput
+  examples: |
+    - bad throughput
+	  - not good 
+	  - Same result
+	  - [25 Mb/s](throughput_DL)
+	  - [70Mb/s](throughput_DL)
+    - same throughput
+    - still low 
+    - [low ca](throughput_ca)
+    - i had [throughput problem](throughput_DL) 
+    - I get [153 mb avr](throughput_DL)
+	  - [Ca avr 60 mb](throughput_ca)
+	  - [Avr ca 75](throughput_ca)
+	  - i have a problem with [ca Max throughput 35](throughput_ca)
+    - [Low throughput DL](throughput_DL)
+    - [Low throughput UL](throughput_UL)
+    - i have [problem with UL](throughput_UL)
+    - [DL bad](throughput_DL) all sectors
+    - [DL bad](throughput_DL) sector 1
+    - [Dynamic DL 30](throughput_dyn)
+    - UL good results
+    - [Average 11](throughput_DL)
+    - All sectors [DL bad](throughput_DL)
+    - S3 [30](throughput_DL) 
+    - S1 [25](throughput_DL)
+    - [Dynamic 20](throughput_dyn)
+    - Low Thrghpt [DL average 50 Mbs](throughput_DL) in both band
+
+
+- intent: inform_throughout_good
+  examples: |
+    - throughput good 
+    - throughput dl better 
+    - good throughput ca
+    - hight throughput avg 
+    - nice avg throughput 
+    - better throughout 
+    - I got throughput
+    - all sectors throughput good 
+    - best throughput
+
+
+- intent: ask_time
+  examples: |
+    - wait 
+    - [1mn](time) please
+    - please to wait
+    - when i'm done i will tell you 
+    - once i finish i will inform you  
+    - one min
+
+- intent: ask_restart
+  examples: |
+    - please to restart 
+    - restart if you can 
+    - can you restart the site 
+    - please to restart the sector [s1](sector)
+    - restart all technologies  
+    - restart band [L1800](Tech4g)
+
+- intent: ask_rollback
+  examples: |
+    - Rollback [1751](cell_id) 
+    - can I rollback the changes for [S1](sector)
+    - please rollback the changes for [S3](Sector) and [U2100](Tech3g) 
+    - can I rollback the changes for [G900](Tech2g) , [S1](Sector)
+    - please rollback the changes for [L2100](Tech4g) [S3](Sector)
+
+- intent: finishing_test
+  examples: |
+    - ssv done 
+    - test finished
+    - finish
+    - done with the site 
+    - done thanks 
+    - problems solved
+
 - intent: goodbye
   examples: |
     - cu
@@ -44,6 +213,11 @@ nlu:
     - of course
     - that sounds good
     - correct
+    - fine 
+    - not a problem 
+    - okey
+    - done
+    - is ok 
 
 - intent: deny
   examples: |
@@ -56,7 +230,6 @@ nlu:
     - not really
     - site not availble 
     - site is not planed for ssv 
-
 
 - intent: mood_great
   examples: |
@@ -99,16 +272,4 @@ nlu:
     - am I talking to a bot?
     - am I talking to a human?
 
-- intent: affirm
-examples: |
-    - yes
-    - indeed
-    - of course
-    - that sounds good
-    - correct
-    - ok 
-    - fine 
-    - not a problem 
-    - okey
-    - done
-    - is ok 
+

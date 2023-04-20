@@ -1,7 +1,4 @@
 version: "3.1"
-
-rules:
-
 - rule: Say goodbye anytime the user says goodbye
   steps:
   - intent: goodbye
@@ -11,3 +8,20 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+- rule: Say 'hello' anytime the user says greeting
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: scheduling the lock and the unlock 
+  steps:
+  - intent: ask_unlock 
+  - intent: ask_lock
+  - action: utter_ask_lock
+  - action: utter_ask_unlock
+
+- rule: ssv_done so unlock all sectors
+  steps:
+  - intent: finishing_test
+  - action: utter_unlock_all

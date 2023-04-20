@@ -26,9 +26,5 @@ nlu:
     - Sector 1
     - sector 2
     - sector 3
-- lookup: conditions 
-    - Rsrp 
-    - Rsrq 
-    - SINR 
-    - RSRP
+    
 
