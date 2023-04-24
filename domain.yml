@@ -8,7 +8,7 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
-
+  - finishing_test
   - ask_restart
   - ask_optimisation
   - ask_lock
@@ -31,6 +31,9 @@ intents:
   - check_all_techs
   - ask_csrf
   - greeting + inform_site
+  - ask_pci
+  - inform_throughput
+  - inform_throughout_good
 entities:
 - Tech2g
 - Tech3g
@@ -191,6 +194,9 @@ slots:
       entity: time
 
 responses:
+
+  utter_unlock_all:
+  - text: "utter_unlock_all"
   utter_greet:
   - text: "Hey! How are you?"
 
@@ -209,6 +215,85 @@ responses:
 
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
+  
+  utter_inform:
+  - text: "utter inforn"
+
+  utter_ask_lock:
+  - text: "utter_ask_lock"
+
+  utter_ask_unlock:
+  - text: "utter_ask_unlock"
+
+  utter_cr_execution:
+  - text: "utter_cr_execution"
+  
+  utter_rollback:
+  - text: "utter_rollback"
+
+  utter_thanks:
+  - text: "utter_thanks"
+
+  utter_check_all_techs:
+  - text: "utter_check_all_techs"
+  
+  utter_ask_help:
+  - text: "utter_ask_help"
+
+  utter_ask_time:
+  - text: "utter_ask_time"
+
+  utter_ask_optimisation:
+  - text: "utter_ask_optimisation"
+  
+  utter_throuoghout_good:
+  - text: "utter_throuoghout_good"
+
+  utter_check:
+  - text: "utter_check"
+
+  utter_ret:
+  - text: "utter_ret"
+
+  utter_optimise:
+  - text: "utter_optimise"
+
+
+  utter_finishing_test:
+  - text: "utter_finishing_test"
+  
+
+  utter_restart:
+  - text: "utter_restart"
+
+  utter_affirm:
+  - text: "utter_affirm"
+
+  utter_ask_csrf:
+  - text: "utter_ask_csrf"
+
+  utter_ask_status:
+  - text: "utter_ask_status"
+
+  utter_help_connection:
+  - text: "utter_help_connection"
+
+  utter_help:
+  - text: "utter_help_connection"
+
+
+  utter_optimisation:
+  - text: "utter_optimisation"
+
+  utter_deny:
+  - text: "utter_deny"
+
+  utter_check_request:
+  - text: "utter_check_request"
+
+  utter_pci:
+  - text: "utter_pci"
+  
 
 actions: 
   - action_get_message

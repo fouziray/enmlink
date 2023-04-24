@@ -66,7 +66,7 @@ stories:
   - action: utter_ask_lock
   - action: utter_ask_unlock
   - action: utter_cr_execution
-  - intent: ask_rollback
+  - intent: ask_Rollback
     entities:
     - Sector : ["s1"]
   - slot_was_set:
@@ -90,7 +90,7 @@ stories:
     - code_site_slot: "15455"
   - intent: check_all_techs
   - action: utter_check_all_techs
-  - intent: ask_help_connection
+  - intent: Connection
     entities:
     - Sector : "S2"
     - Tech4g : "L1800"
@@ -115,28 +115,21 @@ stories:
   - action: utter_ask_unlock
   - intent: inform_throughput
   - action: utter_ask_optimisation
-  - intent: inform_throughput_good
-    entities: 
-    - throughput_ca: "100"
-  - slot_was_set:
-    - throughput_ca_slot: "100"
-  - action: utter_throuoghout_good
   - intent: finishing_test 
-  - action: utter_thanks
-  - intent: goodbye
-  - action: utter_goodbye
+  - action: utter_unlock_all
+  
     
 
 ## story example 2
-- story: storie3
+- story: storie2
   steps:
   - intent : greet
+  - action : utter_greet 
   - intent : inform
     entities:
     - code_site: "se6322"
   - slot_was_set:
     - code_site_slot: "se6322"
-  - action : utter_greet 
   - action : utter_help      # asking question who can i help you ?
   - intent : ask_lock
     entities:
@@ -158,7 +151,7 @@ stories:
     entities:
     - throughput_DL : "80"
   - action : utter_optimise
-  - intent : ask_ret
+  - intent : ask_Ret
   - action : utter_ret
   - intent : ask_restart
   - action : utter_restart
@@ -169,13 +162,14 @@ stories:
   - intent : affirm
   - action : utter_affirm
   - intent : finishing_test
-  - action : utter_thanks
+  - action: utter_unlock_all
 
   
 ## story 3 
 - story: storie3
   steps:
   - intent : greet
+  - action : utter_greet 
   - intent : inform
     entities :
     - code_site : 
@@ -193,18 +187,19 @@ stories:
     entities : 
     - code_site : 
   - action : utter_ask_csrf
-  - intent : rollback
+  - intent : ask_Rollback
   - action : utter_rollback
   - intent : finishing_test
-  - action : utter_thanks
-  - intent : goodby
-  - action : utter_goodby 
+  - action: utter_unlock_all
+  - intent : goodbye
+  - action : utter_goodbye 
 
 
   ## story 4 
 - story: storie4
   steps:
   - intent : greet
+  - action : utter_greet 
   - intent : inform
     entities :
     - code_site :  
@@ -213,7 +208,7 @@ stories:
     - technologie : "3g" 
     - technologie : "4g" 
   - action : utter_ask_status
-  - intent : ask_help_connection
+  - intent : Connection
     entities :
     - technologie : "4g" 
     - Sector : "s1"
@@ -227,7 +222,7 @@ stories:
   - intent : affirm
   - action : utter_affirm
   - intent : finishing_test
-  - action : utter_goodby 
+  - action: utter_unlock_all
 
 
 
@@ -236,21 +231,23 @@ stories:
 - story: storie5
   steps:
   - intent : greet
+  - action : utter_greet 
   - intent : inform
     entities :
     - code_site : 
-  - intent : ask_help_connection
+  - intent : Connection
   - action : utter_help_connection
   - intent : deny 
   - action : utter_deny 
-  - intent : goodby
-  - action : utter_goodby
+  - intent : goodbye
+  - action : utter_goodbye
 
 
   ## story 5    ask career agregation 
 - story: storie6
   steps:
   - intent : greet
+  - action : utter_greet 
   - intent : inform
     entities :
     - code_site : 
@@ -259,21 +256,22 @@ stories:
     - ca : "ca"
   - action : utter_check_request
   - intent : finishing_test
-  - intent : goodby
-  - action : utter_thanks
-  - action : utter_goodby
+  - action: utter_unlock_all
+  - intent : goodbye
+  - action : utter_goodbye
 
 
    ## story 7      ask pci 
 - story: storie7  
   steps:
   - intent : greet
+  - action : utter_greet 
   - intent : inform
     entities :
     - code_site : 
   - intent : ask_pci
   - action : utter_pci
   - intent : finishing_test
-  - intent : goodby
-  - action : utter_thanks
-  - action : utter_goodby
+  - action: utter_unlock_all
+  - intent : goodbye
+  - action : utter_goodbye
