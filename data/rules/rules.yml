@@ -17,12 +17,12 @@ rules:
   - intent: greet
   - action: utter_greet
 
-- rule: scheduling the lock and the unlock 
-  steps:
-  - intent: ask_unlock 
-  - intent: ask_lock
-  - action: utter_ask_lock
-  - action: utter_ask_unlock
+#- rule: scheduling the lock and the unlock 
+#  steps:
+#  - intent: ask_unlock 
+#  - intent: ask_lock
+#  - action: utter_ask_lock
+#  - action: utter_ask_unlock
 
 - rule: ssv_done so unlock all sectors
   steps:
