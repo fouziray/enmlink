@@ -37,6 +37,158 @@ entities:
 - Tech4g
 - Sector
 - conditions
+- RSRP 
+- RSRQ
+- SINR
+- Person
+- code_site
+- throughput_DL
+- throughput_UL
+- throughput_dyn
+- throughput_ca
+- cell_id
+- time
+- ca
+
+slots: 
+  code_site_slot:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: code_site
+
+
+  cell_id_slot:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: cell_id
+
+
+  person_slot:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: person
+
+  Tech2g_slot:
+    type: categorical
+    values:
+    - G900 
+    - G1800
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: Tech2g
+
+
+  Tech3g_slot:
+    type: categorical
+    values:
+    - U900
+    - U2100
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: Tech3g
+
+  
+  Tech4g_slot:
+    type: categorical
+    values:
+    - L1800
+    - L2100
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: Tech4g
+
+  Sector_slot:
+    type: list
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: Sector
+  
+  Sector_l_slot:
+    type: list
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: Sector
+
+
+  Sector_u_slot:
+    type: list
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: Sector
+
+
+
+  throughput_DL_slot:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: throughput_DL
+
+  throughput_UL_slot:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: throughput_UL
+
+  throughput_ca_slot:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: throughput_ca
+
+
+  throughput_dyn_slot:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: throughput_dyn
+
+  RSRP_slot:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: RSRP
+
+
+  RSRQ_slot:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: RSRQ
+
+
+  SINR_slot:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: SINR
+
+
+  time_slot:
+    type: float
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: time
 
 responses:
   utter_greet:

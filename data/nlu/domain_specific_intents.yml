@@ -129,37 +129,47 @@ nlu:
    examples: |
     - salam [amin](person) site [4704](code_site)
 
- - intent: ask_Optimisation
+
+ - intent: inform_throughput
    examples: |
-    - I didnt get the throughput  
-    - how can I optimize the network performance?
-    - what are some ways to improve network performance?
-    - throughput non atteint
-    - can you help me optimize the network?
-    - throughput non atteint 
-    - how can i improve the throughput ?
     - bad throughput
     - not good 
-    - Same result 
+    - Same result
+    - [25 Mb/s](throughput_DL)
+    - [70Mb/s](throughput_DL)
+    - same throughput
     - still low 
-    - low ca
-    - i had throughput problem
-    - i have a problem with ca Max throughput [35](throughput)
-    - Ca avr [60mb](throughput)
-    - low throughpout [1800](band)
-    - Stil has low thrghpt Average is [40Mbs](throughput)
-    - [S1](Sector) : average is [44 Mbs](throughput)
-
- - intent: downlink
-   examples: |
-    - All sectors DL [bad](throughput_dl)
-    - Low throughput DL
-    - Dynamic DL [30](throughput_dl)
- - intent: uplink 
-   examples: |
+    - [low ca](throughput_ca)
+    - i had [throughput problem](throughput_DL) 
+    - I get [153 mb avr](throughput_DL)
+    - [Ca avr 60 mb](throughput_ca)
+    - [Avr ca 75](throughput_ca)
+    - i have a problem with [ca Max throughput 35](throughput_ca)
+    - [Low throughput DL](throughput_DL)
+    - [Low throughput UL](throughput_UL)
+    - i have [problem with UL](throughput_UL)
+    - [DL bad](throughput_DL) all sectors
+    - [DL bad](throughput_DL) sector 1
+    - [Dynamic DL 30](throughput_dyn)
     - UL good results
-    - Low throughput UL 
-    - Low Thrghpt DL average [50 Mbs](throughput_dl) in [both band](both_bands)
+    - [Average 11](throughput_DL)
+    - All sectors [DL bad](throughput_DL)
+    - S3 [30](throughput_DL) 
+    - S1 [25](throughput_DL)
+    - [Dynamic 20](throughput_dyn)
+    - Low Thrghpt [DL average 50 Mbs](throughput_DL) in both band
+
+ - intent: inform_throughout_good
+   examples: |
+    - throughput good 
+    - throughput dl better 
+    - good throughput ca
+    - hight throughput avg 
+    - nice avg throughput 
+    - better throughout 
+    - I got throughput
+    - all sectors throughput good 
+    - best throughput
 
  - intent: ask_Rollback
    examples: |
@@ -171,7 +181,9 @@ nlu:
 
  - intent: inform+ask_lock+ask_unlock
    examples: |
-    - site [1475](code_site) please to lock [s1](Sector) [s2](Sector) and unlock [s3](Sector)
+    - site [1475](code_site) please to lock [s1]{"entity":"Sector", "role":"lock") [s2]("entity":"Sector","role":"lock") and unlock [s3]("entity":"Sector", "role":"unlock")
+    - site [1475](code_site) please to unlock [s1]{"entity":"Sector", "role":"unlock")  and lock [s2]("entity":"Sector","role":"lock") [s3]("entity":"Sector", "role":"lock")
+    - site [1475](code_site) please to lock [s1]{"entity":"Sector", "role":"lock")  and unlock [s2]("entity":"Sector","role":"unlock") and lock [s3]("entity":"Sector", "role":"lock")
 
  - intent: inform+ask_optimisation
    examples: |  
@@ -194,6 +206,14 @@ nlu:
     - what about csrf 
     - Also issue of CSFB about the site [LAI4315](code_site)
 
+ - intent: ask_pci
+   examples: |
+    - Please send me the pci 
+    - i need the pci 
+    - please i need the pci 
+    - pci please
+    - can you send me the pci 
+    
  - intent: ask_restart
    examples: |
     - please to restart 
@@ -203,3 +223,11 @@ nlu:
     - restart all technologies  
     - restart band [L1800](Tech4g)
 
+ - intent: finishing_test
+   examples: |
+    - ssv done 
+    - test finished
+    - finish
+    - done with the site 
+    - done thanks 
+    - problems solved
