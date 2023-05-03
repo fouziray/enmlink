@@ -25,5 +25,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', views.UserList.as_view()),
     path('users/<int:pk>/', views.UserDetail.as_view()),
-    path('reponse/<act>',views.Respond.as_view())
+    path('reponse/<act>',views.Respond.as_view()),
+    path('helpproviders',views.HelpProviderList.as_view()),
+    path('helpproviders/<int:pk>/', views.HelperDetail.as_view()),
+    path('message/',views.MessageList.as_view()),
+    path('convo/',views.ConvoList.as_view())
+    
 ]
