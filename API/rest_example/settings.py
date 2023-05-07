@@ -138,4 +138,4 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
 }
-AUTH_USER_MODEL = 'restapp.User'
+AUTH_USER_MODEL = 'restapp.User'  #comment this to eliminate the error

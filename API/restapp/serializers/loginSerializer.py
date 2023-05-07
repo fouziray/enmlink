@@ -49,8 +49,11 @@ from django.contrib.auth.backends import BaseBackend
 
 class MyBackend(BaseBackend):
     def authenticate(self, request, username=None, password=None):
-        user=User.objects.get(id=1)
-        if check_password(password, user.password):
+        user=User.objects.get(username=username)
+        print("this is return value",user,user.password)
+        #if check_password(password, user.password):
+        if password == user.password: 
+            print("im inside checking")
             return UserSerializer(user)
         else:
             return "false password"

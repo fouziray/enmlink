@@ -1,15 +1,22 @@
 from django.db import models
-
+from django.contrib.auth.models import User ,AbstractUser, AbstractBaseUser, PermissionsMixin
 # Create your models here.
-class User(models.Model):
+class User(AbstractBaseUser, PermissionsMixin):
+
+    #REQUIRED_FIELDS = ('user',)
+    #user = models.OneToOneField(User, related_name='profile', unique=True, on_delete=models.CASCADE)
     id= models.IntegerField
     first_name= models.CharField(max_length=100, null=True)
     last_name= models.CharField(max_length=100, null=True)
-    username= models.CharField(max_length=100,null=True)
-    email= models.EmailField(max_length=100,null=True)
+    username= models.CharField(max_length=100,null=True, unique=True)
+    email= models.EmailField(max_length=100,null=True, unique=True)
     password= models.CharField(max_length=30, null=True)
+    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = 'email'
+
     def __str__(self) -> str:
-        return f"{id} {username} {first_name} {last_name} {email}"
+        return f"{self.id} {self.username} {self.first_name} {self.last_name} {self.email}"
+
 
 class HelpProvider(User):
     fonction=models.CharField(max_length=20, null=False)
