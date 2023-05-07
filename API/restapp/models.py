@@ -25,6 +25,7 @@ class Message(models.Model):
    # intent = models.ForeignKey(Intent,on_delete=models.DO_NOTHING)
     text=models.CharField(max_length=100, null=True)
     user_id= models.ForeignKey(User,on_delete=models.DO_NOTHING)
+    source_is_user= models.BooleanField(default=True)   
 
 class Intent(models.Model):
     intent = models.CharField(max_length=30,default="")

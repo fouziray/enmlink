@@ -17,18 +17,20 @@ from django.contrib import admin
 from django.urls import path
 
 
-from restapp import views
+from restapp.views.views import *
+from restapp.views.loginView import LoginView
 
 admin.autodiscover()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('users/', views.UserList.as_view()),
-    path('users/<int:pk>/', views.UserDetail.as_view()),
-    path('reponse/<act>',views.Respond.as_view()),
-    path('helpproviders',views.HelpProviderList.as_view()),
-    path('helpproviders/<int:pk>/', views.HelperDetail.as_view()),
-    path('message/',views.MessageList.as_view()),
-    path('convo/',views.ConvoList.as_view())
+    path('users/', UserList.as_view()),
+    path('users/<int:pk>/', UserDetail.as_view()),
+    path('reponse/<act>',Respond.as_view()),
+    path('helpproviders',HelpProviderList.as_view()),
+    path('helpproviders/<int:pk>/', HelperDetail.as_view()),
+    path('message/',MessageList.as_view()),
+    path('convo/', ConvoList.as_view()),
+    path('login/', LoginView.as_view()),
     
 ]

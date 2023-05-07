@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from django.contrib.auth.models import User 
 from django.http import Http404
-from restapp.serializers import ConvoSerializer, HelpProviderSerialize, MessageSerializer, UserSerializer
+from restapp.serializers.serializers import ConvoSerializer, HelpProviderSerialize, MessageSerializer, UserSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
