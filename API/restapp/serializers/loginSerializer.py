@@ -53,12 +53,12 @@ class MyBackend(BaseBackend):
             user= User.objects.get(username=username)
         except User.DoesNotExist:
             return False
-        print("this is return value",user,user.password)
         #if check_password(password, user.password):
         if password == user.password: 
-            print("im inside checking")
             return user
         else:
-            return "false password"
+            msg= "false password"
+            raise serializers.ValidationError(msg, code='authorization')
+             
         #user=UserSerializer(user)
 
