@@ -31,7 +31,14 @@ action_endpoint:
 #    db: <name of the db within your mongo instance, e.g. rasa>
 #    username: <username used for authentication>
 #    password: <password used for authentication>
-
+tracker_store:
+    type: customTracker.mySQLTrackerStore
+    dialect: "postgresql"  # the dialect used to interact with the db
+    url: "localhost"  # (optional) host of the sql db, e.g. "localhost"
+    db: "enmssv2"  # path to your db
+    username: "admin"  # username used for authentication
+    password: "admin" # password used for authentication
+   
 # Event broker which all conversation events should be streamed to.
 # https://rasa.com/docs/rasa/event-brokers
 
