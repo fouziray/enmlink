@@ -15,7 +15,7 @@ intents:
   - ask_unlock
   - ask_Ret
   - inform
-  - greeting+inform
+  #- greeting+inform
   - Connection
   - test_done
   - ask_help
@@ -25,33 +25,39 @@ intents:
   - downlink
   - uplink
   - ask_Rollback
-  - inform+ask_lock+ask_unlock
-  - inform+ask_optimisation
+  #- inform+ask_lock+ask_unlock
+  #- inform+ask_optimisation
   - ask_status
   - check_all_techs
   - ask_csrf
-  - greeting + inform_site
+  #- greeting + inform_site
   - ask_pci
   - inform_throughput
   - inform_throughout_good
 entities:
-- Tech2g
-- Tech3g
-- Tech4g
-- Sector
-- conditions
-- RSRP 
-- RSRQ
-- SINR
-- Person
-- code_site
-- throughput_DL
-- throughput_UL
-- throughput_dyn
-- throughput_ca
-- cell_id
-- time
-- ca
+  - Sector: 
+      roles:
+        - block
+        - unblock
+  - Tech2g
+  - Tech3g
+  - Tech4g
+  - conditions
+  - RSRP 
+  - RSRQ
+  - SINR
+  - Person
+  - code_site
+  - throughput:
+      roles:
+        - throughput_DL
+        - throughput_UL
+        - throughput_dyn
+        - throughput_ca
+  - cell_id
+  - time
+  - ca
+
 
 slots: 
   code_site_slot:
@@ -70,40 +76,41 @@ slots:
       entity: cell_id
 
 
-  person_slot:
+  Person:
     type: text
     influence_conversation: true
     mappings: 
     - type: from_entity
-      entity: person
+      entity: Person
 
   Tech2g_slot:
     type: categorical
     values:
     - G900 
     - G1800
+    - 2g
     influence_conversation: true
     mappings: 
     - type: from_entity
       entity: Tech2g
-
 
   Tech3g_slot:
     type: categorical
     values:
     - U900
     - U2100
+    - 3g
     influence_conversation: true
     mappings: 
     - type: from_entity
       entity: Tech3g
-
   
   Tech4g_slot:
     type: categorical
     values:
     - L1800
     - L2100
+    - 4g
     influence_conversation: true
     mappings: 
     - type: from_entity
@@ -116,21 +123,28 @@ slots:
     - type: from_entity
       entity: Sector
   
-  Sector_l_slot:
+  block_sector_slot:
     type: list
     influence_conversation: true
     mappings: 
     - type: from_entity
       entity: Sector
+      role: block
 
-
-  Sector_u_slot:
+  unblock_sector_slot:
     type: list
     influence_conversation: true
     mappings: 
     - type: from_entity
       entity: Sector
+      role: unblock
 
+  throughput_slot:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: throughput
 
 
   throughput_DL_slot:
@@ -138,29 +152,32 @@ slots:
     influence_conversation: true
     mappings: 
     - type: from_entity
-      entity: throughput_DL
+      entity: throughput
+      role: throughput_DL
 
   throughput_UL_slot:
     type: text
     influence_conversation: true
     mappings: 
     - type: from_entity
-      entity: throughput_UL
+      entity: throughput
+      role: throughput_UL
 
   throughput_ca_slot:
     type: text
     influence_conversation: true
     mappings: 
     - type: from_entity
-      entity: throughput_ca
-
+      entity: throughput
+      role: throughput_ca
 
   throughput_dyn_slot:
     type: text
     influence_conversation: true
     mappings: 
     - type: from_entity
-      entity: throughput_dyn
+      entity: throughput
+      role: throughput_dyn
 
   RSRP_slot:
     type: text
@@ -197,8 +214,12 @@ responses:
 
   utter_unlock_all:
   - text: "utter_unlock_all"
+  
   utter_greet:
-  - text: "Hey! How are you?"
+  - text: "Hey! {Person}"
+  - text: "Hello {Person}"
+  - text: "Hi {Person} , how can i help"
+  - text: "Salam {Person}"
 
   utter_cheer_up:
   - text: "Here is something to cheer you up:"
@@ -211,7 +232,8 @@ responses:
   - text: "Great, carry on!"
 
   utter_goodbye:
-  - text: "Bye"
+  - text: "Bye {Person}"
+  - text: "Bye!"
 
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
@@ -220,11 +242,11 @@ responses:
   - text: "utter inforn"
 
   utter_ask_lock:
-  - text: "utter_ask_lock"
-
+  - text: "Sector {block_sector_slot} blocked"
+  - text: "Secteur {block_sector_slot} blocké"
   utter_ask_unlock:
-  - text: "utter_ask_unlock"
-
+  - text: "Sector {unblock_sector_slot} unblocked"
+  - text: "Secteur {unblock_sector_slot} déblocké"
   utter_cr_execution:
   - text: "utter_cr_execution"
   
@@ -246,8 +268,8 @@ responses:
   utter_ask_optimisation:
   - text: "utter_ask_optimisation"
   
-  utter_throuoghout_good:
-  - text: "utter_throuoghout_good"
+  utter_throughout_good:
+  - text: "utter_throughout_good"
 
   utter_check:
   - text: "utter_check"

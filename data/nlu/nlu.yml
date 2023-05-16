@@ -1,11 +1,15 @@
 version: "3.1"
 
 nlu:
+
+- regex: Person 
+    - ^[A-Za-z]{1,7}$
+
 - intent: greet
   examples: |
-    - hey
-    - hello
-    - hi
+    - hey it's [Amin](Preson)
+    - hello i'm [Abdou](Person)
+    - hi it's me the drive tester [Fatah](Person)
     - hello there
     - good morning
     - good evening
@@ -14,8 +18,8 @@ nlu:
     - let's go
     - hey dude
     - hey there
-    - salam  
-    - salut
+    - salam it's [Djamila](Person) 
+    - salut c'est [Aziz](Person) 
     - goodmorning
     - goodevening
     - good afternoon
