@@ -5,14 +5,24 @@ stories:
 - story: happy path
   steps:
   - intent: greet
+    entities:
+    - Person : "Abdou"
+  - slot_was_set:
+    - Person: "Abdou"
   - action: utter_greet
+  - action: action_get_message
   - intent: mood_great
   - action: utter_happy
 
 - story: sad path 1
   steps:
   - intent: greet
+    entities:
+    - Person : "Fatah"
+  - slot_was_set:
+    - Person: "Fatah"
   - action: utter_greet
+  - action: action_get_message
   - intent: mood_unhappy
   - action: utter_cheer_up
   - action: utter_did_that_help
@@ -22,25 +32,51 @@ stories:
 - story: sad path 2
   steps:
   - intent: greet
+    entities:
+    - Person : "Walid"
+  - slot_was_set:
+    - Person: "Walid"
   - action: utter_greet
+  - action: action_get_message 
   - intent: mood_unhappy
   - action: utter_cheer_up
   - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
 
-- story: testing
+- story: testing_unlock_mssg
   steps:
   - intent: ask_unlock
+    entities:
+    - unblock: ["S1"]
+  - slot_was_set:
+    - unblock_sector_slot: ["S1"]
+  - action: utter_ask_unlock
   - action: action_get_message
-  - action: action_hello_world
+ # - action: action_hello_world
+
+- story: testing_lock_mssg
+  steps:
+  - intent: ask_lock
+    entities:
+    - block: ["S3"]
+  - slot_was_set:
+    - block_sector_slot: ["S3"]
+  - action : utter_ask_lock
+  - action: action_get_message
+ # - action: action_hello_world
 
 #------------------
 ## story example 1 
 - story: test_one_technologie_DL
   steps:
   - intent: greet
-  - action: utter_greet
+    entities:
+    - Person : "Faouzi"
+  - slot_was_set:
+    - Person: "Faouzi" 
+  - action: utter_greet  
+  - action: action_get_message
   - intent: inform
     entities:
     - code_site: "15455"
@@ -55,22 +91,24 @@ stories:
   - action: utter_inform
   - intent: ask_lock
     entities:
-    - Sector: "S1"
+    - block: ["S1"]
   - slot_was_set:
-    - Sector_l_slot: ["S1"] 
+    - block_sector_slot: ["S1"]
+  - action : utter_ask_lock 
+  - action: action_get_message 
   - intent: ask_unlock
     entities:
-    - Sector: "s2"
+    - unblock: ["s2"]
   - slot_was_set:
-    - Sector_u_slot: ["s2"]
-  - action: utter_ask_lock
-  - action: utter_ask_unlock
-  - action: utter_cr_execution
+    - unblock_sector_slot: ["s2"]
+  - action : utter_ask_unlock 
+  - action: action_get_message
+  #- action: utter_cr_execution
   - intent: ask_Rollback
     entities:
     - Sector : ["s1"]
   - slot_was_set:
-    - Sector_slot: null
+    - Sector_slot: ["s1"]
   - action: utter_rollback
   - intent: test_done 
   - action: utter_thanks
@@ -82,7 +120,12 @@ stories:
 - story: test_ssv
   steps:
   - intent: greet
+    entities:
+    - Person : "Aziz"
+  - slot_was_set:
+    - Person: "Aziz"
   - action: utter_greet
+  - action: action_get_message
   - intent: inform
     entities:
     - code_site: "15455"
@@ -92,7 +135,7 @@ stories:
   - action: utter_check_all_techs
   - intent: Connection
     entities:
-    - Sector : "S2"
+    - Sector : ["S2"]
     - Tech4g : "L1800"
   - slot_was_set:
     - Sector_slot: ["S2"]
@@ -103,16 +146,18 @@ stories:
   - action: utter_ask_time
   - intent: ask_lock
     entities:
-      - Sector : "S1"
+      - block : ["S1"]
   - slot_was_set:
-    - Sector_l_slot: ["S1"]
+    - block_sector_slot: ["S1"]
+  - action: utter_ask_lock
+  - action: action_get_message
   - intent: ask_unlock
     entities:
-    - Sector : "S2"
+    - unblock : ["S2"]
   - slot_was_set:
-    - Sector_u_slot: ["S2"]
-  - action: utter_ask_lock
+    - unblock_sector_slot: ["S2"]
   - action: utter_ask_unlock
+  - action: action_get_message
   - intent: inform_throughput
   - action: utter_ask_optimisation
   - intent: finishing_test 
@@ -124,7 +169,12 @@ stories:
 - story: storie2
   steps:
   - intent : greet
-  - action : utter_greet 
+    entities:
+    - Person : "Younes"
+  - slot_was_set:
+    - Person: "Younes"
+  - action: utter_greet    
+  - action: action_get_message  
   - intent : inform
     entities:
     - code_site: "se6322"
@@ -133,23 +183,25 @@ stories:
   - action : utter_help      # asking question who can i help you ?
   - intent : ask_lock
     entities:
-    - Sector : "S1"
-    - Sector : "S3"
+    - block : ["S1" , "S3"]
   - slot_was_set:
-    - Sector_l_slot: ["S1","S3"]
-
+    - block_sector_slot: ["S1","S3"]
+  - action : utter_ask_lock 
+  - action: action_get_message
   - intent : ask_unlock
     entities:
-    - Sector : "S2" 
+    - unblock : ["S2"] 
   - slot_was_set:
-    - Sector_u_slot: ["S2"]
-  - action : utter_ask_lock 
+    - unblock_sector_slot: ["S2"]
   - action : utter_ask_unlock
+  - action: action_get_message
   - intent : check_request
   - action : utter_check
   - intent : inform_throughput
     entities:
     - throughput_DL : "80"
+  - slot_was_set:
+    - throughput_DL_slot: "80"
   - action : utter_optimise
   - intent : ask_Ret
   - action : utter_ret
@@ -158,6 +210,8 @@ stories:
   - intent : inform 
     entities:
     - throughput_DL : "90"
+  - slot_was_set:
+    - throughput_DL_slot: "80"
   - action : utter_optimise
   - intent : affirm
   - action : utter_affirm
@@ -169,23 +223,33 @@ stories:
 - story: storie3
   steps:
   - intent : greet
-  - action : utter_greet 
+    entities:
+    - Person : "Maria"
+  - slot_was_set:
+    - Person: "Maria"
+  - action: utter_greet
+  - action: action_get_message 
   - intent : inform
     entities :
-    - code_site : 
-    - technologie :  
+    - code_site : "se1240"
+    - technologie : ["4g"]
+  - slot_was_set:
+    - code_site_slot: ["S1"]
+  - slot_was_set:
+    - Tech4g_slot: "4g"
   - intent : ask_lock
   - action : utter_ask_lock
-  - intent : ask_lock 
-    entities :
-    - code_site :  
+  - action: action_get_message
   - intent : ask_unlock
     entities :
     - ca : "CA" 
-  - action : utter_ask_lock
+  - action : utter_ask_unlock
+  - action: action_get_message
   - intent : ask_csrf
     entities : 
-    - code_site : 
+    - code_site : "ab1426"
+  - slot_was_set:
+    - code_site_slot: "ab1426"
   - action : utter_ask_csrf
   - intent : ask_Rollback
   - action : utter_rollback
@@ -199,25 +263,41 @@ stories:
 - story: storie4
   steps:
   - intent : greet
-  - action : utter_greet 
+    entities:
+    - Person : "Yasmine"
+  - slot_was_set:
+    - Person: "Yasmine"
+  - action: utter_greet
+  - action: action_get_message  
   - intent : inform
     entities :
-    - code_site :  
+    - code_site : "AS78242"
+  - slot_was_set:
+    - code_site_slot: "AS78242"
   - intent : ask_status
     entities :
-    - technologie : "3g" 
-    - technologie : "4g" 
+    - technologie : ["3g" , "4g"]
+  - slot_was_set:
+    - Tech3g_slot: "3g"
+  - slot_was_set:
+    - Tech4g_slot: "4g"  
   - action : utter_ask_status
   - intent : Connection
     entities :
     - technologie : "4g" 
-    - Sector : "s1"
+    - Sector : ["s1"]
+  - slot_was_set:
+    - Tech4g_slot: "4g"
+  - slot_was_set:
+    - Sector_slot: "s1"
   - action : utter_help_connection
   - intent : ask_time 
-  - action :  utter_ask_time
+  - action : utter_ask_time
   - intent : inform_throughput
     entities :
     - throughput_UL: "40"
+  - slot_was_set:
+    - throughput_UL_slot: "40"
   - action : utter_optimisation 
   - intent : affirm
   - action : utter_affirm
@@ -231,10 +311,17 @@ stories:
 - story: storie5
   steps:
   - intent : greet
-  - action : utter_greet 
+    entities:
+    - Person : "Fouad"
+  - slot_was_set:
+    - Person: "Fouad"
+  - action: utter_greet
+  - action: action_get_message 
   - intent : inform
     entities :
-    - code_site : 
+    - code_site : "AM14527"
+  - slot_was_set:
+    - code_site_slot: "AM14527"  
   - intent : Connection
   - action : utter_help_connection
   - intent : deny 
@@ -247,10 +334,17 @@ stories:
 - story: storie6
   steps:
   - intent : greet
-  - action : utter_greet 
+    entities:
+    - Person : "Mohamed"
+  - slot_was_set:
+    - Person: "Mohamed"
+  - action: utter_greet
+  - action: action_get_message  
   - intent : inform
     entities :
-    - code_site : 
+    - code_site : "AL98250"
+  - slot_was_set:
+    - code_site_slot: "AL98250"
   - intent : check_request
     entities : 
     - ca : "ca"
@@ -265,10 +359,17 @@ stories:
 - story: storie7  
   steps:
   - intent : greet
-  - action : utter_greet 
+    entities:
+    - Person : "Karim"
+  - slot_was_set:
+    - Person: "Karim"
+  - action: utter_greet
+  - action: action_get_message 
   - intent : inform
     entities :
-    - code_site : 
+    - code_site : "BE782"
+  - slot_was_set:
+    - code_site_slot: "BE782"
   - intent : ask_pci
   - action : utter_pci
   - intent : finishing_test

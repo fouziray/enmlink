@@ -1,23 +1,27 @@
 version: "2.0"
 nlu:
+ 
+ - regex: code_site 
+    - \b[A-Za-z]{1,3}\d{3,5}\b
+ 
  - intent: ask_lock
    examples: |
-    - lock [S1](Sector)
-    - can you lock [S2](Sector) 
-    - please to lock [S3](Sector) 
-    - can you lock [G900](Tech2g)
-    - i need to lock [U900](Tech3g)
-    - i want to lock [L2100](Tech4g)
-
+    - lock [S1]{"entity" : "Sector", "role" : "block"}
+    - can you lock [S2]{"entity" : "Sector", "role" : "block"}
+    - please to lock [S3]{"entity" : "Sector", "role" : "block"}
+    - can you lock [G900]{"entity" : "Tech2g", "role" : "block"}
+    - i need to lock [U900]{"entity" : "Tech3g", "role" : "block"}
+    - i want to lock [L2100]{"entity" : "Tech4g", "role" : "block"}
+    - lock [s3]{"entity" : "Sector", "role" : "block"} please
  - intent: ask_unlock
    examples: |
-    - unlock [S1](Sector)
-    - can you unlock [S2](Sector) 
-    - please to unlock [S3](Sector) 
-    - can you unlock [G900](Tech2g)
-    - i need to unlock [U900](Tech3g)
-    - i want to unlock [L2100](Tech4g)
-    - unlock [s3](Sector) please
+    - unlock [S1]{"entity" : "Sector", "role" : "unblock"}
+    - can you unlock [S2]{"entity" : "Sector", "role" : "unblock"} 
+    - please to unlock [S3]{"entity" : "Sector", "role" : "unblock"}
+    - can you unlock [G900]{"entity" : "Tech2g", "role" : "unblock"}
+    - i need to unlock [U900]{"entity" : "Tech3g", "role" : "unblock"}
+    - i want to unlock [L2100]{"entity" : "Tech4g", "role" : "unblock"}
+    - unlock [s3]{"entity" : "Sector", "role" : "unblock"} please
 
  - intent: ask_Ret
    examples: |
@@ -39,6 +43,7 @@ nlu:
     - maxtilt all [G900](Tech2g)
     - maxtilt all [U2100](Tech3g)
     - maxtilt all [L1800](Tech4g)
+ 
  - intent: ask_Optimisation
    examples: |
     - I didnt get the throughput  
@@ -46,9 +51,9 @@ nlu:
  - intent: ask_Rollback
    examples: |
     - Rollback 
-    -done please rollback 
-    -rollback the site 
-    -rollback the status
+    - done please rollback 
+    - rollback the site 
+    - rollback the status
     - can I rollback the changes for [S1]
     - please rollback the changes for [S3](Sector) and [U2100](Tech3g) 
     - can I rollback the changes for [G900](Tech2g) , [S1](Sector)
@@ -65,10 +70,10 @@ nlu:
     - the site has congested
     - conditions are bad  
 
- - intent: greeting+inform
-   examples: |
-    - hello , i'm in site [6069](code_site)
-    - salam site [4746](code_site) please
+ #- intent: greeting+inform
+  # examples: |
+   # - hello , i'm in site [6069](code_site)
+    #- salam site [4746](code_site) please
 
   
  - intent: Connection
@@ -114,7 +119,7 @@ nlu:
     - wait 
     - 1mn please
     - please to wait
-    - when i’m done i will tell you 
+    - when i'm done i will tell you 
     - once i finish i will inform you  
     - one min
 
@@ -125,9 +130,9 @@ nlu:
     - please site [6073](code_site)
     - please check site [4119](code_site)
 
- - intent: greeting + inform_site
-   examples: |
-    - salam [amin](person) site [4704](code_site)
+ #- intent: greeting + inform_site
+  # examples: |
+   # - salam [amin](person) site [4704](code_site)
 
 
  - intent: inform_throughput
@@ -135,29 +140,29 @@ nlu:
     - bad throughput
     - not good 
     - Same result
-    - [25 Mb/s](throughput_DL)
-    - [70Mb/s](throughput_DL)
+    - [25 Mb/s]{"entity" : "throughput", "role" : "throughput_DL"}
+    - [70Mb/s]{"entity" : "throughput", "role" : "throughput_DL"}
     - same throughput
     - still low 
-    - [low ca](throughput_ca)
-    - i had [throughput problem](throughput_DL) 
-    - I get [153 mb avr](throughput_DL)
-    - [Ca avr 60 mb](throughput_ca)
-    - [Avr ca 75](throughput_ca)
-    - i have a problem with [ca Max throughput 35](throughput_ca)
-    - [Low throughput DL](throughput_DL)
-    - [Low throughput UL](throughput_UL)
-    - i have [problem with UL](throughput_UL)
-    - [DL bad](throughput_DL) all sectors
-    - [DL bad](throughput_DL) sector 1
-    - [Dynamic DL 30](throughput_dyn)
-    - UL good results
-    - [Average 11](throughput_DL)
-    - All sectors [DL bad](throughput_DL)
-    - S3 [30](throughput_DL) 
-    - S1 [25](throughput_DL)
-    - [Dynamic 20](throughput_dyn)
-    - Low Thrghpt [DL average 50 Mbs](throughput_DL) in both band
+    - [low ca]{"entity" : "throughput", "role" : "throughput_ca"}
+    - i had [throughput problem]{"entity" : "throughput", "role" : "throughput_DL"}
+    - I get [153 mb avr]{"entity" : "throughput", "role" : "throughput_DL"}
+    - [Ca avr 60 mb]{"entity" : "throughput", "role" : "throughput_ca"}
+    - [Avr ca 75]{"entity" : "throughput", "role" : "throughput_ca"}
+    - i have a problem with [ca Max throughput 35]{"entity" : "throughput", "role" : "throughput_ca"}
+    - [Low throughput DL]{"entity" : "throughput", "role" : "throughput_DL"}
+    - [Low throughput UL]{"entity" : "throughput", "role" : "throughput_UL"}
+    - i have [problem with UL]{"entity" : "throughput", "role" : "throughput_UL"}
+    - [DL bad]{"entity" : "throughput", "role" : "throughput_DL"} all sectors
+    - [DL bad]{"entity" : "throughput", "role" : "throughput_DL"} sector 1
+    - [Dynamic DL 30]{"entity" : "throughput", "role" : "throughput_dyn"}
+    - [UL good results]{"entity" : "throughput", "role" : "throughput_UL"} 
+    - [Average 11]{"entity" : "throughput", "role" : "throughput_DL"}
+    - All sectors [DL bad]{"entity" : "throughput", "role" : "throughput_DL"}
+    - S3 [30]{"entity" : "throughput", "role" : "throughput_DL"}
+    - S1 [25]{"entity" : "throughput", "role" : "throughput_DL"}
+    - [Dynamic 20]{"entity" : "throughput", "role" : "throughput_dyn"}
+    - Low Thrghpt [DL average 50 Mbs]{"entity" : "throughput", "role" : "throughput_DL"} in both band
 
  - intent: inform_throughout_good
    examples: |
@@ -179,15 +184,15 @@ nlu:
     - can I rollback the changes for [G900](Tech2g) , [S1](Sector)
     - please rollback the changes for [L2100](Tech4g) [S3](Sector)
 
- - intent: inform+ask_lock+ask_unlock
-   examples: |
-    - site [1475](code_site) please to lock [s1]{"entity":"Sector", "role":"lock") [s2]("entity":"Sector","role":"lock") and unlock [s3]("entity":"Sector", "role":"unlock")
-    - site [1475](code_site) please to unlock [s1]{"entity":"Sector", "role":"unlock")  and lock [s2]("entity":"Sector","role":"lock") [s3]("entity":"Sector", "role":"lock")
-    - site [1475](code_site) please to lock [s1]{"entity":"Sector", "role":"lock")  and unlock [s2]("entity":"Sector","role":"unlock") and lock [s3]("entity":"Sector", "role":"lock")
+# - intent: inform+ask_lock+ask_unlock
+ #  examples: |
+  #  - site [1475](code_site) please to lock [s1]{"entity":"Sector", "role":"lock") [s2]("entity":"Sector","role":"lock") and unlock [s3]("entity":"Sector", "role":"unlock")
+   # - site [1475](code_site) please to unlock [s1]{"entity":"Sector", "role":"unlock")  and lock [s2]("entity":"Sector","role":"lock") [s3]("entity":"Sector", "role":"lock")
+    #- site [1475](code_site) please to lock [s1]{"entity":"Sector", "role":"lock")  and unlock [s2]("entity":"Sector","role":"unlock") and lock [s3]("entity":"Sector", "role":"lock")
 
- - intent: inform+ask_optimisation
-   examples: |  
-    - Site [2527](code_site) low throughput CA
+ #- intent: inform+ask_optimisation
+  # examples: |  
+   # - Site [2527](code_site) low throughput CA
 
  - intent: ask_status
    examples: |
