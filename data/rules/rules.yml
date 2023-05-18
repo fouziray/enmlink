@@ -16,6 +16,7 @@ rules:
   steps:
   - intent: greet
   - action: utter_greet
+  - action: action_get_message
 
 #- rule: scheduling the lock and the unlock 
 #  steps:
@@ -28,3 +29,16 @@ rules:
   steps:
   - intent: finishing_test
   - action: utter_unlock_all
+
+- rule: test_message_in_lock
+  steps:
+  - intent: ask_lock
+  - action: utter_ask_lock 
+  - action: action_get_message
+
+- rule: test_message_in_unlock
+  steps:
+  - intent: ask_unlock
+  - action: utter_ask_unlock 
+  - action: action_get_message
+
