@@ -23,7 +23,6 @@ class LoginSerializer(serializers.Serializer):
         trim_whitespace=False,
         write_only=True
     )
-
     def validate(self, attrs):
         # Take username and password from request
         username = attrs.get('username')

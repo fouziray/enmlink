@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User ,AbstractUser, AbstractBaseUser, PermissionsMixin, BaseUserManager
 # Create your models here.
 class User(AbstractBaseUser, PermissionsMixin):
-
+    use_in_migrations = True
     #REQUIRED_FIELDS = ('user',)
     #user = models.OneToOneField(User, related_name='profile', unique=True, on_delete=models.CASCADE)
     id= models.IntegerField
@@ -63,13 +63,13 @@ class Message(models.Model):
     user_id= models.ForeignKey(User,on_delete=models.DO_NOTHING)
     source_is_user= models.BooleanField(default=True)   
 
-class Intent(models.Model):
-    intent = models.CharField(max_length=30,default="")
-    message_id = models.ForeignKey(Message, on_delete= models.CASCADE)
+#class Intent(models.Model):
+#    intent = models.CharField(max_length=30,default="")
+#    message_id = models.ForeignKey(Message, on_delete= models.CASCADE)
      
-class entity(models.Model):
-    intent_id = models.ForeignKey(Intent, on_delete=models.CASCADE)
-    name = models.CharField(max_length=20, null=False)
+#class entity(models.Model):
+#    intent_id = models.ForeignKey(Intent, on_delete=models.CASCADE)
+#    name = models.CharField(max_length=20, null=False)
     
 class Connexion(models.Model):
     help_provider=models.ForeignKey(HelpProvider,on_delete=models.DO_NOTHING, related_name='help_provider')

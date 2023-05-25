@@ -3,7 +3,8 @@ from rest_framework import views, status, serializers
 from rest_framework.response import Response
 from django.contrib.auth import login
 from ..serializers import loginSerializer
-
+from ..serializers.serializers import UserSerializer
+from django.forms.models import model_to_dict
 class LoginView(views.APIView):
     # This view should be accessible also for unauthenticated users.
     permission_classes = (permissions.AllowAny,)
@@ -20,6 +21,6 @@ class LoginView(views.APIView):
         login(request, user)
         if(request.user.is_authenticated):
        
-            return Response(request.data, status=status.HTTP_202_ACCEPTED)
+            return Response(UserSerializer(user).data, status=status.HTTP_202_ACCEPTED)
         else:
             return Response(request.data, status=status.HTTP_403_FORBIDDEN)

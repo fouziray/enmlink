@@ -39,7 +39,7 @@ from rasa.core.constants import (
 )
 from rasa.shared.core.conversation import Dialogue
 from rasa.shared.core.domain import Domain
-from rasa.shared.core.events import SessionStarted, Event, FollowupAction, UserUttered, BotUttered
+from rasa.shared.core.events import SessionStarted, Event, FollowupAction, UserUttered, BotUttered, ActionExecuted
 from rasa.shared.core.trackers import (
     ActionExecuted,
     DialogueStateTracker,
@@ -475,7 +475,7 @@ class mySQLTrackerStore(TrackerStore, SerializedTrackerAsText):
             if self.domain and len(events) > 0:
                 logger.debug(f"Recreating tracker from sender id '{sender_id}'")
                 return DialogueStateTracker.from_dict(
-                    sender_id, events, self.domain.slots
+                    sender_id, events, self.domain.slots   #the idea here is to inherit a class of DialogueStateTracker that allows one more input in from_dict, the id of the user
                 )
             else:
                 logger.debug(
@@ -540,11 +540,10 @@ class mySQLTrackerStore(TrackerStore, SerializedTrackerAsText):
                     )
                     action = data.get("name")
                     timestamp = data.get("timestamp")
-                    text='hhh'
 
                 
                     # noinspection PyArgumentList
-                    if isinstance(event, (UserUttered,BotUttered)):
+                    if isinstance(event, (UserUttered,BotUttered,ActionExecuted)):
                         session.add(
                             self.SQLEvent( 
                                 sender_id=tracker.sender_id,

@@ -320,7 +320,6 @@ responses:
 actions: 
   - action_get_message
   - action_hello_world
-
 session_config:
   session_expiration_time: 480
   carry_over_slots_to_new_session: true
