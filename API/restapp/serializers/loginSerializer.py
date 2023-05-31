@@ -23,7 +23,6 @@ class LoginSerializer(serializers.Serializer):
         trim_whitespace=False,
         write_only=True
     )
-
     def validate(self, attrs):
         # Take username and password from request
         username = attrs.get('username')
@@ -49,10 +48,16 @@ from django.contrib.auth.backends import BaseBackend
 
 class MyBackend(BaseBackend):
     def authenticate(self, request, username=None, password=None):
-        user=User.objects.get(id=1)
-        if check_password(password, user.password):
-            return UserSerializer(user)
+        try:
+            user= User.objects.get(username=username)
+        except User.DoesNotExist:
+            return False
+        #if check_password(password, user.password):
+        if password == user.password: 
+            return user
         else:
-            return "false password"
+            msg= "false password"
+            raise serializers.ValidationError(msg, code='authorization')
+             
         #user=UserSerializer(user)
 

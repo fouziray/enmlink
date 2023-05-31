@@ -8,7 +8,7 @@
 # This is a simple example for a custom action which utters "Hello World!"
 
 import json
-from typing import Any, Text, Dict, List
+from typing import Any, Text, Dict, List, TYPE_CHECKING
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
@@ -43,3 +43,56 @@ class ActionGetMessage(Action):
          dispatcher.utter_message("hello "+json_obj)
 
          return []
+
+from rasa_sdk.events import SlotSet, SessionStarted, ActionExecuted, EventType
+from rasa.shared.core.constants import ACTION_SESSION_START_NAME, ACTION_LISTEN_NAME
+from rasa.shared.core.trackers import DialogueStateTracker
+if TYPE_CHECKING:
+    from rasa.core.nlg import NaturalLanguageGenerator
+    from rasa.core.channels.channel import OutputChannel
+from rasa.shared.core.domain import Domain
+from rasa.shared.core.events import Event
+class ActionSessionStart(Action):
+    """Applies a conversation session start.
+
+    Takes all `SlotSet` events from the previous session and applies them to the new
+    session.
+    """
+
+    def name(self) -> Text:
+        """Returns action start name."""
+        return ACTION_SESSION_START_NAME
+
+    @staticmethod
+    def _slot_set_events_from_tracker(
+        tracker: "DialogueStateTracker",
+    ) -> List["SlotSet"]:
+        """Fetch SlotSet events from tracker and carry over key, value and metadata."""
+        carried_slots=[
+            SlotSet(key=event.key, value=event.value, metadata=event.metadata)
+            for event in tracker.applied_events()
+            if isinstance(event, SlotSet)
+        ]
+        carried_slots.append(SlotSet(key="user_id",value=1))
+        return  carried_slots
+
+    async def run(
+        self,
+        output_channel: "OutputChannel",
+        nlg: "NaturalLanguageGenerator",
+        tracker: "DialogueStateTracker",
+        dispatcher: "CollectingDispatcher",
+        domain: "Domain",
+    ) -> List[Event]:
+        """Runs action. Please see parent class for the full docstring."""
+        _events: List[Event] = [SessionStarted()]
+        tracker.slots["sample"]=1
+        dispatcher.utter_message("hello "+tracker.get_slot("sample"))
+
+        if domain.session_config.carry_over_slots:
+            _events.extend(self._slot_set_events_from_tracker(tracker))
+
+        _events.append(ActionExecuted(ACTION_LISTEN_NAME))
+
+        return _events
+

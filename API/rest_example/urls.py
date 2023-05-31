@@ -30,6 +30,7 @@ urlpatterns = [
     path('helpproviders',HelpProviderList.as_view()),
     path('helpproviders/<int:pk>/', HelperDetail.as_view()),
     path('message/',MessageList.as_view()),
+    path('event/',EventsList.as_view()),
     path('convo/', ConvoList.as_view()),
     path('login/', LoginView.as_view()),
     

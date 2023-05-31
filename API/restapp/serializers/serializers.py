@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from ..models import Message, Convo, Connexion, HelpProvider
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
