@@ -83,34 +83,34 @@ slots:
     - type: from_entity
       entity: Person
 
-  Tech2g_slot:
-    type: categorical
-    values:
-    - G900 
-    - G1800
-    - 2g
+  Tech2g:
+    type: text
     influence_conversation: true
     mappings: 
     - type: from_entity
       entity: Tech2g
-
-  Tech3g_slot:
+      intent: ask_lock
+      values:
+      - G900 
+      - G1800 
+      - DCS 
+      - 2G 
+  
+  Tech3g:
     type: categorical
     values:
     - U900
     - U2100
     - 3g
-    influence_conversation: true
-    mappings: 
+    mappings:
     - type: from_entity
       entity: Tech3g
-  
-  Tech4g_slot:
+  Tech4g:
     type: categorical
     values:
     - L1800
     - L2100
-    - 4g
+    - 4g 
     influence_conversation: true
     mappings: 
     - type: from_entity
@@ -210,6 +210,12 @@ slots:
     - type: from_entity
       entity: time
 
+forms:
+  technologies_form:
+    required_slots:
+      - Tech2g
+      - Tech3g
+      - Tech4g
 responses:
 
   utter_unlock_all:

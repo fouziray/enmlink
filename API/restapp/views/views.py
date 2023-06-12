@@ -11,6 +11,7 @@ from restapp.models import HelpProvider, Convo, Message
 from restapp.modelEvent import Events
 from restapp.models import User
 class UserList(APIView):
+   
     def get(self, request, format=None):
          users = User.objects.all()
          serializer = UserSerializer(users, many=True)
@@ -143,17 +144,29 @@ class MessageList(APIView):
          user = self.get_object(pk)
          user.delete()
          return Response(status=status.HTTP_204_NO_CONTENT)
-
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 class EventsList(APIView):
+    authentication_classes = [TokenAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    permission_classes = (permissions.AllowAny,)
+    
     def get(self, request, format=None):
-         users = Events.objects.all()
+         users = Events.objects.distinct('type_name')
          serializer = EventSerialize(users, many=True)
-         query="SELECT data :: json -> 'event' AS value FROM events "
-         return self.rawsql(query) # using 
-         #return Response(serializer2)
+         #query="SELECT data :: json -> 'event' AS value FROM events "
+         #return self.rawsql(query) # using 
+         return Response(serializer.data)
     
     def rawsql(self,query):
         with connection.cursor() as cursor:
              cursor.execute(query)
              results= cursor.fetchall()
         return JsonResponse(results,safe=False)
+class SingleEvent(APIView):
+    authentication_classes = [TokenAuthentication, BasicAuthentication]
+    permission_classes = (permissions.AllowAny,)
+    def get(self, request, convo_id ):
+        events=Events.objects.filter(sender_id=convo_id).exclude(type_name="action")
+        serialized_events= EventSerialize(events,many=True)
+        return Response(serialized_events.data)

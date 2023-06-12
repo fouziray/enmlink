@@ -6,9 +6,9 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-class EventsManager(models.Manager):
-    def get_queryset(self):
-        return super().get_queryset().distinct('type_name')
+#class EventsManager(models.Manager):
+   # def get_queryset(self):
+       # return super().get_queryset().distinct('type_name')
 
 class Events(models.Model):
     sender_id = models.CharField(max_length=255)
@@ -17,10 +17,8 @@ class Events(models.Model):
     intent_name = models.CharField(max_length=255, blank=True, null=True)
     action_name = models.CharField(max_length=255, blank=True, null=True)
     #data = models.TextField(blank=True, null=True)
-    data = models.JSONField('data')
-
-  
-    objects = EventsManager()
+    data = models.JSONField('data')  
+    #objects = EventsManager()
 
     class Meta:
         managed = False
