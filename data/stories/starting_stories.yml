@@ -1,0 +1,21 @@
+version: "3.1"
+
+stories:
+- story: 2g locking
+  steps:
+  - intent: ask_lock
+  - action : utter_ask_lock
+  - slot_was_set:
+    - Tech2g: G900
+    - Tech3g: U2100
+    - Tech4g: FDD
+  - action: action_get_message
+  - intent: mood_great
+  - action: utter_happy
+- story: locking multiple technologies at one go using form
+  steps:
+  - intent: ask_lock
+  - action: utter_ask_lock
+  - action: action_get_message
+  - active_loop: technologies_form
+

@@ -24,8 +24,7 @@ SECRET_KEY = 'django-insecure-0xuoa#4f=u)_pt^b-vglqiz3=p5w1gj3-u$al%%o(k5zqs+m1p
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.ngrok.io', 'f6e6-41-106-4-218.ngrok-free.app', 'http://localhost:5174']
 
 
 # Application definition
@@ -38,11 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_extensions',
+    'rest_framework.authtoken',
+    'corsheaders',
     'restapp',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -132,10 +135,26 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
+#        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
     ],
 }
+#AUTHENTICATION_BACKENDS = (
+#   "django.contrib.auth.backends.ModelBackend",
+#   "allauth.account.auth_backends.AuthenticationBackend"
+#)
 AUTH_USER_MODEL = 'restapp.User'  #comment this to eliminate the error
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+]
+
+GRAPH_MODELS ={
+'all_applications': True,
+'graph_models': True,
+}
