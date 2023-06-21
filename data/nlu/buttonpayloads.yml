@@ -1,0 +1,13 @@
+version: "3.1"
+nlu:
+ - intent: 3g_required_slot
+   examples: |
+    - i need only 3g tech
+
+ - intent: 4g_required_slot
+   examples: |
+    - i need only 4g tech
+ 
+ - intent: 2g_required_slot
+   examples: |
+    - i need only 2g tech
