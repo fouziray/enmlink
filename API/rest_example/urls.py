@@ -30,7 +30,7 @@ urlpatterns = [
     path('reponse/<act>',Respond.as_view()),
     path('helpproviders',HelpProviderList.as_view()),
     path('helpproviders/<int:pk>/', HelperDetail.as_view()),
-    path('message/',MessageList.as_view()),
+    #path('message/',MessageList.as_view()),
     path('event/',EventsList.as_view()),
     path('event/<slug:convo_id>',SingleEvent.as_view()),
     path('convo/', ConvoList.as_view()),

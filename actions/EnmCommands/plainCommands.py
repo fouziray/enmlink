@@ -1,8 +1,8 @@
 from abc import abstractmethod
-import pandas as pd
-from .enmscripting import enmscripting
+#import pandas as pd
+#from .enmscripting import enmscripting
 
-
+#this is a first draft of enm access and not yet integrated with actions server
 class Command:
     def __init__(self):
         pass
@@ -16,16 +16,16 @@ class Command:
         pass
 
     def open(self, a, b, c):
-        self.session = enmscripting.open(a, b, c)
-        return self.session
-
+      #  self.session = enmscripting.open(a, b, c)
+      #  return self.session
+        return True
     def closesession(self):
-        enmscripting.close(self.session)
-
+        #enmscripting.close(self.session)
+        pass
     def execute(self, cmd):
-        cmdd = self.session.terminal()
-        return cmdd.execute(cmd).get_output()
-
+        #cmdd = self.session.terminal()
+        #return cmdd.execute(cmd).get_output()
+        pass
 
 class GsmCommand(Command):
 

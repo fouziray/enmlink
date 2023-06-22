@@ -104,7 +104,7 @@ nlu:
     - am I talking to a human?
 
 - intent: affirm
-examples: |
+  examples: |
     - yes
     - indeed
     - of course
@@ -116,3 +116,7 @@ examples: |
     - okey
     - done
     - is ok 
+
+- intent: stop
+  examples: |
+    - stop

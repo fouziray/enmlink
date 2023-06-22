@@ -3,11 +3,11 @@ from django.shortcuts import render
 #from django.contrib.auth.models import User 
 from django.http import Http404
 from restapp.serializers.eventSerializer import EventSerialize
-from restapp.serializers.serializers import ConvoSerializer, HelpProviderSerialize, MessageSerializer, UserSerializer
+from restapp.serializers.serializers import ConvoSerializer, HelpProviderSerialize, UserSerializer #MessageSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
-from restapp.models import HelpProvider, Convo, Message
+from restapp.models import HelpProvider, Convo# Message
 from restapp.modelEvent import Events
 from restapp.models import User
 class UserList(APIView):
@@ -127,7 +127,7 @@ class ConvoList(APIView):
          return Response(status=status.HTTP_204_NO_CONTENT)
 from django.db import connection
 from django.http import JsonResponse
-class MessageList(APIView):
+"""class MessageList(APIView):
     def get(self, request, format=None):
          users = Message.objects.all()
          serializer = MessageSerializer(users, many=True)
@@ -144,6 +144,7 @@ class MessageList(APIView):
          user = self.get_object(pk)
          user.delete()
          return Response(status=status.HTTP_204_NO_CONTENT)
+"""
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 class EventsList(APIView):

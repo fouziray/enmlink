@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
-from ..models import Message, Convo, Connexion, HelpProvider
+from ..models import Convo, Connexion, HelpProvider #Message
+
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -23,11 +24,11 @@ class HelpProviderSerialize(serializers.ModelSerializer):
             model= HelpProvider
             fields= UserSerializer.Meta.fields+('fonction',)
 
-class MessageSerializer(serializers.ModelSerializer):
+"""class MessageSerializer(serializers.ModelSerializer):
      class Meta:
          model= Message
          fields=('user_id','convo_id','created','text','source_is_user')
-
+"""
 class ConvoSerializer(serializers.ModelSerializer):
     class Meta:
          model= Convo

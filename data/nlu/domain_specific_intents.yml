@@ -10,8 +10,17 @@ nlu:
     - can you lock [S2]{"entity" : "Sector", "role" : "block"}
     - please to lock [S3]{"entity" : "Sector", "role" : "block"}
     - can you lock [G900](Tech2g)
+    - can you lock [g900](Tech2g)
+    - can you lock [G1800](Tech2g)
+    - can you lock [g1800](Tech2g)
     - i need to lock [U900](Tech3g)
+    - can you lock [U2100](Tech3g)
+    - can you lock [u900](Tech3g)
+    - can you lock [u2100](Tech3g)
     - i want to lock [L2100](Tech4g)
+    - can you lock [L1800](Tech4g)
+    - can you lock [l1800](Tech4g)
+    - can you lock [l2100](Tech4g)
     - lock [s3]{"entity" : "Sector", "role" : "block"} please
  - intent: ask_unlock
    examples: |

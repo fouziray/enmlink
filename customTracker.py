@@ -111,6 +111,7 @@ class SerializedTrackerAsText(SerializedTrackerRepresentation[Text]):
     def serialise_tracker(tracker: DialogueStateTracker) -> Text:
         """Serializes the tracker, returns representation of the tracker."""
         dialogue = tracker.as_dialogue()
+        logger.debug(f"dialogue tracker here'{dialogue}' .")
 
         return json.dumps(dialogue.as_dict())
 
@@ -675,5 +676,4 @@ def create_tracker_store(
         tracker_store = AwaitableTrackerStore(tracker_store)
 
     return tracker_store
-
 

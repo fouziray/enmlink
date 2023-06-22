@@ -49,7 +49,7 @@ def convert_str_to_list(x, i):
 
 
 pss = str(getpass())
-session = enmscripting.open('https://algenm1.atmmobilis.local', “”, “”)
+session = enmscripting.open('https://algenm1.atmmobilis.local', "", "")
 list_col = list(data.columns)
 print(list_col)
 poll = {}

@@ -1,6 +1,6 @@
 digraph model_graph {
   // Dotfile by Django-Extensions graph_models
-  // Created: 2023-06-05 13:42
+  // Created: 2023-06-15 14:45
   // Cli Options: -a
 
   fontname = "Roboto"
@@ -487,64 +487,6 @@ digraph model_graph {
     </TABLE>
     >]
 
-  restapp_models_Message [label=<
-    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
-    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
-    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    Message
-    </B></FONT></TD></TR>
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>id</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>convo_id</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>user_id</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT COLOR="#7B7B7B" FACE="Roboto">created</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">source_is_user</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">BooleanField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">text</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-    </TABLE>
-    >]
-
   restapp_models_Connexion [label=<
     <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
     <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
@@ -604,6 +546,14 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>convo_id</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT COLOR="#7B7B7B" FACE="Roboto">action_name</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT COLOR="#7B7B7B" FACE="Roboto">CharField</FONT>
@@ -623,14 +573,6 @@ digraph model_graph {
     <FONT COLOR="#7B7B7B" FACE="Roboto">intent_name</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT COLOR="#7B7B7B" FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">sender_id</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
     </TD></TR>
   
   
@@ -702,17 +644,14 @@ digraph model_graph {
   restapp_models_Convo -> restapp_models_User
   [label=" user_id (user)"] [arrowhead=none, arrowtail=dot, dir=both];
 
-  restapp_models_Message -> restapp_models_Convo
-  [label=" convo_id (messages)"] [arrowhead=none, arrowtail=dot, dir=both];
-
-  restapp_models_Message -> restapp_models_User
-  [label=" user_id (message)"] [arrowhead=none, arrowtail=dot, dir=both];
-
   restapp_models_Connexion -> restapp_models_HelpProvider
   [label=" help_provider (help_provider)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   restapp_models_Connexion -> restapp_models_Convo
   [label=" convo_id (connexion)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  restapp_modelEvent_Events -> restapp_models_Convo
+  [label=" convo_id (messages)"] [arrowhead=none, arrowtail=dot, dir=both];
 
 
 }
