@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from ..models import Convo, Connexion, HelpProvider #Message
+from ..models import Convo, Connexion, HelpProvider,ManagedObject, Profile #Message
 
 from django.contrib.auth import get_user_model
 
@@ -39,3 +39,12 @@ class ConnexionSerializer(serializers.ModelSerializer):
          model= Connexion
          fields=('help_provider','created','convo_id')
 
+class ManagedObjectStateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= ManagedObject
+        fields=('state',)
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Profile
+        fields=('avatar',)

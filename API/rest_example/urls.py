@@ -19,7 +19,8 @@ from rest_framework.authtoken import views
 from restapp.views.views import *
 from restapp.views.loginView import LoginView
 from django.contrib.auth.models import User
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 admin.autodiscover()
 
@@ -35,6 +36,8 @@ urlpatterns = [
     path('event/<slug:convo_id>',SingleEvent.as_view()),
     path('convo/', ConvoList.as_view()),
     path('login/', LoginView.as_view()),
-    path('api-token-auth/', views.obtain_auth_token)
+    path('mostate/',ManagedObjectState.as_view()),
+    path('api-token-auth/', views.obtain_auth_token),
+    path('profile/', ProfileImage.as_view())
     
-]
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

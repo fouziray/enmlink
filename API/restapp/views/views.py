@@ -3,13 +3,17 @@ from django.shortcuts import render
 #from django.contrib.auth.models import User 
 from django.http import Http404
 from restapp.serializers.eventSerializer import EventSerialize
-from restapp.serializers.serializers import ConvoSerializer, HelpProviderSerialize, UserSerializer #MessageSerializer
+from restapp.serializers.serializers import ConvoSerializer, HelpProviderSerialize, ManagedObjectStateSerializer, ProfileSerializer, UserSerializer #MessageSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
-from restapp.models import HelpProvider, Convo# Message
+from restapp.models import HelpProvider, Convo, Profile# Message
 from restapp.modelEvent import Events
 from restapp.models import User
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from ..forms import UpdateProfileForm
 class UserList(APIView):
    
     def get(self, request, format=None):
@@ -171,3 +175,54 @@ class SingleEvent(APIView):
         events=Events.objects.filter(sender_id=convo_id).exclude(type_name="action")
         serialized_events= EventSerialize(events,many=True)
         return Response(serialized_events.data)
+
+class ManagedObjectState(APIView):
+    authentication_classes = [TokenAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request, format=None):
+         serializer = ManagedObjectStateSerializer(data=request.data)
+         if serializer.is_valid():
+             serializer.save()
+             return Response(serializer.data, status=status.HTTP_201_CREATED)
+         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ProfileImage(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = [TokenAuthentication, BasicAuthentication]
+
+    """def post(self,request, format=None):
+        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if profile_form.is_valid():
+            profile_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return Response( {'profile_form': '1'},status=status.HTTP_201_CREATED)
+        else:
+            return Response( {'profile_form': ''},status=status.HTTP_201_CREATED)"""
+    def post(self, request, format=None):
+        try:
+            # exist then update
+            profile = Profile.objects.get(user=request.user)
+            print(request.user)
+            serializer = ProfileSerializer(profile, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Profile.DoesNotExist:
+            # not exist then create
+            serializer = ProfileSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save(user=request.user)
+                return Response(serializer.data)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get(self,request):
+        try:
+            profile = Profile.objects.get(user=request.user)
+            serializer = ProfileSerializer(profile)
+            return Response(serializer.data)
+        except Profile.DoesNotExist:
+            return Response('user doesnt have a profile')

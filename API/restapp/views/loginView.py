@@ -22,7 +22,7 @@ class LoginView(views.APIView):
             return Response(request.data, status=status.HTTP_403_FORBIDDEN)
         
         user = serializer.validated_data['user']
-        login(request, user)
+        login(request, user, backend='..serializers.loginSerializer.MyBackend')
         resp=[]
         if(request.user.is_authenticated):
             Token.objects.get_or_create(user=user)
