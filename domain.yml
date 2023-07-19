@@ -83,39 +83,45 @@ slots:
     - type: from_entity
       entity: Person
 
-  Tech2g_slot:
+  
+
+  Tech2g:
     type: categorical
-    values:
-    - G900 
-    - G1800
-    - 2g
     influence_conversation: true
+    values:
+      - G900 
+      - G1800 
+      - DCS 
+      - 2G
+      
     mappings: 
     - type: from_entity
       entity: Tech2g
-
-  Tech3g_slot:
+      intent: ask_lock
+      
+  
+  
+  Tech3g:
     type: categorical
     values:
     - U900
     - U2100
-    - 3g
-    influence_conversation: true
-    mappings: 
+    - 3G
+    mappings:
     - type: from_entity
       entity: Tech3g
-  
-  Tech4g_slot:
+  Tech4g:
     type: categorical
-    values:
-    - L1800
-    - L2100
-    - 4g
     influence_conversation: true
+    values:
+      - L1800
+      - L2100
+      - 4G
     mappings: 
     - type: from_entity
       entity: Tech4g
 
+  
   Sector_slot:
     type: list
     influence_conversation: true
@@ -209,7 +215,18 @@ slots:
     mappings: 
     - type: from_entity
       entity: time
-
+  
+  choosing:
+    type: bool
+    mappings:
+    - type: from_intent
+      value: true
+      intent: stop
+  
+forms:
+  technologies_form:
+    required_slots:
+      - choosing
 responses:
 
   utter_unlock_all:
@@ -320,6 +337,11 @@ responses:
 actions: 
   - action_get_message
   - action_hello_world
+  - action_append_tech_slots
+  - action_reset_techs
+  - action_available_tech
+  - action_block
+
 session_config:
   session_expiration_time: 480
   carry_over_slots_to_new_session: true

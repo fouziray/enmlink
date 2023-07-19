@@ -1,7 +1,5 @@
 version: "3.1"
 
-stories:
-
 - story: happy path
   steps:
   - intent: greet
@@ -82,10 +80,11 @@ stories:
     - code_site: "15455"
     - Tech4g: "L2100"
     - throughput_DL : "45mb"
+
   - slot_was_set:
     - code_site_slot: "15455"
   - slot_was_set:
-    - Tech4g_slot: "L2100"
+    - Tech4g: "L2100"
   - slot_was_set:
     - throughput_DL_slot: "45mb" 
   - action: utter_inform
@@ -107,6 +106,7 @@ stories:
   - intent: ask_Rollback
     entities:
     - Sector : ["s1"]
+
   - slot_was_set:
     - Sector_slot: ["s1"]
   - action: utter_rollback
@@ -140,7 +140,7 @@ stories:
   - slot_was_set:
     - Sector_slot: ["S2"]
   - slot_was_set:
-    - Tech4g_slot: "L1800"
+    - Tech4g: "L1800"
   - action: utter_ask_help
   - intent: ask_time
   - action: utter_ask_time
@@ -236,7 +236,7 @@ stories:
   - slot_was_set:
     - code_site_slot: ["S1"]
   - slot_was_set:
-    - Tech4g_slot: "4g"
+    - Tech4g: "4g"
   - intent : ask_lock
   - action : utter_ask_lock
   - action: action_get_message
@@ -278,16 +278,16 @@ stories:
     entities :
     - technologie : ["3g" , "4g"]
   - slot_was_set:
-    - Tech3g_slot: "3g"
+    - Tech3g: "3g"
   - slot_was_set:
-    - Tech4g_slot: "4g"  
+    - Tech4g: "4g"  
   - action : utter_ask_status
   - intent : Connection
     entities :
     - technologie : "4g" 
     - Sector : ["s1"]
   - slot_was_set:
-    - Tech4g_slot: "4g"
+    - Tech4g: "4g"
   - slot_was_set:
     - Sector_slot: "s1"
   - action : utter_help_connection
@@ -376,3 +376,4 @@ stories:
   - action: utter_unlock_all
   - intent : goodbye
   - action : utter_goodbye
+

@@ -1,0 +1,55 @@
+version: "3.1"
+
+stories:
+- story: 2g locking
+  steps:
+  - intent: ask_lock
+  - action: utter_ask_lock
+  - action: action_block 
+  - slot_was_set:
+    - Tech2g: G900
+    - Tech3g: U2100
+    - Tech4g: FDD
+  #- action: action_get_message
+
+- story: code site
+  steps:
+  - intent: inform 
+    entities:
+    - code_site: 19872
+  - slot_was_set:
+    - code_site_slot: 19872
+#  - action: action_get_message
+
+
+- story: locking multiple technologies at one go
+  steps:
+  - intent: ask_lock
+  - action: utter_ask_lock
+  - action: action_block
+  #- action: action_get_message
+
+#- story: stop form required slots filling  
+#  steps:
+#  - or:
+#    - intent: 3g_required_slot
+#    - intent: 4g_required_slot
+#    - intent: 2g_required_slot
+#  - action: action_append_tech_slots
+
+#- story:
+#  steps:
+#  - intent: finishing_test
+#  - action: action_available_tech
+
+- story: 
+- story: affirmation respond
+  steps:
+  - intent: affirm
+  - action: utter_happy
+
+- story: deny response
+  steps:
+  - intent: deny
+  - action: utter_goodbye
+

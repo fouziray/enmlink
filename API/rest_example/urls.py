@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
-
+from rest_framework.authtoken import views
 from restapp.views.views import *
 from restapp.views.loginView import LoginView
+from django.contrib.auth.models import User
+from django.conf import settings
+from django.conf.urls.static import static
 
 admin.autodiscover()
 
@@ -29,9 +31,14 @@ urlpatterns = [
     path('reponse/<act>',Respond.as_view()),
     path('helpproviders',HelpProviderList.as_view()),
     path('helpproviders/<int:pk>/', HelperDetail.as_view()),
-    path('message/',MessageList.as_view()),
+    #path('message/',MessageList.as_view()),
     path('event/',EventsList.as_view()),
+    path('event/<slug:convo_id>',SingleEvent.as_view()),
     path('convo/', ConvoList.as_view()),
     path('login/', LoginView.as_view()),
+    path('mostate/',ManagedObjectState.as_view()),
+    path('api-token-auth/', views.obtain_auth_token),
+    path('profile/', ProfileImage.as_view()),
+    path('sites/', Sites.as_view())
     
-]
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

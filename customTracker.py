@@ -111,6 +111,7 @@ class SerializedTrackerAsText(SerializedTrackerRepresentation[Text]):
     def serialise_tracker(tracker: DialogueStateTracker) -> Text:
         """Serializes the tracker, returns representation of the tracker."""
         dialogue = tracker.as_dialogue()
+        logger.debug(f"dialogue tracker here'{dialogue}' .")
 
         return json.dumps(dialogue.as_dict())
 
@@ -277,7 +278,7 @@ class mySQLTrackerStore(TrackerStore, SerializedTrackerAsText):
         engine_url = self.get_db_url(
             dialect, host, port, db, username, password, login_db, query
         )
-
+        self.store: Dict[Text, Text]= {}
         self.engine = sa.create_engine(engine_url, **create_engine_kwargs(engine_url))
 
         logger.debug(
@@ -474,9 +475,11 @@ class mySQLTrackerStore(TrackerStore, SerializedTrackerAsText):
 
             if self.domain and len(events) > 0:
                 logger.debug(f"Recreating tracker from sender id '{sender_id}'")
-                return DialogueStateTracker.from_dict(
-                    sender_id, events, self.domain.slots   #the idea here is to inherit a class of DialogueStateTracker that allows one more input in from_dict, the id of the user
-                )
+                logger.debug(f"slots of tracker are: {self.domain.slots} event {events}")
+                return self.deserialise_tracker(sender_id, self.store[sender_id])
+                # DialogueStateTracker.from_dict(
+                #    sender_id, events, self.domain.slots   #the idea here is to inherit a class of DialogueStateTracker that allows one more input in from_dict, the id of the user
+                #)
             else:
                 logger.debug(
                     f"Can't retrieve tracker matching "
@@ -527,8 +530,10 @@ class mySQLTrackerStore(TrackerStore, SerializedTrackerAsText):
 
     async def save(self, tracker: DialogueStateTracker) -> None:
         """Update database with events from the current conversation."""
+        
         await self.stream_events(tracker)
-
+        serialised = self.serialise_tracker(tracker)
+        self.store[tracker.sender_id]= serialised 
         with self.session_scope() as session:
             # only store recent events
             events = self._additional_events(session, tracker)
@@ -599,12 +604,13 @@ def _create_from_endpoint_config(
             **endpoint_config.kwargs,
         )
     elif endpoint_config.type.lower() == "sql":
-        tracker_store = SQLTrackerStore(
+        tracker_store = mySQLTrackerStore(
             domain=domain,
             host=endpoint_config.url,
             event_broker=event_broker,
             **endpoint_config.kwargs,
         )
+        print("hello domain"+domain)
     elif endpoint_config.type.lower() == "dynamo":
         tracker_store = DynamoTrackerStore(
             domain=domain, event_broker=event_broker, **endpoint_config.kwargs
@@ -670,5 +676,4 @@ def create_tracker_store(
         tracker_store = AwaitableTrackerStore(tracker_store)
 
     return tracker_store
-
 

@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
-from ..models import Message, Convo, Connexion, HelpProvider
+from ..models import Convo, Connexion, HelpProvider,ManagedObject, Profile, Technology #Message
+
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -9,17 +10,25 @@ class UserSerializer(serializers.ModelSerializer):
      class Meta:
          model = User
          fields = ('id', 'username', 'first_name', 'last_name', 'email','password')
-
+     
+     def create(self, validated_data):
+        user = User(
+            email=validated_data['email'],
+            username=validated_data['username']
+        )
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
 class HelpProviderSerialize(serializers.ModelSerializer):
      class Meta(UserSerializer.Meta):      
             model= HelpProvider
             fields= UserSerializer.Meta.fields+('fonction',)
 
-class MessageSerializer(serializers.ModelSerializer):
+"""class MessageSerializer(serializers.ModelSerializer):
      class Meta:
          model= Message
          fields=('user_id','convo_id','created','text','source_is_user')
-
+"""
 class ConvoSerializer(serializers.ModelSerializer):
     class Meta:
          model= Convo
@@ -29,4 +38,29 @@ class ConnexionSerializer(serializers.ModelSerializer):
     class Meta:
          model= Connexion
          fields=('help_provider','created','convo_id')
+
+class ManagedObjectStateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= ManagedObject
+        fields=('state',)
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Profile
+        fields=('avatar',)
+
+class TechnologySerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Technology
+        fields=['auto_increment_id','type','state','managedObject_id']
+
+class SiteSerializer(serializers.ModelSerializer):
+    #technologies= serializers.StringRelatedField(many=True)
+    #tech = TechnologySerializer()
+    managedObject=TechnologySerializer(many=True, read_only=True)
+    class Meta:
+        model= ManagedObject
+        fields=['site_id','wilaya','UOP','managedObject']
+
+
 

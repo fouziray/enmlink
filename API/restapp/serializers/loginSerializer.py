@@ -43,7 +43,7 @@ class LoginSerializer(serializers.Serializer):
         attrs['user'] = user
         return attrs
 
-from django.contrib.auth.backends import BaseBackend
+from django.contrib.auth.backends import BaseBackend, ModelBackend
 
 
 class MyBackend(BaseBackend):
@@ -53,7 +53,8 @@ class MyBackend(BaseBackend):
         except User.DoesNotExist:
             return False
         #if check_password(password, user.password):
-        if password == user.password: 
+        if check_password(password, user.password):
+        #set is_active to true if false inside user model
             return user
         else:
             msg= "false password"

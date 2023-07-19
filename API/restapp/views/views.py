@@ -3,14 +3,20 @@ from django.shortcuts import render
 #from django.contrib.auth.models import User 
 from django.http import Http404
 from restapp.serializers.eventSerializer import EventSerialize
-from restapp.serializers.serializers import ConvoSerializer, HelpProviderSerialize, MessageSerializer, UserSerializer
+from restapp.serializers.serializers import ConvoSerializer, HelpProviderSerialize, ManagedObjectStateSerializer, ProfileSerializer, UserSerializer,SiteSerializer, TechnologySerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
-from restapp.models import HelpProvider, Convo, Message
+from restapp.models import HelpProvider, Convo, Profile# Message
 from restapp.modelEvent import Events
-from restapp.models import User
+from restapp.models import User, ManagedObject, Technology
+from rest_framework.decorators import api_view
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from ..forms import UpdateProfileForm
 class UserList(APIView):
+   
     def get(self, request, format=None):
          users = User.objects.all()
          serializer = UserSerializer(users, many=True)
@@ -126,7 +132,7 @@ class ConvoList(APIView):
          return Response(status=status.HTTP_204_NO_CONTENT)
 from django.db import connection
 from django.http import JsonResponse
-class MessageList(APIView):
+"""class MessageList(APIView):
     def get(self, request, format=None):
          users = Message.objects.all()
          serializer = MessageSerializer(users, many=True)
@@ -143,17 +149,107 @@ class MessageList(APIView):
          user = self.get_object(pk)
          user.delete()
          return Response(status=status.HTTP_204_NO_CONTENT)
-
+"""
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 class EventsList(APIView):
+    authentication_classes = [TokenAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    permission_classes = (permissions.AllowAny,)
+    
     def get(self, request, format=None):
-         users = Events.objects.all()
+         users = Events.objects.distinct('type_name')
          serializer = EventSerialize(users, many=True)
-         query="SELECT data :: json -> 'event' AS value FROM events "
-         return self.rawsql(query) # using 
-         #return Response(serializer2)
+         #query="SELECT data :: json -> 'event' AS value FROM events "
+         #return self.rawsql(query) # using 
+         return Response(serializer.data)
     
     def rawsql(self,query):
         with connection.cursor() as cursor:
              cursor.execute(query)
              results= cursor.fetchall()
         return JsonResponse(results,safe=False)
+class SingleEvent(APIView):
+    authentication_classes = [TokenAuthentication, BasicAuthentication]
+    permission_classes = (permissions.AllowAny,)
+    def get(self, request, convo_id ):
+        events=Events.objects.filter(sender_id=convo_id).exclude(type_name="action")
+        serialized_events= EventSerialize(events,many=True)
+        return Response(serialized_events.data)
+
+class ManagedObjectState(APIView):
+    authentication_classes = [TokenAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request, format=None):
+         serializer = ManagedObjectStateSerializer(data=request.data)
+         if serializer.is_valid():
+             serializer.save()
+             return Response(serializer.data, status=status.HTTP_201_CREATED)
+         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ProfileImage(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = [TokenAuthentication, BasicAuthentication]
+
+    """def post(self,request, format=None):
+        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if profile_form.is_valid():
+            profile_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return Response( {'profile_form': '1'},status=status.HTTP_201_CREATED)
+        else:
+            return Response( {'profile_form': ''},status=status.HTTP_201_CREATED)"""
+    @api_view(['POST'])
+    def post(self, request, format=None):
+        try:
+            # exist then update
+            profile = Profile.objects.get(user=request.user)
+            print(request.user)
+            serializer = ProfileSerializer(profile, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Profile.DoesNotExist:
+            # not exist then create
+            serializer = ProfileSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save(user=request.user)
+                return Response(serializer.data)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get(self,request):
+        try:
+            profile = Profile.objects.get(user=request.user)
+            serializer = ProfileSerializer(profile)
+            return Response(serializer.data)
+        except Profile.DoesNotExist:
+            return Response('user doesnt have a profile')
+
+class Sites(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = [TokenAuthentication, BasicAuthentication]
+
+    def get(self, request, format=None):
+         MOs = ManagedObject.objects.all()
+         #Technologies= Technology.objects.all()
+         #finaltech = TechnologySerializer(Technologies,many=True)
+         #MosTechnologies = ManagedObject.objects.prefetch_related('managedObject').all()
+         MosTechnologies= ManagedObject.objects.all()
+         #MosTechnologies= ManagedObject.objects.select_related('managedObject').all()
+         serializer = SiteSerializer(MosTechnologies, many=True)
+         return Response(serializer.data)
+    """def post(self, request, format=None):
+         serializer = ConvoSerializer(data=request.data)
+         if serializer.is_valid():
+             serializer.save()
+             return Response(serializer.data, status=status.HTTP_201_CREATED)
+         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+         user = self.get_object(pk)
+         user.delete()
+         return Response(status=status.HTTP_204_NO_CONTENT)"""

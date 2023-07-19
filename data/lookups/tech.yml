@@ -1,19 +1,23 @@
-version: "2.0"
+version: "3.1"
 nlu: 
 - lookup: Tech2g
     - G900 
     - G1800 
+    - g900
+    - g1800
     - DCS 
     - 2G 
 - lookup: Tech3g
     - U900 
+    - u900
+    - u2100
     - U2100
     - 3G
 - lookup: Tech4g
     - L2100
-    - 2100
+    - l200
     - L1800
-    - 1800
+    - l1800
     - B40
     - TDD
     - FDD
