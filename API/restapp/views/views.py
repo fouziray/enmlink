@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 
 #from django.contrib.auth.models import User 
@@ -234,7 +235,6 @@ class Sites(APIView):
     authentication_classes = [TokenAuthentication, BasicAuthentication]
 
     def get(self, request, format=None):
-         MOs = ManagedObject.objects.all()
          #Technologies= Technology.objects.all()
          #finaltech = TechnologySerializer(Technologies,many=True)
          #MosTechnologies = ManagedObject.objects.prefetch_related('managedObject').all()
@@ -242,6 +242,12 @@ class Sites(APIView):
          #MosTechnologies= ManagedObject.objects.select_related('managedObject').all()
          serializer = SiteSerializer(MosTechnologies, many=True)
          return Response(serializer.data)
+    def post(self, request, format=None):
+         site_serializer = SiteSerializer(data=request.data)
+         if (site_serializer.is_valid(raise_exception=True)):
+            site = site_serializer.save()            
+            return Response(site_serializer.data, status=status.HTTP_201_CREATED)
+         return Response(site_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     """def post(self, request, format=None):
          serializer = ConvoSerializer(data=request.data)
          if serializer.is_valid():
