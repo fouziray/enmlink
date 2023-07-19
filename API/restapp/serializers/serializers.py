@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from ..models import Convo, Connexion, HelpProvider,ManagedObject, Profile #Message
+from ..models import Convo, Connexion, HelpProvider,ManagedObject, Profile, Technology #Message
 
 from django.contrib.auth import get_user_model
 
@@ -48,3 +48,19 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model= Profile
         fields=('avatar',)
+
+class TechnologySerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Technology
+        fields=['auto_increment_id','type','state','managedObject_id']
+
+class SiteSerializer(serializers.ModelSerializer):
+    #technologies= serializers.StringRelatedField(many=True)
+    #tech = TechnologySerializer()
+    managedObject=TechnologySerializer(many=True, read_only=True)
+    class Meta:
+        model= ManagedObject
+        fields=['site_id','wilaya','UOP','managedObject']
+
+
+

@@ -100,17 +100,27 @@ class ManagedObject(models.Model):
     UOP=models.CharField(max_length=6,null=True,choices=UOP_CHOICES)
 
 class Technology(models.Model):
+    auto_increment_id = models.AutoField(primary_key=True)
     managedObject=models.ForeignKey(ManagedObject,on_delete=models.DO_NOTHING, related_name='managedObject')
     TYPE_CHOICES = (
         ('3G', '3G'),
         ('4G', '4G'),
         ('2G', '2G'),
     )
+    STATE_CHOICES = (
+        ('ACTIVE', 'ACTIVE'),
+        ('LOCKED', 'LOCKED'),
+    )
     type = models.CharField(max_length=2, choices=TYPE_CHOICES)
-    state= models.JSONField('state')
+    state= models.CharField(max_length=6,null=True,choices=STATE_CHOICES)
+    throughput= models.IntegerField
 from django.contrib.auth.models import Group
-"""class DtSession(models.Model):
+
+class DtSession(models.Model):
     site=models.ForeignKey(ManagedObject,on_delete=models.DO_NOTHING)
     dtTeam=models.ForeignKey(Group,on_delete=models.DO_NOTHING)
-    technicianTeam=models.ForeignKey(Group,on_delete=models.DO_NOTHING)
-"""
+    #technicianTeam=models.ForeignKey(Group,on_delete=models.DO_NOTHING)
+    technicien=models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    start_time=models.DateTimeField()
+    end_Time=models.DateTimeField()
+    # don't forget develop socket io django + rabbitmq

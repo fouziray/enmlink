@@ -38,6 +38,7 @@ urlpatterns = [
     path('login/', LoginView.as_view()),
     path('mostate/',ManagedObjectState.as_view()),
     path('api-token-auth/', views.obtain_auth_token),
-    path('profile/', ProfileImage.as_view())
+    path('profile/', ProfileImage.as_view()),
+    path('sites/', Sites.as_view())
     
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
