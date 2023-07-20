@@ -1,15 +1,16 @@
-from django.shortcuts import render
 import json
+from django.shortcuts import render
+
 #from django.contrib.auth.models import User 
 from django.http import Http404
 from restapp.serializers.eventSerializer import EventSerialize
-from restapp.serializers.serializers import ConvoSerializer, HelpProviderSerialize, ManagedObjectStateSerializer, ProfileSerializer, UserSerializer,SiteSerializer, TechnologySerializer
+from restapp.serializers.serializers import ConvoSerializer, HelpProviderSerialize, ManagedObjectStateSerializer, ProfileSerializer, UserSerializer,SiteSerializer, TechnologySerializer , SiteSerializer2
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
 from restapp.models import HelpProvider, Convo, Profile# Message
 from restapp.modelEvent import Events
-from restapp.models import User, ManagedObject, Technology
+from restapp.models import User, ManagedObject, Technology, DtSession
 from rest_framework.decorators import api_view
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -234,7 +235,6 @@ class Sites(APIView):
     authentication_classes = [TokenAuthentication, BasicAuthentication]
 
     def get(self, request, format=None):
-         MOs = ManagedObject.objects.all()
          #Technologies= Technology.objects.all()
          #finaltech = TechnologySerializer(Technologies,many=True)
          #MosTechnologies = ManagedObject.objects.prefetch_related('managedObject').all()
@@ -242,28 +242,37 @@ class Sites(APIView):
          #MosTechnologies= ManagedObject.objects.select_related('managedObject').all()
          serializer = SiteSerializer(MosTechnologies, many=True)
          return Response(serializer.data)
-    
     def post(self, request, format=None):
-         dic1 = json.loads(request)
-         print(dict1[0])
-         site_serializer = ManagedObjectStateSerializer(data=request.data)
-         tech_serializer = TechnologySerializer(data=request.data[0]['managedObject'])
-         if (site_serializer.is_valid() and tech_serializer.is_valid()):
-            site = site_serializer.save()
-            tech = tech_serializer.save()
-            response_data = {
-            'site': site_serializer.data,
-            'tech': tech_serializer.data
-            }
+         site_serializer = SiteSerializer(data=request.data)
+         if (site_serializer.is_valid(raise_exception=True)):
+            site = site_serializer.save()            
+            return Response(site_serializer.data, status=status.HTTP_201_CREATED)
+         return Response(site_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    """def post(self, request, format=None):
+         serializer = ConvoSerializer(data=request.data)
+         if serializer.is_valid():
+             serializer.save()
+             return Response(serializer.data, status=status.HTTP_201_CREATED)
+         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-            return Response(response_data, status=status.HTTP_201_CREATED)
-
-         elif(site_serializer.is_valid!= False):
-            return Response(site_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-         elif(tech_serializer.is_valid!= False):
-            return Response(tech_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-"""
     def delete(self, request, pk, format=None):
          user = self.get_object(pk)
          user.delete()
          return Response(status=status.HTTP_204_NO_CONTENT)"""
+    
+
+class SiteDT(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = [TokenAuthentication, BasicAuthentication]
+
+    def get(self, request, format=None):
+        # DT = DtSession.objects.all()
+        # serializer = DTSerializer(DT, many=True)
+        # return Response(serializer.data)
+        MosDTSession= ManagedObject.objects.all()
+        #MosTechnologies= ManagedObject.objects.select_related('managedObject').all()
+        serializer = SiteSerializer2(MosDTSession, many=True)
+        return Response(serializer.data)
+
+
+

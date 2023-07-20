@@ -117,7 +117,7 @@ class Technology(models.Model):
 from django.contrib.auth.models import Group
 
 class DtSession(models.Model):
-    site=models.ForeignKey(ManagedObject,on_delete=models.DO_NOTHING)
+    site=models.ForeignKey(ManagedObject,on_delete=models.DO_NOTHING , related_name='session')
     dtTeam=models.ForeignKey(Group,on_delete=models.DO_NOTHING)
     #technicianTeam=models.ForeignKey(Group,on_delete=models.DO_NOTHING)
     technicien=models.ForeignKey(User, on_delete=models.DO_NOTHING)

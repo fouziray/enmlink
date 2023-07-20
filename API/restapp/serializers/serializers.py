@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from ..models import Convo, Connexion, HelpProvider,ManagedObject, Profile, Technology #Message
+from ..models import Convo, Connexion, HelpProvider,ManagedObject, Profile, Technology, DtSession #Message
 
 from django.contrib.auth import get_user_model
 
@@ -44,6 +44,14 @@ class ManagedObjectStateSerializer(serializers.ModelSerializer):
         model= ManagedObject
         fields=('state',)
 
+
+class DTSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= DtSession
+        fields=['dtTeam' , 'technicien' , 'start_time' , 'end_Time']
+
+
+
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model= Profile
@@ -52,15 +60,60 @@ class ProfileSerializer(serializers.ModelSerializer):
 class TechnologySerializer(serializers.ModelSerializer):
     class Meta:
         model= Technology
-        fields=['auto_increment_id','type','state','managedObject_id']
+        fields=['auto_increment_id','type','state']
 
 class SiteSerializer(serializers.ModelSerializer):
     #technologies= serializers.StringRelatedField(many=True)
     #tech = TechnologySerializer()
-    managedObject=TechnologySerializer(many=True, read_only=True)
+    managedObject=TechnologySerializer(many=True)
+    
     class Meta:
         model= ManagedObject
         fields=['site_id','wilaya','UOP','managedObject']
+    def create(self, validated_data):
+        technologies_data = validated_data.pop("managedObject")
+        mo = ManagedObject.objects.create(**validated_data)
+        technology_serializer = self.fields['managedObject']
+        for technology_data in technologies_data:
+            technology_data['managedObject'] = mo
+            Technology.objects.create(**technology_data)
+        #techno= technology_serializer.create(technologies_data)
+        return mo
+
+
+
+
+
+
+
+
+
+
+
+class SiteSerializer2(serializers.ModelSerializer):
+  
+    session=DTSerializer(many=True)
+    
+    class Meta:
+        model= ManagedObject
+        fields=['site_id','wilaya','UOP','session']
+    def create(self, validated_data):
+        dt_sessions_data = validated_data.pop("session")
+        mo = ManagedObject.objects.create(**validated_data)
+        dtsession_serializer = self.fields['session']
+        for dt_session_data in dt_sessions_data:
+            dt_session_data['session'] = mo
+            DtSession.objects.create(**dt_session_data)
+       
+        return mo
+
+
+
+
+
+
+
+
 
 
 
