@@ -94,7 +94,7 @@ class g4TDDCommand(Command):
 
 class RetCommand(Command):
      
-    def get_tilt(self , siteId):
+    def get_tilt(self , siteId, userlabel):
         siteIdd = siteId.split(", ")  #  dans une liste 
         sites_codes = ','.join(siteIdd)
         # cmd1 = "cmedit get " + sites_codes + (" Retsubunit.(" +userlabel+ ",electricalAntennaTilt) ") or ("RetDevice.(" +userlabel+ ",electricalAntennaTilt)") "-t"
@@ -113,7 +113,7 @@ class RetCommand(Command):
             #cmd1 = "cmedit set " + sites_codes + (" Retsubunit.(userlabel==" +userlabel+ ")") ("RetDevice.(userlabel==" +userlabel+ ",) ") "electricalAntennaTilt="+tilt
             cmd1 = "cmedit set " + sites_codes + " Retsubunit.(userlabel==" +userlabel+ ") electricalAntennaTilt="+tilt
             cmd2 = "cmedit set " + sites_codes + "RetDevice.(userlabel==" +userlabel+ ",) electricalAntennaTilt="+tilt
-            return cmd
+            return (cmd1 or cmd2)
         else:
             return 0
 

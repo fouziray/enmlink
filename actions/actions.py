@@ -10,6 +10,13 @@
 import json
 from typing import Any, Text, Dict, List, TYPE_CHECKING
 
+from langdetect import detect
+
+# add this line in all actions : lang = detect(tracker.get_latest_message.txt or tracker.latest_message.text , tracker.latest_message.get("text"))
+# if lang = 'en' : repondre en englais 
+# if lang = 'fr' : repondre en englais  
+# if lang = 'ar' : repondre en arabe
+
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
@@ -180,6 +187,8 @@ class ActionSessionStart(Action): """
         return _events """
 
 from  .EnmCommands.plainCommands import Command , GsmCommand, g3NodeCommand, g3rncCommand, g4FDDCommand, g4TDDCommand, RetCommand, OptimCommand
+
+"""
 class ActionBlock(Action):
 
     def name(self) -> Text:
@@ -216,7 +225,7 @@ class ActionBlock(Action):
                 a = com.execute(get_state_2G)
                 dispatcher.utter_message(a)
                 print('$$$$$$$',a,'$$$$$$$$')
-                set_state_2G = c.set(siteId, urfcn, bande, 'ACTIVE')
+                set_state_2G = c.set(siteId, urfcn, bande, 'INACTIVE')
 
         else: 
             if(tracker.get_slot('Tech3g') != None):
@@ -237,7 +246,7 @@ class ActionBlock(Action):
                 a = com.execute(get_state_3G)
                 dispatcher.utter_message(a)
                 print('$$$$$$$',a,'$$$$$$$$')
-                set_state_3G = c.set(siteId, bande, 'UNLOCKED')
+                set_state_3G = c.set(siteId, bande, 'LOCKED')
 
                 
     
@@ -252,7 +261,7 @@ class ActionBlock(Action):
                         print(get_state_4G)
                         a = com.execute(get_state_4G)
                         print('$$$$$$$',a,'$$$$$$$$')
-                        set_state_4G = c.set(siteId, 'UNLOCKED')
+                        set_state_4G = c.set(siteId, 'LOCKED')
 
                     else : 
                         if(tech_value4 == 'L1800' or tech_value4 == 'l1800'):
@@ -269,6 +278,200 @@ class ActionBlock(Action):
                         a = com.execute(get_state_4G)
                         dispatcher.utter_message(a)
                         print('$$$$$$$',a,'$$$$$$$$')
-                        set_state_4G = c.set(siteId, bande, 'UNLOCKED')
+                        set_state_4G = c.set(siteId, bande, 'LOCKED')
+
+
+"""
+
+
+
+
+
+
+
+class Action_Block_Unblock(Action):
+   
+    def name(self) -> Text:
+        return "action_block_unblock"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+       # get the technologie 2g or 3g or 4g 
+        com=Command()
+        com.open('XXXX', 'xxxxxx', 'XXXXXXXXXX')
+
+        siteId = tracker.get_slot('code_site_slot')
+        
+        dispatcher.utter_message("code site is "+str(siteId))
+       
+        tech_value2 = tracker.get_slot('Tech2g')
+        tech_value3 = tracker.get_slot('Tech3g')
+        tech_value4 = tracker.get_slot('Tech4g')
+
+        if(tech_value2 != None):
+                c = GsmCommand()
+                urfcn = 1000 
+                if(tech_value2 == 'g900' or tech_value2 == 'G900'):
+                    bande = 'GSM900'
+                else : 
+                    if(tech_value2 == 'g1800' or tech_value2 == 'G1800'):
+                        bande = 'GSM1800'
+                    else:
+                        if(tech_value2 == '2g' or tech_value2 == '2G'):
+                            bande = 'GSM900 , GSM1800'
+                
+                get_state_2G = c.get(siteId, urfcn, bande)
+                print('State 2G')
+                print(get_state_2G)
+                a = com.execute(get_state_2G)
+                dispatcher.utter_message(a)
+                print('$$$$$$$',a,'$$$$$$$$')
+                if(tracker.latest_message['intent'].get('name') == 'ask_lock'):
+                    set_state_2G = c.set(siteId, urfcn, bande, 'ACTIVE')
+                else:
+                    if(tracker.latest_message['intent'].get('name') == 'ask_unlock'):
+                        set_state_2G = c.set(siteId, urfcn, bande, 'INACTIVE')
+                    
+
+        if(tech_value3 != None):
+                c = g3rncCommand()
+                
+                if(tech_value3 == 'U900' or tech_value3 == 'u900'):
+                    bande = 'U900'
+                else : 
+                    if(tech_value3 == 'U2100' or tech_value3 == 'u2100'):
+                        bande = 'U2100'
+                    else:
+                        if(tech_value3 == '3g' or tech_value3 == '3G'):
+                            bande = 'U900 , U2100'
+                
+                get_state_3G = c.get(siteId, bande)
+                print('State 3G')
+                print(get_state_3G)
+                a = com.execute(get_state_3G)
+                dispatcher.utter_message(a)
+                print('$$$$$$$',a,'$$$$$$$$')
+                if(tracker.latest_message['intent'].get('name') == 'ask_lock'):
+                    set_state_3G = c.set(siteId, bande, 'LOCKED')
+                else:
+                    if(tracker.latest_message['intent'].get('name') == 'ask_unlock'):
+                         set_state_3G = c.set(siteId, bande, 'UNLOCKED')
+
+
+
+        if(tech_value4 != None):
+                    
+            tech_value4 = tracker.get_slot('Tech4g')
+            if(tech_value4 == '4g' or tech_value4 == '4G'):
+                c = g4TDDCommand()
+                get_state_4G = c.get(siteId)
+                print('State 4G')
+                print(get_state_4G)
+                a = com.execute(get_state_4G)
+                print('$$$$$$$',a,'$$$$$$$$')
+                if(tracker.latest_message['intent'].get('name') == 'ask_lock'):
+                    set_state_4G = c.set(siteId, 'LOCKED')
+                else:
+                    if(tracker.latest_message['intent'].get('name') == 'ask_unlock'):
+                        set_state_4G = c.set(siteId, 'UNLOCKED')
+                    else : 
+                        if(tech_value4 == 'L1800' or tech_value4 == 'l1800'):
+                            bande = 'L1800'
+                            c = g4FDDCommand()
+                        else:
+                            if(tech_value4 == 'L2100' or tech_value4 == 'l2100'):
+                                bande = 'L2100'
+                                c = g4FDDCommand()        
+                    
+                        get_state_4G = c.get(siteId, bande)
+                        print('State 4G')
+                        print(get_state_4G)
+                        a = com.execute(get_state_4G)
+                        dispatcher.utter_message(a)
+                        print('$$$$$$$',a,'$$$$$$$$')
+                        if(tracker.latest_message['intent'].get('name') == 'ask_lock'):
+                            set_state_4G = c.set(siteId, bande, 'LOCKED')
+                        else:
+                            if(tracker.latest_message['intent'].get('name') == 'ask_unlock'):
+                                set_state_4G = c.set(siteId, bande, 'UNLOCKED')
+
+
+
+
+
+
+
+             
+
+
+class Action_Rollback(Action):
+
+    def name(self) -> Text:
+        return "action_Rollback"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+    
+        com=Command()
+        com.open('XXXX', 'xxxxxx', 'XXXXXXXXXX')
+
+        siteId = tracker.get_slot('code_site_slot')
+        sector = tracker.get_slot('Sector')
+        tech2g = tracker.get_slot('Tech2g')
+        tech3g = tracker.get_slot('Tech3g')
+        tech4g = tracker.get_slot('Tech4g')
+    
+      
+
+
+
+class Action_Ret(Action):
+
+    def name(self) -> Text:
+        return "action_Ret"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+    
+        com=Command()
+        com.open('XXXX', 'xxxxxx', 'XXXXXXXXXX')
+
+        siteId = tracker.get_slot('code_site_slot')
+        sector = tracker.get_slot('Sector')
+        tech2g = tracker.get_slot('Tech2g')
+        tech3g = tracker.get_slot('Tech3g')
+        tech4g = tracker.get_slot('Tech4g')
+        userlabel = 1240 
+        r = RetCommand()
+        cmd_ret = r.get_tilt(siteId , userlabel)
+        
+
+
+class ActionUtterGreet(Action):
+
+     def name(self) -> Text:
+         return "utter_greet"
+
+     def run(self, dispatcher: CollectingDispatcher,
+             tracker: Tracker,
+             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+        
+        mssg = tracker.get_latest_message.txt
+        lan = detect(mssg)
+        lan = 'en' 
+        if(lan== 'en'):
+            dispatcher.utter_template("utter_greet_en", tracker)
+            print("en")
+        elif(lan=='fr'):
+            dispatcher.utter_template("utter_greet_fr", tracker)
+            print("fr")
+        return []
 
 

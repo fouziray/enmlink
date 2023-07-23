@@ -24,7 +24,7 @@ intents:
   - inform_site
   - downlink
   - uplink
-  - ask_Rollback
+  - ask_rollback
   #- inform+ask_lock+ask_unlock
   #- inform+ask_optimisation
   - ask_status
@@ -232,11 +232,15 @@ responses:
   utter_unlock_all:
   - text: "utter_unlock_all"
   
-  utter_greet:
-  - text: "Hey! {Person}"
-  - text: "Hello {Person}"
-  - text: "Hi {Person} , how can i help"
-  - text: "Salam {Person}"
+  utter_greet_eng:
+  - text: "Hey!"
+  - text: "Hello"
+  - text: "Hi , how can i help"
+  - text: "Salam "
+
+  utter_greet_fr:
+  - text: "salut"
+  - text: "Coucous"
 
   utter_cheer_up:
   - text: "Here is something to cheer you up:"
@@ -335,12 +339,16 @@ responses:
   
 
 actions: 
+  - utter_greet
   - action_get_message
   - action_hello_world
   - action_append_tech_slots
   - action_reset_techs
   - action_available_tech
   - action_block
+  - action_block_unblock
+  - action_Rollback
+  - action_Ret
 
 session_config:
   session_expiration_time: 480

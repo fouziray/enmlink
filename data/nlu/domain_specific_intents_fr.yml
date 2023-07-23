@@ -1,0 +1,104 @@
+version: "3.1"
+language: "fr"
+#nlu:
+
+
+ - intent: Connection
+   examples: |
+    - échec de la connexion
+    - la connexion a échoué
+    - je ne peux pas me connecter au site
+    - c'est activé
+    - connexion en cours
+    - je suis connecté
+    - impossible de se connecter à [S2](Sector) et [L2100](Tech4g)
+
+
+  
+ - intent: test_done
+   examples: |
+    - ssv terminé
+    - test terminé
+    - fini
+    - terminé avec le site
+    - terminé, merci
+    - problèmes résolus
+
+  
+ - intent: ask_help
+   examples: |
+    - ??
+    - Que dois-je faire ??
+    - j'ai une question ?
+    - pourriez-vous m'aider
+    - que dois-je faire ensuite ?
+
+
+
+ - intent: ask_time
+   examples: |
+    - attendez
+    - 1 minute s'il vous plaît
+    - s'il vous plaît, attendez
+    - quand j'aurai fini, je vous le dirai
+    - une fois que j'aurai terminé, je vous informerai
+    - une minute
+
+ - intent: inform_site
+   examples: |
+    - je suis disponible sur le site [LBB3402](code_site)
+    - site [4745](code_site)
+    - s'il vous plait le site [09620](code_site)
+    - veuillez vérifier le site [350420](code_site)
+
+
+
+
+
+
+ - intent: ask_status
+   examples: |
+    - vérifiez l'état du réseau [2G](Tech2g) pour moi
+    - quel est l'état actuel de toutes les technologies existantes [2g](Tech2g) [3g](Tech3g) [4g](Tech4g)
+
+ - intent : check_all_techs
+   examples: |
+    - état de toutes les technologies
+    - technologies existantes
+    - technologies actuelles
+    - technologies prises en charge
+    - technologies gérées
+
+ - intent: ask_csrf  # call the optimiser 
+   examples: |
+    - que pensez-vous de csrf
+    - Problème de CSFB également concernant le site [LAI4315](code_site)
+    - la cellule ne bascule pas vers une autre technologie
+    - ca non trouvé
+    - l'agrégation de porteuses ne fonctionne pas
+
+ - intent: ask_pci
+   examples: |
+    - S'il vous plaît, envoyez-moi le pci
+    - j'ai besoin du pci
+    - s'il vous plaît, j'ai besoin du pci
+    - pci s'il vous plaît
+    - pouvez-vous m'envoyer le pci
+    
+ - intent: ask_restart
+   examples: |
+    - s'il vous plaît, redémarrez
+    - redémarrer si vous pouvez
+    - pouvez-vous redémarrer le site
+    - s'il vous plaît, redémarrez le secteur s1
+    - redémarrer toutes les technologies
+    - redémarrer la bande [L1800](Tech4g)
+
+ - intent: finishing_test
+   examples: |
+    - ssv terminé
+    - test terminé
+    - fini
+    - terminé avec le site
+    - terminé, merci
+    - problèmes résolus

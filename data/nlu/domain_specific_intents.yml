@@ -53,10 +53,13 @@ nlu:
     - maxtilt all [U2100](Tech3g)
     - maxtilt all [L1800](Tech4g)
  
+ 
  - intent: ask_Optimisation
    examples: |
     - I didnt get the throughput  
     - throughput non atteint  
+
+
  - intent: ask_Rollback
    examples: |
     - Rollback 
@@ -84,7 +87,11 @@ nlu:
    # - hello , i'm in site [6069](code_site)
     #- salam site [4746](code_site) please
 
-  
+  # reponse : 
+  #check if tech exists or sector exist if true :
+            #please to change the place or reconnect
+            # else the sector or the tech does not exists  
+
  - intent: Connection
    examples: |
     - failed to connect 
@@ -93,7 +100,8 @@ nlu:
     - it is activated 
     - connecting 
     - i’m connected 
-    - can't connect to [S2](Sector) and [L2100](Tech4g)
+    - can't connect to [S2](Sector) and [L2100](Tech4g)    
+
 
   
  - intent: test_done
@@ -216,10 +224,16 @@ nlu:
     - supported technologies 
     - handled technologies
 
- - intent: ask_csrf
+ - intent: ask_csrf  # call the optimiser
+   examples: |
     - what about csrf 
     - Also issue of CSFB about the site [LAI4315](code_site)
+    - cell not basculate to other technology 
+    - ca not found 
+    - carrier agreggation not working 
 
+
+    # 
  - intent: ask_pci
    examples: |
     - Please send me the pci 
