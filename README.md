@@ -12,5 +12,17 @@ Use `rasa run` to run the chatbot's NLU and response selector at once, or `rasa 
 
 The former requires the actions servers to be running with `rasa run actions`, along with api.
 
-For an interactive mode with which the answers can be tweaked and adjusted with an approval or decline of actions use `rasa interactive`
+For an interactive mode with which the answers can be tweaked and adjusted with an approval or decline of actions using `rasa interactive`
 
+## Folders and files structure:
+
+-Entities database: data/lookup/*
+-Intents and Entities extraction: data/nlu.yml
+-Training stories: data/stories.yml
+-Training rules: data/rules.yml
+-Custom actions: actions/actions.py
+-Descriptors: /json/*
+-Trained model: /models/ 
+NLU performance tests: /results/*
+
+for the sake of size, models aren't uploaded to this repository, however they're generated using `rasa train`

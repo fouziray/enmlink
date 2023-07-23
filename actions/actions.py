@@ -49,6 +49,7 @@ class ActionGetMessage(Action):
          #dispatcher.utter_message("hello "+json_obj)
          buttons = [{"title": "Yes", "payload": "/affirm"}, {"title": "No", "payload": "/deny"}]
          dispatcher.utter_message("value of slot"+str(tracker.slots))
+         dispatcher.utter_message(tracker.latest_message['intent'].get('name'))
 #         dispatcher.utter_button_message("respond please ?", buttons)
 
          return [SlotSet("code_site_slot", 1872)]
@@ -88,10 +89,39 @@ class ActionAppendTechSlots(Action):
         
         dispatcher.utter_message("Appending slots to required forms")
 
+class ActionSetSectorAccumulator(Action):
+
+    def name(self) -> Text:
+        return "action_set_sector_accumulator"
+    
+    def get_new_sector_values(self,ln,lo):
+        return [ value for value in ln if value not in lo ]
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]
+    ) -> List[Dict[Text, Any]]:
+        intent_of_last_user_message = tracker.get_intent_of_latest_message()
+        accumulated_sectors=[]
+
+        accumulated_sectors=tracker.get_slot("sector_accumulator")
+        sector_possibilities=['S1','S2','S3']
+        if ( accumulated_sectors == None):
+            accumulated_sectors=[]
+        current_sector_slot = tracker.get_slot("Sector_slot")
+        if intent_of_last_user_message == "ask_unlock":
+            accumulated_sectors.extend(self.get_new_sector_values(current_sector_slot,accumulated_sectors))
+        #dispatcher.utter_message("accumulated slot is this="+str(accumulated_sectors)+" accumul")
+
+        return [
+            SlotSet("sector_accumulator", accumulated_sectors)
+        ]
 #----------------------------------------------------------------
-
 from rasa_sdk.forms import FormValidationAction
-
+from rasa_sdk.types import DomainDict
+from rasa_sdk.forms import ValidationAction
 class ValidateTechnologiesForm(FormValidationAction):
     def name(self) -> Text:
         return "validate_technologies_form"
@@ -99,12 +129,13 @@ class ValidateTechnologiesForm(FormValidationAction):
     async def required_slots(
         self,
         domain_slots: List[Text],
-        dispatcher: "CollectingDispatcher",
-        tracker: "Tracker",
-        domain: "DomainDict",
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
     ) -> List[Text]:
         updated_slots = domain_slots.copy()
-        if tracker.latest_message['intent'].get('name'):
+        requested_techs_options=['3g_required_slot','2g_required_slot','4g_required_slot']
+        if tracker.get_intent_of_latest_message() in requested_techs_options :
             # If the user is an existing customer,
             # do not request the `email_address` slot
             #updated_slots.remove("email_address")
@@ -112,6 +143,38 @@ class ValidateTechnologiesForm(FormValidationAction):
 
 
         return updated_slots
+
+class ValidatePredefinedSlots(ValidationAction):
+    def validate_code_site_slot(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        """Validate code_site_slot's value."""
+        dispatcher.utter_message("validate_code_site_slot")
+        if isinstance(slot_value, str):
+            # validation succeeded, capitalize the value of the "location" slot
+            return {"code_site_slot": slot_value}
+        else:
+            # validation failed, set this slot to None
+            return {"code_site_slot": slot_value}
+    
+    def validate_Sector_slot(self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        Sector_list_copy=[]
+        Sector_list_copy=tracker.get_slot("Sector_slot")
+        available_sectors_architecture=['S1','S2','S3']
+        Sector_list_valid=[ values for values in Sector_list_copy if values in  available_sectors_architecture]
+        dispatcher.utter_message("validate_Sector_slot="+str(Sector_list_valid))
+
+        return {"Sector_slot": Sector_list_valid}
+    
 #class ActionGet(Action):
 #    def name(self) -> Text:
 #        return "action_get_tech";
@@ -242,7 +305,7 @@ class ActionBlock(Action):
                 
     
             else: 
-                if(tracker.slots.get_slot['Tech4g'] != None):
+                if(tracker.get_slot('Tech4g') != None):
                     
                     tech_value4 = tracker.get_slot('Tech4g')
                     if(tech_value4 == '4g' or tech_value4 == '4G'):

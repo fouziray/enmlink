@@ -245,7 +245,10 @@ class Sites(APIView):
     def post(self, request, format=None):
          site_serializer = SiteSerializer(data=request.data)
          if (site_serializer.is_valid(raise_exception=True)):
-            site = site_serializer.save()            
+            try:
+                site = site_serializer.save()     
+            except: 
+                return Response(site_serializer.data, status=status.HTTP_302_FOUND)       
             return Response(site_serializer.data, status=status.HTTP_201_CREATED)
          return Response(site_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     """def post(self, request, format=None):

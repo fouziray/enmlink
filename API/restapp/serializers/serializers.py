@@ -58,18 +58,21 @@ class SiteSerializer(serializers.ModelSerializer):
     #technologies= serializers.StringRelatedField(many=True)
     #tech = TechnologySerializer()
     managedObject=TechnologySerializer(many=True)
-    
     class Meta:
         model= ManagedObject
         fields=['site_id','wilaya','UOP','managedObject']
     def create(self, validated_data):
         technologies_data = validated_data.pop("managedObject")
-        mo = ManagedObject.objects.create(**validated_data)
+        mo, created = ManagedObject.objects.get_or_create(**validated_data)
         technology_serializer = self.fields['managedObject']
-        for technology_data in technologies_data:
-            technology_data['managedObject'] = mo
-            Technology.objects.create(**technology_data)
-        #techno= technology_serializer.create(technologies_data)
+        print("hiiiis")
+
+        if(created):
+            for technology_data in technologies_data:
+                technology_data['managedObject'] = mo
+                Technology.objects.create(**technology_data)
+            #techno= technology_serializer.create(technologies_data)
+        
         return mo
 
 

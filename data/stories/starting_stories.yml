@@ -26,8 +26,9 @@ stories:
   steps:
   - intent: ask_lock
   - action: utter_ask_lock
+  #- slot_was_set: need to check if code site value is set with any value
   - action: action_block
-  #- action: action_get_message
+  - action: action_get_message
 
 #- story: stop form required slots filling  
 #  steps:
@@ -37,10 +38,10 @@ stories:
 #    - intent: 2g_required_slot
 #  - action: action_append_tech_slots
 
-#- story:
-#  steps:
-#  - intent: finishing_test
-#  - action: action_available_tech
+- story:
+  steps:
+  - intent: finishing_test
+  - action: action_available_tech
 
 - story: 
 - story: affirmation respond
@@ -53,3 +54,7 @@ stories:
   - intent: deny
   - action: utter_goodbye
 
+- story: accumulate technologies
+  steps:
+  - intent: ask_unlock
+  - action: action_set_sector_accumulator

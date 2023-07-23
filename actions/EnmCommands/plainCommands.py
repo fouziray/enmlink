@@ -1,5 +1,7 @@
+#!/usr/bin/env python
+import pika, sys, os
 from abc import abstractmethod
-#import pandas as pd
+import pandas as pd
 #from .enmscripting import enmscripting
 
 #this is a first draft of enm access and not yet integrated with actions server
@@ -14,7 +16,35 @@ class Command:
     @abstractmethod
     def set(siteId, uarfcn, bande):
         pass
-
+    def format2g(self):
+        output4=['SubNetwork,SubNetwork,MeContext,ManagedElement,BscFunction,BscM,GeranCellM,GeranCell', 'NodeId\tBscFunctionId\tBscMId\tGeranCellMId\tGeranCellId\tcSysType\tgeranCellId', 'BLDEVO2\t1\t1\t1\t09620D\tGSM1800\t09620D', 'BLDEVO2\t1\t1\t1\t09620E\tGSM1800\t09620E', 'BLDEVO2\t1\t1\t1\t09620F\tGSM1800\t09620F', 'SubNetwork,SubNetwork,MeContext,ManagedElement,BscFunction,BscM,GeranCellM,GeranCell,ChannelGroup', 'NodeId\tBscFunctionId\tBscMId\tGeranCellMId\tGeranCellId\tChannelGroupId\tconnectedG12Tg\tconnectedG31Tg\tstate', 'BLDEVO2\t1\t1\t1\t09620D\t0\tnull\tSubNetwork=ONRM_ROOT_MO,SubNetwork=GRAN,MeContext=BLDEVO2,ManagedElement=BLDEVO2,BscFunction=1,BscM=1,Bts=1,G31Tg=1020\tACTIVE', 'BLDEVO2\t1\t1\t1\t09620E\t0\tnull\tSubNetwork=ONRM_ROOT_MO,SubNetwork=GRAN,MeContext=BLDEVO2,ManagedElement=BLDEVO2,BscFunction=1,BscM=1,Bts=1,G31Tg=1120\tACTIVE', 'BLDEVO2\t1\t1\t1\t09620F\t0\tnull\tSubNetwork=ONRM_ROOT_MO,SubNetwork=GRAN,MeContext=BLDEVO2,ManagedElement=BLDEVO2,BscFunction=1,BscM=1,Bts=1,G31Tg=1220\tACTIVE', '', '6 instance(s)']
+        output3= ['', '0 instance(s)']
+        output2=['SubNetwork,SubNetwork,SubNetwork,MeContext,ManagedElement,RncFunction,UtranCell', 'NodeId\tRncFunctionId\tUtranCellId\tadministrativeState\toperationalState\tuarfcnDl', 'RNCSTF\t1\t193020V\tUNLOCKED\tENABLED\t10563', 'RNCSTF\t1\t193020W\tUNLOCKED\tENABLED\t10563', 'RNCSTF\t1\t193020X\tUNLOCKED\tENABLED\t10588', 'RNCSTF\t1\t193020Y\tUNLOCKED\tENABLED\t10588', 'RNCSTF\t1\t193020U\tUNLOCKED\tENABLED\t10563', 'RNCSTF\t1\t193020Z\tUNLOCKED\tENABLED\t10588', '', '6 instance(s)']
+        output5=['SubNetwork,SubNetwork,SubNetwork,MeContext,ManagedElement,ENodeBFunction,EUtranCellFDD', 'NodeId\tENodeBFunctionId\tEUtranCellFDDId\tadministrativeState\tavailabilityStatus\tfreqBand\toperationalState', '351012L\t1\t351012T\tUNLOCKED\tnull\t1\tENABLED', '351012L\t1\t351012R\tUNLOCKED\tnull\t1\tENABLED', '351012L\t1\t351012S\tUNLOCKED\t[FAILED]\t1\tDISABLED', '', '3 instance(s)']
+        output=['SubNetwork,SubNetwork,SubNetwork,MeContext,ManagedElement,ENodeBFunction,EUtranCellTDD', 'NodeId\tENodeBFunctionId\tEUtranCellTDDId\tadministrativeState\tavailabilityStatus\toperationalState', '16601LT\t1\tL23_16601U\tUNLOCKED\tnull\tENABLED', '16601LT\t1\tL23_16601V\tUNLOCKED\tnull\tENABLED', '16601LT\t1\tL23_16601W\tUNLOCKED\tnull\tENABLED', '16601LT\t1\tL23_16601X\tUNLOCKED\tnull\tENABLED', '16601LT\t1\tL23_16601Y\tUNLOCKED\tnull\tENABLED', '16601LT\t1\tL23_16601Z\tUNLOCKED\tnull\tENABLED', '', '6 instance(s)']
+        if (output[-1]!='0 instance(s)'):
+            output.pop(0)
+            columns_names=output[0].split('\t')
+            output.pop(0)
+            values_data=[ values.split('\t') for values in output ]
+            final=[ valuee for valuee in values_data if ('UNLOCKED' or 'LOCKED' or 'ACTIVE') in valuee]
+            values_data.insert(0,columns_names)
+        else: 
+            columns_names=[]
+            values_data=[]
+        return values_data
+    def formatg(self):
+        l=['SubNetwork,SubNetwork,MeContext,ManagedElement,BscFunction,BscM,GeranCellM,GeranCell', 'NodeId\tBscFunctionId\tBscMId\tGeranCellMId\tGeranCellId\tcSysType\tgeranCellId', 'BLDEVO2\t1\t1\t1\t09620D\tGSM1800\t09620D', 'BLDEVO2\t1\t1\t1\t09620E\tGSM1800\t09620E', 'BLDEVO2\t1\t1\t1\t09620F\tGSM1800\t09620F', 'SubNetwork,SubNetwork,MeContext,ManagedElement,BscFunction,BscM,GeranCellM,GeranCell,ChannelGroup', 'NodeId\tBscFunctionId\tBscMId\tGeranCellMId\tGeranCellId\tChannelGroupId\tconnectedG12Tg\tconnectedG31Tg\tstate', 'BLDEVO2\t1\t1\t1\t09620D\t0\tnull\tSubNetwork=ONRM_ROOT_MO,SubNetwork=GRAN,MeContext=BLDEVO2,ManagedElement=BLDEVO2,BscFunction=1,BscM=1,Bts=1,G31Tg=1020\tACTIVE', 'BLDEVO2\t1\t1\t1\t09620E\t0\tnull\tSubNetwork=ONRM_ROOT_MO,SubNetwork=GRAN,MeContext=BLDEVO2,ManagedElement=BLDEVO2,BscFunction=1,BscM=1,Bts=1,G31Tg=1120\tACTIVE', 'BLDEVO2\t1\t1\t1\t09620F\t0\tnull\tSubNetwork=ONRM_ROOT_MO,SubNetwork=GRAN,MeContext=BLDEVO2,ManagedElement=BLDEVO2,BscFunction=1,BscM=1,Bts=1,G31Tg=1220\tACTIVE', '', '6 instance(s)']
+        i = [row for row in range(len(l)) if 'SubNetwork' in l[row]]
+        if '0 inst' not in l[-1]:
+            print(i)
+            l_core = l[i[1]+2:-1]
+            l_core_2= [l_core[row].split('\t') for row in range(len(l_core)) if l_core[row]!='']
+            columns = l[i[1]+1].split('\t')
+            data = pd.DataFrame(l_core_2,columns=columns)
+            print(data)
+    
+        
     def open(self, a, b, c):
       #  self.session = enmscripting.open(a, b, c)
       #  return self.session
@@ -91,7 +121,6 @@ class g4TDDCommand(Command):
     def set(self, siteId, state):
         cmd = "cmedit set " + siteId + " EutranCellTDD administrativeState=" + state
         return cmd
-
 class RetCommand(Command):
      
     def get_tilt(self , siteId):
@@ -156,11 +185,42 @@ set_state_opt = c5.set_opt("16222L","-50","-60", "0")
 print('Set State Optime')
 print(set_state_opt)
 
+def main():
 
+    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+    channel = connection.channel()
+    channel.queue_declare(queue='hello')
+    channel.basic_publish(exchange='',
+                        routing_key='hello',
+                        body='Hello World!')
+    print(" [x] Sent 'Hello World!'")
+    channel.queue_declare(queue='hello')
+
+    def callback(ch, method, properties, body):
+        print(" [x] Received %r" % body)
+
+    channel.basic_consume(queue='hello',
+                        auto_ack=True,
+                        on_message_callback=callback)
+    print(' [*] Waiting for messages. To exit press CTRL+C')
+    channel.start_consuming()
+    connection.close()
 if __name__ == '__main__':
 
-  """  ### 2G TEST ###
+
+ ### 2G TEST ###
     com=Command()
+    print(com.format2g())
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('Interrupted')
+        try:
+            sys.exit(0)
+        except SystemExit:
+            os._exit(0)
+    #com.formatg()
+    """ 
     com.open('XXXX', 'xxxxxx', 'XXXXXXXXXX')
 
 
