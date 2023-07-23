@@ -1,0 +1,109 @@
+version: "3.1"
+language: "fr"
+#nlu:
+
+ - regex: Person 
+    - ^[A-Za-z]{1,7}$
+
+
+ - intent: greet
+   examples: |
+
+    - hey c'est [Amin](Person)
+    - bonjour je suis [Abdou](Person)
+    - salut c'est moi le drive testeur [Fatah](Person)
+    - bonjour
+    - bonsoir
+    - salut
+    - hey mec
+    - salut toi
+    - salam c'est Djamila
+    - salut c'est Aziz
+    - bon après-midi
+
+ - intent: goodbye
+   examples: |
+
+    - au revoir
+    - à plus tard
+    - bonne nuit
+    - salut
+    - au revoir
+    - passe une bonne journée
+    - à bientôt
+    - bye bye
+    - à plus tard
+    - à plus
+    - à tout à l'heure
+    - à plus tard
+    - on se parle plus tard
+
+ - intent: affirm
+   examples: |
+
+    - oui
+    - ouais
+    - effectivement
+    - bien sûr
+    - ça semble bien
+    - correct
+    - pas de problème
+    - d'accord
+    - c'est fait
+    - c'est bien
+    - ok
+
+ - intent: deny
+   examples: |
+
+    - non
+    - jamais
+    - je ne pense pas
+    - je n'aime pas ça
+    - pas du tout
+    - pas vraiment
+    - le site n'est pas disponible
+    - le site n'est pas prévu pour ssv
+
+ - intent: mood_great
+   examples: |
+
+    - parfait
+    - super
+    - incroyable
+    - merveilleux
+    - très bien
+    - je vais très bien
+    - extrêmement bien
+    - si bien
+    - si parfait
+
+ - intent: mood_unhappy
+   examples: |
+
+    - ma journée était horrible
+    - je suis triste
+    - je ne me sens pas très bien
+    - je suis déçu
+    - super triste
+    - je suis tellement triste
+    - triste
+    - très triste
+    - malheureux
+    - pas bien
+    - pas très bien
+    - extrêmement triste
+    - si triste
+
+ - intent: bot_challenge
+   examples: |
+
+    - es-tu un bot ?
+    - es-tu un humain ?
+    - est-ce que je parle à un bot ?
+    - est-ce que je parle à un humain ?
+
+ - intent: stop
+   examples: |
+
+    - stop

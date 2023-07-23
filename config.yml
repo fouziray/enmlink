@@ -1,11 +1,17 @@
-recipe: default.v1
-assistant_id: 20230414-034917-merry-account
 language: en
+
 pipeline:
+- name: "SpacyNLP"    # spacy pretreined model 
+  model: "en_core_web_sm"     # english 
+- name: "SpacyNLP"
+  model: "fr_core_news_sm"    # french
+- name: "SpacyTokenizer"
+- name: "SpacyFeaturizer"
+
 #- name: Cache
 #  cache_time: 300
 #  max_history: 5
-- name: WhitespaceTokenizer   # faire la toukenization a base des espaces entre les mots , mot par mot 
+#- name: WhitespaceTokenizer   # faire la toukenization a base des espaces entre les mots , mot par mot 
 - name: RegexFeaturizer
 - name: LexicalSyntacticFeaturizer
 - name: CountVectorsFeaturizer
@@ -31,8 +37,8 @@ pipeline:
   constrain_similarities: true
   scale_loss: False
 - name: FallbackClassifier
-threshold: 0.3
-ambiguity_threshold: 0.1
+  threshold: 0.3
+  ambiguity_threshold: 0.1
 policies: null 
 # # No configuration for policies was provided. The following default policies were used to train your model.
 # # If you'd like to customize them, uncomment and adjust the policies.
@@ -46,3 +52,12 @@ policies: null
 #     max_history: 5
 #     epochs: 100
 #     constrain_similarities: true
+ #  - name: MemoizationPolicy
+#  - name: RulePolicy
+  # - name: UnexpecTEDIntentPolicy
+    # max_history: 5
+    # epochs: 100
+ # - name: TEDPolicy
+  #  max_history: 5
+  #  epochs: 100
+    # constrain_similarities: true

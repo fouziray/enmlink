@@ -4,13 +4,13 @@ from django.shortcuts import render
 #from django.contrib.auth.models import User 
 from django.http import Http404
 from restapp.serializers.eventSerializer import EventSerialize
-from restapp.serializers.serializers import ConvoSerializer, HelpProviderSerialize, ManagedObjectStateSerializer, ProfileSerializer, UserSerializer,SiteSerializer, TechnologySerializer
+from restapp.serializers.serializers import ConvoSerializer, HelpProviderSerialize, ManagedObjectStateSerializer, ProfileSerializer, UserSerializer,SiteSerializer, TechnologySerializer , SiteSerializer2
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
 from restapp.models import HelpProvider, Convo, Profile# Message
 from restapp.modelEvent import Events
-from restapp.models import User, ManagedObject, Technology
+from restapp.models import User, ManagedObject, Technology, DtSession
 from rest_framework.decorators import api_view
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -262,3 +262,20 @@ class Sites(APIView):
          user = self.get_object(pk)
          user.delete()
          return Response(status=status.HTTP_204_NO_CONTENT)"""
+    
+
+class SiteDT(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = [TokenAuthentication, BasicAuthentication]
+
+    def get(self, request, format=None):
+        # DT = DtSession.objects.all()
+        # serializer = DTSerializer(DT, many=True)
+        # return Response(serializer.data)
+        MosDTSession= ManagedObject.objects.all()
+        #MosTechnologies= ManagedObject.objects.select_related('managedObject').all()
+        serializer = SiteSerializer2(MosDTSession, many=True)
+        return Response(serializer.data)
+
+
+
