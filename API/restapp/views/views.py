@@ -16,6 +16,12 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from ..forms import UpdateProfileForm
+from rest_framework import generics
+from ..models import ManagedObject
+from ..serializers import SiteSerializer
+
+
+
 class UserList(APIView):
    
     def get(self, request, format=None):
@@ -230,24 +236,78 @@ class ProfileImage(APIView):
         except Profile.DoesNotExist:
             return Response('user doesnt have a profile')
 
-class Sites(APIView):
+class Sites(generics.ListCreateAPIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = [TokenAuthentication, BasicAuthentication]
 
-    def get(self, request, format=None):
+ #   def get(self, request, format=None):
          #Technologies= Technology.objects.all()
          #finaltech = TechnologySerializer(Technologies,many=True)
          #MosTechnologies = ManagedObject.objects.prefetch_related('managedObject').all()
-         MosTechnologies= ManagedObject.objects.all()
+  #       MosTechnologies= ManagedObject.objects.all()
          #MosTechnologies= ManagedObject.objects.select_related('managedObject').all()
-         serializer = SiteSerializer(MosTechnologies, many=True)
-         return Response(serializer.data)
-    def post(self, request, format=None):
-         site_serializer = SiteSerializer(data=request.data)
-         if (site_serializer.is_valid(raise_exception=True)):
-            site = site_serializer.save()            
-            return Response(site_serializer.data, status=status.HTTP_201_CREATED)
-         return Response(site_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+   #      serializer = SiteSerializer(MosTechnologies, many=True)
+    #     return Response(serializer.data)
+    
+       
+   
+    queryset = ManagedObject.objects.all()
+    serializer_class = SiteSerializer
+
+    def create(self, request, *args, **kwargs):
+        # Get the list of post data from the request data
+        
+        if isinstance(request.data, list):
+        
+            post_data_list = request.data
+
+        # Create a list to hold the serializer instances
+            serializer_instances = []
+
+        # Iterate through each post data and create a serializer instance
+            for post_data in post_data_list:
+                serializer = self.get_serializer(data=post_data)
+                serializer.is_valid(raise_exception=True)
+              #  serializer_instances.append(serializer)
+
+        # Perform the bulk create operation
+            self.perform_bulk_create(serializer_instances)
+
+        # Return a response indicating successful creation
+            return self.get_response(serializer_instances)
+
+        else:     
+            site_serializer = SiteSerializer(data=request.data)
+            if (site_serializer.is_valid(raise_exception=True)):
+                site = site_serializer.save()            
+                return Response(site_serializer.data, status=status.HTTP_201_CREATED)
+            return Response(site_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+   
+
+
+    def perform_bulk_create(self, serializer_instances):
+        # Perform the bulk create operation using the serializer instances
+        ManagedObject.objects.bulk_create([serializer.save() for serializer in serializer_instances])
+
+    def get_response(self, serializer_instances):
+        # You can customize the response here if needed
+        # For simplicity, we'll return a list of created post IDs
+        created_ids = [serializer.instance.id for serializer in serializer_instances]
+        return Response({"Sites are created"}, status=status.HTTP_201_CREATED)
+   
+   
+
+#    def post(self, request, format=None):
+ #        site_serializer = SiteSerializer(data=request.data)
+  #       if (site_serializer.is_valid(raise_exception=True)):
+   #         site = site_serializer.save()            
+    #        return Response(site_serializer.data, status=status.HTTP_201_CREATED)
+     #    return Response(site_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+   
+
+   
+   
+   
     """def post(self, request, format=None):
          serializer = ConvoSerializer(data=request.data)
          if serializer.is_valid():
@@ -273,6 +333,11 @@ class SiteDT(APIView):
         #MosTechnologies= ManagedObject.objects.select_related('managedObject').all()
         serializer = SiteSerializer2(MosDTSession, many=True)
         return Response(serializer.data)
+
+
+
+
+
 
 
 
