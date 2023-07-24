@@ -101,6 +101,7 @@ class ManagedObject(models.Model):
 
 class Technology(models.Model):
     auto_increment_id = models.AutoField(primary_key=True)
+    #auto_increment_id=models.IntegerField(primary_key=True)
     managedObject=models.ForeignKey(ManagedObject,on_delete=models.DO_NOTHING, related_name='managedObject')
     TYPE_CHOICES = (
         ('3G', '3G'),

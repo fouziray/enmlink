@@ -128,7 +128,13 @@ slots:
     mappings: 
     - type: from_entity
       entity: Sector
-  
+  sector_accumulator:
+    type: list
+    influence_conversation: true
+    mappings:
+    - type: custom
+      action: action_set_sector_accumulator
+
   block_sector_slot:
     type: list
     influence_conversation: true
@@ -346,6 +352,8 @@ actions:
   - action_reset_techs
   - action_available_tech
   - action_block
+  - action_validate_slot_mappings
+  - action_set_sector_accumulator
   - action_block_unblock
   - action_Rollback
   - action_Ret

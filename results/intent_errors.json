@@ -1,0 +1,74 @@
+[
+  {
+    "text": "i need only 4g tech",
+    "intent": "4g_required_slot",
+    "intent_prediction": {
+      "name": "3g_required_slot",
+      "confidence": 0.43900951743125916
+    }
+  },
+  {
+    "text": "site 4745",
+    "intent": "inform_site",
+    "intent_prediction": {
+      "name": "inform",
+      "confidence": 0.5009363293647766
+    }
+  },
+  {
+    "text": "not good",
+    "intent": "inform_throughput",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.683682382106781
+    }
+  },
+  {
+    "text": "ssv done",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "test_done",
+      "confidence": 0.5571987628936768
+    }
+  },
+  {
+    "text": "test finished",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "test_done",
+      "confidence": 0.5303696393966675
+    }
+  },
+  {
+    "text": "finish",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "test_done",
+      "confidence": 0.5521551370620728
+    }
+  },
+  {
+    "text": "done with the site",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "test_done",
+      "confidence": 0.4985671639442444
+    }
+  },
+  {
+    "text": "done thanks",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "test_done",
+      "confidence": 0.5542361736297607
+    }
+  },
+  {
+    "text": "problems solved",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "test_done",
+      "confidence": 0.6013110876083374
+    }
+  }
+]
