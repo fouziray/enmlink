@@ -240,14 +240,14 @@ class Sites(generics.ListCreateAPIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = [TokenAuthentication, BasicAuthentication]
 
- #   def get(self, request, format=None):
+    def get(self, request, format=None):
          #Technologies= Technology.objects.all()
          #finaltech = TechnologySerializer(Technologies,many=True)
          #MosTechnologies = ManagedObject.objects.prefetch_related('managedObject').all()
-  #       MosTechnologies= ManagedObject.objects.all()
+         MosTechnologies= ManagedObject.objects.all()
          #MosTechnologies= ManagedObject.objects.select_related('managedObject').all()
-   #      serializer = SiteSerializer(MosTechnologies, many=True)
-    #     return Response(serializer.data)
+         serializer = SiteSerializer(MosTechnologies, many=True)
+         return Response(serializer.data)
     
        
    
