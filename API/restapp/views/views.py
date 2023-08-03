@@ -4,7 +4,7 @@ from django.shortcuts import render
 #from django.contrib.auth.models import User 
 from django.http import Http404
 from restapp.serializers.eventSerializer import EventSerialize
-from restapp.serializers.serializers import ConvoSerializer, HelpProviderSerialize, ManagedObjectStateSerializer, ProfileSerializer, UserSerializer,SiteSerializer, TechnologySerializer , SiteSerializer2
+from restapp.serializers.serializers import ConvoSerializer, HelpProviderSerialize, ManagedObjectStateSerializer, ProfileSerializer, UserSerializer,SiteSerializer, TechnologySerializer , SiteSerializer2,GroupSerializer,DTSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
@@ -16,6 +16,14 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from ..forms import UpdateProfileForm
+from django.contrib.auth.models import Group
+from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
+from django.shortcuts import get_object_or_404
+from rest_framework.decorators import action
+from django.contrib.auth.decorators import user_passes_test
+from django.db.models import Max,F,Count, ExpressionWrapper, DateTimeField,Q;
+from rest_framework.pagination import LimitOffsetPagination
+
 class UserList(APIView):
    
     def get(self, request, format=None):
@@ -62,6 +70,8 @@ class UserDetail(APIView):
          user = self.get_object(pk)
          user.delete()
          return Response(status=status.HTTP_204_NO_CONTENT)
+        
+        
 
 class Respond(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -70,6 +80,9 @@ class Respond(APIView):
         return Response("this is "+str(act))
 
 class HelperDetail(APIView):
+    permission_classes = (permissions.AllowAny,)
+   
+    
     def get_object(self, pk):
          try:
              return HelpProvider.objects.get(pk=pk)
@@ -96,8 +109,15 @@ class HelperDetail(APIView):
          
          return Response(status=status.HTTP_204_NO_CONTENT)
 
-class HelpProviderList(APIView):
-    def get(self, request, format=None):
+class HelpProviderList(ReadOnlyModelViewSet):
+    
+    permission_classes = (permissions.AllowAny,)
+    serializer_class=HelpProviderSerialize
+
+    
+    queryset= HelpProvider.objects.all()
+
+    def list(self, request):
          users = HelpProvider.objects.all()
          serializer = HelpProviderSerialize(users, many=True)
          return Response(serializer.data)
@@ -113,6 +133,13 @@ class HelpProviderList(APIView):
          user = self.get_object(pk)
          user.delete()
          return Response(status=status.HTTP_204_NO_CONTENT)
+
+    @action(methods=['get'],detail= True)
+    def getByFunction(self,request,fonction):
+        queryset= HelpProvider.objects.values('id','profile__avatar','last_login','first_name','last_name', 'fonction').filter(fonction=fonction)
+        #queryset= self.get_queryset().filter(fonction=fonction)
+        #serializer= HelpProviderSerialize(queryset,many=True)
+        return Response(queryset)
 
 class ConvoList(APIView):
     def get(self, request, format=None):
@@ -263,7 +290,36 @@ class Sites(APIView):
          user.delete()
          return Response(status=status.HTTP_204_NO_CONTENT)"""
     
-
+class GroupViewSet(ReadOnlyModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    permission_classes = (permissions.AllowAny,)
+    http_method_names = ['get', ]
+    pagination_class = LimitOffsetPagination
+    
+    def is_doctor(user):
+        return user.groups.filter(name='Doctor').exists()
+    def retrieve(self, request,  *args, **kwargs):
+        instance = self.get_object()
+        # query = request.GET.get('query', None)  # read extra data
+        return Response(self.serializer_class(instance).data,
+                        status=status.HTTP_200_OK)
+    
+    def list(self, request):
+        queryset = self.get_queryset()
+        page = self.paginate_queryset(queryset)
+        serializer = self.get_serializer(page, many=True)
+        return self.get_paginated_response(serializer.data)
+    @action(detail=True)
+    def usersInGroup(self,request):
+            #users = User.objects.filter(groups__in=Group.objects.all().query) """It evaluates to a left join of the `restapp_user` table with `restapp_user_groups` and a simple `where` statement"""
+            #users = User.objects.filter(groups__id=pk)
+            #users = User.objects.filter(groups__in=Group.objects.all().query).annotate(name=Count('groups')).values('name')
+            #users = User.objects.values('groups__name').annotate(total=Count('id'))
+            permissionsIdsArray=[21,24,23,22] # permission related to DTsession actions
+            namesGrp=User.objects.values('groups__name','groups__id','id','profile__avatar','last_login','first_name','last_name').filter(groups__name__isnull=False, groups__permissions__id=21)
+            lastActivePerGroup= (namesGrp).values('groups__name').annotate(maxlast=Max('last_login'))
+            return Response([namesGrp,lastActivePerGroup])
 class SiteDT(APIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = [TokenAuthentication, BasicAuthentication]
@@ -276,6 +332,30 @@ class SiteDT(APIView):
         #MosTechnologies= ManagedObject.objects.select_related('managedObject').all()
         serializer = SiteSerializer2(MosDTSession, many=True)
         return Response(serializer.data)
+    def get_groups(self, request, format=None):
+        group = Group.objects.first()
+        group.permissions.all()
+        return Response(group.data)
 
-
-
+class DriveTestSessionViewSet(ReadOnlyModelViewSet):
+    queryset = DtSession.objects.all()
+    serializer_class = DTSerializer
+    permission_classes = (permissions.AllowAny,)
+    http_method_names = ['get', ]
+    
+    def retrieve(self, request,  *args, **kwargs):
+        instance = self.get_object()
+        # query = request.GET.get('query', None)  # read extra data
+        return Response(self.serializer_class(instance).data,
+                        status=status.HTTP_200_OK)
+    
+    def list(self, request):
+        queryset = self.get_queryset().filter()
+        
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    @action(detail=False)
+    def dtsessionsFiltered(self,request,group_id, technician_id): # filtered using group id and technician id
+            queryset = self.get_queryset().filter(Q(dtTeam=group_id) | Q(technicien=technician_id))
+            serializer= self.get_serializer(queryset, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)

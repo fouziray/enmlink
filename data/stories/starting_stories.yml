@@ -58,3 +58,8 @@ stories:
   steps:
   - intent: ask_unlock
   - action: action_set_sector_accumulator
+
+- story: aaa
+  steps:
+  - intent: greet
+  - action: utter_greet

@@ -21,7 +21,6 @@ from restapp.views.loginView import LoginView
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.conf.urls.static import static
-
 admin.autodiscover()
 
 urlpatterns = [
@@ -29,7 +28,8 @@ urlpatterns = [
     path('users/', UserList.as_view()),
     path('users/<int:pk>/', UserDetail.as_view()),
     path('reponse/<act>',Respond.as_view()),
-    path('helpproviders',HelpProviderList.as_view()),
+    path('helpproviders/',HelpProviderList.as_view({'get': 'list'})),
+    path('helpproviders/!<str:fonction>/',HelpProviderList.as_view({'get':'getByFunction'})),
     path('helpproviders/<int:pk>/', HelperDetail.as_view()),
     #path('message/',MessageList.as_view()),
     path('event/',EventsList.as_view()),
@@ -40,5 +40,10 @@ urlpatterns = [
     path('api-token-auth/', views.obtain_auth_token),
     path('profile/', ProfileImage.as_view()),
     path('sites/', Sites.as_view()),
-    path('DT_session/', SiteDT.as_view())
+    path('DT_session/', SiteDT.as_view(),),
+    path('groups/<int:pk>',GroupViewSet.as_view({'get': 'retrieve'})),
+    path('groups/',GroupViewSet.as_view({'get': 'list'})),
+    path('useringroups/',GroupViewSet.as_view({'get': 'usersInGroup'})),
+    path('dtsession/', DriveTestSessionViewSet.as_view({'get':'list'})),
+    path('dtsession/g=<int:group_id>&t=<int:technician_id>/', DriveTestSessionViewSet.as_view({'get':'dtsessionsFiltered'})),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

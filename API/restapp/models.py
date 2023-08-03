@@ -1,6 +1,6 @@
 from django.utils import timezone
 from django.db import models
-from django.contrib.auth.models import User ,AbstractUser, AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.contrib.auth.models import User ,AbstractUser, AbstractBaseUser, PermissionsMixin, BaseUserManager, Group
 
 
 # Create your models here.

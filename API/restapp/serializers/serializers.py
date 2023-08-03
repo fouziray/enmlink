@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from ..models import Convo, Connexion, HelpProvider,ManagedObject, Profile, Technology, DtSession #Message
 
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
 
 User = get_user_model()
 from rest_framework import serializers
@@ -9,7 +10,7 @@ from rest_framework import serializers
 class UserSerializer(serializers.ModelSerializer):
      class Meta:
          model = User
-         fields = ('id', 'username', 'first_name', 'last_name', 'email','password')
+         fields = ('id', 'username', 'first_name', 'last_name', 'email','password','last_login')
      
      def create(self, validated_data):
         user = User(
@@ -46,9 +47,11 @@ class ManagedObjectStateSerializer(serializers.ModelSerializer):
 
 
 class DTSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model= DtSession
-        fields=['dtTeam' , 'technicien' , 'start_time' , 'end_Time']
+        depth = 1
+        fields=['dtTeam' , 'technicien' , 'start_time' , 'end_Time','site','id']
 
 
 
@@ -84,15 +87,6 @@ class SiteSerializer(serializers.ModelSerializer):
         return mo
 
 
-
-
-
-
-
-
-
-
-
 class SiteSerializer2(serializers.ModelSerializer):
   
     session=DTSerializer(many=True)
@@ -110,11 +104,11 @@ class SiteSerializer2(serializers.ModelSerializer):
        
         return mo
 
-
-
-
-
-
+class GroupSerializer(serializers.ModelSerializer):    
+    class Meta:
+        model = Group
+        depth = 1
+        fields = '__all__'
 
 
 

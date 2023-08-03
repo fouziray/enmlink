@@ -526,7 +526,8 @@ class ActionUtterGreet(Action):
              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
          
         
-        mssg = tracker.get_latest_message.txt
+        mssg = tracker.latest_message.text
+        print(mssg)
         lan = detect(mssg)
         lan = 'en' 
         if(lan== 'en'):

@@ -24,7 +24,7 @@ intents:
   - inform_site
   - downlink
   - uplink
-  - ask_rollback
+  - ask_Rollback
   #- inform+ask_lock+ask_unlock
   #- inform+ask_optimisation
   - ask_status
