@@ -47,13 +47,22 @@ class ManagedObjectStateSerializer(serializers.ModelSerializer):
 
 
 class DTSerializer(serializers.ModelSerializer):
-    
+    #title=serializers.SerializerMethodField('get_alternate_name_code_site')
+    #startDate= serializers.SerializerMethodField('get_alternate_name_start')
+    #endDate= serializers.SerializerMethodField('get_alternate_name_end')
+    title=serializers.CharField(source='site_id')
+    startDate=serializers.DateTimeField(source='start_time')
+    endDate=serializers.DateTimeField(source='end_Time')
     class Meta:
         model= DtSession
         depth = 1
-        fields=['dtTeam' , 'technicien' , 'start_time' , 'end_Time','site','id']
-
-
+        fields=['dtTeam' , 'technicien' , 'startDate' , 'endDate','id','title']
+    def get_alternate_name_code_site(self,obj):
+        return obj.site.site_id
+    def get_alternate_name_start(self,obj):
+        return obj.start_time
+    def get_alternate_name_end(self,obj):
+        return obj.end_Time
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:

@@ -23,7 +23,26 @@ from rest_framework.decorators import action
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Max,F,Count, ExpressionWrapper, DateTimeField,Q;
 from rest_framework.pagination import LimitOffsetPagination
+from django.utils.timezone import now
+async_mode = None
+import os
+from django.http import HttpResponse
+import socketio
+basedir = os.path.dirname(os.path.realpath(__file__))
+sio = socketio.Server(async_mode='eventlet')
+thread = None
 
+# Tracks the total number of users using the admin channel
+num_users = 0
+
+# Maximum number of members in a group
+threshold = 4
+@sio.on('connection-bind')
+def connection_bind(sid, data):
+    pass
+@sio.on('disconnect')
+def test_disconnect(sid):
+    pass
 class UserList(APIView):
    
     def get(self, request, format=None):
@@ -201,7 +220,7 @@ class SingleEvent(APIView):
     authentication_classes = [TokenAuthentication, BasicAuthentication]
     permission_classes = (permissions.AllowAny,)
     def get(self, request, convo_id ):
-        events=Events.objects.filter(sender_id=convo_id).exclude(type_name="action")
+        events=Events.objects.filter(sender_id=convo_id).exclude(Q(action_name="action_listen") | Q(action_name="action_session_start"))
         serialized_events= EventSerialize(events,many=True)
         return Response(serialized_events.data)
 
@@ -251,24 +270,38 @@ class ProfileImage(APIView):
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     def get(self,request):
         try:
-            profile = Profile.objects.get(user=request.user)
+            parameter=request.GET.get("id",None)
+            if(parameter != None):
+                profile = Profile.objects.get(user=parameter)
+            else:
+                profile = Profile.objects.get(user=request.user.id)
             serializer = ProfileSerializer(profile)
             return Response(serializer.data)
         except Profile.DoesNotExist:
             return Response('user doesnt have a profile')
 
-class Sites(APIView):
+class Sites(ModelViewSet, LimitOffsetPagination):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = [TokenAuthentication, BasicAuthentication]
-
-    def get(self, request, format=None):
+    serializer_class=SiteSerializer
+    queryset=ManagedObject.objects.all()
+    @action(detail=True, methods=['get'])
+    def get_all(self,request,format=None):
+         MosTechnologies= ManagedObject.objects.all()
+         serializer = SiteSerializer(MosTechnologies, many=True)
+         return Response(serializer.data)
+    @action(detail=True, methods=['get'])       
+    def get_with_pagination(self, request, format=None):
          #Technologies= Technology.objects.all()
          #finaltech = TechnologySerializer(Technologies,many=True)
          #MosTechnologies = ManagedObject.objects.prefetch_related('managedObject').all()
          MosTechnologies= ManagedObject.objects.all()
-         #MosTechnologies= ManagedObject.objects.select_related('managedObject').all()
-         serializer = SiteSerializer(MosTechnologies, many=True)
-         return Response(serializer.data)
+         result=self.paginate_queryset(MosTechnologies)
+         serializer = SiteSerializer(result, many=True) 
+         return self.get_paginated_response(serializer.data)
+  
+#         serializer = SiteSerializer(MosTechnologies, many=True)
+#         return Response(serializer.data)
     def post(self, request, format=None):
          site_serializer = SiteSerializer(data=request.data)
          if (site_serializer.is_valid(raise_exception=True)):
@@ -293,12 +326,11 @@ class Sites(APIView):
 class GroupViewSet(ReadOnlyModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     http_method_names = ['get', ]
     pagination_class = LimitOffsetPagination
     
-    def is_doctor(user):
-        return user.groups.filter(name='Doctor').exists()
+
     def retrieve(self, request,  *args, **kwargs):
         instance = self.get_object()
         # query = request.GET.get('query', None)  # read extra data
@@ -336,13 +368,12 @@ class SiteDT(APIView):
         group = Group.objects.first()
         group.permissions.all()
         return Response(group.data)
-
-class DriveTestSessionViewSet(ReadOnlyModelViewSet):
+        
+class DriveTestSessionViewSet(ModelViewSet):
     queryset = DtSession.objects.all()
     serializer_class = DTSerializer
     permission_classes = (permissions.AllowAny,)
-    http_method_names = ['get', ]
-    
+    http_method_names = ["get","post"]    
     def retrieve(self, request,  *args, **kwargs):
         instance = self.get_object()
         # query = request.GET.get('query', None)  # read extra data
@@ -355,7 +386,27 @@ class DriveTestSessionViewSet(ReadOnlyModelViewSet):
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     @action(detail=False)
+    def dtsessionsFilteredByGroup(self,request,group_id): # filtered using group id and technician id
+            queryset = self.get_queryset().filter(dtTeam=group_id)
+            serializer= self.get_serializer(queryset, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @action(detail=False)
     def dtsessionsFiltered(self,request,group_id, technician_id): # filtered using group id and technician id
             queryset = self.get_queryset().filter(Q(dtTeam=group_id) | Q(technicien=technician_id))
             serializer= self.get_serializer(queryset, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
+    @action(detail=False)
+    def has_session(self,request,site_id):
+        queryset=self.get_queryset().filter(site=site_id,start_time__gte=now().date()).exists()
+        return Response(queryset, status=status.HTTP_200_OK)
+    def create(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.save()
+    def post(self, request, format=None):
+        serializer = self.serializer_class(data=request.data,many=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+

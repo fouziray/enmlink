@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from rest_framework.authtoken import views
 from restapp.views.views import *
 from restapp.views.loginView import LoginView
@@ -39,11 +39,16 @@ urlpatterns = [
     path('mostate/',ManagedObjectState.as_view()),
     path('api-token-auth/', views.obtain_auth_token),
     path('profile/', ProfileImage.as_view()),
-    path('sites/', Sites.as_view()),
+    path('sites/', Sites.as_view({'get':'get_with_pagination'})),
+    path('sites/all/', Sites.as_view({'get':'get_all'})),
+
     path('DT_session/', SiteDT.as_view(),),
     path('groups/<int:pk>',GroupViewSet.as_view({'get': 'retrieve'})),
     path('groups/',GroupViewSet.as_view({'get': 'list'})),
     path('useringroups/',GroupViewSet.as_view({'get': 'usersInGroup'})),
     path('dtsession/', DriveTestSessionViewSet.as_view({'get':'list'})),
+    path('has_session/<str:site_id>',DriveTestSessionViewSet.as_view({'get':'has_session'})),
     path('dtsession/g=<int:group_id>&t=<int:technician_id>/', DriveTestSessionViewSet.as_view({'get':'dtsessionsFiltered'})),
+    path('dtsession/g=<int:group_id>/',DriveTestSessionViewSet.as_view({'get':'dtsessionsFilteredByGroup'})),
+    path('dtsession/', DriveTestSessionViewSet.as_view({'post':'create'})),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
