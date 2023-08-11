@@ -20,7 +20,7 @@ intents:
   - test_done
   - ask_help
   - check_request
-  - ask_time
+  - ask_session_extension
   - inform_site
   - downlink
   - uplink
@@ -128,12 +128,12 @@ slots:
     mappings: 
     - type: from_entity
       entity: Sector
-  sector_accumulator:
-    type: list
-    influence_conversation: true
-    mappings:
-    - type: custom
-      action: action_set_sector_accumulator
+#  sector_accumulator:
+ #   type: list
+  #  influence_conversation: true
+   # mappings:
+    #- type: custom
+     # action: action_set_sector_accumulator
 
   block_sector_slot:
     type: list
@@ -345,18 +345,19 @@ responses:
   
 
 actions: 
-  - utter_greet
+  - action_utter_greet
   - action_get_message
   - action_hello_world
   - action_append_tech_slots
   - action_reset_techs
   - action_available_tech
   - action_block
-  - action_validate_slot_mappings
-  - action_set_sector_accumulator
+  #- action_validate_slot_mappings
+  #- action_set_sector_accumulator
   - action_block_unblock
   - action_Rollback
   - action_Ret
+  - action_set_session_extension
 
 session_config:
   session_expiration_time: 480

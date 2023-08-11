@@ -6,7 +6,7 @@
 
 
 # This is a simple example for a custom action which utters "Hello World!"
-
+"""
 import json
 from typing import Any, Text, Dict, List, TYPE_CHECKING
 
@@ -159,7 +159,8 @@ class ValidatePredefinedSlots(ValidationAction):
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:
-        """Validate code_site_slot's value."""
+        """
+"""Validate code_site_slot's value.""" """"
         dispatcher.utter_message("validate_code_site_slot")
         if isinstance(slot_value, str):
             # validation succeeded, capitalize the value of the "location" slot
@@ -198,7 +199,6 @@ class ValidatePredefinedSlots(ValidationAction):
 #         return [];
 
 
-""""
 from rasa.shared.core.constants import ACTION_SESSION_START_NAME, ACTION_LISTEN_NAME
 from rasa.shared.core.trackers import DialogueStateTracker
 if TYPE_CHECKING:
@@ -352,7 +352,7 @@ class ActionBlock(Action):
 
 
 
-class Action_Block_Unblock(Action):
+""" class Action_Block_Unblock(Action):
    
     def name(self) -> Text:
         return "action_block_unblock"
@@ -514,27 +514,63 @@ class Action_Ret(Action):
         r = RetCommand()
         cmd_ret = r.get_tilt(siteId , userlabel)
         
+"""
+from rasa_sdk import Action, Tracker
+from rasa_sdk.executor import CollectingDispatcher
 
+
+
+
+import json
+from typing import Any, Text, Dict, List, TYPE_CHECKING
+#from langdetect import detect
 
 class ActionUtterGreet(Action):
 
      def name(self) -> Text:
-         return "utter_greet"
+         return "action_utter_greet"
 
      def run(self, dispatcher: CollectingDispatcher,
              tracker: Tracker,
              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
          
         
-        mssg = tracker.get_latest_message.txt
-        lan = detect(mssg)
+        mssg = tracker.latest_message.get(Text)
+      #  lan = detect(mssg)
         lan = 'en' 
         if(lan== 'en'):
-            dispatcher.utter_template("utter_greet_en", tracker)
+            dispatcher.utter_message(response="utter_greet_en")
             print("en")
         elif(lan=='fr'):
-            dispatcher.utter_template("utter_greet_fr", tracker)
+            dispatcher.utter_message(response="utter_greet_fr")
             print("fr")
         return []
 
 
+
+
+"""
+class ActionSession(Action):
+
+     def name(self) -> Text:
+         return "action_set_session_extension"
+
+     def run(self, dispatcher: CollectingDispatcher,
+             tracker: Tracker,
+             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+        
+        mssg = tracker.latest_message.get(Text)
+        print(mssg)
+       # lan = detect(mssg)
+        lan = 'en' 
+        if(lan== 'en'):
+            #dispatcher.utter_message(response="utter_greet_eng")
+            print("en")
+        elif(lan=='fr'):
+           # dispatcher.utter_message(response="utter_greet_fr")
+            print("fr")
+        return []
+
+
+"""

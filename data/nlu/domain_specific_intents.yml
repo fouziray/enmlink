@@ -131,14 +131,25 @@ nlu:
     - sector 2 ? 
     - please check site [42105](code_site) [sector 1](Sector) [L2100](Tech4g)
 
- - intent: ask_time
+ - intent: ask_session_extension
    examples: |
-    - wait 
-    - 1mn please
-    - please to wait
-    - when i'm done i will tell you 
-    - once i finish i will inform you  
-    - one min
+    - [5](time) mins please 
+    - i need more [15](time)mns
+    - I would like a time extension of a [10](time) minutes
+    - Is it possible to get a time extension of a few minutes?
+    - Can we extend the deadline by a few minutes?
+    - Could I have [20](time) extra minutes to finish?
+    - I would like to request a time extension of a few minutes.
+    - Is it possible to push back the deadline by a few minutes?
+    - Can I have a short time extension?
+    - Could I get a small deadline extension of a few minutes?
+    - I need a few more minutes to finish.
+    - Can we have a few minutes' extension?
+    - Can I get a few more minutes to complete the task?
+    - Can we get a short extension of a few minutes?
+    - I need just a few minutes more to complete this
+    - Can we have a brief time extension of a few minutes?
+    
 
  - intent: inform_site
    examples: |

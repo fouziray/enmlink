@@ -1,6 +1,6 @@
 version: "3.1"
 language: "fr"
-#nlu:
+nlu:
 
 
  - intent: Connection
@@ -35,14 +35,21 @@ language: "fr"
 
 
 
- - intent: ask_time
+ - intent: ask_session_extension
    examples: |
-    - attendez
-    - 1 minute s'il vous plaît
-    - s'il vous plaît, attendez
-    - quand j'aurai fini, je vous le dirai
-    - une fois que j'aurai terminé, je vous informerai
-    - une minute
+    - je veux [5](time) min de plus s'il vous plais
+    - Je voudrais une extension de temps de [15](time) minutes.
+    - Est-il possible d'avoir une extension de temps de quelques minutes ?
+    - Serait-il possible de prolonger le délai de [10](time) minutes ?
+    - Pourrais-je avoir un délai supplémentaire de [15](time) minutes ?
+    - J'aimerais obtenir une extension de temps de quelques minutes.
+    - Est-ce que je peux avoir quelques minutes de plus pour terminer ?
+    - Serait-il possible de repousser l'échéance de quelques minutes soit [15](time) min ?
+    - Puis-je avoir un court délai supplémentaire ?
+    - j'ai besoin d'un délais suplémentaire de [10](time) mn
+    - Est-ce que je pourrais avoir un petit délai de quelques minutes ?
+    - J'ai besoin de quelques minutes de plus pour terminer.  
+        
 
  - intent: inform_site
    examples: |

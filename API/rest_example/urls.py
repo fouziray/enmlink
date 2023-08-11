@@ -40,5 +40,7 @@ urlpatterns = [
     path('api-token-auth/', views.obtain_auth_token),
     path('profile/', ProfileImage.as_view()),
     path('sites/', Sites.as_view()),
-    path('DT_session/', SiteDT.as_view())
+    path('DT_session/', SiteDT.as_view()),
+    path('users_groups/',JoinUserGrpView.as_view()),
+    url("", include('django_socketio.urls'))
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
