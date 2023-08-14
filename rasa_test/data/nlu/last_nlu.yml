@@ -1,0 +1,364 @@
+version: "3.1"
+
+nlu:
+
+- regex: Person 
+    - ^[A-Za-z]{1,7}$
+
+
+- regex: code_site 
+    - ^\d{5,6}[uUlL]?$
+
+
+- intent: greet
+  examples: |
+    - hey it's [Amin](Preson)
+    - hello i'm [Abdou](Person)
+    - hi it's me the drive tester [Fatah](Person)
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - hey there
+    - salam it's [Djamila](Person) 
+    - salut c'est [Aziz](Person) 
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+    - see you around
+    - see you later
+    - talk to you later
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+    - site not availble 
+    - site is not planed for ssv 
+
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: affirm
+  examples: |
+    - yes
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - ok 
+    - fine 
+    - not a problem 
+    - okey
+    - done
+    - is ok 
+
+- intent: stop
+  examples: |
+    - stop
+ 
+- intent: ask_lock
+  examples: |
+    - lock [S1](Sector)
+    - can you lock [S2](Sector)
+    - please to lock [S3](Sector)
+    - can you lock [G900](Tech2g)
+    - can you lock [g900](Tech2g)
+    - can you lock [G1800](Tech2g)
+    - can you lock [g1800](Tech2g)
+    - i need to lock [U900](Tech3g)
+    - can you lock [U2100](Tech3g)
+    - can you lock [u900](Tech3g)
+    - can you lock [u2100](Tech3g)
+    - i want to lock [L2100](Tech4g)
+    - can you lock [L1800](Tech4g)
+    - can you lock [l1800](Tech4g)
+    - can you lock [l2100](Tech4g)
+    - lock [s3](Sector) please
+- intent: ask_unlock
+  examples: |
+    - unlock [S1](Sector)
+    - can you unlock [S2](Sector)
+    - please to unlock [S3](Sector)
+    - can you unlock [G900](Tech2g)
+    - i need to unlock [U900](Tech3g)
+    - i want to unlock [L2100](Tech4g)
+    - unlock [s3](Sector) please
+
+- intent: ask_Ret
+  examples: |
+    - maxtilt [S1](Sector)
+    - downtilt [S1](Sector)
+
+    - maxtilt [G900](Tech2g) [S1](Sector)
+    - maxtilt [U2100](Tech3g) [S1](Sector)
+    - maxtilt [L2100](Tech4g) [S1](Sector)
+
+    - downtilt [G900](Tech2g) [S1](Sector)
+    - downtilt [U2100](Tech3g) [S1](Sector)
+    - downtilt [L2100](Tech4g) [S1](Sector)
+
+    - maxtilt all [G900](Tech2g)
+    - maxtilt all [U2100](Tech3g)
+    - maxtilt all [L1800](Tech4g)
+
+    - maxtilt all [G900](Tech2g)
+    - maxtilt all [U2100](Tech3g)
+    - maxtilt all [L1800](Tech4g)
+ 
+ 
+- intent: ask_Optimisation
+  examples: |
+    - I didnt get the throughput  
+    - throughput non atteint  
+
+
+- intent: ask_Rollback
+  examples: |
+    - Rollback 
+    - done please rollback 
+    - rollback the site 
+    - rollback the status
+    - can I rollback the changes for [S1](Sector)
+    - please rollback the changes for [S3](Sector) 
+    - can I rollback the changes for [G900](Tech2g) , [S1](Sector)
+    - please rollback the changes for [L2100](Tech4g) [S3](Sector)
+ 
+
+- intent: inform
+  examples: |
+
+    - conditions are [Rsrp](conditions) [Rsrq](conditions)
+    - bad [RSRP](conditions)
+    - the site has congested
+    - conditions are bad  
+
+- intent: Connection
+  examples: |
+    - failed to connect 
+    - connection failed 
+    - i can’t connect to the site  
+    - it is activated 
+    - connecting 
+    - i’m connected 
+    - can't connect to [S2](Sector) and [L2100](Tech4g)    
+
+
+  
+- intent: test_done
+  examples: |
+    - ssv done 
+    - test finished
+    - finish
+    - done with the site 
+    - done thanks 
+    - problems solved
+
+  
+- intent: ask_help
+  examples: |
+    - ??
+    - What do l do ??
+    - i have a question ? 
+    - could you help me
+    - what do i do next  ?
+
+- intent: check_request
+  examples: |
+    - Do yo unlock all sectors ?
+    - [L2100](Tech3g) locked ? 
+    - please check [sector 1](Sector) locked ? 
+    - [s1](Sector) ? 
+    - [sector 2](Sector) ? 
+    - please check site [42105](code_site) [sector 1](Sector) [L2100](Tech4g)
+
+- intent: ask_session_extension
+  examples: |
+    - [5](time) mins please 
+    - i need more [15](time)mns
+    - I would like a time extension of a [10](time) minutes
+    - Is it possible to get a time extension of a few minutes?
+    - Can we extend the deadline by a few minutes?
+    - Could I have [20](time) extra minutes to finish?
+    - I would like to request a time extension of a few minutes.
+    - Is it possible to push back the deadline by a few minutes?
+    - Can I have a short time extension?
+    - Could I get a small deadline extension of a few minutes?
+    - I need a few more minutes to finish.
+    - Can we have a few minutes' extension?
+    - Can I get a few more minutes to complete the task?
+    - Can we get a short extension of a few minutes?
+    - I need just a few minutes more to complete this
+    - Can we have a brief time extension of a few minutes?
+    
+
+- intent: inform_site
+  examples: |
+    - i'm availble [34020L](code_site)
+    - site [47450U](code_site)
+    - please site [60730](code_site)
+    - please check site [411097](code_site)
+
+
+- intent: inform_throughput
+  examples: |
+    - bad throughput
+    - not good 
+    - Same result
+    - [25 Mb/s]{"entity" : "throughput", "role" : "throughput_DL"}
+    - [70Mb/s]{"entity" : "throughput", "role" : "throughput_DL"}
+    - same throughput
+    - still low 
+    - [low ca]{"entity" : "throughput", "role" : "throughput_ca"}
+    - i had [throughput problem]{"entity" : "throughput", "role" : "throughput_DL"}
+    - I get [153 mb avr]{"entity" : "throughput", "role" : "throughput_DL"}
+    - [Ca avr 60 mb]{"entity" : "throughput", "role" : "throughput_ca"}
+    - [Avr ca 75]{"entity" : "throughput", "role" : "throughput_ca"}
+    - i have a problem with [ca Max throughput 35]{"entity" : "throughput", "role" : "throughput_ca"}
+    - [Low throughput DL]{"entity" : "throughput", "role" : "throughput_DL"}
+    - [Low throughput UL]{"entity" : "throughput", "role" : "throughput_UL"}
+    - i have [problem with UL]{"entity" : "throughput", "role" : "throughput_UL"}
+    - [DL bad]{"entity" : "throughput", "role" : "throughput_DL"} all sectors
+    - [DL bad]{"entity" : "throughput", "role" : "throughput_DL"} sector 1
+    - [Dynamic DL 30]{"entity" : "throughput", "role" : "throughput_dyn"}
+    - [UL good results]{"entity" : "throughput", "role" : "throughput_UL"} 
+    - [Average 11]{"entity" : "throughput", "role" : "throughput_DL"}
+    - All sectors [DL bad]{"entity" : "throughput", "role" : "throughput_DL"}
+    - S3 [30]{"entity" : "throughput", "role" : "throughput_DL"}
+    - S1 [25]{"entity" : "throughput", "role" : "throughput_DL"}
+    - [Dynamic 20]{"entity" : "throughput", "role" : "throughput_dyn"}
+    - Low Thrghpt [DL average 50 Mbs]{"entity" : "throughput", "role" : "throughput_DL"} in both band
+
+- intent: inform_throughput_good
+  examples: |
+    - throughput good 
+    - throughput dl better 
+    - good throughput ca
+    - hight throughput avg 
+    - nice avg throughput 
+    - better throughout 
+    - I got throughput
+    - all sectors throughput good 
+    - best throughput
+
+
+- intent: ask_Rollback
+  examples: |
+    - Rollback 
+    - done please rollback 
+    - rollback the site 
+    - rollback the status
+    - can I rollback the changes for [S1](Sector)
+    - please rollback the changes for [S3](Sector) and [U2100](Tech3g) 
+    - can I rollback the changes for [G900](Tech2g) , [S1](Sector)
+    - please rollback the changes for [L2100](Tech4g) [S3](Sector)
+ 
+
+
+
+- intent: ask_status
+  examples: |
+    - check the status of the network [2G](Tech2g) for me
+    - what is the current status of all the existing technologies [2g](Tech2g)[3g](Tech3g) [4g](Tech4g)
+
+- intent : check_all_techs
+  examples: |
+    - all technologies status 
+    - existing technologies  
+    - current technologies 
+    - supported technologies 
+    - handled technologies
+
+- intent: ask_csrf  # call the optimiser
+  examples: |
+    - what about csrf 
+    - Also issue of CSFB about the site [LAI4315](code_site)
+    - cell not basculate to other technology 
+    - ca not found 
+    - carrier agreggation not working 
+
+- intent: ask_pci
+  examples: |
+    - Please send me the pci 
+    - i need the pci 
+    - please i need the pci 
+    - pci please
+    - can you send me the pci 
+    
+- intent: ask_restart
+  examples: |
+    - please to restart 
+    - restart if you can 
+    - can you restart the site 
+    - please to restart the sector [s1](Sector)
+    - restart all technologies  
+    - restart band [L1800](Tech4g)
+
+- intent: finishing_test
+  examples: |
+    - ssv done 
+    - test finished
+    - finish
+    - done with the site 
+    - done thanks 
+    - problems solved

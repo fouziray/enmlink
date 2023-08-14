@@ -1,0 +1,312 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - finishing_test
+  - stop
+  - ask_restart
+  - ask_optimisation
+  - ask_lock
+  - ask_unlock
+  - ask_Ret
+  - inform
+  - Connection
+  - test_done
+  - ask_help
+  - check_request
+  - ask_session_extension
+  - inform_site
+  - ask_Rollback
+  - ask_status
+  - check_all_techs
+  - ask_csrf
+  - ask_pci
+  - inform_throughput
+  - inform_throughput_good
+entities:
+  - Sector
+  - Tech2g
+  - Tech3g
+  - Tech4g
+  - conditions
+  - RSRP 
+  - RSRQ
+  - SINR
+  - Person
+  - code_site
+  - time
+  - throughput:
+      roles:
+        - throughput_DL
+        - throughput_UL
+        - throughput_dyn
+        - throughput_ca
+
+
+
+
+
+
+
+slots: 
+  code_site:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: code_site
+
+
+  Person:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: Person
+
+  
+
+  Tech2g:
+    type: categorical
+    influence_conversation: true
+    values:
+      - G900 
+      - G1800 
+      - DCS 
+      - 2G
+      - 2g
+    mappings: 
+    - type: from_entity
+      entity: Tech2g
+      
+  
+  Tech3g:
+    type: categorical
+    values:
+    - U900
+    - U2100
+    - 3G
+    - 3g
+    mappings:
+    - type: from_entity
+      entity: Tech3g
+
+  Tech4g:
+    type: categorical
+    influence_conversation: true
+    values:
+      - L1800
+      - L2100
+      - 4G
+      - 4g
+    mappings: 
+    - type: from_entity
+      entity: Tech4g
+
+
+
+
+  unblocked_tech_slot:
+    type: list
+    influence_conversation: true
+    mappings: 
+    - type: custom
+      action: action_unlock_tech
+
+
+  blocked_tech_slot:
+    type: list
+    influence_conversation: true
+    mappings: 
+    - type: custom
+      action: action_lock_tech
+
+
+
+  
+  Sector_slot:
+    type: list
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: Sector
+
+
+
+  unblocked_sector_slot:
+    type: list
+    influence_conversation: true
+    mappings: 
+    - type: custom
+      action: action_unlock_sector
+
+
+  blocked_sector_slot:
+    type: list
+    influence_conversation: true
+    mappings: 
+    - type: custom
+      action: action_lock_sector
+
+
+
+
+
+  throughput_slot:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: throughput
+
+
+  throughput_DL_slot:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: throughput
+      role: throughput_DL
+
+  throughput_UL_slot:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: throughput
+      role: throughput_UL
+
+  throughput_ca_slot:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: throughput
+      role: throughput_ca
+
+  throughput_dyn_slot:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: throughput
+      role: throughput_dyn
+
+  RSRP_slot:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: RSRP
+
+
+  RSRQ_slot:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: RSRQ
+
+
+  SINR_slot:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: SINR
+
+
+  time:
+    type: float
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: time
+
+
+path2g:
+    type: text
+    influence_conversation: false
+    mappings: 
+    - type: custom
+      action: action_status_tech
+
+path3g:
+    type: text
+    influence_conversation: false
+    mappings: 
+    - type: custom
+      action: action_status_tech
+
+path4gFDD:
+    type: text
+    influence_conversation: false
+    mappings: 
+    - type: custom
+      action: action_status_tech
+
+pathTilt:
+    type: text
+    influence_conversation: false
+    mappings: 
+    - type: custom
+      action: action_status_tech
+
+
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+  utter_comfirm:
+  - text: "Ok"
+  
+  utter_reject:
+  - text: "No "
+
+
+  utter_throughput_good:
+  - text: "ok! great throughput"
+  
+  utter_csrf:
+  - text: "you need to contact the optimiser"
+
+  utter_finishing_test:
+  - text: "test is finished and session will be closed"
+
+
+actions: 
+- action_utter_greet # done
+- action_inform_site # done
+#- action_check_all_techs   handled in action_status_tech
+- action_lock_sector
+- action_unlock_sector
+- action_lock_tech # done
+- action_unlock_tech # done
+- action_set_tilt # done with get tilt and save initial state 
+- action_rollback # rollback all stored files (tech , sector , tilt)
+- action_extend_session
+- action_status_tech  # done
+- action_throughput_info #done
+
+session_config:
+  session_expiration_time: 460
+  carry_over_slots_to_new_session: true
