@@ -1,14 +1,127 @@
 version: "3.1"
+
 nlu:
+
+- regex: Person 
+    - ^[A-Za-z]{1,7}$
+
+
+- regex: code_site 
+    - ^\d{5,6}[uUlL]?$
+
+
+- intent: greet
+  examples: |
+    - hey it's [Amin](Preson)
+    - hello i'm [Abdou](Person)
+    - hi it's me the drive tester [Fatah](Person)
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - hey there
+    - salam it's [Djamila](Person) 
+    - salut c'est [Aziz](Person) 
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+    - see you around
+    - see you later
+    - talk to you later
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+    - site not availble 
+    - site is not planed for ssv 
+
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: affirm
+  examples: |
+    - yes
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - ok 
+    - fine 
+    - not a problem 
+    - okey
+    - done
+    - is ok 
+
+- intent: stop
+  examples: |
+    - stop
  
- - regex: code_site 
-    - \b[A-Za-z]{1,3}\d{3,5}\b
- 
- - intent: ask_lock
-   examples: |
-    - lock [S1]{"entity" : "Sector", "role" : "block"}
-    - can you lock [S2]{"entity" : "Sector", "role" : "block"}
-    - please to lock [S3]{"entity" : "Sector", "role" : "block"}
+- intent: ask_lock
+  examples: |
+    - lock [S1](Sector)
+    - can you lock [S2](Sector)
+    - please to lock [S3](Sector)
     - can you lock [G900](Tech2g)
     - can you lock [g900](Tech2g)
     - can you lock [G1800](Tech2g)
@@ -21,9 +134,9 @@ nlu:
     - can you lock [L1800](Tech4g)
     - can you lock [l1800](Tech4g)
     - can you lock [l2100](Tech4g)
-    - lock [s3]{"entity" : "Sector", "role" : "block"} please
- - intent: ask_unlock
-   examples: |
+    - lock [s3](Sector) please
+- intent: ask_unlock
+  examples: |
     - unlock [S1](Sector)
     - can you unlock [S2](Sector)
     - please to unlock [S3](Sector)
@@ -32,8 +145,8 @@ nlu:
     - i want to unlock [L2100](Tech4g)
     - unlock [s3](Sector) please
 
- - intent: ask_Ret
-   examples: |
+- intent: ask_Ret
+  examples: |
     - maxtilt [S1](Sector)
     - downtilt [S1](Sector)
 
@@ -54,46 +167,34 @@ nlu:
     - maxtilt all [L1800](Tech4g)
  
  
- - intent: ask_Optimisation
-   examples: |
+- intent: ask_Optimisation
+  examples: |
     - I didnt get the throughput  
     - throughput non atteint  
 
 
- - intent: ask_Rollback
-   examples: |
+- intent: ask_Rollback
+  examples: |
     - Rollback 
     - done please rollback 
     - rollback the site 
     - rollback the status
-    - can I rollback the changes for [S1]
-    - please rollback the changes for [S3](Sector) and [U2100](Tech3g) 
+    - can I rollback the changes for [S1](Sector)
+    - please rollback the changes for [S3](Sector) 
     - can I rollback the changes for [G900](Tech2g) , [S1](Sector)
     - please rollback the changes for [L2100](Tech4g) [S3](Sector)
  
 
- - intent: inform
-   examples: |
-    - I'm available [LBB3402](code_site)
-    - Cell ID [887303](cell_id) 
-    - Site [4745](code_site)
+- intent: inform
+  examples: |
+
     - conditions are [Rsrp](conditions) [Rsrq](conditions)
     - bad [RSRP](conditions)
     - the site has congested
     - conditions are bad  
 
- #- intent: greeting+inform
-  # examples: |
-   # - hello , i'm in site [6069](code_site)
-    #- salam site [4746](code_site) please
-
-  # reponse : 
-  #check if tech exists or sector exist if true :
-            #please to change the place or reconnect
-            # else the sector or the tech does not exists  
-
- - intent: Connection
-   examples: |
+- intent: Connection
+  examples: |
     - failed to connect 
     - connection failed 
     - i can’t connect to the site  
@@ -104,8 +205,8 @@ nlu:
 
 
   
- - intent: test_done
-   examples: |
+- intent: test_done
+  examples: |
     - ssv done 
     - test finished
     - finish
@@ -114,25 +215,25 @@ nlu:
     - problems solved
 
   
- - intent: ask_help
-   examples: |
+- intent: ask_help
+  examples: |
     - ??
     - What do l do ??
     - i have a question ? 
     - could you help me
     - what do i do next  ?
 
- - intent: check_request
-   examples: |
-    - Do yo unlock all sector ?
-    - L2100 locked ? 
-    - please check sector 1 locked ? 
-    - s1 ? 
-    - sector 2 ? 
+- intent: check_request
+  examples: |
+    - Do yo unlock all sectors ?
+    - [L2100](Tech3g) locked ? 
+    - please check [sector 1](Sector) locked ? 
+    - [s1](Sector) ? 
+    - [sector 2](Sector) ? 
     - please check site [42105](code_site) [sector 1](Sector) [L2100](Tech4g)
 
- - intent: ask_session_extension
-   examples: |
+- intent: ask_session_extension
+  examples: |
     - [5](time) mins please 
     - i need more [15](time)mns
     - I would like a time extension of a [10](time) minutes
@@ -151,20 +252,16 @@ nlu:
     - Can we have a brief time extension of a few minutes?
     
 
- - intent: inform_site
-   examples: |
-    - i'm availble [LBB3402](code_site)
-    - site [4745](code_site)
-    - please site [6073](code_site)
-    - please check site [4119](code_site)
-
- #- intent: greeting + inform_site
-  # examples: |
-   # - salam [amin](person) site [4704](code_site)
+- intent: inform_site
+  examples: |
+    - i'm availble [34020L](code_site)
+    - site [47450U](code_site)
+    - please site [60730](code_site)
+    - please check site [411097](code_site)
 
 
- - intent: inform_throughput
-   examples: |
+- intent: inform_throughput
+  examples: |
     - bad throughput
     - not good 
     - Same result
@@ -192,8 +289,8 @@ nlu:
     - [Dynamic 20]{"entity" : "throughput", "role" : "throughput_dyn"}
     - Low Thrghpt [DL average 50 Mbs]{"entity" : "throughput", "role" : "throughput_DL"} in both band
 
- - intent: inform_throughout_good
-   examples: |
+- intent: inform_throughput_good
+  examples: |
     - throughput good 
     - throughput dl better 
     - good throughput ca
@@ -204,66 +301,61 @@ nlu:
     - all sectors throughput good 
     - best throughput
 
- - intent: ask_Rollback
-   examples: |
-    - Rollback 
-    - can I rollback the changes for [S1]
+
+- intent: ask_Rollback
+  examples: |
+    - Rollback 
+    - done please rollback 
+    - rollback the site 
+    - rollback the status
+    - can I rollback the changes for [S1](Sector)
     - please rollback the changes for [S3](Sector) and [U2100](Tech3g) 
     - can I rollback the changes for [G900](Tech2g) , [S1](Sector)
     - please rollback the changes for [L2100](Tech4g) [S3](Sector)
+ 
 
-# - intent: inform+ask_lock+ask_unlock
- #  examples: |
-  #  - site [1475](code_site) please to lock [s1]{"entity":"Sector", "role":"lock") [s2]("entity":"Sector","role":"lock") and unlock [s3]("entity":"Sector", "role":"unlock")
-   # - site [1475](code_site) please to unlock [s1]{"entity":"Sector", "role":"unlock")  and lock [s2]("entity":"Sector","role":"lock") [s3]("entity":"Sector", "role":"lock")
-    #- site [1475](code_site) please to lock [s1]{"entity":"Sector", "role":"lock")  and unlock [s2]("entity":"Sector","role":"unlock") and lock [s3]("entity":"Sector", "role":"lock")
 
- #- intent: inform+ask_optimisation
-  # examples: |  
-   # - Site [2527](code_site) low throughput CA
 
- - intent: ask_status
-   examples: |
+- intent: ask_status
+  examples: |
     - check the status of the network [2G](Tech2g) for me
     - what is the current status of all the existing technologies [2g](Tech2g)[3g](Tech3g) [4g](Tech4g)
 
- - intent : check_all_techs
-   examples: |
+- intent : check_all_techs
+  examples: |
     - all technologies status 
     - existing technologies  
     - current technologies 
     - supported technologies 
     - handled technologies
 
- - intent: ask_csrf  # call the optimiser
-   examples: |
+- intent: ask_csrf  # call the optimiser
+  examples: |
     - what about csrf 
     - Also issue of CSFB about the site [LAI4315](code_site)
     - cell not basculate to other technology 
     - ca not found 
     - carrier agreggation not working 
 
-
-    # 
- - intent: ask_pci
-   examples: |
+- intent: ask_pci
+  examples: |
     - Please send me the pci 
     - i need the pci 
     - please i need the pci 
     - pci please
     - can you send me the pci 
     
- - intent: ask_restart
-   examples: |
+- intent: ask_restart
+  examples: |
     - please to restart 
     - restart if you can 
     - can you restart the site 
-    - please to restart the sector [s1](sector)
+    - please to restart the sector [s1](Sector)
     - restart all technologies  
     - restart band [L1800](Tech4g)
 
- - intent: finishing_test
-   examples: |
+- intent: finishing_test
+  examples: |
     - ssv done 
     - test finished
     - finish

@@ -1,26 +1,16 @@
 version: "3.1"
 
+stories:
+
 - story: happy path
   steps:
   - intent: greet
-    entities:
-    - Person : "Abdou"
-  - slot_was_set:
-    - Person: "Abdou"
-  - action: utter_greet
-  - action: action_get_message
+  - action: action_utter_greet
   - intent: mood_great
   - action: utter_happy
 
 - story: sad path 1
   steps:
-  - intent: greet
-    entities:
-    - Person : "Fatah"
-  - slot_was_set:
-    - Person: "Fatah"
-  - action: utter_greet
-  - action: action_get_message
   - intent: mood_unhappy
   - action: utter_cheer_up
   - action: utter_did_that_help
@@ -29,351 +19,252 @@ version: "3.1"
 
 - story: sad path 2
   steps:
-  - intent: greet
-    entities:
-    - Person : "Walid"
-  - slot_was_set:
-    - Person: "Walid"
-  - action: utter_greet
-  - action: action_get_message 
   - intent: mood_unhappy
   - action: utter_cheer_up
   - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
 
-- story: testing_unlock_mssg
-  steps:
-  - intent: ask_unlock
-    entities:
-    - unblock: ["S1"]
-  - slot_was_set:
-    - unblock_sector_slot: ["S1"]
-  - action: utter_ask_unlock
-  - action: action_get_message
- # - action: action_hello_world
 
-- story: testing_lock_mssg
+- story: s greeting without name
   steps:
-  - intent: ask_lock
-    entities:
-    - block: ["S3"]
-  - slot_was_set:
-    - block_sector_slot: ["S3"]
-  - action : utter_ask_lock
-  - action: action_get_message
- # - action: action_hello_world
+  - intent: greet
+  - action: action_utter_greet
 
-#------------------
-## story example 1 
-- story: test_one_technologie_DL
+
+- story: s greeting with name
   steps:
   - intent: greet
     entities:
-    - Person : "Faouzi"
+    - Person : "Abdou"
   - slot_was_set:
-    - Person: "Faouzi" 
-  - action: utter_greet  
-  - action: action_get_message
-  - intent: inform
-    entities:
-    - code_site: "15455"
-    - Tech4g: "L2100"
-    - throughput_DL : "45mb"
-
-  - slot_was_set:
-    - code_site_slot: "15455"
-  - slot_was_set:
-    - Tech4g: "L2100"
-  - slot_was_set:
-    - throughput_DL_slot: "45mb" 
-  - action: utter_inform
-  - intent: ask_lock
-    entities:
-    - block: ["S1"]
-  - slot_was_set:
-    - block_sector_slot: ["S1"]
-  - action : utter_ask_lock 
-  - action: action_get_message 
-  - intent: ask_unlock
-    entities:
-    - unblock: ["s2"]
-  - slot_was_set:
-    - unblock_sector_slot: ["s2"]
-  - action : utter_ask_unlock 
-  - action: action_get_message
-  #- action: utter_cr_execution
-  - intent: ask_Rollback
-    entities:
-    - Sector : ["s1"]
-
-  - slot_was_set:
-    - Sector_slot: ["s1"]
-  - action: utter_rollback
-  - intent: test_done 
-  - action: utter_thanks
-  - intent: goodbye
-  - action: utter_goodbye
+    - Person: "Abdou"
+  - action: action_utter_greet
 
 
-## story example 2
-- story: test_ssv
+- story: s inform site
   steps:
-  - intent: greet
+  - intent: inform_site
     entities:
-    - Person : "Aziz"
+    - code_site : "09620U"
   - slot_was_set:
-    - Person: "Aziz"
-  - action: utter_greet
-  - action: action_get_message
-  - intent: inform
-    entities:
-    - code_site: "15455"
-  - slot_was_set:
-    - code_site_slot: "15455"
+    - code_site: "09620U"
+  - action: action_inform_site
+
+
+- story: s check all techs
+  steps:
   - intent: check_all_techs
-  - action: utter_check_all_techs
-  - intent: Connection
+  - action: action_status_tech
+
+
+- story: s lock sector 
+  steps:
+  - intent: ask_lock
     entities:
-    - Sector : ["S2"]
+    - Sector : "S1"
+  - slot_was_set:
+    - Sector_slot: "S1"
+  - action: action_lock_sector
+
+
+- story: s unlock sector 
+  steps:
+  - intent: ask_unlock
+    entities:
+    - Sector : "S2"
+  - slot_was_set:
+    - Sector_slot: "S2"
+  - action: action_unlock_sector
+
+ 
+- story: s lock tech2g 
+  steps:
+  - intent: ask_lock
+    entities:
+    - Tech2g : "G900"
+  - slot_was_set:
+    - Tech2g: "G900"
+  - action: action_lock_tech
+
+- story: s unlock tech2g 
+  steps:
+  - intent: ask_unlock
+    entities:
+    - Tech2g : "g1800"
+  - slot_was_set:
+    - Tech2g: "g1800"
+  - action: action_unlock_tech
+
+
+ 
+- story: s lock tech3g 
+  steps:
+  - intent: ask_lock
+    entities:
+    - Tech3g : "U900"
+  - slot_was_set:
+    - Tech2g: "U900"
+  - action: action_lock_tech
+
+ 
+- story: s unlock tech3g 
+  steps:
+  - intent: ask_unlock
+    entities:
+    - Tech3g : "U2100"
+  - slot_was_set:
+    - Tech3g: "U2100"
+  - action: action_unlock_tech
+
+
+- story: s lock tech4g 
+  steps:
+  - intent: ask_lock
+    entities:
     - Tech4g : "L1800"
   - slot_was_set:
-    - Sector_slot: ["S2"]
-  - slot_was_set:
     - Tech4g: "L1800"
-  - action: utter_ask_help
-  - intent: ask_time
-  - action: utter_ask_time
-  - intent: ask_lock
-    entities:
-      - block : ["S1"]
-  - slot_was_set:
-    - block_sector_slot: ["S1"]
-  - action: utter_ask_lock
-  - action: action_get_message
+  - action: action_lock_tech
+
+ 
+- story: s unlock tech3g 
+  steps:
   - intent: ask_unlock
     entities:
-    - unblock : ["S2"]
+    - Tech3g : "L2100"
   - slot_was_set:
-    - unblock_sector_slot: ["S2"]
-  - action: utter_ask_unlock
-  - action: action_get_message
+    - Tech3g: "L2100"
+  - action: action_unlock_tech
+
+
+
+- story: s edit tilt 1 
+  steps:
+  - intent: ask_Ret
+    entities:
+    - Tech2g : "G900"
+  - slot_was_set:
+    - Tech2g: "G900"
+  - action: action_set_tilt
+
+
+- story: s edit tilt 2 
+  steps:
+  - intent: ask_Ret
+    entities:
+    - Tech3g : "U2100"
+  - slot_was_set:
+    - Tech3g: "U2100"
+  - action: action_set_tilt
+
+
+- story: s edit tilt 3
+  steps:
+  - intent: ask_Ret
+    entities:
+    - Tech4g : "L1800"
+  - slot_was_set:
+    - Tech2g: "L1800"
+  - action: action_set_tilt
+
+
+- story: s edit tilt 4
+  steps:
+  - intent: ask_Ret
+    entities:
+    - Sector : "S1"
+  - slot_was_set:
+    - Sector_slot: "S1"
+  - action: action_set_tilt
+
+
+- story: s rollback
+  steps:
+  - intent: ask_Rollback
+  - action: action_rollback
+
+
+
+- story: s session extension
+  steps:
+  - intent: ask_session_extension
+    entities:
+    - time : "20"
+  - slot_was_set:
+    - time: "20"
+  - action: action_extend_session
+
+
+- story: s restart sector
+  steps:
+  - intent: ask_restart
+    entities:
+    - Sector : "S3"
+  - slot_was_set:
+    - Sector_slot: "S3"
+  - action: action_lock_sector
+  - action: action_unlock_sector
+
+
+- story: s restart tech
+  steps:
+  - intent: ask_restart
+    entities:
+    - Tech2g : "G1800"
+  - slot_was_set:
+    - Tech2g: "G1800"
+  - action: action_lock_tech
+  - action: action_unlock_tech
+
+
+
+- story: s ask csrf 
+  steps:
+  - intent: ask_csrf 
+  - action: utter_csrf
+
+
+- story: s finishing test
+  steps:
+  - intent: finishing_test
+  - action: utter_finishing_test
+
+
+- story: s throughput is good
+  steps:
+  - intent: inform_throughput_good
+  - action: utter_throughput_good
+
+
+
+- story: s throughput status
+  steps:
   - intent: inform_throughput
-  - action: utter_ask_optimisation
-  - intent: finishing_test 
-  - action: utter_unlock_all
-  
-    
+    entities:
+    - throughput_slot : "75Mb/s"
+  - slot_was_set:
+    - throughput_slot: "75Mb/s"
+  - action: action_throughput_info
 
-## story example 2
-- story: storie2
+
+- story: s throughput DL status 
   steps:
-  - intent : greet
+  - intent: inform_throughput
     entities:
-    - Person : "Younes"
+    - throughput : "DL bad"
   - slot_was_set:
-    - Person: "Younes"
-  - action: utter_greet    
-  - action: action_get_message  
-  - intent : inform
-    entities:
-    - code_site: "se6322"
-  - slot_was_set:
-    - code_site_slot: "se6322"
-  - action : utter_help      # asking question who can i help you ?
-  - intent : ask_lock
-    entities:
-    - block : ["S1" , "S3"]
-  - slot_was_set:
-    - block_sector_slot: ["S1","S3"]
-  - action : utter_ask_lock 
-  - action: action_get_message
-  - intent : ask_unlock
-    entities:
-    - unblock : ["S2"] 
-  - slot_was_set:
-    - unblock_sector_slot: ["S2"]
-  - action : utter_ask_unlock
-  - action: action_get_message
-  - intent : check_request
-  - action : utter_check
-  - intent : inform_throughput
-    entities:
-    - throughput_DL : "80"
-  - slot_was_set:
-    - throughput_DL_slot: "80"
-  - action : utter_optimise
-  - intent : ask_Ret
-  - action : utter_ret
-  - intent : ask_restart
-  - action : utter_restart
-  - intent : inform 
-    entities:
-    - throughput_DL : "90"
-  - slot_was_set:
-    - throughput_DL_slot: "80"
-  - action : utter_optimise
-  - intent : affirm
-  - action : utter_affirm
-  - intent : finishing_test
-  - action: utter_unlock_all
+    - throughput_DL_slot: "DL bad"
+  - action: action_throughput_info
 
-  
-## story 3 
-- story: storie3
+
+
+
+- story: s ask status
   steps:
-  - intent : greet
+  - intent: ask_status
     entities:
-    - Person : "Maria"
+    - Tech4g : "4G"
   - slot_was_set:
-    - Person: "Maria"
-  - action: utter_greet
-  - action: action_get_message 
-  - intent : inform
-    entities :
-    - code_site : "se1240"
-    - technologie : ["4g"]
-  - slot_was_set:
-    - code_site_slot: ["S1"]
-  - slot_was_set:
-    - Tech4g: "4g"
-  - intent : ask_lock
-  - action : utter_ask_lock
-  - action: action_get_message
-  - intent : ask_unlock
-    entities :
-    - ca : "CA" 
-  - action : utter_ask_unlock
-  - action: action_get_message
-  - intent : ask_csrf
-    entities : 
-    - code_site : "ab1426"
-  - slot_was_set:
-    - code_site_slot: "ab1426"
-  - action : utter_ask_csrf
-  - intent : ask_Rollback
-  - action : utter_rollback
-  - intent : finishing_test
-  - action: utter_unlock_all
-  - intent : goodbye
-  - action : utter_goodbye 
-
-
-  ## story 4 
-- story: storie4
-  steps:
-  - intent : greet
-    entities:
-    - Person : "Yasmine"
-  - slot_was_set:
-    - Person: "Yasmine"
-  - action: utter_greet
-  - action: action_get_message  
-  - intent : inform
-    entities :
-    - code_site : "AS78242"
-  - slot_was_set:
-    - code_site_slot: "AS78242"
-  - intent : ask_status
-    entities :
-    - technologie : ["3g" , "4g"]
-  - slot_was_set:
-    - Tech3g: "3g"
-  - slot_was_set:
-    - Tech4g: "4g"  
-  - action : utter_ask_status
-  - intent : Connection
-    entities :
-    - technologie : "4g" 
-    - Sector : ["s1"]
-  - slot_was_set:
-    - Tech4g: "4g"
-  - slot_was_set:
-    - Sector_slot: "s1"
-  - action : utter_help_connection
-  - intent : ask_time 
-  - action : utter_ask_time
-  - intent : inform_throughput
-    entities :
-    - throughput_UL: "40"
-  - slot_was_set:
-    - throughput_UL_slot: "40"
-  - action : utter_optimisation 
-  - intent : affirm
-  - action : utter_affirm
-  - intent : finishing_test
-  - action: utter_unlock_all
-
-
-
-
-  ## story 5 
-- story: storie5
-  steps:
-  - intent : greet
-    entities:
-    - Person : "Fouad"
-  - slot_was_set:
-    - Person: "Fouad"
-  - action: utter_greet
-  - action: action_get_message 
-  - intent : inform
-    entities :
-    - code_site : "AM14527"
-  - slot_was_set:
-    - code_site_slot: "AM14527"  
-  - intent : Connection
-  - action : utter_help_connection
-  - intent : deny 
-  - action : utter_deny 
-  - intent : goodbye
-  - action : utter_goodbye
-
-
-  ## story 5    ask career agregation 
-- story: storie6
-  steps:
-  - intent : greet
-    entities:
-    - Person : "Mohamed"
-  - slot_was_set:
-    - Person: "Mohamed"
-  - action: utter_greet
-  - action: action_get_message  
-  - intent : inform
-    entities :
-    - code_site : "AL98250"
-  - slot_was_set:
-    - code_site_slot: "AL98250"
-  - intent : check_request
-    entities : 
-    - ca : "ca"
-  - action : utter_check_request
-  - intent : finishing_test
-  - action: utter_unlock_all
-  - intent : goodbye
-  - action : utter_goodbye
-
-
-   ## story 7      ask pci 
-- story: storie7  
-  steps:
-  - intent : greet
-    entities:
-    - Person : "Karim"
-  - slot_was_set:
-    - Person: "Karim"
-  - action: utter_greet
-  - action: action_get_message 
-  - intent : inform
-    entities :
-    - code_site : "BE782"
-  - slot_was_set:
-    - code_site_slot: "BE782"
-  - intent : ask_pci
-  - action : utter_pci
-  - intent : finishing_test
-  - action: utter_unlock_all
-  - intent : goodbye
-  - action : utter_goodbye
-
+    - Tech4g: "4G"
+  - action: action_status_tech

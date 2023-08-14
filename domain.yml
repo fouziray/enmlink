@@ -9,36 +9,28 @@ intents:
   - mood_unhappy
   - bot_challenge
   - finishing_test
+  - stop
   - ask_restart
   - ask_optimisation
   - ask_lock
   - ask_unlock
   - ask_Ret
   - inform
-  #- greeting+inform
   - Connection
   - test_done
   - ask_help
   - check_request
   - ask_session_extension
   - inform_site
-  - downlink
-  - uplink
-  - ask_rollback
-  #- inform+ask_lock+ask_unlock
-  #- inform+ask_optimisation
+  - ask_Rollback
   - ask_status
   - check_all_techs
   - ask_csrf
-  #- greeting + inform_site
   - ask_pci
   - inform_throughput
-  - inform_throughout_good
+  - inform_throughput_good
 entities:
-  - Sector: 
-      roles:
-        - block
-        - unblock
+  - Sector
   - Tech2g
   - Tech3g
   - Tech4g
@@ -48,32 +40,27 @@ entities:
   - SINR
   - Person
   - code_site
+  - time
   - throughput:
       roles:
         - throughput_DL
         - throughput_UL
         - throughput_dyn
         - throughput_ca
-  - cell_id
-  - time
-  - ca
+
+
+
+
+
 
 
 slots: 
-  code_site_slot:
+  code_site:
     type: text
     influence_conversation: true
     mappings: 
     - type: from_entity
       entity: code_site
-
-
-  cell_id_slot:
-    type: text
-    influence_conversation: true
-    mappings: 
-    - type: from_entity
-      entity: cell_id
 
 
   Person:
@@ -93,13 +80,11 @@ slots:
       - G1800 
       - DCS 
       - 2G
-      
+      - 2g
     mappings: 
     - type: from_entity
       entity: Tech2g
-      intent: ask_lock
       
-  
   
   Tech3g:
     type: categorical
@@ -107,9 +92,11 @@ slots:
     - U900
     - U2100
     - 3G
+    - 3g
     mappings:
     - type: from_entity
       entity: Tech3g
+
   Tech4g:
     type: categorical
     influence_conversation: true
@@ -117,9 +104,30 @@ slots:
       - L1800
       - L2100
       - 4G
+      - 4g
     mappings: 
     - type: from_entity
       entity: Tech4g
+
+
+
+
+  unblocked_tech_slot:
+    type: list
+    influence_conversation: true
+    mappings: 
+    - type: custom
+      action: action_unlock_tech
+
+
+  blocked_tech_slot:
+    type: list
+    influence_conversation: true
+    mappings: 
+    - type: custom
+      action: action_lock_tech
+
+
 
   
   Sector_slot:
@@ -128,28 +136,27 @@ slots:
     mappings: 
     - type: from_entity
       entity: Sector
-#  sector_accumulator:
- #   type: list
-  #  influence_conversation: true
-   # mappings:
-    #- type: custom
-     # action: action_set_sector_accumulator
 
-  block_sector_slot:
+
+
+  unblocked_sector_slot:
     type: list
     influence_conversation: true
     mappings: 
-    - type: from_entity
-      entity: Sector
-      role: block
+    - type: custom
+      action: action_unlock_sector
 
-  unblock_sector_slot:
+
+  blocked_sector_slot:
     type: list
     influence_conversation: true
     mappings: 
-    - type: from_entity
-      entity: Sector
-      role: unblock
+    - type: custom
+      action: action_lock_sector
+
+
+
+
 
   throughput_slot:
     type: text
@@ -215,42 +222,47 @@ slots:
       entity: SINR
 
 
-  time_slot:
+  time:
     type: float
     influence_conversation: true
     mappings: 
     - type: from_entity
       entity: time
-  
-  choosing:
-    type: bool
-    mappings:
-    - type: from_intent
-      value: true
-      intent: stop
-  
-forms:
-  technologies_form:
-    required_slots:
-      - choosing
+
+
+path2g:
+    type: text
+    influence_conversation: false
+    mappings: 
+    - type: custom
+      action: action_status_tech
+
+path3g:
+    type: text
+    influence_conversation: false
+    mappings: 
+    - type: custom
+      action: action_status_tech
+
+path4gFDD:
+    type: text
+    influence_conversation: false
+    mappings: 
+    - type: custom
+      action: action_status_tech
+
+pathTilt:
+    type: text
+    influence_conversation: false
+    mappings: 
+    - type: custom
+      action: action_status_tech
+
+
+
 responses:
-
-  utter_unlock_all:
-  - text: "utter_unlock_all"
-  
-  utter_greet_eng:
-  - text: "Hey!"
-  - text: "Hello"
-  - text: "Hi , how can i help"
-  - text: "Salam "
-
-  utter_greet_fr:
-  - text: "salut"
-  - text: "Coucous"
-
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
+  utter_greet:
+  - text: "Hey! How are you?"
 
   utter_did_that_help:
   - text: "Did that help you?"
@@ -259,106 +271,42 @@ responses:
   - text: "Great, carry on!"
 
   utter_goodbye:
-  - text: "Bye {Person}"
-  - text: "Bye!"
+  - text: "Bye"
 
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
+
+  utter_comfirm:
+  - text: "Ok"
   
-  utter_inform:
-  - text: "utter inforn"
+  utter_reject:
+  - text: "No "
 
-  utter_ask_lock:
-  - text: "Sector {block_sector_slot} blocked"
-  - text: "Secteur {block_sector_slot} blocké"
-  utter_ask_unlock:
-  - text: "Sector {unblock_sector_slot} unblocked"
-  - text: "Secteur {unblock_sector_slot} déblocké"
-  utter_cr_execution:
-  - text: "utter_cr_execution"
+
+  utter_throughput_good:
+  - text: "ok! great throughput"
   
-  utter_rollback:
-  - text: "utter_rollback"
-
-  utter_thanks:
-  - text: "utter_thanks"
-
-  utter_check_all_techs:
-  - text: "utter_check_all_techs"
-  
-  utter_ask_help:
-  - text: "utter_ask_help"
-
-  utter_ask_time:
-  - text: "utter_ask_time"
-
-  utter_ask_optimisation:
-  - text: "utter_ask_optimisation"
-  
-  utter_throughout_good:
-  - text: "utter_throughout_good"
-
-  utter_check:
-  - text: "utter_check"
-
-  utter_ret:
-  - text: "utter_ret"
-
-  utter_optimise:
-  - text: "utter_optimise"
-
+  utter_csrf:
+  - text: "you need to contact the optimiser"
 
   utter_finishing_test:
-  - text: "utter_finishing_test"
-  
+  - text: "test is finished and session will be closed"
 
-  utter_restart:
-  - text: "utter_restart"
-
-  utter_affirm:
-  - text: "utter_affirm"
-
-  utter_ask_csrf:
-  - text: "utter_ask_csrf"
-
-  utter_ask_status:
-  - text: "utter_ask_status"
-
-  utter_help_connection:
-  - text: "utter_help_connection"
-
-  utter_help:
-  - text: "utter_help_connection"
-
-
-  utter_optimisation:
-  - text: "utter_optimisation"
-
-  utter_deny:
-  - text: "utter_deny"
-
-  utter_check_request:
-  - text: "utter_check_request"
-
-  utter_pci:
-  - text: "utter_pci"
-  
 
 actions: 
-  - action_utter_greet
-  - action_get_message
-  - action_hello_world
-  - action_append_tech_slots
-  - action_reset_techs
-  - action_available_tech
-  - action_block
-  #- action_validate_slot_mappings
-  #- action_set_sector_accumulator
-  - action_block_unblock
-  - action_Rollback
-  - action_Ret
-  - action_set_session_extension
+- action_utter_greet # done
+- action_inform_site # done
+#- action_check_all_techs   handled in action_status_tech
+- action_lock_sector
+- action_unlock_sector
+- action_lock_tech # done
+- action_unlock_tech # done
+- action_set_tilt # done with get tilt and save initial state 
+- action_rollback # rollback all stored files (tech , sector , tilt)
+- action_extend_session
+- action_status_tech  # done
+- action_throughput_info #done
 
 session_config:
-  session_expiration_time: 480
+  session_expiration_time: 460
   carry_over_slots_to_new_session: true
