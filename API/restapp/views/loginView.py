@@ -28,6 +28,6 @@ class LoginView(views.APIView):
             Token.objects.get_or_create(user=user)
             resp.append(UserSerializer(user).data)
             #resp.append(Token.objects.get_or_create(user=user)[0].__str__)
-            return Response(UserSerializer(user).data, status=status.HTTP_202_ACCEPTED)
+            return Response(UserSerializer(user, fields=['id','username','first_name','last_name','email','last_login']).data, status=status.HTTP_202_ACCEPTED)
         else:
             return Response(request.data, status=status.HTTP_403_FORBIDDEN)

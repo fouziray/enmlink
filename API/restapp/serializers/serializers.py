@@ -8,11 +8,22 @@ User = get_user_model()
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
-     class Meta:
+    def __init__(self, *args, **kwargs):
+        fields = kwargs.pop('fields', None)
+
+        super().__init__(*args, **kwargs)
+
+        if fields is not None:
+            allowed = set(fields)
+            existing = set(self.fields)
+            for field_name in existing - allowed:
+                self.fields.pop(field_name)
+
+    class Meta:
          model = User
          fields = ('id', 'username', 'first_name', 'last_name', 'email','password','last_login')
      
-     def create(self, validated_data):
+    def create(self, validated_data):
         user = User(
             email=validated_data['email'],
             username=validated_data['username']
@@ -45,6 +56,18 @@ class ManagedObjectStateSerializer(serializers.ModelSerializer):
         model= ManagedObject
         fields=('state',)
 
+class DTserializercreation(serializers.ModelSerializer):
+    title=serializers.CharField(source='site_id')
+    startDate=serializers.DateTimeField(source='start_time')
+    endDate=serializers.DateTimeField(source='end_Time')
+    class Meta:
+        model= DtSession
+        fields = ['dtTeam_id' , 'technicien_id' , 'startDate' , 'endDate','id','title']
+class GroupSerializer(serializers.ModelSerializer):    
+    class Meta:
+        model = Group
+        depth = 1
+        fields = '__all__'
 
 class DTSerializer(serializers.ModelSerializer):
     #title=serializers.SerializerMethodField('get_alternate_name_code_site')
@@ -53,6 +76,7 @@ class DTSerializer(serializers.ModelSerializer):
     title=serializers.CharField(source='site_id')
     startDate=serializers.DateTimeField(source='start_time')
     endDate=serializers.DateTimeField(source='end_Time')
+
     class Meta:
         model= DtSession
         depth = 1
@@ -85,7 +109,6 @@ class SiteSerializer(serializers.ModelSerializer):
         technologies_data = validated_data.pop("managedObject")
         mo, created = ManagedObject.objects.get_or_create(**validated_data)
         technology_serializer = self.fields['managedObject']
-        print("hiiiis")
 
         if(created):
             for technology_data in technologies_data:
@@ -113,11 +136,6 @@ class SiteSerializer2(serializers.ModelSerializer):
        
         return mo
 
-class GroupSerializer(serializers.ModelSerializer):    
-    class Meta:
-        model = Group
-        depth = 1
-        fields = '__all__'
 
 
 
