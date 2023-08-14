@@ -35,7 +35,7 @@ class ActionHelloWorld(Action):
              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
          
          
-         dispatcher.utter_message(text=return_message)
+         dispatcher.utter_message(text='hello how are you ?? ')
 
          return []
 
@@ -526,16 +526,6 @@ class ActionUtterGreet(Action):
              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
          
         
-        mssg = tracker.latest_message.text
-        print(mssg)
-        lan = detect(mssg)
-        lan = 'en' 
-        if(lan== 'en'):
-            dispatcher.utter_template("utter_greet_en", tracker)
-            print("en")
-        elif(lan=='fr'):
-            dispatcher.utter_template("utter_greet_fr", tracker)
-            print("fr")
+        dispatcher.utter_message("hehehe")     
+
         return []
-
-

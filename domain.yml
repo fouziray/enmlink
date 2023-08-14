@@ -345,7 +345,6 @@ responses:
   
 
 actions: 
-  - utter_greet
   - action_get_message
   - action_hello_world
   - action_append_tech_slots
