@@ -1,0 +1,34 @@
+version: "2.0"
+nlu: 
+- lookup: Tech2g
+    - G900 
+    - G1800 
+    - DCS 
+    - 2G 
+- lookup: Tech3g
+    - U900 
+    - U2100
+    - 3G
+- lookup: Tech4g
+    - L2100
+    - 2100
+    - L1800
+    - 1800
+    - B40
+    - TDD
+    - FDD
+    - 4G FDD
+    - 4G TDD
+- lookup: Sector
+    - S1
+    - S2
+    - S3
+    - Sector 1
+    - sector 2
+    - sector 3
+- lookup: conditions 
+    - Rsrp 
+    - Rsrq 
+    - SINR 
+    - RSRP
+
