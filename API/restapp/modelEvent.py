@@ -7,13 +7,14 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-from .models import Convo
+from .models import  DtSession
 #class EventsManager(models.Manager):
    # def get_queryset(self):
        # return super().get_queryset().distinct('type_name')
 
 class Events(models.Model):
     sender_id = models.CharField(max_length=255)
+    #dtsession_id=models.ForeignKey(DtSession,on_delete=models.DO_NOTHING)
     #convo_id=models.ForeignKey(Convo, on_delete=models.CASCADE, related_name='messages')
     type_name = models.CharField(max_length=255)
     timestamp = models.FloatField(blank=True, null=True)

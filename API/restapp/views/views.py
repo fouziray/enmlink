@@ -4,7 +4,7 @@ from django.shortcuts import render
 #from django.contrib.auth.models import User 
 from django.http import Http404
 from restapp.serializers.eventSerializer import EventSerialize
-from restapp.serializers.serializers import ConvoSerializer, HelpProviderSerialize, ManagedObjectStateSerializer, ProfileSerializer, UserSerializer,SiteSerializer, TechnologySerializer , SiteSerializer2,GroupSerializer,DTSerializer
+from restapp.serializers.serializers import ConvoSerializer, HelpProviderSerialize, ManagedObjectStateSerializer, ProfileSerializer, UserSerializer,SiteSerializer, TechnologySerializer , SiteSerializer2,GroupSerializer,DTSerializer, DTserializercreation
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
@@ -24,6 +24,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Max,F,Count, ExpressionWrapper, DateTimeField,Q;
 from rest_framework.pagination import LimitOffsetPagination
 from django.utils.timezone import now
+from rest_framework import pagination
 async_mode = None
 import os
 from django.http import HttpResponse
@@ -44,10 +45,11 @@ def connection_bind(sid, data):
 def test_disconnect(sid):
     pass
 class UserList(APIView):
-   
+    permission_classes = (permissions.AllowAny,)
+
     def get(self, request, format=None):
          users = User.objects.all()
-         serializer = UserSerializer(users, many=True)
+         serializer = UserSerializer(users, many=True,fields=['id','username','first_name','last_name','email','last_login'])
          return Response(serializer.data)
 
     def post(self, request, format=None):
@@ -159,6 +161,11 @@ class HelpProviderList(ReadOnlyModelViewSet):
         #queryset= self.get_queryset().filter(fonction=fonction)
         #serializer= HelpProviderSerialize(queryset,many=True)
         return Response(queryset)
+    @action(methods=['get'], detail=True)
+    def isTechnicianInTimeFrame(self, request, id):
+        val=now()
+        queryset=DtSession.objects.filter(technicien=id,start_time__lte=val,end_Time__gte=val).exists()
+        return Response(queryset,status=status.HTTP_200_OK)
 
 class ConvoList(APIView):
     def get(self, request, format=None):
@@ -278,13 +285,26 @@ class ProfileImage(APIView):
             serializer = ProfileSerializer(profile)
             return Response(serializer.data)
         except Profile.DoesNotExist:
-            return Response('user doesnt have a profile')
+            return Response('/static/default.jpg',status = status.HTTP_204_NO_CONTENT)
 
+
+
+class ExamplePagination(pagination.PageNumberPagination):       
+       page_size = 6
 class Sites(ModelViewSet, LimitOffsetPagination):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = [TokenAuthentication, BasicAuthentication]
     serializer_class=SiteSerializer
+    
     queryset=ManagedObject.objects.all()
+    pagination_class= ExamplePagination
+
+    @action(detail=True, methods=['get'])
+    def get_last_test_per_site(self,request,format=None):
+        last=DtSession.objects.values('site').annotate(max=Max('end_Time'))
+        return Response(last)
+
+
     @action(detail=True, methods=['get'])
     def get_all(self,request,format=None):
          MosTechnologies= ManagedObject.objects.all()
@@ -326,7 +346,7 @@ class Sites(ModelViewSet, LimitOffsetPagination):
 class GroupViewSet(ReadOnlyModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
     http_method_names = ['get', ]
     pagination_class = LimitOffsetPagination
     
@@ -352,6 +372,9 @@ class GroupViewSet(ReadOnlyModelViewSet):
             namesGrp=User.objects.values('groups__name','groups__id','id','profile__avatar','last_login','first_name','last_name').filter(groups__name__isnull=False, groups__permissions__id=21)
             lastActivePerGroup= (namesGrp).values('groups__name').annotate(maxlast=Max('last_login'))
             return Response([namesGrp,lastActivePerGroup])
+    @action(detail=True)
+    def userinwhichgroup(self,request,id):
+        return Response(User.objects.values('groups__id').filter(id=id))
 class SiteDT(APIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = [TokenAuthentication, BasicAuthentication]
@@ -401,8 +424,12 @@ class DriveTestSessionViewSet(ModelViewSet):
         queryset=self.get_queryset().filter(site=site_id,start_time__gte=now().date()).exists()
         return Response(queryset, status=status.HTTP_200_OK)
     def create(self, request):
-        serializer = self.serializer_class(data=request.data)
-        serializer.save()
+        serializer = DTserializercreation(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data,many=True)
         if serializer.is_valid():
