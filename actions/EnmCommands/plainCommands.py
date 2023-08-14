@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-import pika, sys, os
+#import pika, sys, os
+import sys , os
 from abc import abstractmethod
 import pandas as pd
 #from .enmscripting import enmscripting

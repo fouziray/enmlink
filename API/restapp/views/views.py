@@ -410,3 +410,40 @@ class DriveTestSessionViewSet(ModelViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class JoinUserGrpView(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = [TokenAuthentication, BasicAuthentication]
+
+   
+   
+    def get(self, request, *args, **kwargs):
+        # join query users and groups
+        sql_query = """
+            SELECT restapp_user.id , restapp_user.username , restapp_user.email , restapp_user_groups.id 
+            FROM  restapp_user
+            INNER JOIN restapp_user_groups ON restapp_user.id = restapp_user_groups.user_id
+        """
+
+        # SQL query execution with Django's connection
+        with connection.cursor() as cursor:
+            cursor.execute(sql_query)
+            result = cursor.fetchall()
+
+        # json data response
+        data = []
+        for row in result:
+            item = {
+                'id': row[0],
+                'username': row[1],
+                'email': row[2],
+                'group_id': row[3],
+                
+            }
+            data.append(item)
+
+        return Response(data)
+
+
+
+
+

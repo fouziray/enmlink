@@ -1,15 +1,11 @@
 version: "3.1"
-language: "en"
-nlu:
 
-- regex: Person 
-    - ^[A-Za-z]{1,7}$
-
+#nlu:
 - intent: greet
   examples: |
-    - hey it's [Amin](Preson)
-    - hello i'm [Abdou](Person)
-    - hi it's me the drive tester [Fatah](Person)
+    - hey
+    - hello
+    - hi
     - hello there
     - good morning
     - good evening
@@ -17,9 +13,6 @@ nlu:
     - hey there
     - let's go
     - hey dude
-    - hey there
-    - salam it's [Djamila](Person) 
-    - salut c'est [Aziz](Person) 
     - goodmorning
     - goodevening
     - good afternoon
@@ -36,9 +29,6 @@ nlu:
     - see you around
     - bye bye
     - see you later
-    - see you around
-    - see you later
-    - talk to you later
 
 - intent: affirm
   examples: |
@@ -58,9 +48,6 @@ nlu:
     - don't like that
     - no way
     - not really
-    - site not availble 
-    - site is not planed for ssv 
-
 
 - intent: mood_great
   examples: |
@@ -102,21 +89,3 @@ nlu:
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
-
-- intent: affirm
-  examples: |
-    - yes
-    - indeed
-    - of course
-    - that sounds good
-    - correct
-    - ok 
-    - fine 
-    - not a problem 
-    - okey
-    - done
-    - is ok 
-
-- intent: stop
-  examples: |
-    - stop
