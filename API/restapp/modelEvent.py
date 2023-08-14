@@ -7,7 +7,7 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-from .models import Convo, DtSession
+from .models import  DtSession
 #class EventsManager(models.Manager):
    # def get_queryset(self):
        # return super().get_queryset().distinct('type_name')
