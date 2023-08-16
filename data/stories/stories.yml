@@ -1,0 +1,270 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: action_utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+
+- story: s greeting without name
+  steps:
+  - intent: greet
+  - action: action_utter_greet
+
+
+- story: s greeting with name
+  steps:
+  - intent: greet
+    entities:
+    - Person : "Abdou"
+  - slot_was_set:
+    - Person: "Abdou"
+  - action: action_utter_greet
+
+
+- story: s inform site
+  steps:
+  - intent: inform_site
+    entities:
+    - code_site : "09620U"
+  - slot_was_set:
+    - code_site: "09620U"
+  - action: action_inform_site
+
+
+- story: s check all techs
+  steps:
+  - intent: check_all_techs
+  - action: action_status_tech
+
+
+- story: s lock sector 
+  steps:
+  - intent: ask_lock
+    entities:
+    - Sector : "S1"
+  - slot_was_set:
+    - Sector_slot: "S1"
+  - action: action_lock_sector
+
+
+- story: s unlock sector 
+  steps:
+  - intent: ask_unlock
+    entities:
+    - Sector : "S2"
+  - slot_was_set:
+    - Sector_slot: "S2"
+  - action: action_unlock_sector
+
+ 
+- story: s lock tech2g 
+  steps:
+  - intent: ask_lock
+    entities:
+    - Tech2g : "G900"
+  - slot_was_set:
+    - Tech2g: "G900"
+  - action: action_lock_tech
+
+- story: s unlock tech2g 
+  steps:
+  - intent: ask_unlock
+    entities:
+    - Tech2g : "g1800"
+  - slot_was_set:
+    - Tech2g: "g1800"
+  - action: action_unlock_tech
+
+
+ 
+- story: s lock tech3g 
+  steps:
+  - intent: ask_lock
+    entities:
+    - Tech3g : "U900"
+  - slot_was_set:
+    - Tech2g: "U900"
+  - action: action_lock_tech
+
+ 
+- story: s unlock tech3g 
+  steps:
+  - intent: ask_unlock
+    entities:
+    - Tech3g : "U2100"
+  - slot_was_set:
+    - Tech3g: "U2100"
+  - action: action_unlock_tech
+
+
+- story: s lock tech4g 
+  steps:
+  - intent: ask_lock
+    entities:
+    - Tech4g : "L1800"
+  - slot_was_set:
+    - Tech4g: "L1800"
+  - action: action_lock_tech
+
+ 
+- story: s unlock tech3g 
+  steps:
+  - intent: ask_unlock
+    entities:
+    - Tech3g : "L2100"
+  - slot_was_set:
+    - Tech3g: "L2100"
+  - action: action_unlock_tech
+
+
+
+- story: s edit tilt 1 
+  steps:
+  - intent: ask_Ret
+    entities:
+    - Tech2g : "G900"
+  - slot_was_set:
+    - Tech2g: "G900"
+  - action: action_set_tilt
+
+
+- story: s edit tilt 2 
+  steps:
+  - intent: ask_Ret
+    entities:
+    - Tech3g : "U2100"
+  - slot_was_set:
+    - Tech3g: "U2100"
+  - action: action_set_tilt
+
+
+- story: s edit tilt 3
+  steps:
+  - intent: ask_Ret
+    entities:
+    - Tech4g : "L1800"
+  - slot_was_set:
+    - Tech2g: "L1800"
+  - action: action_set_tilt
+
+
+- story: s edit tilt 4
+  steps:
+  - intent: ask_Ret
+    entities:
+    - Sector : "S1"
+  - slot_was_set:
+    - Sector_slot: "S1"
+  - action: action_set_tilt
+
+
+- story: s rollback
+  steps:
+  - intent: ask_Rollback
+  - action: action_rollback
+
+
+
+- story: s session extension
+  steps:
+  - intent: ask_session_extension
+    entities:
+    - time : "20"
+  - slot_was_set:
+    - time: "20"
+  - action: action_extend_session
+
+
+- story: s restart sector
+  steps:
+  - intent: ask_restart
+    entities:
+    - Sector : "S3"
+  - slot_was_set:
+    - Sector_slot: "S3"
+  - action: action_lock_sector
+  - action: action_unlock_sector
+
+
+- story: s restart tech
+  steps:
+  - intent: ask_restart
+    entities:
+    - Tech2g : "G1800"
+  - slot_was_set:
+    - Tech2g: "G1800"
+  - action: action_lock_tech
+  - action: action_unlock_tech
+
+
+
+- story: s ask csrf 
+  steps:
+  - intent: ask_csrf 
+  - action: utter_csrf
+
+
+- story: s finishing test
+  steps:
+  - intent: finishing_test
+  - action: utter_finishing_test
+
+
+- story: s throughput is good
+  steps:
+  - intent: inform_throughput_good
+  - action: utter_throughput_good
+
+
+
+- story: s throughput status
+  steps:
+  - intent: inform_throughput
+    entities:
+    - throughput_slot : "75Mb/s"
+  - slot_was_set:
+    - throughput_slot: "75Mb/s"
+  - action: action_throughput_info
+
+
+- story: s throughput DL status 
+  steps:
+  - intent: inform_throughput
+    entities:
+    - throughput : "DL bad"
+  - slot_was_set:
+    - throughput_DL_slot: "DL bad"
+  - action: action_throughput_info
+
+
+
+
+- story: s ask status
+  steps:
+  - intent: ask_status
+    entities:
+    - Tech4g : "4G"
+  - slot_was_set:
+    - Tech4g: "4G"
+  - action: action_status_tech

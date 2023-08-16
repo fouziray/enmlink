@@ -1,25 +1,33 @@
-version: "2.0"
+version: "3.1"
 nlu: 
 - lookup: Tech2g
+  examples: |
     - G900 
     - G1800 
+    - g900
+    - g1800
     - DCS 
     - 2G 
 - lookup: Tech3g
+  examples: |
     - U900 
+    - u900
+    - u2100
     - U2100
     - 3G
 - lookup: Tech4g
+  examples: |
     - L2100
-    - 2100
+    - l200
     - L1800
-    - 1800
+    - l1800
     - B40
     - TDD
     - FDD
     - 4G FDD
     - 4G TDD
 - lookup: Sector
+  examples: |
     - S1
     - S2
     - S3
@@ -27,8 +35,8 @@ nlu:
     - sector 2
     - sector 3
 - lookup: conditions 
+  examples: |
     - Rsrp 
     - Rsrq 
     - SINR 
     - RSRP
-

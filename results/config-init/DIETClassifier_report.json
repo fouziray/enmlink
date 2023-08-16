@@ -1,0 +1,126 @@
+{
+  "Tech2g": {
+    "precision": 0.4375,
+    "recall": 0.5833333333333334,
+    "f1-score": 0.5,
+    "support": 12,
+    "confused_with": {
+      "Tech4g": 2
+    }
+  },
+  "throughput.throughput_ca": {
+    "precision": 0.4,
+    "recall": 0.3076923076923077,
+    "f1-score": 0.34782608695652173,
+    "support": 13,
+    "confused_with": {
+      "throughput.throughput_DL": 4
+    }
+  },
+  "conditions": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 3,
+    "confused_with": {}
+  },
+  "Person": {
+    "precision": 0.8,
+    "recall": 0.5,
+    "f1-score": 0.6153846153846154,
+    "support": 8,
+    "confused_with": {}
+  },
+  "code_site": {
+    "precision": 1.0,
+    "recall": 0.9473684210526315,
+    "f1-score": 0.972972972972973,
+    "support": 19,
+    "confused_with": {
+      "time": 1
+    }
+  },
+  "time": {
+    "precision": 0.5,
+    "recall": 0.25,
+    "f1-score": 0.3333333333333333,
+    "support": 4,
+    "confused_with": {
+      "throughput.throughput_DL": 1
+    }
+  },
+  "throughput.throughput_DL": {
+    "precision": 0.5,
+    "recall": 0.3793103448275862,
+    "f1-score": 0.4313725490196078,
+    "support": 29,
+    "confused_with": {
+      "throughput.throughput_ca": 3
+    }
+  },
+  "throughput.throughput_UL": {
+    "precision": 0.75,
+    "recall": 0.3333333333333333,
+    "f1-score": 0.46153846153846156,
+    "support": 9,
+    "confused_with": {
+      "throughput.throughput_ca": 1
+    }
+  },
+  "Tech3g": {
+    "precision": 1.0,
+    "recall": 0.5454545454545454,
+    "f1-score": 0.7058823529411764,
+    "support": 11,
+    "confused_with": {
+      "Tech2g": 4,
+      "Tech4g": 1
+    }
+  },
+  "Sector": {
+    "precision": 0.8518518518518519,
+    "recall": 0.7666666666666667,
+    "f1-score": 0.8070175438596491,
+    "support": 30,
+    "confused_with": {
+      "throughput.throughput_ca": 1
+    }
+  },
+  "throughput.throughput_dyn": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 5,
+    "confused_with": {
+      "throughput.throughput_DL": 3
+    }
+  },
+  "Tech4g": {
+    "precision": 0.7272727272727273,
+    "recall": 0.5714285714285714,
+    "f1-score": 0.64,
+    "support": 14,
+    "confused_with": {
+      "Tech2g": 5
+    }
+  },
+  "micro avg": {
+    "precision": 0.6854838709677419,
+    "recall": 0.5414012738853503,
+    "f1-score": 0.6049822064056939,
+    "support": 157
+  },
+  "macro avg": {
+    "precision": 0.5805520482603816,
+    "recall": 0.43204896031574797,
+    "f1-score": 0.48461065966719485,
+    "support": 157
+  },
+  "weighted avg": {
+    "precision": 0.6741233996011066,
+    "recall": 0.5414012738853503,
+    "f1-score": 0.5914873767317754,
+    "support": 157
+  },
+  "accuracy": 0.9342208300704777
+}

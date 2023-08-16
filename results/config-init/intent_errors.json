@@ -1,0 +1,866 @@
+[
+  {
+    "text": "goodevening",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.7147690057754517
+    }
+  },
+  {
+    "text": "cu",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.16794970631599426
+    }
+  },
+  {
+    "text": "have a nice day",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.3040684461593628
+    }
+  },
+  {
+    "text": "don't like that",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "check_all_techs",
+      "confidence": 0.21636924147605896
+    }
+  },
+  {
+    "text": "site not availble",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.8960994482040405
+    }
+  },
+  {
+    "text": "amazing",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.9809396266937256
+    }
+  },
+  {
+    "text": "I am amazing",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.9446980357170105
+    }
+  },
+  {
+    "text": "I am going to save the world",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.46175557374954224
+    }
+  },
+  {
+    "text": "so good",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.7491593956947327
+    }
+  },
+  {
+    "text": "I don't feel very well",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.9384335875511169
+    }
+  },
+  {
+    "text": "not good",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.5147485136985779
+    }
+  },
+  {
+    "text": "yes",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.2674151062965393
+    }
+  },
+  {
+    "text": "that sounds good",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.897966206073761
+    }
+  },
+  {
+    "text": "correct",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.36405178904533386
+    }
+  },
+  {
+    "text": "please to unlock S3",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.578774631023407
+    }
+  },
+  {
+    "text": "throughput non atteint",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "inform_throughput_good",
+      "confidence": 0.7998784184455872
+    }
+  },
+  {
+    "text": "the site has congested",
+    "intent": "inform",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.31620532274246216
+    }
+  },
+  {
+    "text": "What do l do ??",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.21781377494335175
+    }
+  },
+  {
+    "text": "what do i do next  ?",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.5512472987174988
+    }
+  },
+  {
+    "text": "can you provide phone number of someone in team",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.21192973852157593
+    }
+  },
+  {
+    "text": "how do i reach drive test team",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.3615671694278717
+    }
+  },
+  {
+    "text": "can i reach someone via call",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.3545137941837311
+    }
+  },
+  {
+    "text": "can you provide phone number",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "ask_session_extension",
+      "confidence": 0.17600926756858826
+    }
+  },
+  {
+    "text": "Do you unlock all sectors ?",
+    "intent": "check_request",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.8039569854736328
+    }
+  },
+  {
+    "text": "please check sector 1 locked ?",
+    "intent": "check_request",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.2513320744037628
+    }
+  },
+  {
+    "text": "5 mins please",
+    "intent": "ask_session_extension",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.9364117980003357
+    }
+  },
+  {
+    "text": "i need more 15mns",
+    "intent": "ask_session_extension",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.2431512475013733
+    }
+  },
+  {
+    "text": "not good",
+    "intent": "inform_throughput",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.5147485136985779
+    }
+  },
+  {
+    "text": "same throughput",
+    "intent": "inform_throughput",
+    "intent_prediction": {
+      "name": "inform_throughput_good",
+      "confidence": 0.8495243787765503
+    }
+  },
+  {
+    "text": "i had throughput problem",
+    "intent": "inform_throughput",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.47589656710624695
+    }
+  },
+  {
+    "text": "i have problem with UL",
+    "intent": "inform_throughput",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.7852697372436523
+    }
+  },
+  {
+    "text": "what is the current status of all the existing technologies 2g3g 4g",
+    "intent": "ask_status",
+    "intent_prediction": {
+      "name": "check_all_techs",
+      "confidence": 0.9286782741546631
+    }
+  },
+  {
+    "text": "what about csrf",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "check_all_techs",
+      "confidence": 0.39049646258354187
+    }
+  },
+  {
+    "text": "Also issue of CSFB about the site 43155U",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.6178517937660217
+    }
+  },
+  {
+    "text": "cell not basculate to other technology",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "check_all_techs",
+      "confidence": 0.9579616785049438
+    }
+  },
+  {
+    "text": "restart all technologies",
+    "intent": "ask_restart",
+    "intent_prediction": {
+      "name": "check_all_techs",
+      "confidence": 0.6616988182067871
+    }
+  },
+  {
+    "text": "ssv done",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.8939064741134644
+    }
+  },
+  {
+    "text": "done with the site",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.7576165795326233
+    }
+  },
+  {
+    "text": "problems solved",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.9784030914306641
+    }
+  },
+  {
+    "text": "bonsoir",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.5742723941802979
+    }
+  },
+  {
+    "text": "bonne nuit",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "Connection",
+      "confidence": 0.4416329264640808
+    }
+  },
+  {
+    "text": "salut",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.9953954815864563
+    }
+  },
+  {
+    "text": "passe une bonne journée",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.7348822355270386
+    }
+  },
+  {
+    "text": "bien sûr",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.5480833649635315
+    }
+  },
+  {
+    "text": "d'accord",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.4329846501350403
+    }
+  },
+  {
+    "text": "jamais",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.7001194953918457
+    }
+  },
+  {
+    "text": "je ne pense pas",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.7736091613769531
+    }
+  },
+  {
+    "text": "je n'aime pas ça",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.7345231771469116
+    }
+  },
+  {
+    "text": "pas vraiment",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.9631328582763672
+    }
+  },
+  {
+    "text": "le site n'est pas disponible",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.46456775069236755
+    }
+  },
+  {
+    "text": "parfait",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.38208356499671936
+    }
+  },
+  {
+    "text": "très bien",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.4534035623073578
+    }
+  },
+  {
+    "text": "je vais très bien",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.9369191527366638
+    }
+  },
+  {
+    "text": "c'est parfait",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.4542914927005768
+    }
+  },
+  {
+    "text": "let's go",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.6733806133270264
+    }
+  },
+  {
+    "text": "good afternoon",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.3739560842514038
+    }
+  },
+  {
+    "text": "good by",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.48793619871139526
+    }
+  },
+  {
+    "text": "good night",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.2091158926486969
+    }
+  },
+  {
+    "text": "never",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.17113421857357025
+    }
+  },
+  {
+    "text": "I don't think so",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.500313937664032
+    }
+  },
+  {
+    "text": "not really",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.490550696849823
+    }
+  },
+  {
+    "text": "great",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.5292928814888
+    }
+  },
+  {
+    "text": "wonderful",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "check_request",
+      "confidence": 0.1698552519083023
+    }
+  },
+  {
+    "text": "I am feeling very good",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.8776301145553589
+    }
+  },
+  {
+    "text": "I am great",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.18810229003429413
+    }
+  },
+  {
+    "text": "extremely good",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.904895544052124
+    }
+  },
+  {
+    "text": "my day was horrible",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.3248167634010315
+    }
+  },
+  {
+    "text": "I am disappointed",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.35188305377960205
+    }
+  },
+  {
+    "text": "unhappy",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.40642058849334717
+    }
+  },
+  {
+    "text": "not a problem",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.8984845876693726
+    }
+  },
+  {
+    "text": "done",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "finishing_test",
+      "confidence": 0.5719549655914307
+    }
+  },
+  {
+    "text": "please to lock S3",
+    "intent": "ask_lock",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.5011744499206543
+    }
+  },
+  {
+    "text": "can you unlock G900",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.5075077414512634
+    }
+  },
+  {
+    "text": "I didnt get the throughput",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.29573971033096313
+    }
+  },
+  {
+    "text": "bad RSRP value detected",
+    "intent": "inform",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.86958247423172
+    }
+  },
+  {
+    "text": "is activated",
+    "intent": "Connection",
+    "intent_prediction": {
+      "name": "bot_challenge",
+      "confidence": 0.2099536657333374
+    }
+  },
+  {
+    "text": "??",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "bot_challenge",
+      "confidence": 0.21849778294563293
+    }
+  },
+  {
+    "text": "i have a question ?",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "inform",
+      "confidence": 0.395898699760437
+    }
+  },
+  {
+    "text": "could you help me",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "Connection",
+      "confidence": 0.09891340881586075
+    }
+  },
+  {
+    "text": "i need a contact please",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.22968250513076782
+    }
+  },
+  {
+    "text": "is L2100 locked ?",
+    "intent": "check_request",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.71571284532547
+    }
+  },
+  {
+    "text": "s1 ?",
+    "intent": "check_request",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.14510796964168549
+    }
+  },
+  {
+    "text": "can you confirm sector 2 ?",
+    "intent": "check_request",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.8158735632896423
+    }
+  },
+  {
+    "text": "i'm availble 34020L",
+    "intent": "inform_site",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.8568976521492004
+    }
+  },
+  {
+    "text": "70Mb/s",
+    "intent": "inform_throughput",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.18374335765838623
+    }
+  },
+  {
+    "text": "all sectors throughput good",
+    "intent": "inform_throughput_good",
+    "intent_prediction": {
+      "name": "check_request",
+      "confidence": 0.3938102424144745
+    }
+  },
+  {
+    "text": "check the status of the network 2G for me",
+    "intent": "ask_status",
+    "intent_prediction": {
+      "name": "check_request",
+      "confidence": 0.4794597625732422
+    }
+  },
+  {
+    "text": "ca not found",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "ask_Optimisation",
+      "confidence": 0.1359180212020874
+    }
+  },
+  {
+    "text": "carrier agreggation not working",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "inform",
+      "confidence": 0.2957114279270172
+    }
+  },
+  {
+    "text": "pci please",
+    "intent": "ask_pci",
+    "intent_prediction": {
+      "name": "ask_restart",
+      "confidence": 0.2824298143386841
+    }
+  },
+  {
+    "text": "test finished",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "ask_session_extension",
+      "confidence": 0.2564350962638855
+    }
+  },
+  {
+    "text": "finish",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "ask_session_extension",
+      "confidence": 0.48469170928001404
+    }
+  },
+  {
+    "text": "done thanks",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.39844080805778503
+    }
+  },
+  {
+    "text": "salut",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.9640392661094666
+    }
+  },
+  {
+    "text": "bon après-midi",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.1988844871520996
+    }
+  },
+  {
+    "text": "au revoir",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.9035595655441284
+    }
+  },
+  {
+    "text": "effectivement",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.4307621121406555
+    }
+  },
+  {
+    "text": "ça semble bien",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.30996793508529663
+    }
+  },
+  {
+    "text": "pas de problème",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.20329390466213226
+    }
+  },
+  {
+    "text": "pas du tout",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.44041576981544495
+    }
+  },
+  {
+    "text": "super !",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.6727877855300903
+    }
+  },
+  {
+    "text": "incroyable",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.34987562894821167
+    }
+  },
+  {
+    "text": "extrêmement bien",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.9205484986305237
+    }
+  },
+  {
+    "text": "merci pour ca",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.6095842719078064
+    }
+  },
+  {
+    "text": "ca va",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "ask_help",
+      "confidence": 0.12484852224588394
+    }
+  },
+  {
+    "text": "ma journée était horrible",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.8021984696388245
+    }
+  },
+  {
+    "text": "je suis déçu",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.4033070206642151
+    }
+  },
+  {
+    "text": "malheureux",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.7016720175743103
+    }
+  }
+]

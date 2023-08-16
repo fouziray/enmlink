@@ -1,0 +1,362 @@
+version: "3.1"
+nlu:
+- intent: ask_Optimisation
+  examples: |
+    -  throughput non atteint
+- intent: ask_status
+  examples: |
+    - check the status of the network [2G](Tech2g) for me
+- intent: inform
+  examples: |
+    - conditions of [Rsrp](conditions) and [Rsrq](conditions) aren't good
+    - bad [RSRP](conditions) value detected
+    - the site has congested
+- intent: ask_csrf
+  examples: |
+    - ca not found
+    - carrier agreggation not working
+    - what about csrf
+    - Also issue of CSFB about the site [43155U](code_site)
+- intent: ask_pci
+  examples: |
+    - please i need the pci
+    - i need the pci
+    - can you send me the pci
+    - Please send me the pci
+- intent: check_request
+  examples: |
+    - can you confirm [sector 2](Sector) ?
+    - [s1](Sector) ?
+    - is [L2100](Tech3g) locked ?
+    - please check [sector 1](Sector) locked ?
+    - Do you unlock all sectors ?
+- intent: ask_restart
+  examples: |
+    - restart band [L1800](Tech4g)
+    - restart all technologies
+    - restart if you can
+    - please to restart the sector [s1](Sector)
+    - can you restart the site
+- intent: finishing_test
+  examples: |
+    - done with the site
+    - problems solved
+    - ssv done
+    - test finished
+    - done thanks
+- intent: Connection
+  examples: |
+    - connecting
+    - i’m connected
+    - is activated
+    - can't connect to [S2](Sector) and [L2100](Tech4g)
+    - i can’t connect to the site
+    - failed to connect
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - es-tu un bot ?
+    - est-ce que je parle à un bot ?
+    - am I talking to a bot?
+    - are you a human?
+    - es-tu un humain ?
+- intent: check_all_techs
+  examples: |
+    - existing technologies
+    - 
+    - all technologies status
+    - what is the status of current site
+    - handled technologies
+    - supported technologies
+    - tell me state of mos
+    - current technologies
+- intent: ask_unlock
+  examples: |
+    - unlock [s3](Sector) please
+    - i need to unlock [U900](Tech3g)
+    - unlock [S1](Sector)
+    - can you unlock [S2](Sector)
+    - (Sector 2)[Sector] of [74156](code_site), please lock.
+    - Lock (sector 1)[Sector] please
+    - i want to unlock [L2100](Tech4g)
+- intent: ask_Rollback
+  examples: |
+    - please rollback the changes for [L2100](Tech4g) [S3](Sector)
+    - rollback the site
+    - can I rollback the changes for [G900](Tech2g) , [S1](Sector)
+    - can I rollback the changes for [S1](Sector)
+    - please rollback the changes for [S3](Sector) and [U2100](Tech3g)
+    - please rollback the changes for [S3](Sector)
+    - done please rollback
+- intent: ask_Ret
+  examples: |
+    -  maxtilt [G900](Tech2g) [S1](Sector)
+    -  maxtilt [L2100](Tech4g) [S1](Sector)
+    -  maxtilt all [G900](Tech2g)
+    -  downtilt [S1](Sector)
+    -  maxtilt all [L1800](Tech4g)
+    -  maxtilt [S1](Sector)
+    -  maxtilt all [U2100](Tech3g)
+    -  downtilt [U2100](Tech3g) [S1](Sector)
+    -  maxtilt [U2100](Tech3g) [S1](Sector)
+- intent: ask_help
+  examples: |
+    - ??
+    - how do i reach drive test team
+    - can i reach someone via call
+    - what do i do next  ?
+    - can you provide phone number
+    - What do l do ??
+    - could you help me
+    - i have a question ?
+    - i need someone for help
+- intent: inform_throughput_good
+  examples: |
+    - i have good thrgpt here
+    - hight throughput avg
+    - thrpt is good
+    - better throughout
+    - throughput is fine
+    - best throughput
+    - nice avg throughput
+    - all sectors throughput good
+    - throughput dl better
+    - I got throughput
+    - thrghpt is high
+    - throughput is high
+- intent: ask_lock
+  examples: |
+    - lock [S1](Sector)
+    - can you lock [g900](Tech2g)
+    - can you lock [l2100](Tech4g)
+    - can you lock [l1800](Tech4g)
+    - can you lock [u2100](Tech3g)
+    - can you lock [U2100](Tech3g)
+    - can you lock [G900](Tech2g)
+    - i need to lock [U900](Tech3g)
+    - can you lock [g1800](Tech2g)
+    - can you lock [u900](Tech3g)
+    - please to lock [S3](Sector)
+    - lock [s3](Sector) please
+- intent: ask_session_extension
+  examples: |
+    - Is it possible to get a time extension of a few minutes?
+    - I need a few more minutes to finish.
+    - Can I get a few more minutes to complete the task?
+    - Can I have a short time extension?
+    - Can we have a brief time extension of a few minutes?
+    - I would like to request a time extension of a few minutes.
+    - Is it possible to push back the deadline by a few minutes?
+    - I would like a time extension of a [10](time) minutes
+    - Can we extend the deadline by a few minutes?
+    - I need just a few minutes more to complete this
+    - Could I have [20](time) extra minutes to finish?
+    - Can we have a few minutes' extension?
+    - [5](time) mins please
+- intent: inform_site
+  examples: |
+    - site [411097L](code_site)
+    - I'm currently at [34025U](code_site)
+    - Please take note that i'm at site [42169L](code_site)
+    - I'll be working at site [58665U](code_site)
+    - At site [58665U](code_site), there are 3 sectors that require testing.
+    - i'm availble [34020L](code_site)
+    - Quick update: I'll be at [34052U](code_site)
+    - I'll be stationed at site [58665L](code_site), focusing on testing the 2 sectors located within.
+    - Currently assigned to site [42169U](code_site)
+    - Just wanted to inform you that I'm at [34025U](code_site), planning to test the 3 sectors present there
+    - site [47450U](code_site)
+    - I'll be at [34052U](code_site)
+    - Site [58664L](code_site) is my current location. Is there anything more specific you need from me there?
+- intent: deny
+  examples: |
+    - non
+    - pas du tout
+    - no
+    - don't like that
+    - n
+    - je n'aime pas ça
+    - I don't think so
+    - jamais
+    - no way
+    - not really
+    - je ne pense pas
+    - pas vraiment
+    - site is not planed for ssv
+    - le site n'est pas disponible
+- intent: affirm
+  examples: |
+    - correct
+    - c'est bien
+    - d'accord
+    - of course
+    - c'est fait
+    - ok
+    - that sounds good
+    - done
+    - indeed
+    - not a problem
+    - ouais
+    - is ok
+    - pas de problème
+    - effectivement
+    - yes
+    - ça semble bien
+- intent: goodbye
+  examples: |
+    - see you around
+    - à tout à l'heure
+    - on se parle plus tard
+    -  talk to you later
+    - passe une bonne journée
+    - good by
+    - cee you later
+    - à plus
+    - goodbye
+    - à plus tard
+    - bye bye
+    - salut
+    - cu
+    - bye
+    - good night
+    - au revoir
+    - à bientôt
+- intent: greet
+  examples: |
+    - bonjour
+    - good morning
+    - bon après-midi
+    - goodevening
+    - hey it's [Amin](Person)
+    - salut c'est moi le drive testeur [Fatah](Person)
+    - hello i'm [Abdou](Person)
+    - hey c'est [Amin](Person)
+    - salam it's [Djamila](Person)
+    - let's go
+    - hello there
+    - hey dude
+    - salut c'est [Aziz](Person)
+    - bonjour je suis [Abdou](Person)
+    - moin
+    - good afternoon
+    - salut toi
+    - salut
+    - salut c'est Aziz
+    - salam c'est Djamila
+    - goodmorning
+- intent: mood_great
+  examples: |
+    - so perfect
+    - parfait
+    - great
+    - amazing
+    - 
+    - merci pour ca
+    - extremely good
+    - I am amazing
+    - so so perfect
+    - I am feeling very good
+    - incroyable
+    - I am great
+    - feeling like a king
+    - c'est parfait
+    - wonderful
+    - je vais très bien
+    - merveilleux
+    - très bien
+    - super !
+    - extrêmement bien
+    - so good
+    - perfect
+- intent: inform_throughput
+  examples: |
+    - Low [throughput DL]{"entity": "throughput", "role": "throughput_DL"}
+    - S3 [30]{"entity": "throughput", "role": "throughput_DL"}
+    - [Dynamic DL 30]{"entity": "throughput", "role": "throughput_dyn"}
+    - [Avr ca 75]{"entity": "throughput", "role": "throughput_ca"}
+    - [25 Mb/s]{"entity": "throughput", "role": "throughput_DL"}
+    - [Ca avr 60 mb]{"entity": "throughput", "role": "throughput_ca"}
+    - [low ca]{"entity": "throughput", "role": "throughput_ca"}
+    - [UL good results]{"entity": "throughput", "role": "throughput_UL"}
+    - bad throughput
+    - i have a problem with [UL]{"entity": "throughput", "role": "throughput_UL"}
+    - Low [throughput UL]{"entity": "throughput", "role": "throughput_UL"}
+    - [Average 11]{"entity": "throughput", "role": "throughput_DL"}
+    - [Dynamic 20]{"entity": "throughput", "role": "throughput_dyn"}
+    - Low Thrghpt [DL average 50 Mbs]{"entity": "throughput", "role": "throughput_DL"} in both band
+    - [DL bad]{"entity": "throughput", "role": "throughput_DL"} sector 1
+    - All sectors [DL bad]{"entity": "throughput", "role": "throughput_DL"}
+    - same throughput
+    - i have a problem with ca Max [throughput 35]{"entity": "throughput", "role": "throughput_ca"}
+    - S1 [25]{"entity": "throughput", "role": "throughput_DL"}
+    - i had [throughput problem]{"entity": "throughput", "role": "throughput_DL"}
+- intent: mood_unhappy
+  examples: |
+    - not good
+    - extremly sad
+    - not very good
+    - je suis triste
+    - my day was horrible
+    - super triste
+    - unhappy
+    - triste
+    - extrêmement triste
+    - I don't feel very well
+    - si triste
+    - pas bien
+    - very sad
+    - so sad
+    - je ne me sens pas très bien
+    - je suis déçu
+    - pas très bien
+    - sad
+    - I am sad
+    - très triste
+    - I'm so sad
+    - I am disappointed
+- regex: Person
+  examples: |
+    - ^[A-Za-z]{1,7}$
+- regex: code_site
+  examples: |
+    - \d{5,6}[uUlL]?
+- lookup: Tech2g
+  examples: |
+    - G900
+    - G1800
+    - g900
+    - g1800
+    - DCS
+    - 2G
+- lookup: Tech3g
+  examples: |
+    - U900
+    - u900
+    - u2100
+    - U2100
+    - 3G
+- lookup: Tech4g
+  examples: |
+    - L2100
+    - l200
+    - L1800
+    - l1800
+    - B40
+    - TDD
+    - FDD
+    - 4G FDD
+    - 4G TDD
+- lookup: Sector
+  examples: |
+    - S1
+    - S2
+    - S3
+    - Sector 1
+    - sector 2
+    - sector 3
+- lookup: conditions
+  examples: |
+    - Rsrp
+    - Rsrq
+    - SINR
+    - RSRP
