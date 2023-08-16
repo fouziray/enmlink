@@ -27,6 +27,10 @@ class Command:
     def closesession(self):
       #  enmscripting.close(self.session)
         pass
+    def execute(self,command):
+
+        return command
+
 
 
 def format(l, tech):
@@ -44,6 +48,10 @@ def format(l, tech):
 
 
 def manageCodeSite(codeSite):     # permet de connaitre la technologie a tester dans le site 2G , 3G , 4G
+        site4g=None
+        site3g=None
+        site4gTDD=None
+        site2g=None
         if ((codeSite[-1] == 'l') or (codeSite[-1] == 'L')): 
             site4g = codeSite
       
@@ -58,7 +66,12 @@ def manageCodeSite(codeSite):     # permet de connaitre la technologie a tester 
         return[site2g , site3g , site4g , site4gTDD]
 
 def manageCodeSiteSector(codeSite , bande , sector):
-        
+        sector1_2g_b1=None
+        sector2_2g_b1=None
+        sector3_2g_b1=None
+        sector1_2g_b2=None
+        sector2_2g_b2=None
+        sector3_2g_b2=None
         sites = manageCodeSite(codeSite)
         site2g = sites[0]
         site3g = sites[1]
@@ -106,11 +119,11 @@ def manageCodeSiteSector(codeSite , bande , sector):
         if(site4gFDD):
             if ('1800' in bande):
                 if('1' in sector): 
-                    sector1_4g_b1 = site4gFDD       # 1st sector end with 'L' by default
+                    sector1_4g_b1 = site4gFDD + 'M'
                 if('2' in sector):
-                    sector2_4g_b1 = site4gFDD + 'M'
+                    sector2_4g_b1 = site4gFDD + 'N'
                 if('3' in sector):
-                    sector3_4g_b1 = site4gFDD + 'N'
+                    sector3_4g_b1 = site4gFDD + 'O'
             if ('2100' in bande):
                 if('1' in sector): 
                     sector1_4g_b2 = site4gFDD + 'R'
@@ -181,10 +194,12 @@ def check_tilt(codeSite):
     tilt_com = RetCommand()
     get_tilt_values = tilt_com.get_tilt(codeSite) 
     outputTilt = tilt_com.execute(get_tilt_values)
-    tableTilt = format(outputTilt, 'tilt')
+    # here we put a fake object for mocking an enm response 
+    output5=['SubNetwork,SubNetwork,SubNetwork,MeContext,ManagedElement,Equipment,AntennaUnitGroup,AntennaNearUnit,RetSubUnit', 'NodeId\tEquipmentId\tAntennaUnitGroupId\tAntennaNearUnitId\tRetSubUnitId\telectricalAntennaTilt\tuserLabel', '09620L\t1\t3\t7\t1\t55\tY6_LTE4X4_U2100_G1800', '09620L\t1\t3\t1\t1\t80\tR1_G900_U900', '09620L\t1\t3\t2\t1\t55\tY1_UNUSED', '09620L\t1\t3\t3\t1\t55\tY2_LTE4X4_U2100_G1800', '09620L\t1\t3\t4\t1\t60\tY3_TDD4X4', '09620L\t1\t3\t5\t1\t60\tY4_TDD4X4', '09620L\t1\t3\t6\t1\t55\tY5_UNUSED', '09620L\t1\t1\t1\t1\t70\tR1_G900_U900', '09620L\t1\t1\t2\t1\t70\tY1_UNUSED', '09620L\t1\t1\t3\t1\t70\tY2_LTE4X4_U2100_G1800', '09620L\t1\t1\t4\t1\t70\tY3_TDD4X4', '09620L\t1\t1\t5\t1\t70\tY4_TDD4X4', '09620L\t1\t1\t6\t1\t70\tY5_UNUSED', '09620L\t1\t1\t7\t1\t70\tY6_LTE4X4_U2100_G1800', '09620L\t1\t2\t1\t1\t70\tR1_G900_U900', '09620L\t1\t2\t2\t1\t75\tY1_UNUSED', '09620L\t1\t2\t3\t1\t75\tY2_LTE4X4_U2100_G1800', '09620L\t1\t2\t4\t1\t75\tY3_TDD4X4', '09620L\t1\t2\t5\t1\t75\tY4_TDD4X4', '09620L\t1\t2\t6\t1\t75\tY5_UNUSED', '09620L\t1\t2\t7\t1\t75\tY6_LTE4X4_U2100_G1800', '', '21 instance(s)']
+    tableTilt = format(output5, 'tilt')
     responseTilt = "\nStatus tilt\n" + ' '.join((tableTilt[['electricalAntennaTilt', 'userLabel']]).to_string(header=False , index = False).split('\n'))
    
-    return responseTilt
+    return tableTilt
 
 
 

@@ -3,12 +3,12 @@ language: "fr"
 nlu:
 
  - regex: Person 
+   examples: |
     - ^[A-Za-z]{1,7}$
 
 
  - intent: greet
    examples: |
-
     - hey c'est [Amin](Person)
     - bonjour je suis [Abdou](Person)
     - salut c'est moi le drive testeur [Fatah](Person)
@@ -23,7 +23,6 @@ nlu:
 
  - intent: goodbye
    examples: |
-
     - au revoir
     - à plus tard
     - bonne nuit
@@ -40,7 +39,6 @@ nlu:
 
  - intent: affirm
    examples: |
-
     - oui
     - ouais
     - effectivement
@@ -55,7 +53,6 @@ nlu:
 
  - intent: deny
    examples: |
-
     - non
     - jamais
     - je ne pense pas
@@ -67,20 +64,22 @@ nlu:
 
  - intent: mood_great
    examples: |
-
     - parfait
-    - super
+    - super !
     - incroyable
     - merveilleux
     - très bien
     - je vais très bien
     - extrêmement bien
     - si bien
-    - si parfait
+    - c'est parfait
+    - tu t'en sort bien 
+    - merci pour ca
+    - ca va
+    - 
 
  - intent: mood_unhappy
    examples: |
-
     - ma journée était horrible
     - je suis triste
     - je ne me sens pas très bien
@@ -97,13 +96,7 @@ nlu:
 
  - intent: bot_challenge
    examples: |
-
     - es-tu un bot ?
     - es-tu un humain ?
     - est-ce que je parle à un bot ?
     - est-ce que je parle à un humain ?
-
- - intent: stop
-   examples: |
-
-    - stop

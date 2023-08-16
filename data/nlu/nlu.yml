@@ -1,6 +1,6 @@
 version: "3.1"
 
-#nlu:
+nlu:
 - intent: greet
   examples: |
     - hey
@@ -13,6 +13,9 @@ version: "3.1"
     - hey there
     - let's go
     - hey dude
+    - hey there
+    - salam  
+    - salut
     - goodmorning
     - goodevening
     - good afternoon
@@ -29,6 +32,9 @@ version: "3.1"
     - see you around
     - bye bye
     - see you later
+    - see you around
+    - see you later
+    - talk to you later
 
 - intent: affirm
   examples: |
@@ -48,6 +54,9 @@ version: "3.1"
     - don't like that
     - no way
     - not really
+    - site not availble 
+    - site is not planed for ssv 
+
 
 - intent: mood_great
   examples: |
@@ -89,3 +98,17 @@ version: "3.1"
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+
+- intent: affirm
+examples: |
+    - yes
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - ok 
+    - fine 
+    - not a problem 
+    - okey
+    - done
+    - is ok 

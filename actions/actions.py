@@ -7,9 +7,12 @@ from rasa_sdk.executor import CollectingDispatcher
 from .commands import path, check_2g , check_3g , check_4gFDD , check_tilt , check_4gTDD , manageCodeSite , manageCodeSiteSector , format , buildCodeSite , Command , GsmCommand ,g3rncCommand , g3NodeCommand , g4FDDCommand , g4TDDCommand ,OptimCommand , RetCommand
 import pandas as pd 
 import matplotlib.pyplot as plt
+path =  "./store_rollback/"
 
 from os.path import exists
-
+import os
+file_dir = os.path.dirname(os.path.abspath(__file__))
+csv_folder = 'store_rollback'
 
 
 
@@ -35,13 +38,13 @@ class ActionGreet(Action):
 
 
 
-class ActionGreet(Action):
+class ActionInform(Action):
 
     def name(self) -> Text:
         return "action_inform_site"
 
     def run(self, dispatcher: CollectingDispatcher,tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
+        global path
         codeSite = tracker.get_slot("code_site")
         if(codeSite == None):
             dispatcher.utter_message("you haven't entered a code site")
@@ -140,11 +143,11 @@ class Action_Lock_tech(Action):
             # recuperer la bande
             bande = tracker.get_slot("Tech2g")
             if(bande == None):
-                dispatcher.utter_message("you haven't entered the technologie or bande for 2G")
+                dispatcher.utter_message("you haven't entered which bands to lock for 2G")
                 return[]
 
 
-            if ((bande == "2G") or (bande == "2g") or (bande == "DCS")):
+            if ((bande.upper() == "2G") or (bande.upper() == "DCS")):
                 bande = 0    
             block_state_2G = g2_obj.set(site2g , bande , 'INACTIVE')
             
@@ -152,9 +155,9 @@ class Action_Lock_tech(Action):
             SlotSet("blocked_tech_slot" ,['2G'])
             
             if (bande == 0 ):
-                dispatcher.utter_message("technologie 2G locked")
+                dispatcher.utter_message("technologie 2G locked"+block_state_2G)
             else : 
-                dispatcher.utter_message("technoligie 2G locked in bande " +str(bande))
+                dispatcher.utter_message("technoligie 2G locked in bande " +str(bande)+block_state_2G)
        
         if(site3g):
             g3_obj = g3rncCommand()
@@ -397,16 +400,18 @@ class ActionTilt(Action):
 
                 #save tilt status
         path_tilt = path + str(codeSite) + "_tilt.json"
-        responseTilt.to_json(path_tilt , orient = 'records') 
+        file_path = os.path.join(file_dir, csv_folder,  str(codeSite) + "_tilt.json")
+
+        responseTilt.to_json(file_path , orient = 'records') 
         
         SlotSet("pathTilt" , path_tilt )
 
 
-        dispatcher.utter_message(text = "tilt changed successfully")
+        dispatcher.utter_message(text = "tilt changed successfully"+path_tilt+' ')
 
-        tilt_request = tracker.latest_message.text
+        tilt_request = (tracker.latest_message)['text']
         
-        check_tilt(codeSite) # check initial values and save it in path : .store_rollback/$(codeSite)_tilt.json
+        #check_tilt(codeSite) # check initial values and save it in path : .store_rollback/$(codeSite)_tilt.json
 
         if (("max" in tilt_request) or ("up" in tilt_request)):
             # uptilt or maxtilt
@@ -427,7 +432,7 @@ class ActionTilt(Action):
 class ActionRollback(Action):
 
     def name(self) -> Text:
-        return "action_Rollback"    
+        return "action_rollback"    
 
     def run(self, dispatcher: CollectingDispatcher,tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         
@@ -515,20 +520,25 @@ class ActionLockSector(Action):
         # recuperer la technologie 
         codeSite = tracker.get_slot("code_site")
         
-        if(codeSite == None):
+        if(codeSite is None):
             dispatcher.utter_message("you haven't entered site code")
             return[]
 
      
        
-        sector_to_block = tracker.get_slot("Sector")
+        sector_to_block = tracker.get_slot("Sector_slot")
         if(sector_to_block == None):
             dispatcher.utter_message("i didn't get the sector to block")
             return[]
-            
+
+        bande2g=''
+        bande3g=''
+        bande4g=''        
         bande2g = tracker.get_slot("Tech2g")
         bande3g = tracker.get_slot("Tech3g")
         bande4g = tracker.get_slot("Tech4g")
+      
+
         if(('900' in bande2g) or ('1800' in bande2g)):
             sectors = manageCodeSiteSector(codeSite , bande2g ,sector_to_block)
             obj2g = GsmCommand()
@@ -615,7 +625,7 @@ class ActionLockSector(Action):
             return[]
             
         
-
+#class ActionLockSectorAll(): # to implement but not priority 
 
 class ActionUnlockSector(Action):
    
@@ -635,7 +645,7 @@ class ActionUnlockSector(Action):
 
      
        
-        sector_to_unblock = tracker.get_slot("Sector")
+        sector_to_unblock = tracker.get_slot("Sector_slot")
         if(sector_to_unblock == None):
             dispatcher.utter_message("i didn't get the sector to Unblock")
             return[]
@@ -643,6 +653,12 @@ class ActionUnlockSector(Action):
         bande2g = tracker.get_slot("Tech2g")
         bande3g = tracker.get_slot("Tech3g")
         bande4g = tracker.get_slot("Tech4g")
+        if (bande2g is None ) :
+            bande2g=''
+        if (bande3g is None) :
+            bande3g=''
+        if (bande4g is None) : 
+            bande4g=''
         if(('900' in bande2g) or ('1800' in bande2g)):
             sectors = manageCodeSiteSector(codeSite , bande2g ,sector_to_unblock)
             obj2g = GsmCommand()
