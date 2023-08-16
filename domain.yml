@@ -291,6 +291,10 @@ responses:
 
   utter_finishing_test:
   - text: "test is finished and session will be closed"
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
 
 
 actions: 

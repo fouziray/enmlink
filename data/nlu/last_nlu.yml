@@ -7,12 +7,13 @@ nlu:
 
 
 - regex: code_site 
-    - ^\d{5,6}[uUlL]?$
-
+  examples: |
+      - \d{5,6}[uUlL]?
+    
 
 - intent: greet
   examples: |
-    - hey it's [Amin](Preson)
+    - hey it's [Amin](Person)
     - hello i'm [Abdou](Person)
     - hi it's me the drive tester [Fatah](Person)
     - hello there
@@ -113,9 +114,6 @@ nlu:
     - done
     - is ok 
 
-- intent: stop
-  examples: |
-    - stop
  
 - intent: ask_lock
   examples: |
@@ -144,6 +142,8 @@ nlu:
     - i need to unlock [U900](Tech3g)
     - i want to unlock [L2100](Tech4g)
     - unlock [s3](Sector) please
+    - Lock (sector 1)[Sector] please
+    - (Sector 2)[Sector] of [74156](code_site), please lock.
 
 - intent: ask_Ret
   examples: |
@@ -187,9 +187,8 @@ nlu:
 
 - intent: inform
   examples: |
-
-    - conditions are [Rsrp](conditions) [Rsrq](conditions)
-    - bad [RSRP](conditions)
+    - conditions of [Rsrp](conditions) and [Rsrq](conditions) aren't good
+    - bad [RSRP](conditions) value detected
     - the site has congested
     - conditions are bad  
 
@@ -198,23 +197,13 @@ nlu:
     - failed to connect 
     - connection failed 
     - i can’t connect to the site  
-    - it is activated 
+    - is activated 
     - connecting 
     - i’m connected 
     - can't connect to [S2](Sector) and [L2100](Tech4g)    
 
 
-  
-- intent: test_done
-  examples: |
-    - ssv done 
-    - test finished
-    - finish
-    - done with the site 
-    - done thanks 
-    - problems solved
 
-  
 - intent: ask_help
   examples: |
     - ??
@@ -222,15 +211,21 @@ nlu:
     - i have a question ? 
     - could you help me
     - what do i do next  ?
+    - i need someone for help 
+    - can you provide phone number of someone in team
+    - i need a contact please
+    - how do i reach drive test team
+    - can i reach someone via call
+    - can you provide phone number
 
 - intent: check_request
   examples: |
-    - Do yo unlock all sectors ?
-    - [L2100](Tech3g) locked ? 
+    - Do you unlock all sectors ?
+    - is [L2100](Tech3g) locked ? 
     - please check [sector 1](Sector) locked ? 
     - [s1](Sector) ? 
-    - [sector 2](Sector) ? 
-    - please check site [42105](code_site) [sector 1](Sector) [L2100](Tech4g)
+    - can you confirm [sector 2](Sector) ? 
+    - please check site [42105L](code_site) [sector 1](Sector) [L2100](Tech4g)
 
 - intent: ask_session_extension
   examples: |
@@ -256,10 +251,20 @@ nlu:
   examples: |
     - i'm availble [34020L](code_site)
     - site [47450U](code_site)
-    - please site [60730](code_site)
-    - please check site [411097](code_site)
-
-
+    - please site [60730U](code_site)
+    - site [411097L](code_site)
+    - At site [58665U](code_site), there are 3 sectors that require testing.
+    - site [42169L](code_site), where I'll be conducting tests on all 3 sectors.
+    - Just wanted to inform you that I'm at [34025U](code_site), planning to test the 3 sectors present there
+    - I'll be stationed at site [58665L](code_site), focusing on testing the 2 sectors located within.
+    - Currently assigned to site [42169U](code_site)
+    - I'll be working at site [58665U](code_site)
+    - Please take note that i'm at site [42169L](code_site)
+    - Quick update: I'll be at [34052U](code_site)
+    - I'll be at [34052U](code_site)
+    - At site [42169L](code_site)
+    - I'm currently at [34025U](code_site)
+    - Site [58664L](code_site) is my current location. Is there anything more specific you need from me there?
 - intent: inform_throughput
   examples: |
     - bad throughput
@@ -274,10 +279,10 @@ nlu:
     - I get [153 mb avr]{"entity" : "throughput", "role" : "throughput_DL"}
     - [Ca avr 60 mb]{"entity" : "throughput", "role" : "throughput_ca"}
     - [Avr ca 75]{"entity" : "throughput", "role" : "throughput_ca"}
-    - i have a problem with [ca Max throughput 35]{"entity" : "throughput", "role" : "throughput_ca"}
-    - [Low throughput DL]{"entity" : "throughput", "role" : "throughput_DL"}
-    - [Low throughput UL]{"entity" : "throughput", "role" : "throughput_UL"}
-    - i have [problem with UL]{"entity" : "throughput", "role" : "throughput_UL"}
+    - i have a problem with ca Max [throughput 35]{"entity" : "throughput", "role" : "throughput_ca"}
+    - Low [throughput DL]{"entity" : "throughput", "role" : "throughput_DL"}
+    - Low [throughput UL]{"entity" : "throughput", "role" : "throughput_UL"}
+    - i have a problem with [UL]{"entity" : "throughput", "role" : "throughput_UL"}
     - [DL bad]{"entity" : "throughput", "role" : "throughput_DL"} all sectors
     - [DL bad]{"entity" : "throughput", "role" : "throughput_DL"} sector 1
     - [Dynamic DL 30]{"entity" : "throughput", "role" : "throughput_dyn"}
@@ -300,6 +305,13 @@ nlu:
     - I got throughput
     - all sectors throughput good 
     - best throughput
+    - throughput is fine
+    - i got good thrpt
+    - thrpt is good
+    - i have good thrgpt here
+    - thrghpt is high
+    - throughput is high
+    
 
 
 - intent: ask_Rollback
@@ -328,11 +340,15 @@ nlu:
     - current technologies 
     - supported technologies 
     - handled technologies
+    - give me status of all the site
+    - tell me state of mos
+    - what is the status of current site
+    - 
 
 - intent: ask_csrf  # call the optimiser
   examples: |
     - what about csrf 
-    - Also issue of CSFB about the site [LAI4315](code_site)
+    - Also issue of CSFB about the site [43155U](code_site)
     - cell not basculate to other technology 
     - ca not found 
     - carrier agreggation not working 
