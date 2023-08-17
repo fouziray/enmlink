@@ -1,5 +1,4 @@
 version: "2.0"
-nlu:
  - intent: ask_lock
    examples: |
     - lock [S1](Sector)

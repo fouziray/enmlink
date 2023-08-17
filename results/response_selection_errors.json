@@ -1,50 +1,42 @@
 [
   {
-    "text": "bad throughput",
+    "text": "mauvais débit",
     "intent_response_key_target": "inform_throughput/low",
     "intent_response_key_prediction": {
       "name": "inform_throughput/good",
-      "confidence": 0.9219470620155334
+      "confidence": 0.7821335792541504
     }
   },
   {
-    "text": "having difficulties connecting",
+    "text": "Tous les secteurs DL mauvais",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.999931812286377
+    }
+  },
+  {
+    "text": "débit non atteint",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 1.0
+    }
+  },
+  {
+    "text": "je ne peux pas me connecter au site",
     "intent_response_key_target": "Connection/cannotconnect",
     "intent_response_key_prediction": {
       "name": "Connection/connected",
-      "confidence": 0.9994984865188599
+      "confidence": 0.9444737434387207
     }
   },
   {
-    "text": "connecting",
-    "intent_response_key_target": "Connection/connected",
-    "intent_response_key_prediction": {
-      "name": "Connection/cannotconnect",
-      "confidence": 0.9989149570465088
-    }
-  },
-  {
-    "text": "not good",
+    "text": "j'ai eu un problème de débit",
     "intent_response_key_target": "inform_throughput/low",
     "intent_response_key_prediction": {
       "name": "inform_throughput/good",
-      "confidence": 0.9999998807907104
-    }
-  },
-  {
-    "text": "i had throughput problem",
-    "intent_response_key_target": "inform_throughput/low",
-    "intent_response_key_prediction": {
-      "name": "inform_throughput/good",
-      "confidence": 0.7928693294525146
-    }
-  },
-  {
-    "text": "UL good results",
-    "intent_response_key_target": "inform_throughput/good",
-    "intent_response_key_prediction": {
-      "name": "inform_throughput/low",
-      "confidence": 0.999906063079834
+      "confidence": 1.0
     }
   }
 ]

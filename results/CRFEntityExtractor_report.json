@@ -1,83 +1,56 @@
 {
-  "Tech3g": {
+  "throughput.throughput_UL": {
     "precision": 1.0,
-    "recall": 0.6923076923076923,
-    "f1-score": 0.8181818181818181,
-    "support": 13,
+    "recall": 0.3333333333333333,
+    "f1-score": 0.5,
+    "support": 3,
     "confused_with": {
-      "Tech4g": 1
-    }
-  },
-  "throughput.throughput_DL": {
-    "precision": 0.5,
-    "recall": 0.13333333333333333,
-    "f1-score": 0.2105263157894737,
-    "support": 15,
-    "confused_with": {
-      "throughput": 2
+      "throughput.throughput_DL": 1
     }
   },
   "code_site": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
-    "support": 19,
+    "support": 17,
     "confused_with": {}
   },
   "Tech2g": {
-    "precision": 0.9166666666666666,
-    "recall": 0.7857142857142857,
-    "f1-score": 0.8461538461538461,
-    "support": 14,
+    "precision": 1.0,
+    "recall": 0.9333333333333333,
+    "f1-score": 0.9655172413793104,
+    "support": 15,
     "confused_with": {}
   },
   "Sector": {
-    "precision": 0.9259259259259259,
-    "recall": 0.7575757575757576,
-    "f1-score": 0.8333333333333334,
-    "support": 33,
-    "confused_with": {
-      "Tech2g": 1
-    }
+    "precision": 1.0,
+    "recall": 0.9583333333333334,
+    "f1-score": 0.9787234042553191,
+    "support": 24,
+    "confused_with": {}
   },
-  "Tech4g": {
-    "precision": 0.9411764705882353,
-    "recall": 1.0,
-    "f1-score": 0.9696969696969697,
-    "support": 16,
+  "Tech3g": {
+    "precision": 1.0,
+    "recall": 0.8461538461538461,
+    "f1-score": 0.9166666666666666,
+    "support": 13,
     "confused_with": {}
   },
   "time": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 4,
-    "confused_with": {}
-  },
-  "throughput.throughput_UL": {
     "precision": 1.0,
     "recall": 0.25,
     "f1-score": 0.4,
     "support": 4,
+    "confused_with": {
+      "throughput": 1
+    }
+  },
+  "Tech4g": {
+    "precision": 1.0,
+    "recall": 0.9285714285714286,
+    "f1-score": 0.962962962962963,
+    "support": 14,
     "confused_with": {}
-  },
-  "throughput.throughput_dyn": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 3,
-    "confused_with": {
-      "time": 1
-    }
-  },
-  "throughput.throughput_ca": {
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1-score": 0.0,
-    "support": 10,
-    "confused_with": {
-      "throughput.throughput_DL": 2
-    }
   },
   "Person": {
     "precision": 0.0,
@@ -86,23 +59,51 @@
     "support": 5,
     "confused_with": {}
   },
+  "throughput.throughput_dyn": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 2,
+    "confused_with": {
+      "throughput.throughput_DL": 1
+    }
+  },
+  "throughput.throughput_DL": {
+    "precision": 0.375,
+    "recall": 0.21428571428571427,
+    "f1-score": 0.2727272727272727,
+    "support": 14,
+    "confused_with": {
+      "throughput": 1
+    }
+  },
+  "throughput.throughput_ca": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 10,
+    "confused_with": {
+      "throughput.throughput_DL": 2,
+      "throughput": 1
+    }
+  },
   "micro avg": {
-    "precision": 0.9222222222222223,
-    "recall": 0.6102941176470589,
-    "f1-score": 0.7345132743362833,
-    "support": 136
+    "precision": 0.9431818181818182,
+    "recall": 0.6859504132231405,
+    "f1-score": 0.7942583732057417,
+    "support": 121
   },
   "macro avg": {
-    "precision": 0.5712517330164388,
-    "recall": 0.419902824448279,
-    "f1-score": 0.46162657119594913,
-    "support": 136
+    "precision": 0.6704545454545454,
+    "recall": 0.4967282717282717,
+    "f1-score": 0.5451452316355938,
+    "support": 121
   },
   "weighted avg": {
-    "precision": 0.7496155324875048,
-    "recall": 0.6102941176470589,
-    "f1-score": 0.6562909098125816,
-    "support": 136
+    "precision": 0.7871900826446281,
+    "recall": 0.6859504132231405,
+    "f1-score": 0.7213921511499775,
+    "support": 121
   },
-  "accuracy": 0.9520069808027923
+  "accuracy": 0.9633802816901409
 }

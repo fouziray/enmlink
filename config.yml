@@ -8,10 +8,8 @@ assistant_id: 20230811-224653-large-chalet
 
 # Configuration for Rasa NLU.
 # https://rasa.com/docs/rasa/nlu/components/
-language: en
+language: fr
 pipeline:
-- name: SpacyNLP
-  model: en_core_web_sm
 - name: SpacyNLP
   model: fr_core_news_sm
 - name: SpacyTokenizer
@@ -28,7 +26,7 @@ pipeline:
   min_ngram: 1
   max_ngram: 4
 - name: DIETClassifier
-  epochs: 100
+  epochs: 50
   constrain_similarities: true
 - name: "CRFEntityExtractor"
   # BILOU_flag determines whether to use BILOU tagging or not.
@@ -82,5 +80,5 @@ policies:
 #     epochs: 100
 - name: TEDPolicy
   max_history: 5
-  epochs: 100
+  epochs: 80
   constrain_similarities: true

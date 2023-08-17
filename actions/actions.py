@@ -71,7 +71,7 @@ class ActionTechStatus(Action):
             dispatcher.utter_message("you haven't entered a code site")
             return[]
         
-        message = tracker.latest_message.text   
+        message = (tracker.latest_message)['text']   
         sites = manageCodeSite(codeSite)
         site2g = sites[0]
         site3g = sites[1]
@@ -200,7 +200,9 @@ class Action_Lock_tech(Action):
 
         if(site4g):
             g4_obj = g4FDDCommand()
-            
+            response1_4g=None
+            response_4g=None
+            response2_4g=None
             # recuperer la bande
             bande = tracker.get_slot("Tech4g")
             if(bande == None):
@@ -233,14 +235,16 @@ class Action_Lock_tech(Action):
             
 
             if(response1_4g):
-                dispatcher.utter_message("technologie 4G bande L1800 blocked")
+                dispatcher.utter_message("technologie 4G bande L1800 blocked"+response1_4g)
+             
             if(response2_4g) : 
-                dispatcher.utter_message("technoligie 4G bande L2100 blocked in bande")
+                dispatcher.utter_message("technoligie 4G bande L2100 blocked in bande"+response2_4g)
+    
             if(response_4g):
-                dispatcher.utter_message("technologie 4G blocked")
-       
-       
-        return []
+                dispatcher.utter_message("technologie 4G blocked"+response_4g)
+               
+
+        return [SlotSet("Tech4g",None)]
        
      
 
@@ -334,7 +338,9 @@ class Action_Unlock_tech(Action):
 
         if(site4g):
             g4_obj = g4FDDCommand()
-            
+            response_4g= None
+            response1_4g= None
+            response2_4g= None
             # recuperer la bande
             bande = tracker.get_slot("Tech4g")
             if(codeSite == None):

@@ -1,0 +1,810 @@
+[
+  {
+    "text": "the site has congested",
+    "intent": "inform",
+    "intent_prediction": {
+      "name": "Connection",
+      "confidence": 0.19549064338207245
+    }
+  },
+  {
+    "text": "done with the site",
+    "intent": "test_done",
+    "intent_prediction": {
+      "name": "finishing_test",
+      "confidence": 0.8478376865386963
+    }
+  },
+  {
+    "text": "i have a question ?",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "inform",
+      "confidence": 0.5036290884017944
+    }
+  },
+  {
+    "text": "Do yo unlock all sector ?",
+    "intent": "check_request",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.9003551602363586
+    }
+  },
+  {
+    "text": "one min",
+    "intent": "ask_time",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.5541271567344666
+    }
+  },
+  {
+    "text": "i'm availble LBB3402",
+    "intent": "inform_site",
+    "intent_prediction": {
+      "name": "inform",
+      "confidence": 0.8838791251182556
+    }
+  },
+  {
+    "text": "Same result",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.999569833278656
+    }
+  },
+  {
+    "text": "still low",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.9989743232727051
+    }
+  },
+  {
+    "text": "current technologies",
+    "intent": "check_all_techs",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.8799402713775635
+    }
+  },
+  {
+    "text": "restart all technologies",
+    "intent": "ask_restart",
+    "intent_prediction": {
+      "name": "check_all_techs",
+      "confidence": 0.3921942114830017
+    }
+  },
+  {
+    "text": "I am feeling very good",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.9804251790046692
+    }
+  },
+  {
+    "text": "I am going to save the world",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.1902989000082016
+    }
+  },
+  {
+    "text": "of course",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.46983468532562256
+    }
+  },
+  {
+    "text": "fine",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.7306605577468872
+    }
+  },
+  {
+    "text": "Just wanted to inform you that I'm at 34025U, planning to test the 3 sectors present there",
+    "intent": "inform_site",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.1113467812538147
+    }
+  },
+  {
+    "text": "i have a problem with ca Max throughput 35",
+    "intent": "inform_throughput",
+    "intent_prediction": {
+      "name": "ask_Optimisation",
+      "confidence": 0.9937875270843506
+    }
+  },
+  {
+    "text": "ca",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.2948559522628784
+    }
+  },
+  {
+    "text": "finish",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "test_done",
+      "confidence": 0.8949958086013794
+    }
+  },
+  {
+    "text": "not good",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "ask_Optimisation",
+      "confidence": 0.9609671235084534
+    }
+  },
+  {
+    "text": "I'm available LBB3402",
+    "intent": "inform",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.8930493593215942
+    }
+  },
+  {
+    "text": "Site 4745",
+    "intent": "inform",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.9822269678115845
+    }
+  },
+  {
+    "text": "test finished",
+    "intent": "test_done",
+    "intent_prediction": {
+      "name": "finishing_test",
+      "confidence": 0.7202025055885315
+    }
+  },
+  {
+    "text": "could you help me",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.39929282665252686
+    }
+  },
+  {
+    "text": "s1 ?",
+    "intent": "check_request",
+    "intent_prediction": {
+      "name": "ask_help",
+      "confidence": 0.65855872631073
+    }
+  },
+  {
+    "text": "once i finish i will inform you",
+    "intent": "ask_time",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.2904631495475769
+    }
+  },
+  {
+    "text": "please check site 4119",
+    "intent": "inform_site",
+    "intent_prediction": {
+      "name": "check_request",
+      "confidence": 0.41676729917526245
+    }
+  },
+  {
+    "text": "not good",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.9793674349784851
+    }
+  },
+  {
+    "text": "Ca avr 60mb",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.9924942255020142
+    }
+  },
+  {
+    "text": "all technologies status",
+    "intent": "check_all_techs",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.8640460968017578
+    }
+  },
+  {
+    "text": "let's go",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.18532876670360565
+    }
+  },
+  {
+    "text": "good night",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.260938823223114
+    }
+  },
+  {
+    "text": "don't like that",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.3132930397987366
+    }
+  },
+  {
+    "text": "amazing",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.9937447905540466
+    }
+  },
+  {
+    "text": "I am amazing",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.9711855053901672
+    }
+  },
+  {
+    "text": "done",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "test_done",
+      "confidence": 0.3532554507255554
+    }
+  },
+  {
+    "text": "supported technologies",
+    "intent": "ask_status",
+    "intent_prediction": {
+      "name": "check_all_techs",
+      "confidence": 0.9489964842796326
+    }
+  },
+  {
+    "text": "same throughput",
+    "intent": "inform_throughput",
+    "intent_prediction": {
+      "name": "ask_Optimisation",
+      "confidence": 0.9963380098342896
+    }
+  },
+  {
+    "text": "still low results",
+    "intent": "inform_throughput",
+    "intent_prediction": {
+      "name": "ask_Optimisation",
+      "confidence": 0.9929453730583191
+    }
+  },
+  {
+    "text": "Average 11 downlink",
+    "intent": "inform_throughput",
+    "intent_prediction": {
+      "name": "ask_Optimisation",
+      "confidence": 0.9541333913803101
+    }
+  },
+  {
+    "text": "throughput is fine",
+    "intent": "inform_throughput",
+    "intent_prediction": {
+      "name": "ask_Optimisation",
+      "confidence": 0.8535951375961304
+    }
+  },
+  {
+    "text": "done with the site",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "test_done",
+      "confidence": 0.7804369926452637
+    }
+  },
+  {
+    "text": "moin",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.15090687572956085
+    }
+  },
+  {
+    "text": "site not availble",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.8531030416488647
+    }
+  },
+  {
+    "text": "I am disappointed",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.19794131815433502
+    }
+  },
+  {
+    "text": "unhappy",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.7006232738494873
+    }
+  },
+  {
+    "text": "I didnt get the throughput",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.9628678560256958
+    }
+  },
+  {
+    "text": "Cell ID 887303",
+    "intent": "inform",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.8271875381469727
+    }
+  },
+  {
+    "text": "finish",
+    "intent": "test_done",
+    "intent_prediction": {
+      "name": "finishing_test",
+      "confidence": 0.9576373100280762
+    }
+  },
+  {
+    "text": "problems solved",
+    "intent": "test_done",
+    "intent_prediction": {
+      "name": "finishing_test",
+      "confidence": 0.9632750153541565
+    }
+  },
+  {
+    "text": "??",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "check_request",
+      "confidence": 0.6866800785064697
+    }
+  },
+  {
+    "text": "please check site 42105 sector 1 L2100",
+    "intent": "check_request",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.848206102848053
+    }
+  },
+  {
+    "text": "I didnt get the throughput",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.9628678560256958
+    }
+  },
+  {
+    "text": "low ca",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.8996457457542419
+    }
+  },
+  {
+    "text": "S1 : average is 44 Mbs",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.992518424987793
+    }
+  },
+  {
+    "text": "wonderful",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.384986013174057
+    }
+  },
+  {
+    "text": "that sounds good",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.5037174820899963
+    }
+  },
+  {
+    "text": "existing technologies",
+    "intent": "ask_status",
+    "intent_prediction": {
+      "name": "check_all_techs",
+      "confidence": 0.8925839066505432
+    }
+  },
+  {
+    "text": "current technologies",
+    "intent": "ask_status",
+    "intent_prediction": {
+      "name": "check_all_techs",
+      "confidence": 0.9496447443962097
+    }
+  },
+  {
+    "text": "Ca avr 60 mb",
+    "intent": "inform_throughput",
+    "intent_prediction": {
+      "name": "ask_Optimisation",
+      "confidence": 0.9619015455245972
+    }
+  },
+  {
+    "text": "Avr ca 75",
+    "intent": "inform_throughput",
+    "intent_prediction": {
+      "name": "ask_Optimisation",
+      "confidence": 0.9539417624473572
+    }
+  },
+  {
+    "text": "cell doesn't not basculate to other technology",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "check_all_techs",
+      "confidence": 0.21712471544742584
+    }
+  },
+  {
+    "text": "done thanks",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "test_done",
+      "confidence": 0.7994681000709534
+    }
+  },
+  {
+    "text": "cu",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.44290778040885925
+    }
+  },
+  {
+    "text": "n",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.3502003848552704
+    }
+  },
+  {
+    "text": "I don't feel very well",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.18359267711639404
+    }
+  },
+  {
+    "text": "done thanks",
+    "intent": "test_done",
+    "intent_prediction": {
+      "name": "finishing_test",
+      "confidence": 0.8781132698059082
+    }
+  },
+  {
+    "text": "1mn please",
+    "intent": "ask_time",
+    "intent_prediction": {
+      "name": "ask_session_extension",
+      "confidence": 0.3096684217453003
+    }
+  },
+  {
+    "text": "site 4745",
+    "intent": "inform_site",
+    "intent_prediction": {
+      "name": "inform",
+      "confidence": 0.8503215312957764
+    }
+  },
+  {
+    "text": "bad throughput",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.9997947812080383
+    }
+  },
+  {
+    "text": "i had throughput problem",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.9996275901794434
+    }
+  },
+  {
+    "text": "i have a problem with ca Max throughput 35",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.9991450309753418
+    }
+  },
+  {
+    "text": "low throughpout 1800",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.9999585151672363
+    }
+  },
+  {
+    "text": "handled technologies",
+    "intent": "check_all_techs",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.9537301659584045
+    }
+  },
+  {
+    "text": "good afternoon",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.3350934088230133
+    }
+  },
+  {
+    "text": "have a nice day",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "ask_help",
+      "confidence": 0.2289537489414215
+    }
+  },
+  {
+    "text": "never",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.20947599411010742
+    }
+  },
+  {
+    "text": "extremely good",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.21806108951568604
+    }
+  },
+  {
+    "text": "how do i reach drive test team",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.4275418817996979
+    }
+  },
+  {
+    "text": "check state for 2g only",
+    "intent": "ask_status",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.6000637412071228
+    }
+  },
+  {
+    "text": "ca not found",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.28406673669815063
+    }
+  },
+  {
+    "text": "carrier agreggation not working",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.32434171438217163
+    }
+  },
+  {
+    "text": "test finished",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "test_done",
+      "confidence": 0.9493587613105774
+    }
+  },
+  {
+    "text": "my day was horrible",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "ask_session_extension",
+      "confidence": 0.18712535500526428
+    }
+  },
+  {
+    "text": "ssv done",
+    "intent": "test_done",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.3059241473674774
+    }
+  },
+  {
+    "text": "L2100 locked ?",
+    "intent": "check_request",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.9017249941825867
+    }
+  },
+  {
+    "text": "sector 2 ?",
+    "intent": "check_request",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.49393391609191895
+    }
+  },
+  {
+    "text": "when i’m done i will tell you",
+    "intent": "ask_time",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.26588284969329834
+    }
+  },
+  {
+    "text": "what are some ways to improve network performance?",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.4993692934513092
+    }
+  },
+  {
+    "text": "how can i improve the throughput ?",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.28887996077537537
+    }
+  },
+  {
+    "text": "supported technologies",
+    "intent": "check_all_techs",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.9863297343254089
+    }
+  },
+  {
+    "text": "salut c'est Aziz",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.3862810432910919
+    }
+  },
+  {
+    "text": "good by",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.22717100381851196
+    }
+  },
+  {
+    "text": "I don't think so",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.7216832637786865
+    }
+  },
+  {
+    "text": "not really",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "ask_Optimisation",
+      "confidence": 0.2618723213672638
+    }
+  },
+  {
+    "text": "correct",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "Connection",
+      "confidence": 0.5692126750946045
+    }
+  },
+  {
+    "text": "i need a contact please",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "Connection",
+      "confidence": 0.3950972259044647
+    }
+  },
+  {
+    "text": "handled technologies",
+    "intent": "ask_status",
+    "intent_prediction": {
+      "name": "check_all_techs",
+      "confidence": 0.8927509784698486
+    }
+  },
+  {
+    "text": "i had throughput problem",
+    "intent": "inform_throughput",
+    "intent_prediction": {
+      "name": "ask_Optimisation",
+      "confidence": 0.9735146164894104
+    }
+  },
+  {
+    "text": "Also issue of CSFB about the site 43155U",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.5354140400886536
+    }
+  },
+  {
+    "text": "ssv done",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.3059241473674774
+    }
+  },
+  {
+    "text": "problems solved",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "test_done",
+      "confidence": 0.9326078295707703
+    }
+  }
+]
