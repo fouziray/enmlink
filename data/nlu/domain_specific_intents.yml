@@ -1,0 +1,205 @@
+version: "2.0"
+nlu:
+ - intent: ask_lock
+   examples: |
+    - lock [S1](Sector)
+    - can you lock [S2](Sector) 
+    - please to lock [S3](Sector) 
+    - can you lock [G900](Tech2g)
+    - i need to lock [U900](Tech3g)
+    - i want to lock [L2100](Tech4g)
+
+ - intent: ask_unlock
+   examples: |
+    - unlock [S1](Sector)
+    - can you unlock [S2](Sector) 
+    - please to unlock [S3](Sector) 
+    - can you unlock [G900](Tech2g)
+    - i need to unlock [U900](Tech3g)
+    - i want to unlock [L2100](Tech4g)
+    - unlock [s3](Sector) please
+
+ - intent: ask_Ret
+   examples: |
+    - maxtilt [S1](Sector)
+    - downtilt [S1](Sector)
+
+    - maxtilt [G900](Tech2g) [S1](Sector)
+    - maxtilt [U2100](Tech3g) [S1](Sector)
+    - maxtilt [L2100](Tech4g) [S1](Sector)
+
+    - downtilt [G900](Tech2g) [S1](Sector)
+    - downtilt [U2100](Tech3g) [S1](Sector)
+    - downtilt [L2100](Tech4g) [S1](Sector)
+
+    - maxtilt all [G900](Tech2g)
+    - maxtilt all [U2100](Tech3g)
+    - maxtilt all [L1800](Tech4g)
+
+    - maxtilt all [G900](Tech2g)
+    - maxtilt all [U2100](Tech3g)
+    - maxtilt all [L1800](Tech4g)
+ - intent: ask_Optimisation
+   examples: |
+    - I didnt get the throughput  
+    - throughput non atteint  
+ - intent: ask_Rollback
+   examples: |
+    - Rollback 
+    -done please rollback 
+    -rollback the site 
+    -rollback the status
+    - can I rollback the changes for [S1]
+    - please rollback the changes for [S3](Sector) and [U2100](Tech3g) 
+    - can I rollback the changes for [G900](Tech2g) , [S1](Sector)
+    - please rollback the changes for [L2100](Tech4g) [S3](Sector)
+ 
+
+ - intent: inform
+   examples: |
+    - I'm available [LBB3402](code_site)
+    - Cell ID [887303](cell_id) 
+    - Site [4745](code_site)
+    - conditions are [Rsrp](conditions) [Rsrq](conditions)
+    - bad [RSRP](conditions)
+    - the site has congested
+    - conditions are bad  
+
+ - intent: greeting+inform
+   examples: |
+    - hello , i'm in site [6069](code_site)
+    - salam site [4746](code_site) please
+
+  
+ - intent: Connection
+   examples: |
+    - failed to connect 
+    - connection failed 
+    - i can’t connect to the site  
+    - it is activated 
+    - connecting 
+    - i’m connected 
+    - can't connect to [S2](Sector) and [L2100](Tech4g)
+
+  
+ - intent: test_done
+   examples: |
+    - ssv done 
+    - test finished
+    - finish
+    - done with the site 
+    - done thanks 
+    - problems solved
+
+  
+ - intent: ask_help
+   examples: |
+    - ??
+    - What do l do ??
+    - i have a question ? 
+    - could you help me
+    - what do i do next  ?
+
+ - intent: check_request
+   examples: |
+    - Do yo unlock all sector ?
+    - L2100 locked ? 
+    - please check sector 1 locked ? 
+    - s1 ? 
+    - sector 2 ? 
+    - please check site [42105](code_site) [sector 1](Sector) [L2100](Tech4g)
+
+ - intent: ask_time
+   examples: |
+    - wait 
+    - 1mn please
+    - please to wait
+    - when i’m done i will tell you 
+    - once i finish i will inform you  
+    - one min
+
+ - intent: inform_site
+   examples: |
+    - i'm availble [LBB3402](code_site)
+    - site [4745](code_site)
+    - please site [6073](code_site)
+    - please check site [4119](code_site)
+
+ - intent: greeting + inform_site
+   examples: |
+    - salam [amin](person) site [4704](code_site)
+
+ - intent: ask_Optimisation
+   examples: |
+    - I didnt get the throughput  
+    - how can I optimize the network performance?
+    - what are some ways to improve network performance?
+    - throughput non atteint
+    - can you help me optimize the network?
+    - throughput non atteint 
+    - how can i improve the throughput ?
+    - bad throughput
+    - not good 
+    - Same result 
+    - still low 
+    - low ca
+    - i had throughput problem
+    - i have a problem with ca Max throughput [35](throughput)
+    - Ca avr [60mb](throughput)
+    - low throughpout [1800](band)
+    - Stil has low thrghpt Average is [40Mbs](throughput)
+    - [S1](Sector) : average is [44 Mbs](throughput)
+
+ - intent: downlink
+   examples: |
+    - All sectors DL [bad](throughput_dl)
+    - Low throughput DL
+    - Dynamic DL [30](throughput_dl)
+ - intent: uplink 
+   examples: |
+    - UL good results
+    - Low throughput UL 
+    - Low Thrghpt DL average [50 Mbs](throughput_dl) in [both band](both_bands)
+
+ - intent: ask_Rollback
+   examples: |
+    - Rollback 
+    - can I rollback the changes for [S1]
+    - please rollback the changes for [S3](Sector) and [U2100](Tech3g) 
+    - can I rollback the changes for [G900](Tech2g) , [S1](Sector)
+    - please rollback the changes for [L2100](Tech4g) [S3](Sector)
+
+ - intent: inform+ask_lock+ask_unlock
+   examples: |
+    - site [1475](code_site) please to lock [s1](Sector) [s2](Sector) and unlock [s3](Sector)
+
+ - intent: inform+ask_optimisation
+   examples: |  
+    - Site [2527](code_site) low throughput CA
+
+ - intent: ask_status
+   examples: |
+    - check the status of the network [2G](Tech2g) for me
+    - what is the current status of all the existing technologies [2g](Tech2g)[3g](Tech3g) [4g](Tech4g)
+
+ - intent : check_all_techs
+   examples: |
+    - all technologies status 
+    - existing technologies  
+    - current technologies 
+    - supported technologies 
+    - handled technologies
+
+ - intent: ask_csrf
+    - what about csrf 
+    - Also issue of CSFB about the site [LAI4315](code_site)
+
+ - intent: ask_restart
+   examples: |
+    - please to restart 
+    - restart if you can 
+    - can you restart the site 
+    - please to restart the sector [s1](sector)
+    - restart all technologies  
+    - restart band [L1800](Tech4g)
+
