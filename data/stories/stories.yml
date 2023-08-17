@@ -233,14 +233,14 @@ stories:
 
 - story: s throughput is good
   steps:
-  - intent: inform_throughput_good
+  - intent: inform_throughput/good
   - action: utter_throughput_good
 
 
 
 - story: s throughput status
   steps:
-  - intent: inform_throughput
+  - intent: inform_throughput/bad
     entities:
     - throughput_slot : "75Mb/s"
   - slot_was_set:
@@ -250,7 +250,7 @@ stories:
 
 - story: s throughput DL status 
   steps:
-  - intent: inform_throughput
+  - intent: inform_throughput/bad
     entities:
     - throughput : "DL bad"
   - slot_was_set:

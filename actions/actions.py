@@ -8,7 +8,7 @@ from .commands import path, check_2g , check_3g , check_4gFDD , check_tilt , che
 import pandas as pd 
 import matplotlib.pyplot as plt
 path =  "./store_rollback/"
-
+import re
 from os.path import exists
 import os
 file_dir = os.path.dirname(os.path.abspath(__file__))
@@ -489,6 +489,7 @@ class ActionThroughput(Action):
             return[]
         
         throughput = tracker.get_slot("throughput_slot")
+        throughput=[ int(s) for s in  re.findall(r'\b\d+\b', throughput)][0]
         if(throughput == None):
             dispatcher.utter_message("what is the value of the throughput you 've got ?")
             return[]
