@@ -26,6 +26,8 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User(
             email=validated_data['email'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
             username=validated_data['username']
         )
         user.set_password(validated_data['password'])
@@ -35,12 +37,27 @@ class HelpProviderSerialize(serializers.ModelSerializer):
      class Meta(UserSerializer.Meta):      
             model= HelpProvider
             fields= UserSerializer.Meta.fields+('fonction',)
-
+     
+     def create(self, validated_data):
+        user = HelpProvider(
+            email=validated_data['email'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
+            fonction=validated_data['fonction'],
+            username=validated_data['username']
+        )
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+    
 """class MessageSerializer(serializers.ModelSerializer):
      class Meta:
          model= Message
          fields=('user_id','convo_id','created','text','source_is_user')
 """
+class MessageRasaBotSerializer(serializers.Serializer):
+     sender=serializers.IntegerField()
+     message=serializers.CharField()
 class ConvoSerializer(serializers.ModelSerializer):
     class Meta:
          model= Convo

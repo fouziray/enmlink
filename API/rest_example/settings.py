@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-0xuoa#4f=u)_pt^b-vglqiz3=p5w1gj3-u$al%%o(k5zqs+m1p
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.ngrok.io', 'f6e6-41-106-4-218.ngrok-free.app', 'http://localhost:5174','1af3-105-111-188-145.ngrok-free.app']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.ngrok.io', 'ef83-41-104-164-140.ngrok-free.app', 'e5c5-41-108-115-212.ngrok-free.app', os.environ.get('HOST_URL','localhost')]
 
 
 # Application definition
@@ -80,17 +80,26 @@ WSGI_APPLICATION = 'rest_example.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'enmssv2',
+#        'USER': 'postgres',
+#        'PASSWORD': 'admin',
+#        'HOST': 'localhost',
+#        'PORT': '5432',
+#    }
+#}
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'enmssv2',
-        'USER': 'admin',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': os.environ.get('DB_DRIVER','django.db.backends.postgresql'),
+        'USER': os.environ.get('PG_USER','postgres'),
+        'PASSWORD':os.environ.get('PG_PASSWORD','admin'),
+        'NAME': os.environ.get('PG_DB','enmssv2'),
+        'PORT': os.environ.get('PG_PORT','5432'),
+        'HOST': os.environ.get('PG_HOST','localhost'), # uses the container if set, otherwise it runs locally
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

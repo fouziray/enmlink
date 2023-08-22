@@ -1,7 +1,6 @@
 version: "3.1"
 language: "fr"
 nlu:
-
 - regex: Person 
     - ^[A-Za-z]{1,7}$
 
@@ -98,7 +97,7 @@ nlu:
     - déinclinaison maximal [S1](Sector) trop basse
     - inclinaison maximale [G900](Tech2g) [S1](Sector)
     - inclinaison maximale [U2100](Tech3g) [S1](Sector)
-    - positionement extrème vers la haut [L2100](Tech4g) [S1](Sector)
+    - positionement extrème vers le haut [L2100](Tech4g) [S1](Sector)
     - positionement extrème vers le bas [G900](Tech2g) [S1](Sector)
     - inclinaison vers le bas [U2100](Tech3g) [S1](Sector)
     - inclinaison vers le bas [L2100](Tech4g) [S1](Sector)

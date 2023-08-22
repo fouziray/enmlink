@@ -343,7 +343,11 @@ class Action_Unlock_tech(Action):
             response2_4g= None
             # recuperer la bande
             bande = tracker.get_slot("Tech4g")
-            if(codeSite == None):
+            if (bande is None):
+                dispatcher.utter_message("No band provided")
+                return []
+            
+            if(codeSite is None):
                 dispatcher.utter_message("you haven't entered the technologie or bande for 4G")
                 return[]
             bande1 = 'L1800'
@@ -372,11 +376,11 @@ class Action_Unlock_tech(Action):
 
 
             if(response1_4g):
-                dispatcher.utter_message("technologie 4G bande L1800 Unlocked")
+                dispatcher.utter_message("technology 4G bande L1800 Unlocked")
             if(response2_4g) : 
-                dispatcher.utter_message("technoligie 4G bande L2100 Unlocked in bande")
+                dispatcher.utter_message("technology 4G bande L2100 Unlocked in first band")
             if(response_4g):
-                dispatcher.utter_message("technologie 4G Unlocked")
+                dispatcher.utter_message(" all 4G technology Unlocked")
        
        
         return []
@@ -752,3 +756,15 @@ class ActionUnlockSector(Action):
             dispatcher.utter_message(text= "Sorry but i didn't recognize the band for the sector you want to Unlock")
             return[]
 
+"""
+    class ActionExtend(SessionAction):
+   
+    def name(self) -> Text:
+        return "action_extend_session"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        time="50"
+ """       

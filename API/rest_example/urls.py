@@ -53,4 +53,7 @@ urlpatterns = [
     path('dtsession/g=<int:group_id>/',DriveTestSessionViewSet.as_view({'get':'dtsessionsFilteredByGroup'})),
     path('dtsession/', DriveTestSessionViewSet.as_view({'post':'create'})),
     path('isintimeframe/<int:id>',HelpProviderList.as_view({'get':'isTechnicianInTimeFrame'})),
+    path('botmessage/',exchangeMessageRasa.as_view()),
+    path('botmessageFr/',exchangeMessageRasaFrench.as_view()),
+    path('stats/',DriveTestSessionViewSet.as_view({'get':'statsOnSessions'}))
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
