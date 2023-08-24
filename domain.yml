@@ -262,8 +262,6 @@ pathTilt:
     mappings: 
     - type: custom
 
-
-
 responses:
   utter_greet:
   - text: "Hey! How are you?"

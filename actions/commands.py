@@ -2,7 +2,7 @@ from abc import abstractmethod
 import pandas as pd
 #import enmscripting        # module privé propre au système enm 
 import json
-
+from os.path import exists
 
 
 path =  ".store_rollback/"
@@ -44,6 +44,8 @@ def format(l, tech):
             columns = l[1].split('\t')
         l_core_2 = [l_core[row].split('\t') for row in range(len(l_core)) if l_core[row] != '']
         data = pd.DataFrame(l_core_2, columns=columns)
+    else: 
+        data=pd.DataFrame()
     return data
 
 
@@ -162,25 +164,32 @@ def check_2g(site2g):
     get_state_2G = g2_obj.get(site2g , 'G900 , G1800')
         
     output2g = g2_obj.execute(get_state_2G)
+    # this is a sample output from enm
+    output2g=['SubNetwork,SubNetwork,MeContext,ManagedElement,BscFunction,BscM,GeranCellM,GeranCell', 'NodeId\tBscFunctionId\tBscMId\tGeranCellMId\tGeranCellId\tcSysType\tgeranCellId', 'BLDEVO2\t1\t1\t1\t09620D\tGSM1800\t09620D', 'BLDEVO2\t1\t1\t1\t09620E\tGSM1800\t09620E', 'BLDEVO2\t1\t1\t1\t09620F\tGSM1800\t09620F', 'SubNetwork,SubNetwork,MeContext,ManagedElement,BscFunction,BscM,GeranCellM,GeranCell,ChannelGroup', 'NodeId\tBscFunctionId\tBscMId\tGeranCellMId\tGeranCellId\tChannelGroupId\tconnectedG12Tg\tconnectedG31Tg\tstate', 'BLDEVO2\t1\t1\t1\t09620D\t0\tnull\tSubNetwork=ONRM_ROOT_MO,SubNetwork=GRAN,MeContext=BLDEVO2,ManagedElement=BLDEVO2,BscFunction=1,BscM=1,Bts=1,G31Tg=1020\tACTIVE', 'BLDEVO2\t1\t1\t1\t09620E\t0\tnull\tSubNetwork=ONRM_ROOT_MO,SubNetwork=GRAN,MeContext=BLDEVO2,ManagedElement=BLDEVO2,BscFunction=1,BscM=1,Bts=1,G31Tg=1120\tACTIVE', 'BLDEVO2\t1\t1\t1\t09620F\t0\tnull\tSubNetwork=ONRM_ROOT_MO,SubNetwork=GRAN,MeContext=BLDEVO2,ManagedElement=BLDEVO2,BscFunction=1,BscM=1,Bts=1,G31Tg=1220\tACTIVE', '', '6 instance(s)']
+    #output2g= ['', '0 instance(s)']
+
     table2g = format(output2g , '2G')
-    response2g = "Status 2g\n" +' '.join((table2g[['GeranCellId','state']]).to_string(header=False , index = False).split('\n'))
+    #response2g = "Status 2g\n" +' '.join((table2g[['GeranCellId','state']]).to_string(header=False , index = False).split('\n'))
 
 
-    return response2g
+    return table2g
 
 
 
 def check_3g(site3g):
     g3_obj = g3rncCommand()
-    get_state_3G = g3_obj.get(site3g , '1')
+    get_state_3G = g3_obj.get(site3g , 'U900')
        
     output3g = g3_obj.execute(get_state_3G)
+    output3g=['SubNetwork,SubNetwork,SubNetwork,MeContext,ManagedElement,RncFunction,UtranCell', 'NodeId\tRncFunctionId\tUtranCellId\tadministrativeState\toperationalState\tuarfcnDl', 'RNCSTF\t1\t193020V\tUNLOCKED\tENABLED\t10563', 'RNCSTF\t1\t193020W\tUNLOCKED\tENABLED\t10563', 'RNCSTF\t1\t193020X\tUNLOCKED\tENABLED\t10588', 'RNCSTF\t1\t193020Y\tUNLOCKED\tENABLED\t10588', 'RNCSTF\t1\t193020U\tUNLOCKED\tENABLED\t10563', 'RNCSTF\t1\t193020Z\tUNLOCKED\tENABLED\t10588', '', '6 instance(s)']
+    #output3g= ['', '0 instance(s)']
+
     table3g = format(output3g , '3G')
-    response3g = "\nStatus 3g\n" +' '.join((table3g[['UtranCellId','administrativeState']]).to_string(header=False , index = False).split('\n'))
+    #response3g = "\nStatus 3g\n" +' '.join((table3g[['UtranCellId','administrativeState']]).to_string(header=False , index = False).split('\n'))
     
 
     
-    return response3g                    
+    return table3g                    
 
 
 def check_4gFDD(site4g):
@@ -188,18 +197,20 @@ def check_4gFDD(site4g):
     get_state_4GFDD = g4_obj.get(site4g, '1')
 
     output4g =g4_obj.execute(get_state_4GFDD)
+    output4g= ['SubNetwork,SubNetwork,SubNetwork,MeContext,ManagedElement,ENodeBFunction,EUtranCellFDD', 'NodeId\tENodeBFunctionId\tEUtranCellFDDId\tadministrativeState\tavailabilityStatus\tfreqBand\toperationalState', '351012L\t1\t351012T\tUNLOCKED\tnull\t1\tENABLED', '351012L\t1\t351012R\tUNLOCKED\tnull\t1\tENABLED', '351012L\t1\t351012S\tUNLOCKED\t[FAILED]\t1\tDISABLED', '', '3 instance(s)']
+
     table4g = format(output4g , '4G')
-
-    response4g = "\nStatus 4g FDD\n" +' '.join((table4g[['EUtranCellFDDId','administrativeState']]).to_string(header=False , index = False).split('\n'))
-
     
-    return response4g
+    #response4g = "\nStatus 4g FDD\n" +' '.join((table4g[['EUtranCellFDDId','administrativeState']]).to_string(header=False , index = False).split('\n'))
+    
+    return table4g
 
 def check_4gTDD(site4gTDD):
     g4TDD_obj = g4TDDCommand()
     get_state_4GTDD = g4TDD_obj.get(site4gTDD)
 
     output4g_TDD =g4TDD_obj.execute(get_state_4GTDD)
+    
     table4gTDD = format(output4g_TDD , '4G')
     response4gTDD = "\nStatus 4g TDD\n" + ' '.join((table4gTDD[['EUtranCellFDDId','administrativeState']]).to_string(header=False , index = False).split('\n'))
    
@@ -267,13 +278,14 @@ class GsmCommand(Command):
         g2_data_json = json.load(f)
         f_l = []
         for row in g2_data_json:
-            command = self.set(row['GeranCellId'], '0', row['state'])
+            command = self.set(row['GeranCellId'], row['BscFunctionId'] , row['state'])
             f_l.append(command)
         return f_l
 
 
 class g3rncCommand(Command):
     def get(self, siteId, band):
+        cmd=None
         if band == 'U900':
             cmd = "cmedit get * UtranCell.(UtranCellId==" + str(
                 siteId) + "*,administrativeState,operationalState,uarfcnDl==3070) -t"
@@ -289,23 +301,31 @@ class g3rncCommand(Command):
         elif band == 'U2100':
             cmd = "cmedit set * UtranCell.(UtranCellId==" + str(
                 siteId) + "*,uarfcnDl!=3070) administrativeState=" + state 
-        if (file != None):
-            listcmd = []
-            f1 = open(file)
-            g3_data_json = json.load(f1)
-            for row in g3_data_json:
-                cmd = "cmedit set * UtranCell.(UtranCellId==" + row['UtranCellId'] + "*,uarfcnDl!=3070) administrativeState=" + row['administrativeState']
-                listcmd.append(cmd)
-            return listcmd
+       # if (file != None):
+       #     listcmd = []
+       #     f1 = open(file)
+       #     g3_data_json = json.load(f1)
+       #     for row in g3_data_json:
+       #         cmd = "cmedit set * UtranCell.(UtranCellId==" + row['UtranCellId'] + "*,uarfcnDl!=3070) administrativeState=" + row['administrativeState']
+       #         listcmd.append(cmd)
+       #     return listcmd
         return cmd
     
 
     def rollback_3g(self, path3g):
         f = open(path3g)
         g3_data_json = json.load(f)
+        listcmd = []
         for row in g3_data_json:
-            command = self.set(row['UtranCellId'],row['administrativeState'])
+            band="U900"
+            if (row['uarfcnDl'] != "3070"):
+                band="U2100"
+            command = self.set(row['UtranCellId'],band,row['administrativeState'])
+            listcmd.append(command)
+        return listcmd
             #print(command)
+      
+            
 
 
 
@@ -345,7 +365,7 @@ class g4FDDCommand(Command):
         g4_data_json = json.load(f)
         f1_l = []
         for row in g4_data_json:
-            command = self.set(row['EUtranCellFDDId'], 0, row['administrativeState'])
+            command = self.set(row['EUtranCellFDDId'], row['freqBand'], row['administrativeState'])
             f1_l.append(command)
         return f1_l
 
@@ -391,15 +411,18 @@ class RetCommand(Command):
         return commandSetTilt
 
     def rollback_tilt(self, path):
-        f = open(path)
-        f1 = []
-        tilt_data_json = json.load(f)
-        for row in tilt_data_json:
-            command = self.tiltCOmmand(row['NodeId'], row['AntennaUnitGroupId'], row['AntennaNearUnitId'],
-                                       row['RetSubUnitId'], row['electricalAntennaTilt'])
-            f1.append(command)
-            #print(command)
-        return f1
+        if( exists(path)):
+            f = open(path)
+            f1 = []
+            tilt_data_json = json.load(f)
+            for row in tilt_data_json:
+                command = self.tiltCOmmand(row['NodeId'], row['AntennaUnitGroupId'], row['AntennaNearUnitId'],
+                                        row['RetSubUnitId'], row['electricalAntennaTilt'])
+                f1.append(command)
+                #print(command)
+            return f1
+        else:
+            return None
 
 
 class OptimCommand(Command):
@@ -436,7 +459,7 @@ class OptimCommand(Command):
                 l_core_2= [l_core[row].split('\t') for row in range(len(l_core)) if l_core[row]!='']
                 data = pd.DataFrame(l_core_2,columns=columns)
         else:
-            data = "#### technology not exists for this site ####"
+            data = tech+" technology doens't exists for this site"
         return (data)
 
 

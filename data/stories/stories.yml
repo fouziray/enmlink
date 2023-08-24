@@ -63,8 +63,13 @@ stories:
   - intent: ask_lock
     entities:
     - Sector : "S1"
-  - slot_was_set:
-    - Sector_slot: "S1"
+  - or:
+    - slot_was_set:
+      - Sector_slot: ["S1"]
+    - slot_was_set:
+      - Sector_slot: ["S2"]
+    - slot_was_set:
+      - Sector_slot: ["S3"]
   - action: action_lock_sector
 
 
@@ -83,8 +88,21 @@ stories:
   - intent: ask_lock
     entities:
     - Tech2g : "G900"
-  - slot_was_set:
-    - Tech2g: "G900"
+  - or:
+    - slot_was_set:
+      - Tech2g: "G900"
+    - slot_was_set:
+      - Tech2g: "2G"
+    - slot_was_set:
+      - Tech3g: "3G"
+    - slot_was_set:
+      - Tech3g: "U900"
+    - slot_was_set:
+      - Tech3g: "U2100"
+    - slot_was_set:
+      - Tech4G: "4G"
+    - slot_was_set:
+      - Tech4G: "L1800"
   - action: action_lock_tech
 
 - story: s unlock tech2g 

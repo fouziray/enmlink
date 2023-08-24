@@ -49,7 +49,9 @@ class ActionInform(Action):
         if(codeSite == None):
             dispatcher.utter_message("you haven't entered a code site")
             return[]
-        else: 
+        else:
+            dispatcher.utter_message("Got it, "+codeSite+" it is !")
+
             path += codeSite + '/'                # chemin de sauvgarde des modifications su rle site 
             # ouverture session enm
           #  com.open('XXXX', 'xxxxxx', 'XXXXXXXXXX')
@@ -73,34 +75,67 @@ class ActionTechStatus(Action):
             dispatcher.utter_message("you haven't entered a code site")
             return[]
         
-        message = (tracker.latest_message)['text']   
+        message = (tracker.latest_message)['text']  
+         
         sites = manageCodeSite(codeSite)
         site2g = sites[0]
         site3g = sites[1]
         site4g = sites[2]        
-        site4gTDD = sites[3]                
+        site4gTDD = sites[3] 
+        print(str(sites)+"__________________________")               
         # check one or multiple techs
         if(("2" in message) and (tracker.get_slot("Tech2g")!= None)):
+            if(site2g == None):
+                if(codeSite[-1].lower()=='l'  or codeSite[-1].lower()=='u' ):
+                    site2g=codeSite[:-1]
+                else:
+                    site2g=codeSite
             response2g = check_2g(site2g)
+            if(response2g.empty ):
+                dispatcher.utter_message(text="2G technology doesn't exist")  
+            else:
                 #save 2G status
-            path2g = path + str(site2g) + "_2g.json"
-            response2g.to_json(path2g , orient = 'records') 
-            SlotSet("path2g" , path2g)          # save path in slot 
+                path2g = path + str(site2g) + "_2g.json"
+                file_path = os.path.join(file_dir, csv_folder,  str(codeSite) + "_2g.json")
+
+                response2g.to_json(file_path , orient = 'records') 
+                dispatcher.utter_message(text="status for 2G: "+' ,'.join(response2g[["GeranCellId", "state"]].to_string(header=False , index = False).split('\n')))
 
 
         if(("3" in message) and (tracker.get_slot("Tech3g")!= None)):
+            if( site3g == None):
+                if(codeSite[-1].lower()=='l'):
+                    site3g='U'.join(codeSite.rsplit(codeSite[-1:], 1))
+                else:
+                    site3g=codeSite+'U'
+                
             response3g = check_3g(site3g)
                             #save 3G status
-            path3g = path + str(site3g) + "_3g.json"
-            response3g.to_json(path3g , orient = 'records') 
-            SlotSet("path3g" , path3g)
+            if(response3g.empty):
+                dispatcher.utter_message(text="3G technology doesn't exist")  
+            else:
+                path3g = path + str(site3g) + "_3g.json"
+                file_path = os.path.join(file_dir, csv_folder,  str(codeSite) + "_3g.json")
 
-        if(("4" in message) and (tracker.get_slot("Tech4g")!= None)):
+                response3g.to_json(file_path , orient = 'records') 
+                dispatcher.utter_message(text="status for 3G: "+' ,'.join(response3g[["UtranCellId", "operationalState"]].to_string(header=False , index = False).split('\n')))
+
+        if(("4" in message) and (tracker.get_slot("Tech4g")!= None) ):
+            if(site4g == None):
+                if(codeSite[-1].lower()=='u'):
+                    site4g='L'.join(codeSite.rsplit(codeSite[-1:], 1))
+                else:
+                    site4g=codeSite+'L'
             response4g = check_4gFDD(site4g)
+            if(response4g.empty):
+                dispatcher.utter_message(text="4G technology doesn't exist")  
+            else:
                             #save 4G status
-            path4g = path + str(site4g) + "_4g.json"
-            response4g.to_json(path4g , orient = 'records') 
-            SlotSet("path4gFDD" , path4g)
+                path4g = path + str(site4g) + "_4g.json"
+                file_path = os.path.join(file_dir, csv_folder,  str(codeSite) + "_4g.json")
+
+                response4g.to_json(file_path , orient = 'records') 
+                dispatcher.utter_message(text="status for 4G: "+' ,'.join(response4g[["EUtranCellFDDId", "administrativeState"]].to_string(header=False , index = False).split('\n')))
 
         if(tracker.latest_message['intent'].get('check_all_techs')):
             response2g = check_2g(site2g)
@@ -108,9 +143,9 @@ class ActionTechStatus(Action):
             response4g = check_4gFDD(site4g)
         
         
-        response  = response2g + response3g + response4g
+#        response  = response2g + response3g + response4g
 
-        dispatcher.utter_message(text=response)
+#        dispatcher.utter_message(text=response)
         
         return []
        
@@ -161,7 +196,7 @@ class Action_Lock_tech(Action):
             if (bande == 0 ):
                 dispatcher.utter_message("technologie 2G locked"+block_state_2G)
             else : 
-                dispatcher.utter_message("technoligie 2G locked in bande " +str(bande)+block_state_2G)
+                dispatcher.utter_message("technologie 2G locked in bande " +str(bande)+block_state_2G)
        
         if(site3g):
             g3_obj = g3rncCommand()
@@ -169,7 +204,7 @@ class Action_Lock_tech(Action):
             # recuperer la bande
             bande = tracker.get_slot("Tech3g")
             if(bande == None):
-                dispatcher.utter_message("you haven't entered the technologie or bande for 3G")
+                dispatcher.utter_message("You need to specify which 3G band, or both")
                 return[]
             
             bande1 = 'U900'
@@ -210,7 +245,7 @@ class Action_Lock_tech(Action):
             # recuperer la bande
             bande = tracker.get_slot("Tech4g")
             if(bande == None):
-                dispatcher.utter_message("you haven't entered the technologie or bande for 4G")
+                dispatcher.utter_message("You need to specify which 4G frequency band, or both")
                 return[]
             bande1 = 'L1800'
             bande2 = 'L2100'
@@ -239,13 +274,13 @@ class Action_Lock_tech(Action):
             
 
             if(response1_4g):
-                dispatcher.utter_message("technologie 4G bande L1800 blocked"+response1_4g)
+                dispatcher.utter_message("technology 4G bande L1800 blocked"+response1_4g)
              
             if(response2_4g) : 
-                dispatcher.utter_message("technoligie 4G bande L2100 blocked in bande"+response2_4g)
+                dispatcher.utter_message("technology 4G bande L2100 blocked in bande"+response2_4g)
     
             if(response_4g):
-                dispatcher.utter_message("technologie 4G blocked"+response_4g)
+                dispatcher.utter_message("technology 4G blocked"+response_4g)
                
 
         return [SlotSet("Tech4g",None)]
@@ -464,38 +499,51 @@ class ActionRollback(Action):
 
         if(caslot!=None):
             print("jejejejaaaaaaaa"+caslot)
-        path2g = tracker.get_slot("path2g")
-        path3g = tracker.get_slot("path3g")
-        path4gFDD = tracker.get_slot("path4gFDD")
+        path2g = os.path.join(file_dir, csv_folder,  str(codeSite) + "_2g.json")
+        path3g = os.path.join(file_dir, csv_folder,  str(codeSite) + "_3g.json")
+        path4gFDD = os.path.join(file_dir, csv_folder,  str(codeSite) + "_4g.json")
         pathTilt = tracker.get_slot("pathTilt")
+        file_path = os.path.join(file_dir, csv_folder,  str(codeSite) + "_tilt.json")
         if( pathTilt != None):
             print(pathTilt)
         
-        if(path2g):
+        if(exists(path2g)):
             com2g = GsmCommand()
-            com.execute(com2g.rollback_2g(path2g))
+            listcmd=com2g.rollback_2g(path2g)
+        
+            for val in listcmd:
+                com.execute(val)
+            os.remove(path2g)
             dispatcher.utter_message(text= "rollback 2g done!")
 
-        if(path3g):
+        if(exists(path3g)):
             com3g = g3rncCommand()
-            com.execute(com3g.rollback_3g(path3g))
+            listcmd=com3g.rollback_3g(path3g)
+            for val in listcmd:
+                com.execute(val)
+            os.remove(path3g)
 
             dispatcher.utter_message(text= "rollback 3g done!")
 
 
-        if(path4gFDD):
+        if(exists(path4gFDD)):
             com4gFDD = g4FDDCommand()
-            com.execute(com4gFDD.rollback_4g(path4gFDD))
+            listcmd=com4gFDD.rollback_4g(path4gFDD)
+            for val in listcmd:
+                com.execute(val)
+            os.remove(path4gFDD)
 
             dispatcher.utter_message(text= "rollback 4g done!")
 
         
-        if(pathTilt):
-            comTilt = RetCommand()
-            com.execute(comTilt.rollback_tilt(pathTilt))
-
+        comTilt = RetCommand()
+        reverseCommands=comTilt.rollback_tilt(file_path)
+        if(reverseCommands != None):
+            for val in reverseCommands:
+                com.execute(val)
+            os.remove(path4gFDD)
+        else:
             dispatcher.utter_message(text= "rollback tilt done!")
-
 
         return[]
         
@@ -601,24 +649,27 @@ class ActionLockSector(Action):
         elif(('900' in bande3g) or ('2100' in bande3g)):
             sectors=manageCodeSiteSector(codeSite , bande3g ,sector_to_block)
             dispatcher.utter_message(text="this is site 3"+str(sectors)) 
-
+            if ('900' in bande3g ):
+                bande3g="U900"
+            else:
+                bande3g="U2100"
             obj3g = g3rncCommand()
             if(sectors[0]):
-                get_s1 = obj3g.get(sectors[0])
+                get_s1 = obj3g.get(sectors[0],bande3g)
                 com.execute(get_s1)
                 set_s1 = obj3g.set(sectors[0] , bande3g , 'BLOCKED')
                 com.execute(set_s1)
                 dispatcher.utter_message(text="Sector S1 bande "+bande3g+" for 3G is now BLOCKED") 
 
             if(sectors[1]):
-                get_s2 = obj3g.get(sectors[1])
+                get_s2 = obj3g.get(sectors[1],bande3g)
                 com.execute(get_s2)
                 set_s2 = obj3g.set(sectors[1] , bande3g , 'BLOCKED')
                 com.execute(set_s2)
                 dispatcher.utter_message(text="Sector S2 bande "+bande3g+" for 3G is now BLOCKED") 
 
             if(sectors[2]):
-                get_s3 = obj3g.get(sectors[2])
+                get_s3 = obj3g.get(sectors[2],bande3g)
                 com.execute(get_s3)
                 set_s3 = obj3g.set(sectors[2] , bande3g , 'BLOCKED')
                 com.execute(set_s3)
@@ -690,14 +741,15 @@ class ActionUnlockSector(Action):
         bande2g = tracker.get_slot("Tech2g")
         bande3g = tracker.get_slot("Tech3g")
         bande4g = tracker.get_slot("Tech4g")
+        
         if (bande2g is None ) :
             bande2g=''
         if (bande3g is None) :
             bande3g=''
         if (bande4g is None) : 
             bande4g=''
+        sectors = manageCodeSiteSector(codeSite , bande2g ,sector_to_unblock)
         if(('900' in bande2g) or ('1800' in bande2g)):
-            sectors = manageCodeSiteSector(codeSite , bande2g ,sector_to_unblock)
             obj2g = GsmCommand()
             if(sectors[0]):
                 get_s1 = obj2g.get(sectors[0],"GSM1800")

@@ -87,9 +87,11 @@ nlu:
     - peux-tu déblocker [G900](Tech2g)
     - j'ai besoin de déverrouiller [U900](Tech3g)
     - je veux la [L2100](Tech4g) ouverte
+    - déblocker [DCS](Tech2g)
+    - ouvre si possible [3G](Tech3g)
     - déverrouille [s3](Sector) s'il te plaît
-    - Secteur 1 [Sector], s'il te plaît, fermer le.
-    - Secteur 2 [Sector] de [74156](code_site), verrouille s'il te plaît.
+    - Secteur 1 [Sector], ouvre le.
+    - Secteur 2 [Sector] de [74156](code_site), déverrouille s'il te plaît.
 
 - intent: ask_Ret
   examples: |
