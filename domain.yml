@@ -27,6 +27,7 @@ intents:
 #  - check_all_techs
   - ask_csrf
  # - ask_pci
+  - nlu_fallback
   - inform_throughput/low
   - inform_throughput/good
 entities:
