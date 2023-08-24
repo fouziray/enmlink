@@ -245,8 +245,12 @@ path3g:
       action: action_status_tech
 
 path4gFDD:
-    type: text
+    type: categorical
     influence_conversation: false
+    values:
+     - tiltjson
+     - ejjeje_tilt.json
+     - tilt.json
     mappings: 
     - type: custom
       action: action_status_tech
@@ -256,7 +260,6 @@ pathTilt:
     influence_conversation: false
     mappings: 
     - type: custom
-      action: action_status_tech
 
 
 

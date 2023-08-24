@@ -11,7 +11,7 @@ assistant_id: 20230811-224653-large-chalet
 language: en
 pipeline:
 - name: SpacyNLP
-  model:  fr_core_news_sm #en_core_web_sm
+  model:  fr_core_news_md #en_core_web_sm
 - name: SpacyTokenizer
 - name: SpacyFeaturizer
 # # No configuration for the NLU pipeline was provided. The following default pipeline was used to train your model.

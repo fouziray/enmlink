@@ -87,7 +87,15 @@ class UserList(APIView):
          user = self.get_object(pk)
          user.delete()
          return Response(status=status.HTTP_204_NO_CONTENT)
-
+    
+    def put(self, request, format=None):
+        userdata=request.data
+        print(str(userdata)+"hehhheeeeeeeeeeeeeeee");
+        serializer=UserSerializer(User.objects.get(pk=userdata['id']),data=userdata)
+        if(serializer.is_valid()):
+            serializer.save()
+            return Response(serializer.data)
+    
 class UserDetail(APIView):
      """
      Retrieve, update or delete a user instance.
@@ -282,7 +290,6 @@ class ProfileImage(APIView):
             return Response( {'profile_form': '1'},status=status.HTTP_201_CREATED)
         else:
             return Response( {'profile_form': ''},status=status.HTTP_201_CREATED)"""
-    @api_view(['POST'])
     def post(self, request, format=None):
         try:
             # exist then update
@@ -294,11 +301,18 @@ class ProfileImage(APIView):
                 return Response(serializer.data)
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except Profile.DoesNotExist:
+        except :
+            parameter=request.POST.get("id",None)
             # not exist then create
+            if(parameter != None):
+                profile = User.objects.get(id=parameter)
+            else:
+                profile = User.objects.get(id=request.user.id)
+
+            
             serializer = ProfileSerializer(data=request.data)
             if serializer.is_valid():
-                serializer.save(user=request.user)
+                serializer.save(user=profile)
                 return Response(serializer.data)
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -312,9 +326,8 @@ class ProfileImage(APIView):
             serializer = ProfileSerializer(profile)
             return Response(serializer.data)
         except Profile.DoesNotExist:
-            return Response('/static/default.jpg',status = status.HTTP_204_NO_CONTENT)
-
-
+            return Response({"avatar":"/static/default.jpg"},status = status.HTTP_204_NO_CONTENT)
+   
 
 class ExamplePagination(pagination.PageNumberPagination):       
        page_size = 6
@@ -444,7 +457,9 @@ class DriveTestSessionViewSet(ModelViewSet):
     @action(detail=False)
     def dtsessionsFiltered(self,request,group_id, technician_id): # filtered using group id and technician id
             queryset = self.get_queryset().filter(Q(dtTeam=group_id) | Q(technicien=technician_id))
-            return Response(queryset, status=status.HTTP_200_OK)
+            serializer= self.get_serializer(queryset, many=True)
+
+            return Response(serializer.data, status=status.HTTP_200_OK)
     
     @action(detail=False)
     def statsOnSessions(self,request): # filtered using group id and technician id
@@ -453,8 +468,9 @@ class DriveTestSessionViewSet(ModelViewSet):
             LastWeek= DtSession.objects.values("start_time","end_Time").filter(start_time__gte=now().date()-datetime.timedelta(7),end_Time__lte=now().date()).count()
             current= DtSession.objects.filter(start_time__lte=now(),end_Time__gte=now())
             serializer= self.get_serializer(current, many=True)
-
-            return Response({"lastweek":LastWeek,"percentage":LastWeek*100/BeforeLastWeek,"testsPerUOP":queryset,"currentSessions":serializer.data}, status=status.HTTP_200_OK)
+            taskprogress= DtSession.objects.order_by().values("site").distinct().count()
+            numberofsites= ManagedObject.objects.count()
+            return Response({"lastweek":LastWeek,"percentage":LastWeek*100/BeforeLastWeek,"testsPerUOP":queryset,"currentSessions":serializer.data, "taskProgress": (taskprogress/numberofsites)*100}, status=status.HTTP_200_OK)
     
     @action(detail=False)
     def has_session(self,request,site_id):

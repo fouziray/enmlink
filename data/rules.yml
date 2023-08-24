@@ -16,3 +16,31 @@ rules:
   steps:
   - intent: nlu_fallback
   - action: utter_rephrase
+
+
+- rule: session_extension_rule
+  steps:
+  - intent: ask_session_extension
+  - action: action_extend_session
+
+
+- rule: finishing_test_rule
+  steps:
+  - intent: finishing_test
+  - action: utter_finishing_test
+
+- rule: rollback_rule
+  steps:
+  - intent: ask_Rollback
+  - action: action_rollback
+
+  
+- rule: check_all_tech_rule
+  steps:
+  - intent: check_all_techs
+  - action: action_status_tech
+
+- rule: status_rule
+  steps:
+  - intent: ask_status
+  - action: action_status_tech

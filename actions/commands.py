@@ -28,7 +28,7 @@ class Command:
       #  enmscripting.close(self.session)
         pass
     def execute(self,command):
-
+        print("this is executed command"+str(command))
         return command
 
 
@@ -48,6 +48,7 @@ def format(l, tech):
 
 
 def manageCodeSite(codeSite):     # permet de connaitre la technologie a tester dans le site 2G , 3G , 4G
+        print("code site is c"+str(codeSite))
         site4g=None
         site3g=None
         site4gTDD=None
@@ -62,10 +63,11 @@ def manageCodeSite(codeSite):     # permet de connaitre la technologie a tester 
             site4gTDD = codeSite
         else:
             site2g = codeSite
-       
+        #print("list out of managed code site"+str([site2g , site3g , site4g , site4gTDD]))
         return[site2g , site3g , site4g , site4gTDD]
 
 def manageCodeSiteSector(codeSite , bande , sector):
+        #print("parametres"+str(codeSite)+" "+str(bande)+" "+str(sector))
         sector1_2g_b1=None
         sector2_2g_b1=None
         sector3_2g_b1=None
@@ -85,10 +87,13 @@ def manageCodeSiteSector(codeSite , bande , sector):
         sector2_3g_b2=None
         sector3_3g_b2=None
         sites = manageCodeSite(codeSite)
+        #print("list inside sectors manage"+str(sites))
         site2g = sites[0]
         site3g = sites[1]
         site4gFDD = sites[2]
         site4gTDD = sites[3]
+        sector="\t".join(sector)
+        #print("sector"+str(sector))
         # 1 cas site 2G
         if(site2g):
             if ('900' in bande):
@@ -105,7 +110,7 @@ def manageCodeSiteSector(codeSite , bande , sector):
                     sector2_2g_b2 = site2g + 'E'
                 if('3' in sector):
                     sector3_2g_b2 = site2g + 'F'
-           
+            #print("hfhef"+str([sector1_2g_b1 , sector2_2g_b1 , sector3_2g_b1 , sector1_2g_b2 , sector2_2g_b2 , sector3_2g_b2]))
             return[sector1_2g_b1 , sector2_2g_b1 , sector3_2g_b1 , sector1_2g_b2 , sector2_2g_b2 , sector3_2g_b2]
 
         # 2eme cas technologie 3G
@@ -114,17 +119,17 @@ def manageCodeSiteSector(codeSite , bande , sector):
                 if('1' in sector): 
                     sector1_3g_b1 = site3g      # 1st sector end with 'U' by default
                 if('2' in sector):
-                    sector2_3g_b1 = site3g - 'U' + 'V'
+                    sector2_3g_b1 = 'V'.join(site3g.rsplit(site3g[-1:], 1)) #site3g - 'U' + 'V'
                 if('3' in sector):
-                    sector3_3g_b1 = site3g - 'U' + 'W'
+                    sector3_3g_b1 = 'W'.join(site3g.rsplit(site3g[-1:], 1)) #site3g - 'U' + 'W'
             if ('2100' in bande):
                 if('1' in sector): 
-                    sector1_3g_b2 = site3g - 'U' + 'X'
+                    sector1_3g_b2 = 'X'.join(site3g.rsplit(site3g[-1:], 1)) #site3g - 'U' + 'X'
                 if('2' in sector):
-                    sector2_3g_b2 = site3g - 'U' + 'Y'
+                    sector2_3g_b2 = 'Y'.join(site3g.rsplit(site3g[-1:], 1))#site3g - 'U' + 'Y'
                 if('3' in sector):
-                    sector3_3g_b2 = site3g - 'U' + 'Z'
-           
+                    sector3_3g_b2 = 'Z'.join(site3g.rsplit(site3g[-1:], 1))#site3g - 'U' + 'Z'
+            #print("hehehe"+str([sector1_3g_b1 , sector2_3g_b1 , sector3_3g_b1 , sector1_3g_b2 , sector2_3g_b2 , sector3_3g_b2]))
             return[sector1_3g_b1 , sector2_3g_b1 , sector3_3g_b1 , sector1_3g_b2 , sector2_3g_b2 , sector3_3g_b2]
 
 
@@ -143,10 +148,10 @@ def manageCodeSiteSector(codeSite , bande , sector):
                     sector2_4g_b2 = site4gFDD + 'S'
                 if('3' in sector):
                     sector3_4g_b2 = site4gFDD + 'T'
-            
+            #print("hehee4gfdd"+str([sector1_4g_b1 , sector2_4g_b1 , sector3_4g_b1 , sector1_4g_b2 , sector2_4g_b2 , sector3_4g_b2]))
             return[sector1_4g_b1 , sector2_4g_b1 , sector3_4g_b1 , sector1_4g_b2 , sector2_4g_b2 , sector3_4g_b2]
-
-
+        #print("manageCodeSiteSector"+str(sites))
+        return []
 
 
        
@@ -289,8 +294,7 @@ class g3rncCommand(Command):
             f1 = open(file)
             g3_data_json = json.load(f1)
             for row in g3_data_json:
-                cmd = "cmedit set * UtranCell.(UtranCellId==" + row[
-                    'UtranCellId'] + "*,uarfcnDl!=3070) administrativeState=" + row['administrativeState']
+                cmd = "cmedit set * UtranCell.(UtranCellId==" + row['UtranCellId'] + "*,uarfcnDl!=3070) administrativeState=" + row['administrativeState']
                 listcmd.append(cmd)
             return listcmd
         return cmd
@@ -301,7 +305,7 @@ class g3rncCommand(Command):
         g3_data_json = json.load(f)
         for row in g3_data_json:
             command = self.set(row['UtranCellId'],row['administrativeState'])
-            print(command)
+            #print(command)
 
 
 
@@ -394,7 +398,7 @@ class RetCommand(Command):
             command = self.tiltCOmmand(row['NodeId'], row['AntennaUnitGroupId'], row['AntennaNearUnitId'],
                                        row['RetSubUnitId'], row['electricalAntennaTilt'])
             f1.append(command)
-            print(command)
+            #print(command)
         return f1
 
 
