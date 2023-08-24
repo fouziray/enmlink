@@ -29,6 +29,7 @@ intents:
   - ask_pci
   - inform_throughput
   - inform_throughput_good
+  - nlu_fallback
 entities:
   - Sector
   - Tech2g
@@ -282,7 +283,7 @@ responses:
   utter_reject:
   - text: "No "
 
-
+  
   utter_throughput_good:
   - text: "ok! great throughput"
   
