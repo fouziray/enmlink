@@ -5,31 +5,31 @@ intents:
   - goodbye
   - affirm
   - deny
-  - mood_great
-  - mood_unhappy
+#  - mood_great
+#  - mood_unhappy
   - bot_challenge
   - finishing_test
-  - stop
+#  - stop
   - ask_restart
-  - ask_optimisation
+#  - ask_optimisation
   - ask_lock
   - ask_unlock
   - ask_Ret
   - inform
   - Connection
-  - test_done
+#  - test_done
   - ask_help
   - check_request
   - ask_session_extension
   - inform_site
   - ask_Rollback
   - ask_status
-  - check_all_techs
+#  - check_all_techs
   - ask_csrf
-  - ask_pci
-  - inform_throughput
-  - inform_throughput_good
+ # - ask_pci
   - nlu_fallback
+  - inform_throughput/low
+  - inform_throughput/good
 entities:
   - Sector
   - Tech2g
@@ -283,7 +283,13 @@ responses:
   utter_reject:
   - text: "No "
 
-  
+  utter_rephrase:
+  - text: "I'm sorry i didn't understand that, please rephrase."
+
+  utter_default:
+  - text: "I'm sorry i didn't understand that, please rephrase"
+
+
   utter_throughput_good:
   - text: "ok! great throughput"
   

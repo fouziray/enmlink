@@ -1,0 +1,189 @@
+{
+  "ask_Ret": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 11,
+    "confused_with": {}
+  },
+  "goodbye": {
+    "precision": 0.8571428571428571,
+    "recall": 0.6666666666666666,
+    "f1-score": 0.75,
+    "support": 9,
+    "confused_with": {
+      "inform_throughput": 2,
+      "mood_great": 1
+    }
+  },
+  "inform_throughput": {
+    "precision": 0.8863636363636364,
+    "recall": 0.975,
+    "f1-score": 0.9285714285714285,
+    "support": 40,
+    "confused_with": {
+      "ask_help": 1
+    }
+  },
+  "ask_csrf": {
+    "precision": 0.3333333333333333,
+    "recall": 0.16666666666666666,
+    "f1-score": 0.2222222222222222,
+    "support": 6,
+    "confused_with": {
+      "ask_status": 2,
+      "inform_site": 1,
+      "deny": 1
+    }
+  },
+  "ask_pci": {
+    "precision": 0.8333333333333334,
+    "recall": 1.0,
+    "f1-score": 0.9090909090909091,
+    "support": 5,
+    "confused_with": {}
+  },
+  "mood_great": {
+    "precision": 0.5625,
+    "recall": 0.6428571428571429,
+    "f1-score": 0.6000000000000001,
+    "support": 14,
+    "confused_with": {
+      "affirm": 3,
+      "greet": 1
+    }
+  },
+  "greet": {
+    "precision": 0.8571428571428571,
+    "recall": 0.5454545454545454,
+    "f1-score": 0.6666666666666665,
+    "support": 11,
+    "confused_with": {
+      "mood_great": 4,
+      "ask_help": 1
+    }
+  },
+  "ask_Rollback": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 9,
+    "confused_with": {}
+  },
+  "finishing_test": {
+    "precision": 0.4,
+    "recall": 0.3333333333333333,
+    "f1-score": 0.3636363636363636,
+    "support": 6,
+    "confused_with": {
+      "affirm": 2,
+      "inform_site": 1
+    }
+  },
+  "Connection": {
+    "precision": 0.9090909090909091,
+    "recall": 0.9090909090909091,
+    "f1-score": 0.9090909090909091,
+    "support": 11,
+    "confused_with": {
+      "mood_great": 1
+    }
+  },
+  "ask_session_extension": {
+    "precision": 0.8823529411764706,
+    "recall": 0.9375,
+    "f1-score": 0.9090909090909091,
+    "support": 16,
+    "confused_with": {
+      "inform_throughput": 1
+    }
+  },
+  "ask_status": {
+    "precision": 0.7647058823529411,
+    "recall": 1.0,
+    "f1-score": 0.8666666666666666,
+    "support": 13,
+    "confused_with": {}
+  },
+  "ask_help": {
+    "precision": 0.8,
+    "recall": 0.7272727272727273,
+    "f1-score": 0.761904761904762,
+    "support": 11,
+    "confused_with": {
+      "ask_session_extension": 1,
+      "ask_pci": 1
+    }
+  },
+  "inform_site": {
+    "precision": 0.8333333333333334,
+    "recall": 0.9375,
+    "f1-score": 0.8823529411764706,
+    "support": 16,
+    "confused_with": {
+      "ask_unlock": 1
+    }
+  },
+  "ask_lock": {
+    "precision": 0.9411764705882353,
+    "recall": 1.0,
+    "f1-score": 0.9696969696969697,
+    "support": 16,
+    "confused_with": {}
+  },
+  "ask_restart": {
+    "precision": 1.0,
+    "recall": 0.8333333333333334,
+    "f1-score": 0.9090909090909091,
+    "support": 6,
+    "confused_with": {
+      "ask_status": 1
+    }
+  },
+  "deny": {
+    "precision": 0.8,
+    "recall": 0.5,
+    "f1-score": 0.6153846153846154,
+    "support": 8,
+    "confused_with": {
+      "inform_site": 1,
+      "goodbye": 1
+    }
+  },
+  "affirm": {
+    "precision": 0.5,
+    "recall": 0.45454545454545453,
+    "f1-score": 0.47619047619047616,
+    "support": 11,
+    "confused_with": {
+      "finishing_test": 2,
+      "mood_great": 1
+    }
+  },
+  "ask_unlock": {
+    "precision": 0.9,
+    "recall": 1.0,
+    "f1-score": 0.9473684210526316,
+    "support": 9,
+    "confused_with": {}
+  },
+  "accuracy": 0.8245614035087719,
+  "macro avg": {
+    "precision": 0.7926566080977846,
+    "recall": 0.769958988380041,
+    "f1-score": 0.7730013247122584,
+    "support": 228
+  },
+  "weighted avg": {
+    "precision": 0.8170616212992374,
+    "recall": 0.8245614035087719,
+    "f1-score": 0.8142750092501599,
+    "support": 228
+  },
+  "micro avg": {
+    "precision": 0.8245614035087719,
+    "recall": 0.8245614035087719,
+    "f1-score": 0.8245614035087719,
+    "support": 228
+  }
+}

@@ -8,7 +8,7 @@ from .commands import path, check_2g , check_3g , check_4gFDD , check_tilt , che
 import pandas as pd 
 import matplotlib.pyplot as plt
 path =  "./store_rollback/"
-
+import re
 from os.path import exists
 import os
 file_dir = os.path.dirname(os.path.abspath(__file__))
@@ -71,7 +71,7 @@ class ActionTechStatus(Action):
             dispatcher.utter_message("you haven't entered a code site")
             return[]
         
-        message = tracker.latest_message.text   
+        message = (tracker.latest_message)['text']   
         sites = manageCodeSite(codeSite)
         site2g = sites[0]
         site3g = sites[1]
@@ -200,7 +200,9 @@ class Action_Lock_tech(Action):
 
         if(site4g):
             g4_obj = g4FDDCommand()
-            
+            response1_4g=None
+            response_4g=None
+            response2_4g=None
             # recuperer la bande
             bande = tracker.get_slot("Tech4g")
             if(bande == None):
@@ -233,14 +235,16 @@ class Action_Lock_tech(Action):
             
 
             if(response1_4g):
-                dispatcher.utter_message("technologie 4G bande L1800 blocked")
+                dispatcher.utter_message("technologie 4G bande L1800 blocked"+response1_4g)
+             
             if(response2_4g) : 
-                dispatcher.utter_message("technoligie 4G bande L2100 blocked in bande")
+                dispatcher.utter_message("technoligie 4G bande L2100 blocked in bande"+response2_4g)
+    
             if(response_4g):
-                dispatcher.utter_message("technologie 4G blocked")
-       
-       
-        return []
+                dispatcher.utter_message("technologie 4G blocked"+response_4g)
+               
+
+        return [SlotSet("Tech4g",None)]
        
      
 
@@ -334,10 +338,16 @@ class Action_Unlock_tech(Action):
 
         if(site4g):
             g4_obj = g4FDDCommand()
-            
+            response_4g= None
+            response1_4g= None
+            response2_4g= None
             # recuperer la bande
             bande = tracker.get_slot("Tech4g")
-            if(codeSite == None):
+            if (bande is None):
+                dispatcher.utter_message("No band provided")
+                return []
+            
+            if(codeSite is None):
                 dispatcher.utter_message("you haven't entered the technologie or bande for 4G")
                 return[]
             bande1 = 'L1800'
@@ -366,11 +376,11 @@ class Action_Unlock_tech(Action):
 
 
             if(response1_4g):
-                dispatcher.utter_message("technologie 4G bande L1800 Unlocked")
+                dispatcher.utter_message("technology 4G bande L1800 Unlocked")
             if(response2_4g) : 
-                dispatcher.utter_message("technoligie 4G bande L2100 Unlocked in bande")
+                dispatcher.utter_message("technology 4G bande L2100 Unlocked in first band")
             if(response_4g):
-                dispatcher.utter_message("technologie 4G Unlocked")
+                dispatcher.utter_message(" all 4G technology Unlocked")
        
        
         return []
@@ -489,6 +499,7 @@ class ActionThroughput(Action):
             return[]
         
         throughput = tracker.get_slot("throughput_slot")
+        throughput=[ int(s) for s in  re.findall(r'\b\d+\b', throughput)][0]
         if(throughput == None):
             dispatcher.utter_message("what is the value of the throughput you 've got ?")
             return[]
@@ -745,3 +756,15 @@ class ActionUnlockSector(Action):
             dispatcher.utter_message(text= "Sorry but i didn't recognize the band for the sector you want to Unlock")
             return[]
 
+"""
+    class ActionExtend(SessionAction):
+   
+    def name(self) -> Text:
+        return "action_extend_session"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        time="50"
+ """       

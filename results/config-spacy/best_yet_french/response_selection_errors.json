@@ -1,0 +1,58 @@
+[
+  {
+    "text": "j'ai eu un problème de débit",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.5371845364570618
+    }
+  },
+  {
+    "text": "débit non atteint",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.991381824016571
+    }
+  },
+  {
+    "text": "résultats UL bons",
+    "intent_response_key_target": "inform_throughput/good",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/low",
+      "confidence": 0.9999998807907104
+    }
+  },
+  {
+    "text": "je ne peux pas me connecter au site",
+    "intent_response_key_target": "Connection/cannotconnect",
+    "intent_response_key_prediction": {
+      "name": "Connection/connected",
+      "confidence": 0.9993840456008911
+    }
+  },
+  {
+    "text": "des difficultés à se connecter",
+    "intent_response_key_target": "Connection/cannotconnect",
+    "intent_response_key_prediction": {
+      "name": "Connection/connected",
+      "confidence": 0.9985837936401367
+    }
+  },
+  {
+    "text": "je suis déconnecté, impossible de rejoindre la cellule",
+    "intent_response_key_target": "Connection/cannotconnect",
+    "intent_response_key_prediction": {
+      "name": "Connection/connected",
+      "confidence": 0.9977425336837769
+    }
+  },
+  {
+    "text": "résultats toujours bas",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.9999402761459351
+    }
+  }
+]

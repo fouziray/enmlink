@@ -1,0 +1,34 @@
+[
+  {
+    "text": "having difficulties connecting",
+    "intent_response_key_target": "Connection/cannotconnect",
+    "intent_response_key_prediction": {
+      "name": "Connection/connected",
+      "confidence": 0.9721800088882446
+    }
+  },
+  {
+    "text": "thanks you i'm connected now",
+    "intent_response_key_target": "Connection/connected",
+    "intent_response_key_prediction": {
+      "name": "Connection/cannotconnect",
+      "confidence": 0.5305905342102051
+    }
+  },
+  {
+    "text": "same throughput",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.9991276860237122
+    }
+  },
+  {
+    "text": "UL good results",
+    "intent_response_key_target": "inform_throughput/good",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/low",
+      "confidence": 0.6887475252151489
+    }
+  }
+]

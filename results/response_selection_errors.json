@@ -1,0 +1,42 @@
+[
+  {
+    "text": "mauvais débit",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.7821335792541504
+    }
+  },
+  {
+    "text": "Tous les secteurs DL mauvais",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.999931812286377
+    }
+  },
+  {
+    "text": "débit non atteint",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 1.0
+    }
+  },
+  {
+    "text": "je ne peux pas me connecter au site",
+    "intent_response_key_target": "Connection/cannotconnect",
+    "intent_response_key_prediction": {
+      "name": "Connection/connected",
+      "confidence": 0.9444737434387207
+    }
+  },
+  {
+    "text": "j'ai eu un problème de débit",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 1.0
+    }
+  }
+]

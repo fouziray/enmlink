@@ -1,7 +1,5 @@
 version: "3.1"
 
-nlu:
-
 - regex: Person 
     - ^[A-Za-z]{1,7}$
 
@@ -18,45 +16,36 @@ nlu:
     - hi it's me the drive tester [Fatah](Person)
     - hello there
     - good morning
-    - good evening
-    - moin
     - hey there
     - let's go
     - hey dude
     - hey there
     - salam it's [Djamila](Person) 
     - salut c'est [Aziz](Person) 
-    - goodmorning
-    - goodevening
     - good afternoon
 
 - intent: goodbye
   examples: |
-    - cu
     - good by
-    - cee you later
+    - see you later
     - good night
     - bye
     - goodbye
     - have a nice day
     - see you around
     - bye bye
-    - see you later
-    - see you around
-    - see you later
     - talk to you later
 
 - intent: deny
   examples: |
     - no
-    - n
     - never
     - I don't think so
     - don't like that
     - no way
     - not really
-    - site not availble 
-    - site is not planed for ssv 
+    - not available 
+    - site is not planned 
 
 
 - intent: mood_great
@@ -76,22 +65,6 @@ nlu:
     - so good
     - so perfect
 
-- intent: mood_unhappy
-  examples: |
-    - my day was horrible
-    - I am sad
-    - I don't feel very well
-    - I am disappointed
-    - super sad
-    - I'm so sad
-    - sad
-    - very sad
-    - unhappy
-    - not good
-    - not very good
-    - extremly sad
-    - so saad
-    - so sad
 
 - intent: bot_challenge
   examples: |
@@ -109,7 +82,7 @@ nlu:
     - correct
     - ok 
     - fine 
-    - not a problem 
+    - yes sure no problem 
     - okey
     - done
     - is ok 
@@ -149,7 +122,6 @@ nlu:
   examples: |
     - maxtilt [S1](Sector)
     - downtilt [S1](Sector)
-
     - maxtilt [G900](Tech2g) [S1](Sector)
     - maxtilt [U2100](Tech3g) [S1](Sector)
     - maxtilt [L2100](Tech4g) [S1](Sector)
@@ -171,7 +143,7 @@ nlu:
   examples: |
     - I didnt get the throughput  
     - throughput non atteint  
-
+    
 
 - intent: ask_Rollback
   examples: |
@@ -192,15 +164,24 @@ nlu:
     - the site has congested
     - conditions are bad  
 
-- intent: Connection
+- intent: Connection/cannotconnect
   examples: |
     - failed to connect 
-    - connection failed 
+    - connection failed [s3](Sector)
     - i can’t connect to the site  
-    - is activated 
+    - can't connect to [S2](Sector) and [L2100](Tech4g)    
+    - i'm disconnected , can't reach cell
+    - having difficulties connecting
+ 
+- intent: Connection/connected
+  examples: |
+    - its activated i'm in 
     - connecting 
     - i’m connected 
-    - can't connect to [S2](Sector) and [L2100](Tech4g)    
+    - i'm in
+    - thanks you i'm connected now
+    
+
 
 
 
@@ -218,14 +199,23 @@ nlu:
     - can i reach someone via call
     - can you provide phone number
 
-- intent: check_request
+
+- intent: ask_status
   examples: |
-    - Do you unlock all sectors ?
-    - is [L2100](Tech3g) locked ? 
-    - please check [sector 1](Sector) locked ? 
-    - [s1](Sector) ? 
-    - can you confirm [sector 2](Sector) ? 
-    - please check site [42105L](code_site) [sector 1](Sector) [L2100](Tech4g)
+    - check the status of the network [2G](Tech2g) for me
+    - what is the current status of all the existing technologies [2g](Tech2g)[3g](Tech3g) [4g](Tech4g)
+    - check state for [2g](Tech2g) only
+    - provide status of [3g](Tech3g) 
+    - tell me what is state of [4g](Tech4g)
+    - all technologies status 
+    - existing technologies  
+    - current technologies 
+    - supported technologies 
+    - handled technologies
+    - give me status of all the site
+    - tell me state of cells
+    - what is the status of current site
+
 
 - intent: ask_session_extension
   examples: |
@@ -265,36 +255,34 @@ nlu:
     - At site [42169L](code_site)
     - I'm currently at [34025U](code_site)
     - Site [58664L](code_site) is my current location. Is there anything more specific you need from me there?
-- intent: inform_throughput
+- intent: inform_throughput/low
   examples: |
     - bad throughput
-    - not good 
-    - Same result
-    - [25 Mb/s]{"entity" : "throughput", "role" : "throughput_DL"}
-    - [70Mb/s]{"entity" : "throughput", "role" : "throughput_DL"}
+    - [25]{"entity" : "throughput", "role" : "throughput_DL"} Mb/s
+    - [70]{"entity" : "throughput", "role" : "throughput_DL"} Mb/s
     - same throughput
-    - still low 
-    - [low ca]{"entity" : "throughput", "role" : "throughput_ca"}
-    - i had [throughput problem]{"entity" : "throughput", "role" : "throughput_DL"}
-    - I get [153 mb avr]{"entity" : "throughput", "role" : "throughput_DL"}
+    - still low results
+    - low ca [40]{"entity" : "throughput", "role" : "throughput_ca"}
+    - i had throughput problem
+    - I get [153 mb ]{"entity" : "throughput", "role" : "throughput_DL"} avr 
     - [Ca avr 60 mb]{"entity" : "throughput", "role" : "throughput_ca"}
-    - [Avr ca 75]{"entity" : "throughput", "role" : "throughput_ca"}
+    - [ Avr ca 75]{"entity" : "throughput", "role" : "throughput_ca"}
     - i have a problem with ca Max [throughput 35]{"entity" : "throughput", "role" : "throughput_ca"}
-    - Low [throughput DL]{"entity" : "throughput", "role" : "throughput_DL"}
-    - Low [throughput UL]{"entity" : "throughput", "role" : "throughput_UL"}
+    - Low throughput [DL]{"entity" : "throughput", "role" : "throughput_DL"}
+    - Low throughput [UL]{"entity" : "throughput", "role" : "throughput_UL"}
     - i have a problem with [UL]{"entity" : "throughput", "role" : "throughput_UL"}
-    - [DL bad]{"entity" : "throughput", "role" : "throughput_DL"} all sectors
-    - [DL bad]{"entity" : "throughput", "role" : "throughput_DL"} sector 1
-    - [Dynamic DL 30]{"entity" : "throughput", "role" : "throughput_dyn"}
-    - [UL good results]{"entity" : "throughput", "role" : "throughput_UL"} 
-    - [Average 11]{"entity" : "throughput", "role" : "throughput_DL"}
-    - All sectors [DL bad]{"entity" : "throughput", "role" : "throughput_DL"}
-    - S3 [30]{"entity" : "throughput", "role" : "throughput_DL"}
-    - S1 [25]{"entity" : "throughput", "role" : "throughput_DL"}
+    - DL bad [25]{"entity" : "throughput", "role" : "throughput_DL"} all sectors
+    - DL bad [10]{"entity" : "throughput", "role" : "throughput_DL"} sector 1
+    - Dynamic DL [30]{"entity" : "throughput", "role" : "throughput_dyn"} is very low
+    - UL bad results [50]{"entity" : "throughput", "role" : "throughput_UL"} 
+    - Average [11]{"entity" : "throughput", "role" : "throughput_DL"} downlink 
+    - All sectors DL bad 
+    - [S3](Sector) low [30]{"entity" : "throughput", "role" : "throughput_DL"}
+    - [S1](Sector) low [25]{"entity" : "throughput", "role" : "throughput_DL"}
     - [Dynamic 20]{"entity" : "throughput", "role" : "throughput_dyn"}
     - Low Thrghpt [DL average 50 Mbs]{"entity" : "throughput", "role" : "throughput_DL"} in both band
 
-- intent: inform_throughput_good
+- intent: inform_throughput/good
   examples: |
     - throughput good 
     - throughput dl better 
@@ -311,6 +299,7 @@ nlu:
     - i have good thrgpt here
     - thrghpt is high
     - throughput is high
+    - UL good results
     
 
 
@@ -328,30 +317,17 @@ nlu:
 
 
 
-- intent: ask_status
-  examples: |
-    - check the status of the network [2G](Tech2g) for me
-    - what is the current status of all the existing technologies [2g](Tech2g)[3g](Tech3g) [4g](Tech4g)
 
-- intent : check_all_techs
-  examples: |
-    - all technologies status 
-    - existing technologies  
-    - current technologies 
-    - supported technologies 
-    - handled technologies
-    - give me status of all the site
-    - tell me state of mos
-    - what is the status of current site
-    - 
+  
 
-- intent: ask_csrf  # call the optimiser
+- intent: ask_csrf  # call the optimiser, this is our out of scope intent
   examples: |
     - what about csrf 
     - Also issue of CSFB about the site [43155U](code_site)
-    - cell not basculate to other technology 
+    - cell doesn't not basculate to other technology 
     - ca not found 
     - carrier agreggation not working 
+    - ca 
 
 - intent: ask_pci
   examples: |

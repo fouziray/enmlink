@@ -1,634 +1,226 @@
 [
   {
-    "text": "good afternoon",
-    "intent": "greet",
-    "intent_prediction": {
-      "name": "inform_throughput_good",
-      "confidence": 0.8562633991241455
-    }
-  },
-  {
-    "text": "cu",
+    "text": "à plus tard",
     "intent": "goodbye",
-    "intent_prediction": {
-      "name": "affirm",
-      "confidence": 0.5504035353660583
-    }
-  },
-  {
-    "text": "not good",
-    "intent": "mood_unhappy",
-    "intent_prediction": {
-      "name": "inform_throughput",
-      "confidence": 0.9591034054756165
-    }
-  },
-  {
-    "text": "not a problem",
-    "intent": "affirm",
-    "intent_prediction": {
-      "name": "deny",
-      "confidence": 0.7765734791755676
-    }
-  },
-  {
-    "text": "is L2100 locked ?",
-    "intent": "check_request",
-    "intent_prediction": {
-      "name": "ask_lock",
-      "confidence": 0.9819703102111816
-    }
-  },
-  {
-    "text": "5 mins please",
-    "intent": "ask_session_extension",
-    "intent_prediction": {
-      "name": "inform_throughput",
-      "confidence": 0.877534806728363
-    }
-  },
-  {
-    "text": "i had throughput problem",
-    "intent": "inform_throughput",
-    "intent_prediction": {
-      "name": "inform_throughput_good",
-      "confidence": 0.9680588841438293
-    }
-  },
-  {
-    "text": "cell not basculate to other technology",
-    "intent": "ask_csrf",
-    "intent_prediction": {
-      "name": "check_all_techs",
-      "confidence": 0.883538544178009
-    }
-  },
-  {
-    "text": "bien sûr",
-    "intent": "affirm",
-    "intent_prediction": {
-      "name": "mood_great",
-      "confidence": 0.9312014579772949
-    }
-  },
-  {
-    "text": "jamais",
-    "intent": "deny",
-    "intent_prediction": {
-      "name": "mood_great",
-      "confidence": 0.9526426196098328
-    }
-  },
-  {
-    "text": "pas du tout",
-    "intent": "deny",
-    "intent_prediction": {
-      "name": "mood_unhappy",
-      "confidence": 0.517903745174408
-    }
-  },
-  {
-    "text": "très bien",
-    "intent": "mood_great",
-    "intent_prediction": {
-      "name": "mood_unhappy",
-      "confidence": 0.6165637969970703
-    }
-  },
-  {
-    "text": "extrêmement bien",
-    "intent": "mood_great",
-    "intent_prediction": {
-      "name": "mood_unhappy",
-      "confidence": 0.8344526290893555
-    }
-  },
-  {
-    "text": "je ne me sens pas très bien",
-    "intent": "mood_unhappy",
-    "intent_prediction": {
-      "name": "deny",
-      "confidence": 0.43577075004577637
-    }
-  },
-  {
-    "text": "moin",
-    "intent": "greet",
-    "intent_prediction": {
-      "name": "ask_csrf",
-      "confidence": 0.17931178212165833
-    }
-  },
-  {
-    "text": "let's go",
-    "intent": "greet",
-    "intent_prediction": {
-      "name": "goodbye",
-      "confidence": 0.7602332830429077
-    }
-  },
-  {
-    "text": "no way",
-    "intent": "deny",
-    "intent_prediction": {
-      "name": "goodbye",
-      "confidence": 0.4550230801105499
-    }
-  },
-  {
-    "text": "I am going to save the world",
-    "intent": "mood_great",
     "intent_prediction": {
       "name": "ask_session_extension",
-      "confidence": 0.2734559178352356
+      "confidence": 0.38007912039756775
     }
   },
   {
-    "text": "unhappy",
-    "intent": "mood_unhappy",
+    "text": "non",
+    "intent": "deny",
     "intent_prediction": {
-      "name": "goodbye",
-      "confidence": 0.5975047945976257
+      "name": "ask_status",
+      "confidence": 0.1742415428161621
     }
   },
   {
-    "text": "yes",
+    "text": "c'est fait",
     "intent": "affirm",
     "intent_prediction": {
-      "name": "goodbye",
-      "confidence": 0.5664855241775513
+      "name": "ask_help",
+      "confidence": 0.44416698813438416
     }
   },
   {
-    "text": "Also issue of CSFB about the site 43155U",
-    "intent": "ask_csrf",
-    "intent_prediction": {
-      "name": "inform_site",
-      "confidence": 0.20773835480213165
-    }
-  },
-  {
-    "text": "restart all technologies",
-    "intent": "ask_restart",
-    "intent_prediction": {
-      "name": "check_all_techs",
-      "confidence": 0.8792986869812012
-    }
-  },
-  {
-    "text": "ssv done",
-    "intent": "finishing_test",
-    "intent_prediction": {
-      "name": "deny",
-      "confidence": 0.9735575318336487
-    }
-  },
-  {
-    "text": "done thanks",
-    "intent": "finishing_test",
-    "intent_prediction": {
-      "name": "affirm",
-      "confidence": 0.8645095825195312
-    }
-  },
-  {
-    "text": "au revoir",
-    "intent": "goodbye",
-    "intent_prediction": {
-      "name": "greet",
-      "confidence": 0.805976152420044
-    }
-  },
-  {
-    "text": "ca va",
-    "intent": "mood_great",
+    "text": "j'ai besoin de déverrouiller U900",
+    "intent": "ask_unlock",
     "intent_prediction": {
       "name": "ask_lock",
-      "confidence": 0.517224133014679
+      "confidence": 0.5537455081939697
     }
   },
   {
-    "text": "good by",
+    "text": "à bientôt",
     "intent": "goodbye",
-    "intent_prediction": {
-      "name": "mood_great",
-      "confidence": 0.4128921627998352
-    }
-  },
-  {
-    "text": "site is not planed for ssv",
-    "intent": "deny",
-    "intent_prediction": {
-      "name": "finishing_test",
-      "confidence": 0.3526400923728943
-    }
-  },
-  {
-    "text": "of course",
-    "intent": "affirm",
-    "intent_prediction": {
-      "name": "check_all_techs",
-      "confidence": 0.3417457342147827
-    }
-  },
-  {
-    "text": "done",
-    "intent": "affirm",
-    "intent_prediction": {
-      "name": "ask_help",
-      "confidence": 0.29285675287246704
-    }
-  },
-  {
-    "text": "is activated",
-    "intent": "Connection",
     "intent_prediction": {
       "name": "affirm",
-      "confidence": 0.5235602259635925
+      "confidence": 0.9291256070137024
     }
   },
   {
-    "text": "i need a contact please",
-    "intent": "ask_help",
-    "intent_prediction": {
-      "name": "ask_pci",
-      "confidence": 0.44214320182800293
-    }
-  },
-  {
-    "text": "s1 ?",
-    "intent": "check_request",
-    "intent_prediction": {
-      "name": "ask_help",
-      "confidence": 0.6858653426170349
-    }
-  },
-  {
-    "text": "same throughput",
-    "intent": "inform_throughput",
-    "intent_prediction": {
-      "name": "inform_throughput_good",
-      "confidence": 0.9509356021881104
-    }
-  },
-  {
-    "text": "carrier agreggation not working",
-    "intent": "ask_csrf",
-    "intent_prediction": {
-      "name": "Connection",
-      "confidence": 0.49425145983695984
-    }
-  },
-  {
-    "text": "problems solved",
-    "intent": "finishing_test",
-    "intent_prediction": {
-      "name": "affirm",
-      "confidence": 0.975387692451477
-    }
-  },
-  {
-    "text": "bonsoir",
-    "intent": "greet",
-    "intent_prediction": {
-      "name": "goodbye",
-      "confidence": 0.4196855127811432
-    }
-  },
-  {
-    "text": "bon après-midi",
-    "intent": "greet",
-    "intent_prediction": {
-      "name": "bot_challenge",
-      "confidence": 0.31960806250572205
-    }
-  },
-  {
-    "text": "bonne nuit",
-    "intent": "goodbye",
-    "intent_prediction": {
-      "name": "Connection",
-      "confidence": 0.3862728774547577
-    }
-  },
-  {
-    "text": "salut",
-    "intent": "goodbye",
-    "intent_prediction": {
-      "name": "greet",
-      "confidence": 0.9990376234054565
-    }
-  },
-  {
-    "text": "pas vraiment",
-    "intent": "deny",
-    "intent_prediction": {
-      "name": "mood_unhappy",
-      "confidence": 0.5436818599700928
-    }
-  },
-  {
-    "text": "super !",
-    "intent": "mood_great",
-    "intent_prediction": {
-      "name": "mood_unhappy",
-      "confidence": 0.3518286943435669
-    }
-  },
-  {
-    "text": "merveilleux",
-    "intent": "mood_great",
-    "intent_prediction": {
-      "name": "greet",
-      "confidence": 0.46007412672042847
-    }
-  },
-  {
-    "text": "merci pour ca",
-    "intent": "mood_great",
-    "intent_prediction": {
-      "name": "deny",
-      "confidence": 0.19711540639400482
-    }
-  },
-  {
-    "text": "malheureux",
-    "intent": "mood_unhappy",
-    "intent_prediction": {
-      "name": "goodbye",
-      "confidence": 0.6886184215545654
-    }
-  },
-  {
-    "text": "good night",
-    "intent": "goodbye",
-    "intent_prediction": {
-      "name": "inform_throughput_good",
-      "confidence": 0.4456436038017273
-    }
-  },
-  {
-    "text": "have a nice day",
-    "intent": "goodbye",
-    "intent_prediction": {
-      "name": "inform_throughput",
-      "confidence": 0.2653060555458069
-    }
-  },
-  {
-    "text": "not really",
-    "intent": "deny",
-    "intent_prediction": {
-      "name": "mood_unhappy",
-      "confidence": 0.8201480507850647
-    }
-  },
-  {
-    "text": "I am feeling very good",
-    "intent": "mood_great",
-    "intent_prediction": {
-      "name": "mood_unhappy",
-      "confidence": 0.986354649066925
-    }
-  },
-  {
-    "text": "fine",
+    "text": "d'accord",
     "intent": "affirm",
     "intent_prediction": {
-      "name": "finishing_test",
-      "confidence": 0.2951667606830597
-    }
-  },
-  {
-    "text": "??",
-    "intent": "ask_help",
-    "intent_prediction": {
-      "name": "check_request",
-      "confidence": 0.3654917776584625
-    }
-  },
-  {
-    "text": "i have a question ?",
-    "intent": "ask_help",
-    "intent_prediction": {
-      "name": "ask_session_extension",
-      "confidence": 0.4282852113246918
-    }
-  },
-  {
-    "text": "could you help me",
-    "intent": "ask_help",
-    "intent_prediction": {
-      "name": "bot_challenge",
-      "confidence": 0.3983585834503174
-    }
-  },
-  {
-    "text": "i need more 15mns",
-    "intent": "ask_session_extension",
-    "intent_prediction": {
-      "name": "ask_pci",
-      "confidence": 0.19836317002773285
-    }
-  },
-  {
-    "text": "i'm availble 34020L",
-    "intent": "inform_site",
-    "intent_prediction": {
       "name": "deny",
-      "confidence": 0.8989046812057495
+      "confidence": 0.45887553691864014
     }
   },
   {
-    "text": "not good",
-    "intent": "inform_throughput",
+    "text": "peux-tu déblocker G900",
+    "intent": "ask_unlock",
     "intent_prediction": {
-      "name": "mood_unhappy",
-      "confidence": 0.9984330534934998
+      "name": "ask_lock",
+      "confidence": 0.9914304614067078
     }
   },
   {
-    "text": "all sectors throughput good",
-    "intent": "inform_throughput_good",
+    "text": "c'est fait, s'il te plaît, reviens en arrière",
+    "intent": "ask_Rollback",
     "intent_prediction": {
-      "name": "inform_throughput",
-      "confidence": 0.7488954067230225
+      "name": "affirm",
+      "confidence": 0.5250918865203857
     }
   },
   {
-    "text": "tell me state of mos",
-    "intent": "check_all_techs",
-    "intent_prediction": {
-      "name": "mood_unhappy",
-      "confidence": 0.16304157674312592
-    }
-  },
-  {
-    "text": "what about csrf",
-    "intent": "ask_csrf",
-    "intent_prediction": {
-      "name": "ask_help",
-      "confidence": 0.4438093900680542
-    }
-  },
-  {
-    "text": "done with the site",
+    "text": "les problèmes sont tous résolus",
     "intent": "finishing_test",
     "intent_prediction": {
       "name": "inform_throughput",
-      "confidence": 0.1502942442893982
-    }
-  },
-  {
-    "text": "salut",
-    "intent": "greet",
-    "intent_prediction": {
-      "name": "goodbye",
-      "confidence": 0.9897602200508118
-    }
-  },
-  {
-    "text": "ça semble bien",
-    "intent": "affirm",
-    "intent_prediction": {
-      "name": "mood_great",
-      "confidence": 0.9431455135345459
-    }
-  },
-  {
-    "text": "incroyable",
-    "intent": "mood_great",
-    "intent_prediction": {
-      "name": "deny",
-      "confidence": 0.3984840214252472
-    }
-  },
-  {
-    "text": "hi it's me the drive tester Fatah",
-    "intent": "greet",
-    "intent_prediction": {
-      "name": "ask_pci",
-      "confidence": 0.19789588451385498
-    }
-  },
-  {
-    "text": "site not availble",
-    "intent": "deny",
-    "intent_prediction": {
-      "name": "inform_site",
-      "confidence": 0.8384177088737488
-    }
-  },
-  {
-    "text": "I don't feel very well",
-    "intent": "mood_unhappy",
-    "intent_prediction": {
-      "name": "mood_great",
-      "confidence": 0.987539529800415
-    }
-  },
-  {
-    "text": "not very good",
-    "intent": "mood_unhappy",
-    "intent_prediction": {
-      "name": "inform_throughput",
-      "confidence": 0.41749268770217896
-    }
-  },
-  {
-    "text": "that sounds good",
-    "intent": "affirm",
-    "intent_prediction": {
-      "name": "goodbye",
-      "confidence": 0.35616186261177063
-    }
-  },
-  {
-    "text": "Lock (sector 1)[Sector] please",
-    "intent": "ask_unlock",
-    "intent_prediction": {
-      "name": "check_request",
-      "confidence": 0.6328922510147095
-    }
-  },
-  {
-    "text": "(Sector 2)[Sector] of 74156, please lock.",
-    "intent": "ask_unlock",
-    "intent_prediction": {
-      "name": "check_request",
-      "confidence": 0.377689927816391
-    }
-  },
-  {
-    "text": "how do i reach drive test team",
-    "intent": "ask_help",
-    "intent_prediction": {
-      "name": "finishing_test",
-      "confidence": 0.4566349983215332
-    }
-  },
-  {
-    "text": "Do you unlock all sectors ?",
-    "intent": "check_request",
-    "intent_prediction": {
-      "name": "ask_unlock",
-      "confidence": 0.9324964880943298
-    }
-  },
-  {
-    "text": "ca not found",
-    "intent": "ask_csrf",
-    "intent_prediction": {
-      "name": "deny",
-      "confidence": 0.3064414858818054
+      "confidence": 0.9892863631248474
     }
   },
   {
     "text": "passe une bonne journée",
     "intent": "goodbye",
     "intent_prediction": {
-      "name": "mood_unhappy",
-      "confidence": 0.7379887104034424
+      "name": "deny",
+      "confidence": 0.34450969099998474
     }
   },
   {
-    "text": "effectivement",
-    "intent": "affirm",
-    "intent_prediction": {
-      "name": "mood_great",
-      "confidence": 0.6049639582633972
-    }
-  },
-  {
-    "text": "pas de problème",
-    "intent": "affirm",
-    "intent_prediction": {
-      "name": "mood_unhappy",
-      "confidence": 0.7973302602767944
-    }
-  },
-  {
-    "text": "je ne pense pas",
+    "text": "pas question",
     "intent": "deny",
     "intent_prediction": {
-      "name": "mood_unhappy",
-      "confidence": 0.9965664148330688
+      "name": "ask_help",
+      "confidence": 0.4626274108886719
     }
   },
   {
-    "text": "parfait",
-    "intent": "mood_great",
+    "text": "s'il te plaît, blocker S3",
+    "intent": "ask_lock",
     "intent_prediction": {
-      "name": "affirm",
-      "confidence": 0.5235667824745178
+      "name": "ask_unlock",
+      "confidence": 0.828420877456665
     }
   },
   {
-    "text": "c'est parfait",
-    "intent": "mood_great",
+    "text": "j'ai besoin d'un contact s'il vous plaît",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "ask_session_extension",
+      "confidence": 0.32177430391311646
+    }
+  },
+  {
+    "text": "restore l'etat du site",
+    "intent": "ask_Rollback",
     "intent_prediction": {
       "name": "affirm",
-      "confidence": 0.7581186890602112
+      "confidence": 0.21436169743537903
+    }
+  },
+  {
+    "text": "c'est fini",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.5241290330886841
+    }
+  },
+  {
+    "text": "au revoir",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "ask_help",
+      "confidence": 0.39042967557907104
+    }
+  },
+  {
+    "text": "au plaisir",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.6616213321685791
+    }
+  },
+  {
+    "text": "en effet",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "finishing_test",
+      "confidence": 0.27146679162979126
+    }
+  },
+  {
+    "text": "Secteur 1 [Sector], s'il te plaît, fermer le.",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.43135353922843933
+    }
+  },
+  {
+    "text": "Secteur 2 [Sector] de 74156, verrouille s'il te plaît.",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.8673121333122253
+    }
+  },
+  {
+    "text": "j'ai une question ?",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.6583048701286316
+    }
+  },
+  {
+    "text": "quel est l'état du site actuel",
+    "intent": "ask_status",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.6162862181663513
+    }
+  },
+  {
+    "text": "j'ai terminé avec le site",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.4496126174926758
+    }
+  },
+  {
+    "text": "bonne soirée",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "ask_help",
+      "confidence": 0.405048668384552
+    }
+  },
+  {
+    "text": "jamais",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "ask_help",
+      "confidence": 0.2851518988609314
+    }
+  },
+  {
+    "text": "correct",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "Connection",
+      "confidence": 0.7485343813896179
+    }
+  },
+  {
+    "text": "s'il te plaît, activer S3",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.7353278994560242
+    }
+  },
+  {
+    "text": "je veux la L2100 ouverte",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.30095672607421875
     }
   }
 ]

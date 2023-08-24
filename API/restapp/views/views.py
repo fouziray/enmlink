@@ -1,10 +1,11 @@
+import datetime
 import json
 from django.shortcuts import render
 
 #from django.contrib.auth.models import User 
 from django.http import Http404
 from restapp.serializers.eventSerializer import EventSerialize
-from restapp.serializers.serializers import ConvoSerializer, HelpProviderSerialize, ManagedObjectStateSerializer, ProfileSerializer, UserSerializer,SiteSerializer, TechnologySerializer , SiteSerializer2,GroupSerializer,DTSerializer, DTserializercreation
+from restapp.serializers.serializers import ConvoSerializer, HelpProviderSerialize, ManagedObjectStateSerializer, ProfileSerializer, UserSerializer,SiteSerializer, TechnologySerializer , SiteSerializer2,GroupSerializer,DTSerializer, DTserializercreation, MessageRasaBotSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
@@ -29,6 +30,7 @@ async_mode = None
 import os
 from django.http import HttpResponse
 import socketio
+import requests
 basedir = os.path.dirname(os.path.realpath(__file__))
 sio = socketio.Server(async_mode='eventlet')
 thread = None
@@ -44,6 +46,28 @@ def connection_bind(sid, data):
 @sio.on('disconnect')
 def test_disconnect(sid):
     pass
+class exchangeMessageRasa(APIView):
+        permission_classes = (permissions.AllowAny,)
+        def post(self, request, format=None):
+            api_url="http://localhost:5005/webhooks/rest/webhook"
+            serializer = MessageRasaBotSerializer(data=request.data)
+            if serializer.is_valid():
+                headers =  {"Content-Type":"application/json"}
+                response=requests.post(api_url, data=json.dumps(serializer.data),headers=headers)
+                return Response(response.json(), status=response.status_code)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class exchangeMessageRasaFrench(APIView):
+        permission_classes = (permissions.AllowAny,)
+        def post(self, request, format=None):
+            api_url="http://localhost:5005/webhooks/rest/webhook"
+            serializer = MessageRasaBotSerializer(data=request.data)
+            if serializer.is_valid():
+                headers =  {"Content-Type":"application/json"}
+                response=requests.post(api_url, data=json.dumps(serializer.data),headers=headers)
+                return Response(response.json(), status=response.status_code)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class UserList(APIView):
     permission_classes = (permissions.AllowAny,)
 
@@ -134,7 +158,7 @@ class HelpProviderList(ReadOnlyModelViewSet):
     
     permission_classes = (permissions.AllowAny,)
     serializer_class=HelpProviderSerialize
-
+    
     
     queryset= HelpProvider.objects.all()
 
@@ -165,7 +189,9 @@ class HelpProviderList(ReadOnlyModelViewSet):
     def isTechnicianInTimeFrame(self, request, id):
         val=now()
         queryset=DtSession.objects.filter(technicien=id,start_time__lte=val,end_Time__gte=val).exists()
-        return Response(queryset,status=status.HTTP_200_OK)
+        
+        return Response(DtSession.objects.filter(technicien=id,start_time__lte=val,end_Time__gte=val).values_list("id",flat=True),status=status.HTTP_200_OK)
+        
 
 class ConvoList(APIView):
     def get(self, request, format=None):
@@ -227,7 +253,8 @@ class SingleEvent(APIView):
     authentication_classes = [TokenAuthentication, BasicAuthentication]
     permission_classes = (permissions.AllowAny,)
     def get(self, request, convo_id ):
-        events=Events.objects.filter(sender_id=convo_id).exclude(Q(action_name="action_listen") | Q(action_name="action_session_start"))
+        events=Events.objects.filter(sender_id=convo_id).exclude(Q(action_name="action_listen") | Q(action_name="action_session_start")).order_by("timestamp")
+
         serialized_events= EventSerialize(events,many=True)
         return Response(serialized_events.data)
 
@@ -417,8 +444,18 @@ class DriveTestSessionViewSet(ModelViewSet):
     @action(detail=False)
     def dtsessionsFiltered(self,request,group_id, technician_id): # filtered using group id and technician id
             queryset = self.get_queryset().filter(Q(dtTeam=group_id) | Q(technicien=technician_id))
-            serializer= self.get_serializer(queryset, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(queryset, status=status.HTTP_200_OK)
+    
+    @action(detail=False)
+    def statsOnSessions(self,request): # filtered using group id and technician id
+            queryset = DtSession.objects.values("site__UOP").annotate(number=Count("site__UOP"))
+            BeforeLastWeek= DtSession.objects.values("start_time","end_Time").filter(start_time__gte=now().date()-datetime.timedelta(14),end_Time__lte=now().date()-datetime.timedelta(7)).count()
+            LastWeek= DtSession.objects.values("start_time","end_Time").filter(start_time__gte=now().date()-datetime.timedelta(7),end_Time__lte=now().date()).count()
+            current= DtSession.objects.filter(start_time__lte=now(),end_Time__gte=now())
+            serializer= self.get_serializer(current, many=True)
+
+            return Response({"lastweek":LastWeek,"percentage":LastWeek*100/BeforeLastWeek,"testsPerUOP":queryset,"currentSessions":serializer.data}, status=status.HTTP_200_OK)
+    
     @action(detail=False)
     def has_session(self,request,site_id):
         queryset=self.get_queryset().filter(site=site_id,start_time__gte=now().date()).exists()

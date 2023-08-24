@@ -1,102 +1,271 @@
 version: "3.1"
 language: "fr"
 nlu:
-
- - regex: Person 
-   examples: |
+- regex: Person 
     - ^[A-Za-z]{1,7}$
 
+- regex: code_site 
+  examples: |
+      - \d{5,6}[uUlL]?
+    
 
- - intent: greet
-   examples: |
-    - hey c'est [Amin](Person)
+- intent: greet
+  examples: |
+    - salut c'est [Amin](Person)
     - bonjour je suis [Abdou](Person)
-    - salut c'est moi le drive testeur [Fatah](Person)
+    - salut c'est moi, le testeur [Fatah](Person)
+    - salut c'est le technicien du drive test
     - bonjour
-    - bonsoir
     - salut
-    - hey mec
-    - salut toi
-    - salam c'est Djamila
-    - salut c'est Aziz
-    - bon après-midi
+    - salam c'est [Djamila](Person)
+    - salut c'est [Aziz](Person)
 
- - intent: goodbye
-   examples: |
+- intent: goodbye
+  examples: |
     - au revoir
     - à plus tard
-    - bonne nuit
-    - salut
-    - au revoir
+    - bonne soirée
     - passe une bonne journée
     - à bientôt
-    - bye bye
-    - à plus tard
-    - à plus
-    - à tout à l'heure
-    - à plus tard
-    - on se parle plus tard
+    - au plaisir
 
- - intent: affirm
-   examples: |
-    - oui
-    - ouais
-    - effectivement
-    - bien sûr
-    - ça semble bien
-    - correct
-    - pas de problème
-    - d'accord
-    - c'est fait
-    - c'est bien
-    - ok
 
- - intent: deny
-   examples: |
+- intent: deny
+  examples: |
     - non
     - jamais
     - je ne pense pas
     - je n'aime pas ça
-    - pas du tout
+    - pas question
     - pas vraiment
-    - le site n'est pas disponible
-    - le site n'est pas prévu pour ssv
+    - pas disponible
+    - ce n'est pas prévu
 
- - intent: mood_great
-   examples: |
-    - parfait
-    - super !
-    - incroyable
-    - merveilleux
-    - très bien
-    - je vais très bien
-    - extrêmement bien
-    - si bien
-    - c'est parfait
-    - tu t'en sort bien 
-    - merci pour ca
-    - ca va
-    - 
-
- - intent: mood_unhappy
-   examples: |
-    - ma journée était horrible
-    - je suis triste
-    - je ne me sens pas très bien
-    - je suis déçu
-    - super triste
-    - je suis tellement triste
-    - triste
-    - très triste
-    - malheureux
-    - pas bien
-    - pas très bien
-    - extrêmement triste
-    - si triste
-
- - intent: bot_challenge
-   examples: |
+- intent: bot_challenge
+  examples: |
     - es-tu un bot ?
     - es-tu un humain ?
     - est-ce que je parle à un bot ?
     - est-ce que je parle à un humain ?
+
+- intent: affirm
+  examples: |
+    - oui
+    - en effet
+    - bien sûr
+    - ça me semble bien
+    - correct
+    - d'accord
+    - bien
+    - oui, bien sûr, pas de problème
+    - c'est fait
+
+- intent: ask_lock
+  examples: |
+    - verrouille [S1](Sector)
+    - peux-tu verrouiller [S2](Sector)
+    - s'il te plaît, blocker [S3](Sector)
+    - peux-tu blocker [G900](Tech2g)
+    - peux-tu verrouiller [g900](Tech2g)
+    - peux-tu stopper [G1800](Tech2g)
+    - peux-tu verrouiller [g1800](Tech2g)
+    - j'ai besoin de verrouiller [U900](Tech3g)
+    - peux-tu fermer [U2100](Tech3g)
+    - peux-tu blocker [u900](Tech3g)
+    - peux-tu verrouiller [u2100](Tech3g)
+    - je veux verrouiller [L2100](Tech4g)
+    - peux-tu arreter [L1800](Tech4g)
+    - peux-tu verrouiller [l1800](Tech4g)
+    - peux-tu verrouiller [l2100](Tech4g)
+    - fermer [s3](Sector) s'il te plaît
+
+- intent: ask_unlock
+  examples: |
+    - déverrouille [S1](Sector)
+    - peux-tu ouvrir [S2](Sector)
+    - s'il te plaît, activer [S3](Sector)
+    - peux-tu déblocker [G900](Tech2g)
+    - j'ai besoin de déverrouiller [U900](Tech3g)
+    - je veux la [L2100](Tech4g) ouverte
+    - déverrouille [s3](Sector) s'il te plaît
+    - Secteur 1 [Sector], s'il te plaît, fermer le.
+    - Secteur 2 [Sector] de [74156](code_site), verrouille s'il te plaît.
+
+- intent: ask_Ret
+  examples: |
+    - inclinaison maximale [S1](Sector)
+    - déinclinaison maximal [S1](Sector) trop basse
+    - inclinaison maximale [G900](Tech2g) [S1](Sector)
+    - inclinaison maximale [U2100](Tech3g) [S1](Sector)
+    - positionement extrème vers le haut [L2100](Tech4g) [S1](Sector)
+    - positionement extrème vers le bas [G900](Tech2g) [S1](Sector)
+    - inclinaison vers le bas [U2100](Tech3g) [S1](Sector)
+    - inclinaison vers le bas [L2100](Tech4g) [S1](Sector)
+    - inclinaison maximale pour tous [G900](Tech2g)
+    - inclinaison maximale pour tous [L1800](Tech4g)
+    - inclinaison maximale pour tous [U2100](Tech3g)
+    - inclinaison maximale pour tous [L1800](Tech4g)
+
+- intent: ask_Rollback
+  examples: |
+    - retour en arrière
+    - c'est fait, s'il te plaît, reviens en arrière
+    - annule le site
+    - annule l'état
+    - puis-je annuler les changements pour [S1](Sector)
+    - s'il te plaît, annule les changements pour [S3](Sector) et [U2100](Tech3g)
+    - puis-je annuler les changements pour [G900](Tech2g), [S1](Sector)
+    - s'il te plaît, annule les changements pour [L2100](Tech4g) [S3](Sector)
+
+- intent: inform
+  examples: |
+    - mauvaises conditions de [Rsrp](conditions) et [Rsrq](conditions)
+    - mauvaise valeur [RSRP](conditions) détectée
+    - le site est congestionné
+    - les conditions sont mauvaises
+
+- intent: Connection/cannotconnect
+  examples: |
+    - échec de la connexion
+    - échec de la connexion [s3](Sector)
+    - je ne peux pas me connecter au site
+    - impossible de se connecter à [S2](Sector) et [L2100](Tech4g)
+    - je suis déconnecté, impossible de rejoindre la cellule
+    - des difficultés à se connecter
+
+- intent: Connection/connected
+  examples: |
+    - c'est activé, je suis connecté
+    - en train de me connecter
+    - je suis connecté
+    - je suis connecté
+    - merci, je suis connecté maintenant
+
+- intent: ask_help
+  examples: |
+    - ??
+    - Que dois-je faire ??
+    - j'ai une question ?
+    - pourriez-vous m'aider
+    - que dois-je faire ensuite ?
+    - j'ai besoin d'aide
+    - pouvez-vous me fournir le numéro de téléphone de quelqu'un de l'équipe
+    - j'ai besoin d'un contact s'il vous plaît
+    - comment puis-je joindre l'équipe de test de conduite
+    - puis-je joindre quelqu'un par téléphone
+    - pouvez-vous fournir un numéro de téléphone
+
+- intent: ask_status
+  examples: |
+    - vérifie l'état du réseau [2G](Tech2g) pour moi
+    - quel est l'état actuel de toutes les technologies existantes [2g](Tech2g) [3g](Tech3g) [4g](Tech4g)
+    - vérifie l'état pour [2g](Tech2g) uniquement
+    - fournis l'état de [3g](Tech3g)
+    - dis-moi quel est l'état de [4g](Tech4g)
+    - état de toutes les technologies
+    - technologies existantes
+    - technologies actuelles
+    - technologies prises en charge
+    - technologies gérées
+    - donne-moi l'état de tous les sites
+    - dis-moi l'état des cellules
+    - quel est l'état du site actuel
+
+- intent: ask_session_extension
+  examples: |
+    - [5](time) minutes s'il te plaît
+    - j'ai besoin de [15](time) minutes supplémentaires
+    - j'aimerais une prolongation de [10](time) minutes
+    - Est-il possible d'obtenir une prolongation de délai de quelques minutes ?
+    - Pouvons-nous repousser la date limite de quelques minutes ?
+    - Pourrais-je avoir [20](time) minutes supplémentaires pour terminer ?
+    - J'aimerais demander une prolongation de délai de quelques minutes.
+    - Est-il possible de repousser la date limite de quelques minutes ?
+    - Puis-je avoir une courte prolongation de délai ?
+    - Pourrais-je obtenir une petite prolongation de délai de quelques minutes ?
+    - J'ai besoin de quelques minutes de plus pour terminer.
+    - Pouvons-nous avoir une prolongation de quelques minutes ?
+    - Puis-je obtenir quelques minutes supplémentaires pour terminer la tâche ?
+    - Pouvons-nous obtenir une courte prolongation de quelques minutes ?
+    - J'ai juste besoin de quelques minutes de plus pour terminer cela
+    - Pouvons-nous obtenir une brève prolongation de quelques minutes ?
+
+- intent: inform_site
+  examples: |
+    - je suis disponible [34020L](code_site)
+    - site [47450U](code_site)
+    - s'il te plaît site [60730U](code_site)
+    - site [411097L](code_site)
+    - Au site [58665U](code_site), il y a 3 secteurs qui nécessitent des tests.
+    - site [42169L](code_site), où je vais effectuer des tests sur les 3 secteurs présents.
+    - Juste pour vous informer que je suis à [34025U](code_site), en train de planifier les tests sur les 3 secteurs présents là-bas.
+    - Je serai basé sur le site [58665L](code_site), en me concentrant sur les tests des 2 secteurs qui s'y trouvent.
+    - Actuellement affecté au site [42169U](code_site)
+    - Je serai au site [58665U](code_site)
+    - Veuillez noter que je suis au site [42169L](code_site)
+    - Mise à jour rapide : Je serai au [34052U](code_site)
+    - Je serai au [34052U](code_site)
+    - Au site [42169L](code_site)
+    - Je suis actuellement au [34025U](code_site)
+    - Le site [58664L](code_site) est mon emplacement actuel. Avez-vous besoin d'autres informations spécifiques de ma part là-bas ?
+
+- intent: inform_throughput/low
+  examples: |
+    - mauvais débit
+    - [25]{"entity" : "throughput", "role" : "throughput_DL"} Mb/s
+    - [70]{"entity" : "throughput", "role" : "throughput_DL"} Mb/s
+    - même débit tourjours bas
+    - résultats toujours bas
+    - faible ca [40]{"entity" : "throughput", "role" : "throughput_ca"}
+    - j'ai eu un problème de débit
+    - j'obtiens [153 mb]{"entity" : "throughput", "role" : "throughput_DL"} en moyenne
+    - [Ca avr 60 mb]{"entity" : "throughput", "role" : "throughput_ca"}
+    - [Avr ca 75]{"entity" : "throughput", "role" : "throughput_ca"}
+    - j'ai un problème avec le ca Max [débit 35]{"entity" : "throughput", "role" : "throughput_ca"}
+    - faible débit [DL]{"entity" : "throughput", "role" : "throughput_DL"}
+    - faible débit [UL]{"entity" : "throughput", "role" : "throughput_UL"}
+    - j'ai un problème avec [UL]{"entity" : "throughput", "role" : "throughput_UL"}
+    - DL mauvais [25]{"entity" : "throughput", "role" : "throughput_DL"} tous les secteurs
+    - DL mauvais [10]{"entity" : "throughput", "role" : "throughput_DL"} secteur 1
+    - DL dynamique [30]{"entity" : "throughput", "role" : "throughput_dyn"} très bas
+    - résultats UL mauvais [50]{"entity" : "throughput", "role" : "throughput_UL"}
+    - Moyenne [11]{"entity" : "throughput", "role" : "throughput_DL"} liaison descendante
+    - Tous les secteurs DL mauvais
+    - [S3](Sector) faible [30]{"entity" : "throughput", "role" : "throughput_DL"}
+    - [S1](Sector) faible [25]{"entity" : "throughput", "role" : "throughput_DL"}
+    - Dynamique [20]{"entity" : "throughput", "role" : "throughput_dyn"}
+    - Faible débit [DL moyenne 50 Mbs]{"entity" : "throughput", "role" : "throughput_DL"} dans les deux bandes
+    - débit non atteint
+
+- intent: inform_throughput/good
+  examples: |
+    - bon débit
+    - débit DL meilleur
+    - bon débit ca
+    - débit moyen élevé
+    - bon débit moyen
+    - meilleur débit
+    - j'ai obtenu un bon débit
+    - bon débit pour tous les secteurs
+    - le débit est élevé
+    - résultats UL bons
+
+- intent: ask_Rollback
+  examples: |
+    - retour en arrière
+    - c'est fait, s'il te plaît, reviens en arrière
+    - restore l'etat du site
+    - annulez les changements effectuer
+    - puis-je annuler les changements pour [S1](Sector)
+    - s'il te plaît, annule les changements pour [S3](Sector) et [U2100](Tech3g)
+    - puis-je annuler les changements pour [G900](Tech2g), [S1](Sector)
+    - s'il te plaît, annule les changements pour [L2100](Tech4g) [S3](Sector)
+
+- intent: finishing_test
+  examples: |
+    - test SSV terminé
+    - test terminé
+    - c'est fini
+    - j'ai terminé avec le site
+    - c'est terminé, merci
+    - les problèmes sont tous résolus

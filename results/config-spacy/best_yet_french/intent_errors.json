@@ -1,0 +1,122 @@
+[
+  {
+    "text": "en effet",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "ask_Rollback",
+      "confidence": 0.6464413404464722
+    }
+  },
+  {
+    "text": "j'ai besoin de déverrouiller U900",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.9707111120223999
+    }
+  },
+  {
+    "text": "au revoir",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "ask_help",
+      "confidence": 0.7447466254234314
+    }
+  },
+  {
+    "text": "restore l'etat du site",
+    "intent": "ask_Rollback",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.5904648900032043
+    }
+  },
+  {
+    "text": "c'est fini",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.5590065121650696
+    }
+  },
+  {
+    "text": "non",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.8301992416381836
+    }
+  },
+  {
+    "text": "passe une bonne journée",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.5270790457725525
+    }
+  },
+  {
+    "text": "à bientôt",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.8439127802848816
+    }
+  },
+  {
+    "text": "correct",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "Connection",
+      "confidence": 0.31852561235427856
+    }
+  },
+  {
+    "text": "peux-tu déblocker G900",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.9994909763336182
+    }
+  },
+  {
+    "text": "c'est fait, s'il te plaît, reviens en arrière",
+    "intent": "ask_Rollback",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.3106590509414673
+    }
+  },
+  {
+    "text": "pas question",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "ask_help",
+      "confidence": 0.7309194803237915
+    }
+  },
+  {
+    "text": "c'est fait",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.6824254393577576
+    }
+  },
+  {
+    "text": "s'il te plaît, blocker S3",
+    "intent": "ask_lock",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.9038839340209961
+    }
+  },
+  {
+    "text": "les problèmes sont tous résolus",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.9851860404014587
+    }
+  }
+]
