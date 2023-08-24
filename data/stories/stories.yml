@@ -100,9 +100,9 @@ stories:
     - slot_was_set:
       - Tech3g: "U2100"
     - slot_was_set:
-      - Tech4G: "4G"
+      - Tech4g: "4G"
     - slot_was_set:
-      - Tech4G: "L1800"
+      - Tech4g: "L1800"
   - action: action_lock_tech
 
 - story: s unlock tech2g 
