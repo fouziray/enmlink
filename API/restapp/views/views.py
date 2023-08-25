@@ -433,7 +433,7 @@ class SiteDT(APIView):
         return Response(group.data)
         
 class DriveTestSessionViewSet(ModelViewSet):
-    queryset = DtSession.objects.all()
+    queryset = DtSession.objects.all().order_by('-start_time')
     serializer_class = DTSerializer
     permission_classes = (permissions.AllowAny,)
     http_method_names = ["get","post"]    
@@ -442,7 +442,7 @@ class DriveTestSessionViewSet(ModelViewSet):
         # query = request.GET.get('query', None)  # read extra data
         return Response(self.serializer_class(instance).data,
                         status=status.HTTP_200_OK)
-    
+
     def list(self, request):
         queryset = self.get_queryset().filter()
         
@@ -484,7 +484,7 @@ class DriveTestSessionViewSet(ModelViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def post(self, request, format=None):
-        serializer = self.serializer_class(data=request.data,many=True)
+        serializer = DTserializercreation(data=request.data,many=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

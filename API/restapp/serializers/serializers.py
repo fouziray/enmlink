@@ -79,7 +79,7 @@ class DTserializercreation(serializers.ModelSerializer):
     endDate=serializers.DateTimeField(source='end_Time')
     class Meta:
         model= DtSession
-        fields = ['dtTeam_id' , 'technicien_id' , 'startDate' , 'endDate','id','title']
+        fields = ['dtTeam' , 'technicien' , 'startDate' , 'endDate','id','title']
 class GroupSerializer(serializers.ModelSerializer):    
     class Meta:
         model = Group
