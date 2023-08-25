@@ -11,6 +11,9 @@ path =  "./store_rollback/"
 import re
 from os.path import exists
 import os
+import requests
+
+
 file_dir = os.path.dirname(os.path.abspath(__file__))
 csv_folder = 'store_rollback'
 
@@ -289,8 +292,7 @@ class Action_Lock_tech(Action):
 
 
 
-
-class Action_Unlock_tech(Action):
+class Action_UnLock_tech(Action):
    
     def name(self) -> Text:
         return "action_unlock_tech"
@@ -298,20 +300,21 @@ class Action_Unlock_tech(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        # recuperer la technologie 
+        response1_3g=None
+        response2_3g=None
+        response2_3g=None
+        # recuperer le code du site 
         codeSite = tracker.get_slot("code_site")
+        
         if(codeSite == None):
-            dispatcher.utter_message("you haven't entered the site code , please to add it")
+            dispatcher.utter_message("you haven't entered site code")
             return[]
+
         sites = manageCodeSite(codeSite)
+        
         site2g = sites[0]
         site3g = sites[1]
         site4g = sites[2]
-
-
-        
-
 
         if(site2g):
             g2_obj = GsmCommand()
@@ -319,117 +322,109 @@ class Action_Unlock_tech(Action):
             # recuperer la bande
             bande = tracker.get_slot("Tech2g")
             if(bande == None):
-                dispatcher.utter_message("you haven't entered the technologie or bande for 2G")
+                dispatcher.utter_message("you haven't entered which bands to unlock for 2G")
                 return[]
 
 
-            if ((bande == "2G") or (bande == "2g") or (bande == "DCS")):
+            if ((bande.upper() == "2G") or (bande.upper() == "DCS")):
                 bande = 0    
-            block_state_2G = g2_obj.set(site2g , bande , 'ACTIVE')
-            com.execute(block_state_2G)
-
+            unblock_state_2G = g2_obj.set(site2g , bande , 'ACTIVE')
+            
+            com.execute(unblock_state_2G)
             SlotSet("unblocked_tech_slot" ,['2G'])
-
+            
             if (bande == 0 ):
-                dispatcher.utter_message("technologie 2G unblocked")
+                dispatcher.utter_message("technologie 2G unlocked"+unblock_state_2G)
             else : 
-                dispatcher.utter_message("technoligie 2G unblocked in bande " +str(bande))
+                dispatcher.utter_message("technologie 2G unlocked in bande " +str(bande)+unblock_state_2G)
        
         if(site3g):
             g3_obj = g3rncCommand()
             
             # recuperer la bande
-            bande =tracker.get_slot("Tech3g")
-            if (bande is None):
-                bande= ''
-            if(codeSite == None):
-                dispatcher.utter_message("you haven't entered the technologie or bande for 3G")
+            bande = tracker.get_slot("Tech3g")
+            if(bande == None):
+                dispatcher.utter_message("You need to specify which 3G band, or both")
                 return[]
-            response1_3g=None
-            response2_3g=None
-
+            
             bande1 = 'U900'
             bande2 = 'U2100'
            
             if('900' in bande):    
-                block_state_3G_b1 = g3_obj.set(site3g , bande1 , 'UNLOCKED')
-                response1_3g = com.execute(block_state_3G_b1)
+                unblock_state_3G_b1 = g3_obj.set(site3g , bande1 , 'UNLOCKED')
+                response1_3g = com.execute(unblock_state_3G_b1)         #g3_obj.execute(block_state_3G_b1)
                 
                 SlotSet("unblocked_tech_slot" ,[bande1])
-            
+
             if('2100' in bande):
-                block_state_3G_b2 = g3_obj.set(site3g , bande2 , 'UNLOCKED')
-                response2_3g = com.execute(block_state_3G_b2)
-
+                unblock_state_3G_b2 = g3_obj.set(site3g , bande2 , 'UNLOCKED')
+                response2_3g =  com.execute(unblock_state_3G_b2)                         #g3_obj.execute(block_state_3G_b2)
+                
                 SlotSet("unblocked_tech_slot" ,[bande2])
-            
-            if (('3g' in bande)or ('3G' in bande)):     # deblocker la technologie entière
-                block_state_3G_b1 = g3_obj.set(site3g , bande1 , 'UNLOCKED')   
-                block_state_3G_b2 = g3_obj.set(site3g , bande2 , 'UNLOCKED')
-                response1_3g = com.execute(block_state_3G_b1)
-                response2_3g = com.execute(block_state_3G_b2)
 
+            if (('3g' in bande)or ('3G' in bande)):     # blocker la technologie entière
+                unblock_state_3G_b1 = g3_obj.set(site3g , bande1 , 'UNLOCKED')   
+                unblock_state_3G_b2 = g3_obj.set(site3g , bande2 , 'UNLOCKED')
+                response1_3g = com.execute(unblock_state_3G_b1)     #g3_obj.execute(block_state_3G_b1)
+                response2_3g = com.execute(unblock_state_3G_b2)     #g3_obj.execute(block_state_3G_b2)
+            
                 SlotSet("unblocked_tech_slot" ,[bande1 , bande2])
 
             if(response1_3g):
-                dispatcher.utter_message("technologie 3G bande U900 Unlocked")
+                dispatcher.utter_message("technologie 3G bande U900 unblocked")
             if(response2_3g) : 
-                dispatcher.utter_message("technoligie 3G bande U2100 Unlocked in bande ")
+                dispatcher.utter_message("technoligie 3G bande U2100 unblocked in bande ")
        
 
 
         if(site4g):
             g4_obj = g4FDDCommand()
-            response_4g= None
-            response1_4g= None
-            response2_4g= None
+            response1_4g=None
+            response_4g=None
+            response2_4g=None
             # recuperer la bande
             bande = tracker.get_slot("Tech4g")
-            if (bande is None):
-                dispatcher.utter_message("No band provided")
-                return []
-            
-            if(codeSite is None):
-                dispatcher.utter_message("you haven't entered the technologie or bande for 4G")
+            if(bande == None):
+                dispatcher.utter_message("You need to specify which 4G frequency band, or both")
                 return[]
             bande1 = 'L1800'
             bande2 = 'L2100'
            
             if('1800' in bande):    
                 bande1= '3'
-                block_state_4G_b1 = g4_obj.set(site4g , bande1 , 'UNLOCKED')
-                response1_4g = com.execute(block_state_4G_b1)
+                unblock_state_4G_b1 = g4_obj.set(site4g , bande1 , 'UNLOCKED')
+                response1_4g = com.execute(unblock_state_4G_b1)
 
                 SlotSet("unblocked_tech_slot" ,[bande1])
 
             if('2100' in bande):
                 bande2= '1'
-                block_state_4G_b2 = g4_obj.set(site4g , bande2 , 'UNLOCKED')
-                response2_4g = com.execute(block_state_4G_b2)
+                unblock_state_4G_b2 = g4_obj.set(site4g , bande2 , 'UNLOCKED')
+                response2_4g = com.execute(unblock_state_4G_b2)
 
                 SlotSet("unblocked_tech_slot" ,[bande2])
 
             if (('4g' in bande)or ('4G' in bande)): 
-                bande = 0                                                    # deblocker la technologie entière
-                block_state_4G = g4_obj.set(site4g , bande , 'UNLOCKED')   
-                response_4g = com.execute(block_state_4G)
-
+                bande = 0                                                    # blocker la technologie entière
+                unblock_state_4G = g4_obj.set(site4g , bande , 'UNLOCKED')   
+                
+                response_4g = com.execute(unblock_state_4G)
+               
                 SlotSet("unblocked_tech_slot" ,['4G'])
-
+            
 
             if(response1_4g):
-                dispatcher.utter_message("technology 4G bande L1800 Unlocked")
+                dispatcher.utter_message("technology 4G bande L1800 unblocked"+response1_4g)
+             
             if(response2_4g) : 
-                dispatcher.utter_message("technology 4G bande L2100 Unlocked in first band")
+                dispatcher.utter_message("technology 4G bande L2100 unblocked in bande"+response2_4g)
+    
             if(response_4g):
-                dispatcher.utter_message(" all 4G technology Unlocked")
-       
-       
-        return []
-       
+                dispatcher.utter_message("technology 4G unblocked"+response_4g)
+               
 
-
-
+        return [SlotSet("Tech4g",None)]
+       
 
 
 class ActionTilt(Action):
@@ -455,10 +450,6 @@ class ActionTilt(Action):
 
         responseTilt.to_json(file_path , orient = 'records') 
         
-        SlotSet("Tech4g" , "khlasssss" )
-
-        SlotSet("pathTilt" , file_path )
-
         dispatcher.utter_message(text = "tilt changed successfully "+file_path+' ')
 
         tilt_request = (tracker.latest_message)['text']
@@ -712,10 +703,15 @@ class ActionLockSector(Action):
             return[]
             
             
-        
-#class ActionLockSectorAll(): # to implement but not priority 
 
-class ActionUnlockSector(Action):
+
+
+
+
+
+
+
+class ActionUnLockSector(Action):
    
     def name(self) -> Text:
         return "action_unlock_sector"
@@ -727,46 +723,47 @@ class ActionUnlockSector(Action):
         # recuperer la technologie 
         codeSite = tracker.get_slot("code_site")
         
-        if(codeSite == None):
+        if(codeSite is None):
             dispatcher.utter_message("you haven't entered site code")
             return[]
-
-     
-       
+      
         sector_to_unblock = tracker.get_slot("Sector_slot")
         if(sector_to_unblock == None):
-            dispatcher.utter_message("i didn't get the sector to Unblock")
+            dispatcher.utter_message("i didn't get the sector to unblock")
             return[]
-            
-        bande2g = tracker.get_slot("Tech2g")
-        bande3g = tracker.get_slot("Tech3g")
-        bande4g = tracker.get_slot("Tech4g")
+
+        bande2g=''
+        bande3g=''
+        bande4g=''        
+        if (tracker.get_slot("Tech2g") is not None):
+            bande2g = tracker.get_slot("Tech2g")
+        if (tracker.get_slot("Tech3g") is not None ):
+            bande3g = tracker.get_slot("Tech3g")
+        if (tracker.get_slot("Tech4g") is not None ):
+            bande4g = tracker.get_slot("Tech4g")
+
         
-        if (bande2g is None ) :
-            bande2g=''
-        if (bande3g is None) :
-            bande3g=''
-        if (bande4g is None) : 
-            bande4g=''
-        sectors = manageCodeSiteSector(codeSite , bande2g ,sector_to_unblock)
+            
         if(('900' in bande2g) or ('1800' in bande2g)):
+            sectors = manageCodeSiteSector(codeSite , bande2g ,sector_to_unblock)
+            dispatcher.utter_message(text="this is site "+str(sectors)) 
             obj2g = GsmCommand()
             if(sectors[0]):
-                get_s1 = obj2g.get(sectors[0],"GSM1800")
+                get_s1 = obj2g.get(sectors[0],"GSM900")
                 com.execute(get_s1)
                 set_s1 = obj2g.set(sectors[0] , bande2g , 'ACTIVE')
                 com.execute(set_s1)
                 dispatcher.utter_message(text="Sector S1 bande "+bande2g+" for 2G is now ACTIVE") 
 
             if(sectors[1]):
-                get_s2 = obj2g.get(sectors[1],"GSM1800")
+                get_s2 = obj2g.get(sectors[1],"GSM900")
                 com.execute(get_s2)
                 set_s2 = obj2g.set(sectors[1] , bande2g , 'ACTIVE')
                 com.execute(set_s2)
                 dispatcher.utter_message(text="Sector S2 bande "+bande2g+" for 2G is now ACTIVE") 
 
             if(sectors[2]):
-                get_s3 = obj2g.get(sectors[2],"GSM1800")
+                get_s3 = obj2g.get(sectors[2],"GSM900")
                 com.execute(get_s3)
                 set_s3 = obj2g.set(sectors[2] , bande2g , 'ACTIVE')
                 com.execute(set_s3)
@@ -776,24 +773,29 @@ class ActionUnlockSector(Action):
             return[]
             
         elif(('900' in bande3g) or ('2100' in bande3g)):
-            manageCodeSiteSector(codeSite , bande3g ,sector_to_unblock)
+            sectors=manageCodeSiteSector(codeSite , bande3g ,sector_to_unblock)
+            dispatcher.utter_message(text="this is site 3"+str(sectors)) 
+            if ('900' in bande3g ):
+                bande3g="U900"
+            else:
+                bande3g="U2100"
             obj3g = g3rncCommand()
             if(sectors[0]):
-                get_s1 = obj3g.get(sectors[0],"U900")
+                get_s1 = obj3g.get(sectors[0],bande3g)
                 com.execute(get_s1)
                 set_s1 = obj3g.set(sectors[0] , bande3g , 'UNBLOCKED')
                 com.execute(set_s1)
                 dispatcher.utter_message(text="Sector S1 bande "+bande3g+" for 3G is now UNBLOCKED") 
 
             if(sectors[1]):
-                get_s2 = obj3g.get(sectors[1],"U900")
+                get_s2 = obj3g.get(sectors[1],bande3g)
                 com.execute(get_s2)
                 set_s2 = obj3g.set(sectors[1] , bande3g , 'UNBLOCKED')
                 com.execute(set_s2)
                 dispatcher.utter_message(text="Sector S2 bande "+bande3g+" for 3G is now UNBLOCKED") 
 
             if(sectors[2]):
-                get_s3 = obj3g.get(sectors[2],"U900")
+                get_s3 = obj3g.get(sectors[2],bande3g)
                 com.execute(get_s3)
                 set_s3 = obj3g.set(sectors[2] , bande3g , 'UNBLOCKED')
                 com.execute(set_s3)
@@ -802,40 +804,44 @@ class ActionUnlockSector(Action):
             SlotSet("unblocked_sector_slot" , sector_to_unblock)
             return[]
 
-
         elif(('1800' in bande4g) or ('2100' in bande4g)):
-            manageCodeSiteSector(codeSite , bande4g ,sector_to_unblock)
+            sectors= manageCodeSiteSector(codeSite , bande4g ,sector_to_unblock)
+            dispatcher.utter_message(text="this is site 4 "+str(sectors)) 
+
             obj4gFDD = g4FDDCommand()
             if(sectors[0]):
-                get_s1 = obj4gFDD.get(sectors[0],bande4g)
+                get_s1 = obj4gFDD.get(sectors[0])
                 com.execute(get_s1)
                 set_s1 = obj4gFDD.set(sectors[0] , bande4g , 'UNBLOCKED')
                 com.execute(set_s1)
                 dispatcher.utter_message(text="Sector S1 bande "+bande4g+" for 4G is now UNBLOCKED") 
 
             if(sectors[1]):
-                get_s2 = obj4gFDD.get(sectors[1],bande4g)
+                get_s2 = obj4gFDD.get(sectors[1])
                 com.execute(get_s2)
                 set_s2 = obj4gFDD.set(sectors[1] , bande4g , 'UNBLOCKED')
                 com.execute(set_s2)
                 dispatcher.utter_message(text="Sector S2 bande "+bande4g+" for 4G is now UNBLOCKED") 
 
             if(sectors[2]):
-                get_s3 = obj4gFDD.get(sectors[2],bande4g)
+                get_s3 = obj4gFDD.get(sectors[2])
                 com.execute(get_s3)
                 set_s3 = obj4gFDD.set(sectors[2] , bande4g , 'UNBLOCKED')
                 com.execute(set_s3)
                 dispatcher.utter_message(text="Sector S3 bande "+bande4g+" for 4G is now UNBLOCKED") 
-           
-            SlotSet("undeblocked_sector_slot" , sector_to_unblock)   
+            
+            SlotSet("unblocked_sector_slot" , sector_to_unblock)
             return[]
 
         else: 
-            dispatcher.utter_message(text= "Sorry but i didn't recognize the band for the sector you want to Unlock")
+            dispatcher.utter_message(text= "Sorry but i didn't recognize the band for the sector you want to unlock")
             return[]
+               
+#class ActionLockSectorAll(): # to implement but not priority 
 
-"""
-    class ActionExtend(SessionAction):
+
+
+class ActionExtend(Action):
    
     def name(self) -> Text:
         return "action_extend_session"
@@ -843,6 +849,42 @@ class ActionUnlockSector(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        url = "https:-------------------" # api @
 
-        time="50"
- """       
+
+        codeSite = tracker.get_slot("code_site")
+        
+        if(codeSite is None):
+            dispatcher.utter_message("you haven't entered site code")
+            return[]
+
+        time = tracker.get_slot("time")
+        if(time is None):
+            
+
+            time = 15
+
+            dispatcher.utter_message("Your session is extended by 15 mins")
+        
+        else:
+            dispatcher.utter_message("Your session is extended by "+time+ " mins")
+        
+        data = {
+            "Sender": "walid",
+            "time": time
+        }
+
+        try:
+            response = requests.post(url, json=data)
+
+            if response.status_code == 200:
+                return["POST request was successful!"]
+            else:
+                return[f"POST request failed with status code: {response.status_code}"]
+        except Exception as exp:
+            return[f"An error occurred: {str(exp)}"]
+
+
+            
+

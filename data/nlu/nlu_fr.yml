@@ -35,7 +35,6 @@ nlu:
     - non
     - jamais
     - je ne pense pas
-    - je n'aime pas ça
     - pas question
     - pas vraiment
     - pas disponible
@@ -59,6 +58,7 @@ nlu:
     - bien
     - oui, bien sûr, pas de problème
     - c'est fait
+    - on est bien d'accord
 
 - intent: ask_lock
   examples: |
@@ -66,58 +66,78 @@ nlu:
     - peux-tu verrouiller [S2](Sector)
     - s'il te plaît, blocker [S3](Sector)
     - peux-tu blocker [G900](Tech2g)
+    - si c'est possible de fermer la technologie [2g](Tech2g) 
     - peux-tu verrouiller [g900](Tech2g)
-    - peux-tu stopper [G1800](Tech2g)
-    - peux-tu verrouiller [g1800](Tech2g)
-    - j'ai besoin de verrouiller [U900](Tech3g)
+    - stopper la bonde [G1800](Tech2g) s'il vous plait
+    - peux-tu verrouiller [DCS](Tech2g)
+    - j'ai besoin de fermer la bonde [U900](Tech3g)
     - peux-tu fermer [U2100](Tech3g)
-    - peux-tu blocker [u900](Tech3g)
-    - peux-tu verrouiller [u2100](Tech3g)
-    - je veux verrouiller [L2100](Tech4g)
-    - peux-tu arreter [L1800](Tech4g)
-    - peux-tu verrouiller [l1800](Tech4g)
-    - peux-tu verrouiller [l2100](Tech4g)
-    - fermer [s3](Sector) s'il te plaît
+    - veuillez blocker la technologie [u900](Tech3g) pour moi 
+    - j'est besoin que la bande [u2100](Tech3g) soit fermée
+    - fermez la [L2100](Tech4g) instantanement
+    - si c'est possible d'enpecher la technologie [L1800](Tech4g)
+    - coupez [l1800](Tech4g) pour un moment
+    - peux-tu stopper [l2100](Tech4g) pour moi 
+    - suspendez la connexion a au secteur [s3](Sector) s'il te plaît
 
 - intent: ask_unlock
   examples: |
     - déverrouille [S1](Sector)
-    - peux-tu ouvrir [S2](Sector)
-    - s'il te plaît, activer [S3](Sector)
+    - peux-tu déverrouiller [s2](Sector)
+    - s'il te plaît, deblocker [S3](Sector)
     - peux-tu déblocker [G900](Tech2g)
-    - j'ai besoin de déverrouiller [U900](Tech3g)
-    - je veux la [L2100](Tech4g) ouverte
-    - déblocker [DCS](Tech2g)
-    - ouvre si possible [3G](Tech3g)
-    - déverrouille [s3](Sector) s'il te plaît
-    - Secteur 1 [Sector], ouvre le.
-    - Secteur 2 [Sector] de [74156](code_site), déverrouille s'il te plaît.
+    - si c'est possible d'ouvrir la technologie [2g](Tech2g) 
+    - peux-tu déverrouiller [g900](Tech2g)
+    - lancez la bonde [G1800](Tech2g) s'il vous plait
+    - demarrer la technologie [4g](Tech4g) pour moi 
+    - peux-tu déverrouiller [DCS](Tech2g)
+    - j'ai besoin d'ouvrir la bonde [U900](Tech3g)
+    - peux-tu ouvrir [U2100](Tech3g)
+    - veuillez déblocker la technologie [u900](Tech3g) pour moi 
+    - j'est besoin que la bande [u2100](Tech3g) soit ouverte
+    - ouvrez la [L2100](Tech4g) instantanement
+    - si c'est possible d'autoriser la technologie [L1800](Tech4g)
+    - activer la [l1800](Tech4g) pour un moment
+    - peux-tu activer [l2100](Tech4g) pour moi 
+    - permettez la connexion a au secteur [s3](Sector) s'il te plaît
 
 - intent: ask_Ret
   examples: |
     - inclinaison maximale [S1](Sector)
+    - inclinez au max s'il vous plait
     - déinclinaison maximal [S1](Sector) trop basse
+    - déclinez le max si c'est possible [2G](Tech2g)
     - inclinaison maximale [G900](Tech2g) [S1](Sector)
     - inclinaison maximale [U2100](Tech3g) [S1](Sector)
     - positionement extrème vers le haut [L2100](Tech4g) [S1](Sector)
     - positionement extrème vers le bas [G900](Tech2g) [S1](Sector)
     - inclinaison vers le bas [U2100](Tech3g) [S1](Sector)
-    - inclinaison vers le bas [L2100](Tech4g) [S1](Sector)
     - inclinaison maximale pour tous [G900](Tech2g)
-    - inclinaison maximale pour tous [L1800](Tech4g)
+    - repositionnez le tilt vers le bas 
+    - inclinez vers le bas la technologie [L2100](Tech4g) [S1](Sector)
+    - repositionnez le tilt vers la haut
+    - si c'est possible de redrésser le tilt 
+    - je veux changer l'etat de l'entaine plus vers le haut 
+    - bougez l'entaine vers le bas s'ilvous plait pour toute [4g](Tech4g)
     - inclinaison maximale pour tous [U2100](Tech3g)
     - inclinaison maximale pour tous [L1800](Tech4g)
 
 - intent: ask_Rollback
   examples: |
     - retour en arrière
+    - si c'est possible de faire un rollback
     - c'est fait, s'il te plaît, reviens en arrière
-    - annule le site
-    - annule l'état
+    - annule les modifications faites
+    - annule le nouvel état 
     - puis-je annuler les changements pour [S1](Sector)
+    - restorez l'ancienne configuration
+    - retour vers la config initiale
+    - je veux que tu refait le parametrage precedent
     - s'il te plaît, annule les changements pour [S3](Sector) et [U2100](Tech3g)
     - puis-je annuler les changements pour [G900](Tech2g), [S1](Sector)
     - s'il te plaît, annule les changements pour [L2100](Tech4g) [S3](Sector)
+    - restorez ce qui a été auparavant 
+    
 
 - intent: inform
   examples: |
@@ -162,16 +182,17 @@ nlu:
     - vérifie l'état du réseau [2G](Tech2g) pour moi
     - quel est l'état actuel de toutes les technologies existantes [2g](Tech2g) [3g](Tech3g) [4g](Tech4g)
     - vérifie l'état pour [2g](Tech2g) uniquement
-    - fournis l'état de [3g](Tech3g)
-    - dis-moi quel est l'état de [4g](Tech4g)
-    - état de toutes les technologies
-    - technologies existantes
-    - technologies actuelles
-    - technologies prises en charge
-    - technologies gérées
-    - donne-moi l'état de tous les sites
-    - dis-moi l'état des cellules
-    - quel est l'état du site actuel
+    - s'il te plait les technologies [2g](Tech2g) [3g](Tech3g) et [4g](Tech4g)
+    - fournis moi l'état de la technologie [3g](Tech3g)
+    - dis-moi quel est le status de la tech [4g](Tech4g)
+    - l'état de toutes les technologies possibles
+    - technologies existantes [2g](Tech2g) [3g](Tech3g) [4g](Tech4g)
+    - j'aimerais savoir les technologies actuelles
+    - quelles sont les technologies prises en charge dans ce site ainsi que leurs configurations
+    - les technologies gérées ? lesquelles?
+    - donne-moi l'état de tout le site
+    - dis-moi concernant l'état générale du site 
+    - quel est la configuration du site actuel 
 
 - intent: ask_session_extension
   examples: |
@@ -252,17 +273,6 @@ nlu:
     - le débit est élevé
     - résultats UL bons
 
-- intent: ask_Rollback
-  examples: |
-    - retour en arrière
-    - c'est fait, s'il te plaît, reviens en arrière
-    - restore l'etat du site
-    - annulez les changements effectuer
-    - puis-je annuler les changements pour [S1](Sector)
-    - s'il te plaît, annule les changements pour [S3](Sector) et [U2100](Tech3g)
-    - puis-je annuler les changements pour [G900](Tech2g), [S1](Sector)
-    - s'il te plaît, annule les changements pour [L2100](Tech4g) [S3](Sector)
-
 - intent: finishing_test
   examples: |
     - test SSV terminé
@@ -271,3 +281,8 @@ nlu:
     - j'ai terminé avec le site
     - c'est terminé, merci
     - les problèmes sont tous résolus
+    - merci pour votre aide c'est fini
+    - merci pour votre assistance 
+    - test fini avec success
+    - fini avec ce site
+    - le test de connectivité est terminé 
