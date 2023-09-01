@@ -21,6 +21,9 @@ from restapp.views.loginView import LoginView
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
+from rest_framework.schemas import get_schema_view
+
 admin.autodiscover()
 
 urlpatterns = [
@@ -52,8 +55,26 @@ urlpatterns = [
     path('dtsession/g=<int:group_id>&t=<int:technician_id>/', DriveTestSessionViewSet.as_view({'get':'dtsessionsFiltered'})),
     path('dtsession/g=<int:group_id>/',DriveTestSessionViewSet.as_view({'get':'dtsessionsFilteredByGroup'})),
     path('dtsession/', DriveTestSessionViewSet.as_view({'post':'create'})),
+    path('dtsession/today/', DriveTestSessionViewSet.as_view({'get':'todays_sessions'})),
     path('isintimeframe/<int:id>',HelpProviderList.as_view({'get':'isTechnicianInTimeFrame'})),
     path('botmessage/',exchangeMessageRasa.as_view()),
     path('botmessageFr/',exchangeMessageRasaFrench.as_view()),
-    path('stats/',DriveTestSessionViewSet.as_view({'get':'statsOnSessions'}))
+    path('stats/',DriveTestSessionViewSet.as_view({'get':'statsOnSessions'})),
+    path('openapi', get_schema_view(
+        title="Your Project",
+        description="API for all things …",
+        version="1.0.0",
+        permission_classes=(permissions.AllowAny,),
+     
+    ), name='openapi-schema'),
+
+    path('swagger-ui/', TemplateView.as_view(
+        template_name='swagger-ui.html',
+        extra_context={'schema_url':'openapi-schema'}
+    ), name='swagger-ui'),
+ path('redoc/', TemplateView.as_view(
+        template_name='redoc.html',
+        extra_context={'schema_url':'openapi-schema'}
+    ), name='redoc'),
+
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
