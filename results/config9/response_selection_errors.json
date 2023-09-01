@@ -1,0 +1,42 @@
+[
+  {
+    "text": "connecting",
+    "intent_response_key_target": "Connection/connected",
+    "intent_response_key_prediction": {
+      "name": "Connection/cannotconnect",
+      "confidence": 0.9997442364692688
+    }
+  },
+  {
+    "text": "i’m connected",
+    "intent_response_key_target": "Connection/connected",
+    "intent_response_key_prediction": {
+      "name": "Connection/cannotconnect",
+      "confidence": 0.9986668825149536
+    }
+  },
+  {
+    "text": "All sectors DL bad",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "Connection/cannotconnect",
+      "confidence": 0.38629335165023804
+    }
+  },
+  {
+    "text": "I got throughput",
+    "intent_response_key_target": "inform_throughput/good",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/low",
+      "confidence": 0.9647179841995239
+    }
+  },
+  {
+    "text": "still low results",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.9694257974624634
+    }
+  }
+]

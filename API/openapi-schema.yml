@@ -1,0 +1,1043 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /users/:
+    get:
+      operationId: listUsers
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ''
+      tags:
+      - users
+    post:
+      operationId: createUserList
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - users
+    put:
+      operationId: updateUserList
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - users
+    delete:
+      operationId: destroyUserList
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+      - users
+  /users/{id}/:
+    get:
+      operationId: retrieveUserDetail
+      description: Retrieve, update or delete a user instance.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - users
+    put:
+      operationId: updateUserDetail
+      description: Retrieve, update or delete a user instance.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - users
+    delete:
+      operationId: destroyUserDetail
+      description: Retrieve, update or delete a user instance.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - users
+  /reponse/{act}:
+    get:
+      operationId: retrieveRespond
+      description: ''
+      parameters:
+      - name: act
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - reponse
+  /helpproviders/:
+    get:
+      operationId: listHelpProviders
+      description: ''
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/HelpProviderSerialize'
+          description: ''
+      tags:
+      - helpproviders
+  /helpproviders/!{fonction}/:
+    get:
+      operationId: getByFunctionHelpProvider
+      description: ''
+      parameters:
+      - name: fonction
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HelpProviderSerialize'
+          description: ''
+      tags:
+      - helpproviders
+  /helpproviders/{id}/:
+    get:
+      operationId: retrieveHelperDetail
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - helpproviders
+    put:
+      operationId: updateHelperDetail
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - helpproviders
+    delete:
+      operationId: destroyHelperDetail
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - helpproviders
+  /event/:
+    get:
+      operationId: listEvents
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ''
+      tags:
+      - event
+  /event/{convo_id}:
+    get:
+      operationId: retrieveSingleEvent
+      description: ''
+      parameters:
+      - name: convo_id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - event
+  /convo/:
+    get:
+      operationId: listConvos
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ''
+      tags:
+      - convo
+    post:
+      operationId: createConvoList
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - convo
+    delete:
+      operationId: destroyConvoList
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+      - convo
+  /profile/:
+    get:
+      operationId: listProfileImages
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ''
+      tags:
+      - profile
+    post:
+      operationId: createProfileImage
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - profile
+  /sites/:
+    get:
+      operationId: getWithPaginationManagedObject
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Site'
+          description: ''
+      tags:
+      - sites
+  /sites/all/:
+    get:
+      operationId: getAllManagedObject
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Site'
+          description: ''
+      tags:
+      - sites
+  /sites/lastsession/:
+    get:
+      operationId: getLastTestPerSiteManagedObject
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Site'
+          description: ''
+      tags:
+      - sites
+  /DT_session/:
+    get:
+      operationId: listSiteDTs
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ''
+      tags:
+      - DT-session
+  /groups/{id}:
+    get:
+      operationId: retrieveGroup
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this group.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: ''
+      tags:
+      - groups
+  /groups/:
+    get:
+      operationId: listGroups
+      description: ''
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Group'
+          description: ''
+      tags:
+      - groups
+  /useringroups/:
+    get:
+      operationId: usersInGroupGroup
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: ''
+      tags:
+      - useringroups
+  /userinwhichgroup/{id}:
+    get:
+      operationId: userinwhichgroupGroup
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this group.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: ''
+      tags:
+      - userinwhichgroup
+  /dtsession/:
+    get:
+      operationId: listDtSessions
+      description: ''
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DT'
+          description: ''
+      tags:
+      - dtsession
+    post:
+      operationId: createDtSession
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DT'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DT'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DT'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DT'
+          description: ''
+      tags:
+      - dtsession
+  /has_session/{site_id}:
+    get:
+      operationId: hasSessionDtSession
+      description: ''
+      parameters:
+      - name: site_id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DT'
+          description: ''
+      tags:
+      - has-session
+  /dtsession/g={group_id}&t={technician_id}/:
+    get:
+      operationId: dtsessionsFilteredDtSession
+      description: ''
+      parameters:
+      - name: group_id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: technician_id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DT'
+          description: ''
+      tags:
+      - dtsession
+  /dtsession/g={group_id}/:
+    get:
+      operationId: dtsessionsFilteredByGroupDtSession
+      description: ''
+      parameters:
+      - name: group_id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DT'
+          description: ''
+      tags:
+      - dtsession
+  /dtsession/today/:
+    get:
+      operationId: todaysSessionsDtSession
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DT'
+          description: ''
+      tags:
+      - dtsession
+  /isintimeframe/{id}:
+    get:
+      operationId: isTechnicianInTimeFrameHelpProvider
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this help provider.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HelpProviderSerialize'
+          description: ''
+      tags:
+      - isintimeframe
+  /stats/:
+    get:
+      operationId: statsOnSessionsDtSession
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DT'
+          description: ''
+      tags:
+      - stats
+  /login/:
+    post:
+      operationId: createLogin
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - login
+  /mostate/:
+    post:
+      operationId: createManagedObjectState
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - mostate
+  /api-token-auth/:
+    post:
+      operationId: createAuthToken
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+          description: ''
+      tags:
+      - api-token-auth
+  /botmessage/:
+    post:
+      operationId: createexchangeMessageRasa
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - botmessage
+  /botmessageFr/:
+    post:
+      operationId: createexchangeMessageRasaFrench
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - botmessageFr
+components:
+  schemas:
+    HelpProviderSerialize:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          nullable: true
+          maxLength: 100
+        first_name:
+          type: string
+          nullable: true
+          maxLength: 100
+        last_name:
+          type: string
+          nullable: true
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          nullable: true
+          maxLength: 100
+        password:
+          type: string
+          nullable: true
+          maxLength: 100
+        last_login:
+          type: string
+          format: date-time
+          nullable: true
+        fonction:
+          type: string
+          maxLength: 20
+      required:
+      - fonction
+    Site:
+      type: object
+      properties:
+        site_id:
+          type: string
+          maxLength: 7
+        wilaya:
+          type: string
+          nullable: true
+          maxLength: 100
+        UOP:
+          enum:
+          - EAST
+          - CENTER
+          - SOUTH
+          type: string
+          nullable: true
+        managedObject:
+          type: array
+          items:
+            type: object
+            properties:
+              auto_increment_id:
+                type: integer
+                readOnly: true
+              type:
+                enum:
+                - 3G
+                - 4G
+                - 2G
+                type: string
+              state:
+                enum:
+                - ACTIVE
+                - LOCKED
+                type: string
+                nullable: true
+            required:
+            - type
+      required:
+      - site_id
+      - managedObject
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        permissions:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                readOnly: true
+              name:
+                type: string
+                maxLength: 255
+              codename:
+                type: string
+                maxLength: 100
+              content_type:
+                type: integer
+            required:
+            - name
+            - codename
+            - content_type
+          readOnly: true
+      required:
+      - name
+    DT:
+      type: object
+      properties:
+        dtTeam:
+          type: object
+          properties:
+            id:
+              type: integer
+              readOnly: true
+            name:
+              type: string
+              maxLength: 150
+            permissions:
+              type: array
+              items:
+                type: integer
+          required:
+          - name
+          readOnly: true
+        technicien:
+          type: object
+          properties:
+            id:
+              type: integer
+              readOnly: true
+            last_login:
+              type: string
+              format: date-time
+              nullable: true
+            is_superuser:
+              type: boolean
+              description: Designates that this user has all permissions without explicitly
+                assigning them.
+            first_name:
+              type: string
+              nullable: true
+              maxLength: 100
+            last_name:
+              type: string
+              nullable: true
+              maxLength: 100
+            username:
+              type: string
+              nullable: true
+              maxLength: 100
+            email:
+              type: string
+              format: email
+              nullable: true
+              maxLength: 100
+            password:
+              type: string
+              nullable: true
+              maxLength: 100
+            is_staff:
+              type: boolean
+            is_active:
+              type: boolean
+            groups:
+              type: array
+              items:
+                type: integer
+              description: The groups this user belongs to. A user will get all permissions
+                granted to each of their groups.
+            user_permissions:
+              type: array
+              items:
+                type: integer
+              description: Specific permissions for this user.
+          readOnly: true
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+      required:
+      - startDate
+      - endDate
+      - title
+    AuthToken:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        token:
+          type: string
+          readOnly: true
+      required:
+      - username
+      - password

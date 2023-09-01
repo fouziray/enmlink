@@ -1,0 +1,514 @@
+[
+  {
+    "text": "hello i'm Abdou",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.17338788509368896
+    }
+  },
+  {
+    "text": "good morning",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.2161276489496231
+    }
+  },
+  {
+    "text": "good afternoon",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.27367255091667175
+    }
+  },
+  {
+    "text": "good night",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.5802875757217407
+    }
+  },
+  {
+    "text": "don't like that",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "ask_csrf",
+      "confidence": 0.5079719424247742
+    }
+  },
+  {
+    "text": "not really",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "ask_csrf",
+      "confidence": 0.34256744384765625
+    }
+  },
+  {
+    "text": "not available",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "ask_csrf",
+      "confidence": 0.28833362460136414
+    }
+  },
+  {
+    "text": "feeling like a king",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.3979940116405487
+    }
+  },
+  {
+    "text": "I am going to save the world",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "ask_restart",
+      "confidence": 0.09665799885988235
+    }
+  },
+  {
+    "text": "are you a bot?",
+    "intent": "bot_challenge",
+    "intent_prediction": {
+      "name": "ask_session_extension",
+      "confidence": 0.20130854845046997
+    }
+  },
+  {
+    "text": "are you a human?",
+    "intent": "bot_challenge",
+    "intent_prediction": {
+      "name": "ask_session_extension",
+      "confidence": 0.19432121515274048
+    }
+  },
+  {
+    "text": "of course",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.3894747793674469
+    }
+  },
+  {
+    "text": "yes sure no problem",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.2330487072467804
+    }
+  },
+  {
+    "text": "okey",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.29901957511901855
+    }
+  },
+  {
+    "text": "I didnt get the throughput",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.9664608836174011
+    }
+  },
+  {
+    "text": "the site has congested",
+    "intent": "inform",
+    "intent_prediction": {
+      "name": "ask_Rollback",
+      "confidence": 0.18477469682693481
+    }
+  },
+  {
+    "text": "could you help me",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "ask_pci",
+      "confidence": 0.12898413836956024
+    }
+  },
+  {
+    "text": "i need a contact please",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "ask_pci",
+      "confidence": 0.28224730491638184
+    }
+  },
+  {
+    "text": "i need more 15mns",
+    "intent": "ask_session_extension",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.16562232375144958
+    }
+  },
+  {
+    "text": "what about csrf",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.2622160315513611
+    }
+  },
+  {
+    "text": "Also issue of CSFB about the site 43155U",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.4390147626399994
+    }
+  },
+  {
+    "text": "cell doesn't not basculate to other technology",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.35875245928764343
+    }
+  },
+  {
+    "text": "can you restart the site",
+    "intent": "ask_restart",
+    "intent_prediction": {
+      "name": "ask_pci",
+      "confidence": 0.35348257422447205
+    }
+  },
+  {
+    "text": "restart band L1800",
+    "intent": "ask_restart",
+    "intent_prediction": {
+      "name": "ask_help",
+      "confidence": 0.1722189038991928
+    }
+  },
+  {
+    "text": "problems solved",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.46034154295921326
+    }
+  },
+  {
+    "text": "hi it's me the drive tester Fatah",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "ask_session_extension",
+      "confidence": 0.3393767774105072
+    }
+  },
+  {
+    "text": "salut c'est Aziz",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "ask_csrf",
+      "confidence": 0.1848086565732956
+    }
+  },
+  {
+    "text": "good by",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "inform",
+      "confidence": 0.28712478280067444
+    }
+  },
+  {
+    "text": "have a nice day",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.30908527970314026
+    }
+  },
+  {
+    "text": "I don't think so",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.26305270195007324
+    }
+  },
+  {
+    "text": "site is not planned",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.39269644021987915
+    }
+  },
+  {
+    "text": "super stoked",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.2787894308567047
+    }
+  },
+  {
+    "text": "extremely good",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.4044843912124634
+    }
+  },
+  {
+    "text": "am I talking to a bot?",
+    "intent": "bot_challenge",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.18119628727436066
+    }
+  },
+  {
+    "text": "am I talking to a human?",
+    "intent": "bot_challenge",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.16702541708946228
+    }
+  },
+  {
+    "text": "indeed",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.37053269147872925
+    }
+  },
+  {
+    "text": "that sounds good",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.24612079560756683
+    }
+  },
+  {
+    "text": "correct",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "finishing_test",
+      "confidence": 0.11136553436517715
+    }
+  },
+  {
+    "text": "done",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "ask_Rollback",
+      "confidence": 0.18809305131435394
+    }
+  },
+  {
+    "text": "lock S1",
+    "intent": "ask_lock",
+    "intent_prediction": {
+      "name": "ask_Ret",
+      "confidence": 0.32061174511909485
+    }
+  },
+  {
+    "text": "please to lock S3",
+    "intent": "ask_lock",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.3551887571811676
+    }
+  },
+  {
+    "text": "can you unlock G900",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.5751537084579468
+    }
+  },
+  {
+    "text": "maxtilt all G900",
+    "intent": "ask_Ret",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.4617050886154175
+    }
+  },
+  {
+    "text": "maxtilt all U2100",
+    "intent": "ask_Ret",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.43803903460502625
+    }
+  },
+  {
+    "text": "maxtilt all L1800",
+    "intent": "ask_Ret",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.4753427803516388
+    }
+  },
+  {
+    "text": "throughput non atteint",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.9745368957519531
+    }
+  },
+  {
+    "text": "rollback the site",
+    "intent": "ask_Rollback",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.45962098240852356
+    }
+  },
+  {
+    "text": "bad RSRP value detected",
+    "intent": "inform",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.8261827230453491
+    }
+  },
+  {
+    "text": "??",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.3203451335430145
+    }
+  },
+  {
+    "text": "What do l do ??",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.22400924563407898
+    }
+  },
+  {
+    "text": "i have a question ?",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "ask_session_extension",
+      "confidence": 0.3877507150173187
+    }
+  },
+  {
+    "text": "what do i do next  ?",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "ask_Optimisation",
+      "confidence": 0.1086200699210167
+    }
+  },
+  {
+    "text": "can you provide phone number",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.1986140012741089
+    }
+  },
+  {
+    "text": "what is the status of current site",
+    "intent": "ask_status",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.26412028074264526
+    }
+  },
+  {
+    "text": "i'm availble 34020L",
+    "intent": "inform_site",
+    "intent_prediction": {
+      "name": "Connection",
+      "confidence": 0.3387505114078522
+    }
+  },
+  {
+    "text": "ca not found",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.24689197540283203
+    }
+  },
+  {
+    "text": "carrier agreggation not working",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.20294375717639923
+    }
+  },
+  {
+    "text": "ca",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.4393508732318878
+    }
+  },
+  {
+    "text": "pci please",
+    "intent": "ask_pci",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.4061393737792969
+    }
+  },
+  {
+    "text": "please to restart",
+    "intent": "ask_restart",
+    "intent_prediction": {
+      "name": "Connection",
+      "confidence": 0.14067351818084717
+    }
+  },
+  {
+    "text": "restart if you can",
+    "intent": "ask_restart",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.15320837497711182
+    }
+  },
+  {
+    "text": "restart all technologies",
+    "intent": "ask_restart",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.6925106644630432
+    }
+  },
+  {
+    "text": "ssv done",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "ask_Rollback",
+      "confidence": 0.19093720614910126
+    }
+  },
+  {
+    "text": "done thanks",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.31266337633132935
+    }
+  }
+]

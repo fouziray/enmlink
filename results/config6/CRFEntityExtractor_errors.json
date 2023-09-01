@@ -1,0 +1,1185 @@
+[
+  {
+    "text": "hey it's Amin",
+    "entities": [
+      {
+        "start": 9,
+        "end": 13,
+        "value": "Amin",
+        "entity": "Person"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "hello i'm Abdou",
+    "entities": [
+      {
+        "start": 10,
+        "end": 15,
+        "value": "Abdou",
+        "entity": "Person"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "i need to lock U900",
+    "entities": [
+      {
+        "start": 15,
+        "end": 19,
+        "value": "U900",
+        "entity": "Tech3g"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "Tech2g",
+        "start": 15,
+        "end": 19,
+        "confidence_entity": 0.9578682780265808,
+        "value": "U900",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "Tech2g",
+        "start": 15,
+        "end": 19,
+        "confidence_entity": 0.33917677754141345,
+        "value": "U900",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "can you lock u900",
+    "entities": [
+      {
+        "start": 13,
+        "end": 17,
+        "value": "u900",
+        "entity": "Tech3g"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "Tech2g",
+        "start": 13,
+        "end": 17,
+        "confidence_entity": 0.9681357741355896,
+        "value": "u900",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "Tech2g",
+        "start": 13,
+        "end": 17,
+        "confidence_entity": 0.3391767775414155,
+        "value": "u900",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "i need to unlock U900",
+    "entities": [
+      {
+        "start": 17,
+        "end": 21,
+        "value": "U900",
+        "entity": "Tech3g"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "Tech2g",
+        "start": 17,
+        "end": 21,
+        "confidence_entity": 0.9588497281074524,
+        "value": "U900",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "Tech2g",
+        "start": 17,
+        "end": 21,
+        "confidence_entity": 0.27853861025630094,
+        "value": "U900",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "conditions of Rsrp and Rsrq aren't good",
+    "entities": [
+      {
+        "start": 14,
+        "end": 18,
+        "value": "Rsrp",
+        "entity": "conditions"
+      },
+      {
+        "start": 23,
+        "end": 27,
+        "value": "Rsrq",
+        "entity": "conditions"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "conditions",
+        "start": 14,
+        "end": 18,
+        "confidence_entity": 0.981594979763031,
+        "value": "RSRP",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      },
+      {
+        "entity": "conditions",
+        "start": 23,
+        "end": 27,
+        "confidence_entity": 0.820643961429596,
+        "value": "Rsrq",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "conditions",
+        "start": 14,
+        "end": 18,
+        "confidence_entity": 0.4819767232288422,
+        "value": "RSRP",
+        "extractor": "CRFEntityExtractor",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "provide status of 3g",
+    "entities": [
+      {
+        "start": 18,
+        "end": 20,
+        "value": "3g",
+        "entity": "Tech3g"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "Tech4g",
+        "start": 19,
+        "end": 20,
+        "confidence_entity": 0.35437706112861633,
+        "value": "g",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "Tech4g",
+        "start": 19,
+        "end": 20,
+        "confidence_entity": 0.47380392305204605,
+        "value": "g",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "i need more 15mns",
+    "entities": [
+      {
+        "start": 12,
+        "end": 14,
+        "value": "15",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "I would like a time extension of a 10 minutes",
+    "entities": [
+      {
+        "start": 35,
+        "end": 37,
+        "value": "10",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "throughput",
+        "start": 35,
+        "end": 37,
+        "confidence_entity": 0.8661074638366699,
+        "role": "throughput_DL",
+        "confidence_role": 0.5692732334136963,
+        "value": "10",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      },
+      {
+        "entity": "throughput",
+        "start": 35,
+        "end": 37,
+        "confidence_entity": 0.9911840001350246,
+        "role": "throughput_DL",
+        "confidence_role": 0.988914069626367,
+        "value": "10",
+        "extractor": "CRFEntityExtractor",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Could I have 20 extra minutes to finish?",
+    "entities": [
+      {
+        "start": 13,
+        "end": 15,
+        "value": "20",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "throughput",
+        "start": 13,
+        "end": 15,
+        "confidence_entity": 0.9644271731376648,
+        "role": "throughput_DL",
+        "confidence_role": 0.5586556792259216,
+        "value": "20",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "throughput",
+        "start": 13,
+        "end": 15,
+        "confidence_entity": 0.9998535452333992,
+        "role": "throughput_DL",
+        "confidence_role": 0.8527582832502871,
+        "value": "20",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "25 Mb/s",
+    "entities": [
+      {
+        "start": 0,
+        "end": 2,
+        "value": "25",
+        "entity": "throughput",
+        "role": "throughput_DL"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "throughput",
+        "start": 0,
+        "end": 2,
+        "confidence_entity": 0.9646814465522766,
+        "role": "throughput_DL",
+        "confidence_role": 0.7766082882881165,
+        "value": "25",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      },
+      {
+        "entity": "throughput",
+        "start": 0,
+        "end": 2,
+        "confidence_entity": 0.99967739914527,
+        "role": "throughput_DL",
+        "confidence_role": 0.9882564271240518,
+        "value": "25",
+        "extractor": "CRFEntityExtractor",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      },
+      {
+        "entity": "throughput",
+        "start": 3,
+        "end": 5,
+        "confidence_entity": 0.7723118152488051,
+        "role": "throughput_ca",
+        "confidence_role": 0.9846612758400866,
+        "value": "Mb",
+        "extractor": "CRFEntityExtractor"
+      },
+      {
+        "entity": "Sector",
+        "start": 5,
+        "end": 6,
+        "confidence_entity": 0.9874200411916233,
+        "role": "throughput_ca",
+        "confidence_role": 0.7342773927716945,
+        "value": "/",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "70 Mb/s",
+    "entities": [
+      {
+        "start": 0,
+        "end": 2,
+        "value": "70",
+        "entity": "throughput",
+        "role": "throughput_DL"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "throughput",
+        "start": 0,
+        "end": 5,
+        "confidence_entity": 0.4937397837638855,
+        "role": "throughput_ca",
+        "confidence_role": 0.3299395442008972,
+        "value": "70 Mb",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "throughput",
+        "start": 0,
+        "end": 5,
+        "confidence_entity": 0.8676314656974907,
+        "role": "throughput_ca",
+        "confidence_role": 0.8822950154805986,
+        "value": "70 Mb",
+        "extractor": "CRFEntityExtractor"
+      },
+      {
+        "entity": "Sector",
+        "start": 5,
+        "end": 6,
+        "confidence_entity": 0.9873238816342431,
+        "role": "throughput_ca",
+        "confidence_role": 0.7342787491540839,
+        "value": "/",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "Avr ca 75",
+    "entities": [
+      {
+        "start": 0,
+        "end": 10,
+        "value": " Avr ca 75",
+        "entity": "throughput",
+        "role": "throughput_ca"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "throughput",
+        "start": 7,
+        "end": 9,
+        "confidence_entity": 0.5457540154457092,
+        "role": "throughput_ca",
+        "confidence_role": 0.19643628597259521,
+        "value": "75",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "throughput",
+        "start": 4,
+        "end": 6,
+        "confidence_entity": 0.5699912496968271,
+        "value": "ca",
+        "extractor": "CRFEntityExtractor"
+      },
+      {
+        "entity": "throughput",
+        "start": 7,
+        "end": 9,
+        "confidence_entity": 0.9803387295279121,
+        "role": "throughput_ca",
+        "confidence_role": 0.7088047590203562,
+        "value": "75",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "i have a problem with ca Max throughput 35",
+    "entities": [
+      {
+        "start": 29,
+        "end": 42,
+        "value": "throughput 35",
+        "entity": "throughput",
+        "role": "throughput_ca"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "throughput",
+        "start": 40,
+        "end": 42,
+        "confidence_entity": 0.7582498788833618,
+        "role": "throughput_ca",
+        "confidence_role": 0.2541770339012146,
+        "value": "35",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "throughput",
+        "start": 40,
+        "end": 42,
+        "confidence_entity": 0.9904550330893501,
+        "role": "throughput_ca",
+        "confidence_role": 0.9180785072974245,
+        "value": "35",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "Low throughput DL",
+    "entities": [
+      {
+        "start": 15,
+        "end": 17,
+        "value": "DL",
+        "entity": "throughput",
+        "role": "throughput_DL"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Average 11 downlink",
+    "entities": [
+      {
+        "start": 8,
+        "end": 10,
+        "value": "11",
+        "entity": "throughput",
+        "role": "throughput_DL"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "throughput",
+        "start": 0,
+        "end": 7,
+        "confidence_entity": 0.8933615684509277,
+        "role": "throughput_DL",
+        "confidence_role": 0.8728704452514648,
+        "value": "Average",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "throughput",
+        "start": 8,
+        "end": 10,
+        "confidence_entity": 0.661859393119812,
+        "role": "throughput_DL",
+        "confidence_role": 0.6416653394699097,
+        "value": "11",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "throughput",
+        "start": 0,
+        "end": 7,
+        "confidence_entity": 0.9553879181806715,
+        "role": "throughput_DL",
+        "confidence_role": 0.9768888310713981,
+        "value": "Average",
+        "extractor": "CRFEntityExtractor"
+      },
+      {
+        "entity": "throughput",
+        "start": 8,
+        "end": 10,
+        "confidence_entity": 0.7063187269173489,
+        "role": "throughput_DL",
+        "confidence_role": 0.9910759517618805,
+        "value": "11",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "S3 low 30",
+    "entities": [
+      {
+        "start": 0,
+        "end": 2,
+        "value": "S3",
+        "entity": "Sector"
+      },
+      {
+        "start": 7,
+        "end": 9,
+        "value": "30",
+        "entity": "throughput",
+        "role": "throughput_DL"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "Sector",
+        "start": 0,
+        "end": 2,
+        "confidence_entity": 0.9872511029243469,
+        "value": "S3",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      },
+      {
+        "entity": "throughput",
+        "start": 7,
+        "end": 9,
+        "confidence_entity": 0.9415135383605957,
+        "role": "throughput_DL",
+        "confidence_role": 0.4248184859752655,
+        "value": "30",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      },
+      {
+        "entity": "Sector",
+        "start": 0,
+        "end": 2,
+        "confidence_entity": 0.996282598858764,
+        "value": "S3",
+        "extractor": "CRFEntityExtractor",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      },
+      {
+        "entity": "throughput",
+        "start": 7,
+        "end": 9,
+        "confidence_entity": 0.9991828933750521,
+        "role": "throughput_dyn",
+        "confidence_role": 0.977460898145084,
+        "value": "30",
+        "extractor": "CRFEntityExtractor",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Dynamic 20",
+    "entities": [
+      {
+        "start": 0,
+        "end": 10,
+        "value": "Dynamic 20",
+        "entity": "throughput",
+        "role": "throughput_dyn"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "throughput",
+        "start": 8,
+        "end": 10,
+        "confidence_entity": 0.9674840569496155,
+        "role": "throughput_DL",
+        "confidence_role": 0.5735026001930237,
+        "value": "20",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "throughput",
+        "start": 8,
+        "end": 10,
+        "confidence_entity": 0.9999198263652496,
+        "role": "throughput_DL",
+        "confidence_role": 0.8511410200205999,
+        "value": "20",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "hi it's me the drive tester Fatah",
+    "entities": [
+      {
+        "start": 28,
+        "end": 33,
+        "value": "Fatah",
+        "entity": "Person"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "salam it's Djamila",
+    "entities": [
+      {
+        "start": 11,
+        "end": 18,
+        "value": "Djamila",
+        "entity": "Person"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "salut c'est Aziz",
+    "entities": [
+      {
+        "start": 12,
+        "end": 16,
+        "value": "Aziz",
+        "entity": "Person"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "throughput",
+        "start": 6,
+        "end": 11,
+        "confidence_entity": 0.3586021457346909,
+        "value": "c'est",
+        "extractor": "CRFEntityExtractor"
+      },
+      {
+        "entity": "throughput",
+        "start": 12,
+        "end": 16,
+        "confidence_entity": 0.7395338464709125,
+        "role": "throughput_UL",
+        "confidence_role": 0.7086851286460553,
+        "value": "Aziz",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "good by",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "throughput",
+        "start": 5,
+        "end": 7,
+        "confidence_entity": 0.9999924458310718,
+        "role": "throughput_DL",
+        "confidence_role": 0.9961050044836618,
+        "value": "by",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "throughput non atteint",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "throughput",
+        "start": 15,
+        "end": 22,
+        "confidence_entity": 0.3237924552513815,
+        "value": "atteint",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "What do l do ??",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "Sector",
+        "start": 8,
+        "end": 9,
+        "confidence_entity": 0.5009490648826268,
+        "value": "l",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "what is the current status of all the existing technologies 2g3g 4g",
+    "entities": [
+      {
+        "start": 60,
+        "end": 62,
+        "value": "2g",
+        "entity": "Tech2g"
+      },
+      {
+        "start": 62,
+        "end": 64,
+        "value": "3g",
+        "entity": "Tech3g"
+      },
+      {
+        "start": 65,
+        "end": 67,
+        "value": "4g",
+        "entity": "Tech4g"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "Tech3g",
+        "start": 63,
+        "end": 64,
+        "confidence_entity": 0.312300443649292,
+        "value": "g",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "Tech3g",
+        "start": 66,
+        "end": 67,
+        "confidence_entity": 0.30426016449928284,
+        "value": "g",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "Tech4g",
+        "start": 63,
+        "end": 64,
+        "confidence_entity": 0.4073474710621092,
+        "value": "g",
+        "extractor": "CRFEntityExtractor"
+      },
+      {
+        "entity": "Tech4g",
+        "start": 65,
+        "end": 67,
+        "confidence_entity": 0.7363410710332335,
+        "value": "4g",
+        "extractor": "CRFEntityExtractor",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "5 mins please",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "5",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "Tech4g",
+        "start": 0,
+        "end": 1,
+        "confidence_entity": 0.45926744435939826,
+        "value": "5",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "Can we extend the deadline by a few minutes?",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "throughput",
+        "start": 27,
+        "end": 29,
+        "confidence_entity": 0.9999888195043316,
+        "role": "throughput_DL",
+        "confidence_role": 0.996415917754796,
+        "value": "by",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "Is it possible to push back the deadline by a few minutes?",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "throughput",
+        "start": 41,
+        "end": 43,
+        "confidence_entity": 0.9999888195043316,
+        "role": "throughput_DL",
+        "confidence_role": 0.9964159177547962,
+        "value": "by",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "Can we have a few minutes' extension?",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "Sector",
+        "start": 25,
+        "end": 26,
+        "confidence_entity": 0.486931070296127,
+        "value": "'",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "I'll be stationed at site 58665L, focusing on testing the 2 sectors located within.",
+    "entities": [
+      {
+        "start": 26,
+        "end": 32,
+        "value": "58665L",
+        "entity": "code_site"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "code_site",
+        "start": 26,
+        "end": 32,
+        "confidence_entity": 0.9954035878181458,
+        "value": "58665L",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "code_site",
+        "start": 26,
+        "end": 32,
+        "confidence_entity": 0.8913072662189079,
+        "value": "58665L",
+        "extractor": "CRFEntityExtractor"
+      },
+      {
+        "entity": "Tech2g",
+        "start": 58,
+        "end": 59,
+        "confidence_entity": 0.9670214953336272,
+        "value": "2",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "Quick update: I'll be at 34052U",
+    "entities": [
+      {
+        "start": 25,
+        "end": 31,
+        "value": "34052U",
+        "entity": "code_site"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "code_site",
+        "start": 25,
+        "end": 31,
+        "confidence_entity": 0.993690013885498,
+        "value": "34052U",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "Tech2g",
+        "start": 12,
+        "end": 13,
+        "confidence_entity": 0.7454258858287612,
+        "role": "throughput_dyn",
+        "confidence_role": 0.885964128302945,
+        "value": ":",
+        "extractor": "CRFEntityExtractor"
+      },
+      {
+        "entity": "code_site",
+        "start": 25,
+        "end": 31,
+        "confidence_entity": 0.6857596285266039,
+        "value": "34052U",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "low ca 40",
+    "entities": [
+      {
+        "start": 7,
+        "end": 9,
+        "value": "40",
+        "entity": "throughput",
+        "role": "throughput_ca"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "throughput",
+        "start": 7,
+        "end": 9,
+        "confidence_entity": 0.4984150230884552,
+        "value": "40",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "throughput",
+        "start": 7,
+        "end": 9,
+        "confidence_entity": 0.8718835760096906,
+        "value": "40",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "I get 153 mb  avr",
+    "entities": [
+      {
+        "start": 6,
+        "end": 13,
+        "value": "153 mb ",
+        "entity": "throughput",
+        "role": "throughput_DL"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Ca avr 60 mb",
+    "entities": [
+      {
+        "start": 0,
+        "end": 12,
+        "value": "Ca avr 60 mb",
+        "entity": "throughput",
+        "role": "throughput_ca"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "throughput",
+        "start": 7,
+        "end": 9,
+        "confidence_entity": 0.3753543496131897,
+        "value": "60",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "throughput",
+        "start": 7,
+        "end": 9,
+        "confidence_entity": 0.9565094909381066,
+        "role": "throughput_DL",
+        "confidence_role": 0.6042623848754045,
+        "value": "60",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "DL bad 10 sector 1",
+    "entities": [
+      {
+        "start": 7,
+        "end": 9,
+        "value": "10",
+        "entity": "throughput",
+        "role": "throughput_DL"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "time",
+        "start": 7,
+        "end": 9,
+        "confidence_entity": 0.5495942831039429,
+        "value": "10",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      },
+      {
+        "entity": "time",
+        "start": 7,
+        "end": 9,
+        "confidence_entity": 0.9910997194894837,
+        "value": "10",
+        "extractor": "CRFEntityExtractor",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      },
+      {
+        "entity": "Tech2g",
+        "start": 17,
+        "end": 18,
+        "confidence_entity": 0.9277540534819539,
+        "value": "1",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "Dynamic DL 30 is very low",
+    "entities": [
+      {
+        "start": 11,
+        "end": 13,
+        "value": "30",
+        "entity": "throughput",
+        "role": "throughput_dyn"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "throughput",
+        "start": 11,
+        "end": 13,
+        "confidence_entity": 0.6504396200180054,
+        "role": "throughput_DL",
+        "confidence_role": 0.6671268939971924,
+        "value": "30",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      },
+      {
+        "entity": "throughput",
+        "start": 0,
+        "end": 7,
+        "confidence_entity": 0.7836991540671935,
+        "role": "throughput_dyn",
+        "confidence_role": 0.9723948960489054,
+        "value": "Dynamic",
+        "extractor": "CRFEntityExtractor"
+      },
+      {
+        "entity": "throughput",
+        "start": 8,
+        "end": 10,
+        "confidence_entity": 0.8283027979451333,
+        "role": "throughput_DL",
+        "confidence_role": 0.9875048914518514,
+        "value": "DL",
+        "extractor": "CRFEntityExtractor",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      },
+      {
+        "entity": "throughput",
+        "start": 11,
+        "end": 13,
+        "confidence_entity": 0.9854719377706277,
+        "role": "throughput_DL",
+        "confidence_role": 0.9725047966233291,
+        "value": "30",
+        "extractor": "CRFEntityExtractor",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "UL bad results 50",
+    "entities": [
+      {
+        "start": 15,
+        "end": 17,
+        "value": "50",
+        "entity": "throughput",
+        "role": "throughput_UL"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "throughput",
+        "start": 15,
+        "end": 17,
+        "confidence_entity": 0.33873891830444336,
+        "value": "50",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "time",
+        "start": 15,
+        "end": 17,
+        "confidence_entity": 0.7149182426222187,
+        "value": "50",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "Low Thrghpt DL average 50 Mbs in both band",
+    "entities": [
+      {
+        "start": 12,
+        "end": 29,
+        "value": "DL average 50 Mbs",
+        "entity": "throughput",
+        "role": "throughput_DL"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "throughput",
+        "start": 23,
+        "end": 25,
+        "confidence_entity": 0.29404416680336,
+        "value": "50",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "time",
+        "start": 23,
+        "end": 25,
+        "confidence_entity": 0.6955184055630796,
+        "value": "50",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "throughput dl better",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "throughput",
+        "start": 11,
+        "end": 13,
+        "confidence_entity": 0.6045035272031593,
+        "value": "DL",
+        "extractor": "CRFEntityExtractor",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,106 @@
+[
+  {
+    "text": "i'm disconnected , can't reach cell",
+    "intent_response_key_target": "Connection/cannotconnect",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.9921950101852417
+    }
+  },
+  {
+    "text": "having difficulties connecting",
+    "intent_response_key_target": "Connection/cannotconnect",
+    "intent_response_key_prediction": {
+      "name": "Connection/connected",
+      "confidence": 0.6254777312278748
+    }
+  },
+  {
+    "text": "i’m connected",
+    "intent_response_key_target": "Connection/connected",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 1.0
+    }
+  },
+  {
+    "text": "thanks you i'm connected now",
+    "intent_response_key_target": "Connection/connected",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.9999821186065674
+    }
+  },
+  {
+    "text": "70 Mb/s",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.5690457820892334
+    }
+  },
+  {
+    "text": "same throughput",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.9911535382270813
+    }
+  },
+  {
+    "text": "I get 153 mb  avr",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.999994158744812
+    }
+  },
+  {
+    "text": "Avr ca 75",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.9936059713363647
+    }
+  },
+  {
+    "text": "throughput dl better",
+    "intent_response_key_target": "inform_throughput/good",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/low",
+      "confidence": 0.9291275143623352
+    }
+  },
+  {
+    "text": "connecting",
+    "intent_response_key_target": "Connection/connected",
+    "intent_response_key_prediction": {
+      "name": "Connection/cannotconnect",
+      "confidence": 0.9999992847442627
+    }
+  },
+  {
+    "text": "bad throughput",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.9999998807907104
+    }
+  },
+  {
+    "text": "i had throughput problem",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.9919881820678711
+    }
+  },
+  {
+    "text": "hight throughput avg",
+    "intent_response_key_target": "inform_throughput/good",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/low",
+      "confidence": 0.9999504089355469
+    }
+  }
+]

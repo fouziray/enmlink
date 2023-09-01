@@ -1,0 +1,778 @@
+[
+  {
+    "text": "hey it's Amin",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.1423623263835907
+    }
+  },
+  {
+    "text": "hi it's me the drive tester Fatah",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.14615413546562195
+    }
+  },
+  {
+    "text": "let's go",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.1267303228378296
+    }
+  },
+  {
+    "text": "salam it's Djamila",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.19608630239963531
+    }
+  },
+  {
+    "text": "salut c'est Aziz",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "ask_Ret",
+      "confidence": 0.48496878147125244
+    }
+  },
+  {
+    "text": "see you later",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.24742759764194489
+    }
+  },
+  {
+    "text": "see you around",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.1538086086511612
+    }
+  },
+  {
+    "text": "talk to you later",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.3053833246231079
+    }
+  },
+  {
+    "text": "no",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.19465024769306183
+    }
+  },
+  {
+    "text": "never",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "ask_Ret",
+      "confidence": 0.28245237469673157
+    }
+  },
+  {
+    "text": "I don't think so",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.3094688653945923
+    }
+  },
+  {
+    "text": "don't like that",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "ask_help",
+      "confidence": 0.191258504986763
+    }
+  },
+  {
+    "text": "feeling like a king",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "ask_session_extension",
+      "confidence": 0.19042238593101501
+    }
+  },
+  {
+    "text": "I am going to save the world",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.2621159553527832
+    }
+  },
+  {
+    "text": "am I talking to a bot?",
+    "intent": "bot_challenge",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.2307034432888031
+    }
+  },
+  {
+    "text": "yes",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.6897252202033997
+    }
+  },
+  {
+    "text": "correct",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "ask_Ret",
+      "confidence": 0.17057345807552338
+    }
+  },
+  {
+    "text": "ok",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.642356276512146
+    }
+  },
+  {
+    "text": "fine",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.36181166768074036
+    }
+  },
+  {
+    "text": "yes sure no problem",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "finishing_test",
+      "confidence": 0.19442135095596313
+    }
+  },
+  {
+    "text": "okey",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.3805241584777832
+    }
+  },
+  {
+    "text": "lock S1",
+    "intent": "ask_lock",
+    "intent_prediction": {
+      "name": "ask_Ret",
+      "confidence": 0.4243461489677429
+    }
+  },
+  {
+    "text": "disable 4g tech for a moment please",
+    "intent": "ask_lock",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.3012397289276123
+    }
+  },
+  {
+    "text": "please to lock S3",
+    "intent": "ask_lock",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.4625987112522125
+    }
+  },
+  {
+    "text": "can you please lock G900",
+    "intent": "ask_lock",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.4910573959350586
+    }
+  },
+  {
+    "text": "i'm asking you to lock the sector 1 from the 3g tech band 2 tech",
+    "intent": "ask_lock",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.250914603471756
+    }
+  },
+  {
+    "text": "i need to stop g900 in sector S2",
+    "intent": "ask_lock",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.8682510256767273
+    }
+  },
+  {
+    "text": "can you stop the  3rd sector of L2100",
+    "intent": "ask_lock",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.8851258158683777
+    }
+  },
+  {
+    "text": "(Sector 2)[Sector] of 74156, please to lock.",
+    "intent": "ask_lock",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.28373080492019653
+    }
+  },
+  {
+    "text": "enable 4g tech for a moment please",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.3110225200653076
+    }
+  },
+  {
+    "text": "i need 3g technology to be opened",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.553803026676178
+    }
+  },
+  {
+    "text": "i'm asking you to unlock the sector 1 from the 3g tech band 2 tech",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.20016784965991974
+    }
+  },
+  {
+    "text": "start g1800 technology",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.7689274549484253
+    }
+  },
+  {
+    "text": "can you activate L1800",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.7388020157814026
+    }
+  },
+  {
+    "text": "please start u2100 tech",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.46166911721229553
+    }
+  },
+  {
+    "text": "change the tilt of the [3g] technology",
+    "intent": "ask_Ret",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.665312647819519
+    }
+  },
+  {
+    "text": "I didnt get the throughput",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.8363706469535828
+    }
+  },
+  {
+    "text": "restore the initial state of the site",
+    "intent": "ask_Rollback",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.8677554726600647
+    }
+  },
+  {
+    "text": "bad RSRP value detected",
+    "intent": "inform",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.9137791991233826
+    }
+  },
+  {
+    "text": "connection failed s3",
+    "intent": "Connection",
+    "intent_prediction": {
+      "name": "ask_Ret",
+      "confidence": 0.2073533684015274
+    }
+  },
+  {
+    "text": "i have a question ?",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "ask_session_extension",
+      "confidence": 0.34753403067588806
+    }
+  },
+  {
+    "text": "i need a contact please",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.153935968875885
+    }
+  },
+  {
+    "text": "existing technologies",
+    "intent": "ask_status",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.5852731466293335
+    }
+  },
+  {
+    "text": "i have a problem with UL",
+    "intent": "inform_throughput",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.09047545492649078
+    }
+  },
+  {
+    "text": "what about csrf",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "ask_help",
+      "confidence": 0.1612887680530548
+    }
+  },
+  {
+    "text": "Also issue of CSFB about the site 43155U",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.6701307892799377
+    }
+  },
+  {
+    "text": "cell doesn't not basculate to other technology",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "ask_status",
+      "confidence": 0.258992075920105
+    }
+  },
+  {
+    "text": "restart if you can",
+    "intent": "ask_restart",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.15305401384830475
+    }
+  },
+  {
+    "text": "restart all technologies",
+    "intent": "ask_restart",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.4118514955043793
+    }
+  },
+  {
+    "text": "done with the site",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.24492532014846802
+    }
+  },
+  {
+    "text": "hello i'm Abdou",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.6681480407714844
+    }
+  },
+  {
+    "text": "good morning",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.3047734797000885
+    }
+  },
+  {
+    "text": "good afternoon",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.27206334471702576
+    }
+  },
+  {
+    "text": "good by",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.774407148361206
+    }
+  },
+  {
+    "text": "good night",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.2737005650997162
+    }
+  },
+  {
+    "text": "goodbye",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.6485891938209534
+    }
+  },
+  {
+    "text": "have a nice day",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "ask_session_extension",
+      "confidence": 0.46562039852142334
+    }
+  },
+  {
+    "text": "not available",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "ask_help",
+      "confidence": 0.16163305938243866
+    }
+  },
+  {
+    "text": "site is not planned",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.2672044634819031
+    }
+  },
+  {
+    "text": "extremely good",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.3438052833080292
+    }
+  },
+  {
+    "text": "so so perfect",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.17066164314746857
+    }
+  },
+  {
+    "text": "of course",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "inform",
+      "confidence": 0.2055082470178604
+    }
+  },
+  {
+    "text": "that sounds good",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "inform",
+      "confidence": 0.2568037509918213
+    }
+  },
+  {
+    "text": "done",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "finishing_test",
+      "confidence": 0.7822245359420776
+    }
+  },
+  {
+    "text": "is ok",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.46284574270248413
+    }
+  },
+  {
+    "text": "i need 3g technology to be closed",
+    "intent": "ask_lock",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.7152807712554932
+    }
+  },
+  {
+    "text": "can you lock G1800",
+    "intent": "ask_lock",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.45459648966789246
+    }
+  },
+  {
+    "text": "close g1800 technology",
+    "intent": "ask_lock",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.5059835314750671
+    }
+  },
+  {
+    "text": "can you deactivate L1800",
+    "intent": "ask_lock",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.7787730097770691
+    }
+  },
+  {
+    "text": "please disable u2100 tech",
+    "intent": "ask_lock",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.7084944248199463
+    }
+  },
+  {
+    "text": "can you lock l1800",
+    "intent": "ask_lock",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.4804057478904724
+    }
+  },
+  {
+    "text": "unlock S1",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.49348875880241394
+    }
+  },
+  {
+    "text": "please to unlock S3",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.6967983841896057
+    }
+  },
+  {
+    "text": "i need to enable g900 in sector S2",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.6382850408554077
+    }
+  },
+  {
+    "text": "can you launch the  3rd sector of L2100",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.6496661901473999
+    }
+  },
+  {
+    "text": "Unlock s3 please",
+    "intent": "ask_unlock",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.7104239463806152
+    }
+  },
+  {
+    "text": "can you maxtilt S1",
+    "intent": "ask_Ret",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.16764774918556213
+    }
+  },
+  {
+    "text": "throughput non atteint",
+    "intent": "ask_Optimisation",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.9322190880775452
+    }
+  },
+  {
+    "text": "the site has congested",
+    "intent": "inform",
+    "intent_prediction": {
+      "name": "ask_Rollback",
+      "confidence": 0.369936466217041
+    }
+  },
+  {
+    "text": "can't connect to S2 and L2100",
+    "intent": "Connection",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.5109156370162964
+    }
+  },
+  {
+    "text": "having difficulties connecting",
+    "intent": "Connection",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.41152888536453247
+    }
+  },
+  {
+    "text": "i’m connected",
+    "intent": "Connection",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.49793705344200134
+    }
+  },
+  {
+    "text": "i'm in",
+    "intent": "Connection",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.2806110084056854
+    }
+  },
+  {
+    "text": "thanks you i'm connected now",
+    "intent": "Connection",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.2316080629825592
+    }
+  },
+  {
+    "text": "how do i reach drive test team",
+    "intent": "ask_help",
+    "intent_prediction": {
+      "name": "ask_csrf",
+      "confidence": 0.09567717462778091
+    }
+  },
+  {
+    "text": "give the 4GFDD state please",
+    "intent": "ask_status",
+    "intent_prediction": {
+      "name": "ask_Rollback",
+      "confidence": 0.510607123374939
+    }
+  },
+  {
+    "text": "give me status of the entire site",
+    "intent": "ask_status",
+    "intent_prediction": {
+      "name": "ask_Rollback",
+      "confidence": 0.28890880942344666
+    }
+  },
+  {
+    "text": "5 mins please",
+    "intent": "ask_session_extension",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.14266738295555115
+    }
+  },
+  {
+    "text": "i need more 15mns",
+    "intent": "ask_session_extension",
+    "intent_prediction": {
+      "name": "ask_help",
+      "confidence": 0.2967347502708435
+    }
+  },
+  {
+    "text": "i'm availble 34020L",
+    "intent": "inform_site",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.593052864074707
+    }
+  },
+  {
+    "text": "ca not found",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.10190550237894058
+    }
+  },
+  {
+    "text": "carrier agreggation not working",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "inform_site",
+      "confidence": 0.14941708743572235
+    }
+  },
+  {
+    "text": "ca",
+    "intent": "ask_csrf",
+    "intent_prediction": {
+      "name": "ask_lock",
+      "confidence": 0.1918833702802658
+    }
+  },
+  {
+    "text": "please i need the pci",
+    "intent": "ask_pci",
+    "intent_prediction": {
+      "name": "bot_challenge",
+      "confidence": 0.15878506004810333
+    }
+  },
+  {
+    "text": "can you restart the site",
+    "intent": "ask_restart",
+    "intent_prediction": {
+      "name": "ask_Rollback",
+      "confidence": 0.3451130986213684
+    }
+  },
+  {
+    "text": "restart band L1800",
+    "intent": "ask_restart",
+    "intent_prediction": {
+      "name": "ask_unlock",
+      "confidence": 0.18132205307483673
+    }
+  },
+  {
+    "text": "problems solved",
+    "intent": "finishing_test",
+    "intent_prediction": {
+      "name": "inform_throughput",
+      "confidence": 0.5393127202987671
+    }
+  }
+]

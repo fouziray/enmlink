@@ -1,0 +1,114 @@
+[
+  {
+    "text": "having difficulties connecting",
+    "intent_response_key_target": "Connection/cannotconnect",
+    "intent_response_key_prediction": {
+      "name": "Connection/connected",
+      "confidence": 0.8356127738952637
+    }
+  },
+  {
+    "text": "thanks you i'm connected now",
+    "intent_response_key_target": "Connection/connected",
+    "intent_response_key_prediction": {
+      "name": "Connection/cannotconnect",
+      "confidence": 0.9571976065635681
+    }
+  },
+  {
+    "text": "Low throughput DL",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.9956054091453552
+    }
+  },
+  {
+    "text": "All sectors DL bad",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.9999929666519165
+    }
+  },
+  {
+    "text": "I got throughput",
+    "intent_response_key_target": "inform_throughput/good",
+    "intent_response_key_prediction": {
+      "name": "Connection/cannotconnect",
+      "confidence": 0.620864748954773
+    }
+  },
+  {
+    "text": "i got good thrpt",
+    "intent_response_key_target": "inform_throughput/good",
+    "intent_response_key_prediction": {
+      "name": "Connection/cannotconnect",
+      "confidence": 0.9984851479530334
+    }
+  },
+  {
+    "text": "i have good thrgpt here",
+    "intent_response_key_target": "inform_throughput/good",
+    "intent_response_key_prediction": {
+      "name": "Connection/cannotconnect",
+      "confidence": 0.9521297812461853
+    }
+  },
+  {
+    "text": "i'm disconnected , can't reach cell",
+    "intent_response_key_target": "Connection/cannotconnect",
+    "intent_response_key_prediction": {
+      "name": "Connection/connected",
+      "confidence": 0.9690476059913635
+    }
+  },
+  {
+    "text": "connecting",
+    "intent_response_key_target": "Connection/connected",
+    "intent_response_key_prediction": {
+      "name": "Connection/cannotconnect",
+      "confidence": 0.9999997615814209
+    }
+  },
+  {
+    "text": "bad throughput",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.9999997615814209
+    }
+  },
+  {
+    "text": "same throughput",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.9999918937683105
+    }
+  },
+  {
+    "text": "i had throughput problem",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.9836089015007019
+    }
+  },
+  {
+    "text": "Low throughput UL",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.9758759140968323
+    }
+  },
+  {
+    "text": "throughput dl better",
+    "intent_response_key_target": "inform_throughput/good",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/low",
+      "confidence": 0.9808534383773804
+    }
+  }
+]

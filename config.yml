@@ -11,7 +11,7 @@ assistant_id: 20230811-224653-large-chalet
 language: en
 pipeline:
 - name: SpacyNLP
-  model:  fr_core_news_md #en_core_web_sm
+  model: en_core_web_sm # fr_core_news_md
 - name: SpacyTokenizer
 - name: SpacyFeaturizer
 # # No configuration for the NLU pipeline was provided. The following default pipeline was used to train your model.
@@ -59,6 +59,9 @@ pipeline:
   # Name of dense featurizers to use.
   # If list is empty all available dense features are used.
   "featurizers": []
+- name: "DucklingEntityExtractor"
+  url: "http://localhost:5333"
+  dimensions: ["duration"]
 - name: EntitySynonymMapper
 - name: ResponseSelector
   epochs: 100

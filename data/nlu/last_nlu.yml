@@ -1,5 +1,5 @@
 version: "3.1"
-
+nlu:
 - regex: Person 
     - ^[A-Za-z]{1,7}$
 
@@ -92,82 +92,68 @@ version: "3.1"
   examples: |
     - lock [S1](Sector)
     - can you lock [S2](Sector)
-    - disable [4g](Tech4g) tech for a moment please
-    - i need [3g](Tech3g) technology to be closed
     - please to lock [S3](Sector)
-    - can you please lock [G900](Tech2g)
+    - can you lock [G900](Tech2g)
+    - can you lock [g900](Tech2g)
     - can you lock [G1800](Tech2g)
-    - i'm asking you to lock the [sector 1](Sector) from the [3g](Tech3g) tech band 2 tech 
-    - close [g1800](Tech2g) technology
-    - i need to stop [g900](Tech2g) in sector [S2](Sector)
-    - can you deactivate [L1800](Tech4g) 
-    - can you stop the 3rd [sector](Sector) of [L2100](Tech4g)
-    - please disable [u2100](Tech3g) tech 
+    - can you lock [g1800](Tech2g)
+    - i need to lock [U900](Tech3g)
+    - can you lock [U2100](Tech3g)
+    - can you lock [u900](Tech3g)
+    - can you lock [u2100](Tech3g)
     - i want to lock [L2100](Tech4g)
+    - can you lock [L1800](Tech4g)
     - can you lock [l1800](Tech4g)
     - can you lock [l2100](Tech4g)
     - lock [s3](Sector) please
-    - (Sector 2)[Sector] of [74156](code_site), please to lock.
-
 - intent: ask_unlock
   examples: |
     - unlock [S1](Sector)
     - can you unlock [S2](Sector)
-    - enable [4g](Tech4g) tech for a moment please
-    - i need [3g](Tech3g) technology to be opened
     - please to unlock [S3](Sector)
-    - can you please unlock [G900](Tech2g)
-    - can you open [G1800](Tech2g)
-    - i'm asking you to unlock the [sector 1](Sector) from the [3g](Tech3g) tech band 2 tech 
-    - start [g1800](Tech2g) technology
-    - i need to enable [g900](Tech2g) in sector [S2](Sector)
-    - can you activate [L1800](Tech4g) 
-    - can you launch the 3rd [sector](Sector) of [L2100](Tech4g)
-    - please start [u2100](Tech3g) tech 
+    - can you unlock [G900](Tech2g)
+    - i need to unlock [U900](Tech3g)
     - i want to unlock [L2100](Tech4g)
-    - can you unlock [l1800](Tech4g)
-    - can you enable [l2100](Tech4g)
-    - Unlock [s3](Sector) please
-    - (Sector 2)[Sector] of [74156](code_site), please unlock.
+    - unlock [s3](Sector) please
+    - Lock (sector 1)[Sector] please
+    - (Sector 2)[Sector] of [74156](code_site), please lock.
 
 - intent: ask_Ret
   examples: |
-    - can you maxtilt [S1](Sector)
-    - change the tilt of the [3g] technology
-    - downtilt [S1](Sector)
-    - maxtilt [G900](Tech2g) [S1](Sector)
-    - maxtilt [U2100](Tech3g) [S1](Sector)
-    - maxtilt [L2100](Tech4g) [S1](Sector)
+    - maxtilt [S1](Sector)
+    - downtilt [S1](Sector)
+    - maxtilt [G900](Tech2g) [S1](Sector)
+    - maxtilt [U2100](Tech3g) [S1](Sector)
+    - maxtilt [L2100](Tech4g) [S1](Sector)
 
-    - downtilt [G900](Tech2g) [S1](Sector)
-    - downtilt [U2100](Tech3g) [S1](Sector)
-    - downtilt [L2100](Tech4g) [S1](Sector)
+    - downtilt [G900](Tech2g) [S1](Sector)
+    - downtilt [U2100](Tech3g) [S1](Sector)
+    - downtilt [L2100](Tech4g) [S1](Sector)
 
-    - maxtilt all [G900](Tech2g)
-    - maxtilt all [U2100](Tech3g)
-    - maxtilt all [L1800](Tech4g)
+    - maxtilt all [G900](Tech2g)
+    - maxtilt all [U2100](Tech3g)
+    - maxtilt all [L1800](Tech4g)
 
-    - maxtilt all [G900](Tech2g)
-    - maxtilt all [U2100](Tech3g)
-    - maxtilt all [L1800](Tech4g)
+    - maxtilt all [G900](Tech2g)
+    - maxtilt all [U2100](Tech3g)
+    - maxtilt all [L1800](Tech4g)
  
  
 - intent: ask_Optimisation
   examples: |
-    - I didnt get the throughput 
-    - throughput non atteint 
+    - I didnt get the throughput  
+    - throughput non atteint  
+    
 
 - intent: ask_Rollback
   examples: |
-    - Rollback 
-    - done , and now please rollback the changes 
+    - Rollback 
+    - done please rollback 
     - rollback the site 
-    - restore the initial state of the site
-    - go back to the first settings
     - rollback the status
     - can I rollback the changes for [S1](Sector)
     - please rollback the changes for [S3](Sector) 
-    - can you do a restore the changes for [G900](Tech2g) , [S1](Sector)
+    - can I rollback the changes for [G900](Tech2g) , [S1](Sector)
     - please rollback the changes for [L2100](Tech4g) [S3](Sector)
  
 
@@ -218,28 +204,27 @@ version: "3.1"
   examples: |
     - check the status of the network [2G](Tech2g) for me
     - what is the current status of all the existing technologies [2g](Tech2g)[3g](Tech3g) [4g](Tech4g)
-    - check state for [2g](Tech2g) if exists
-    - provide status of [DCS](Tech2g) 
-    - tell me what is state of [4g](Tech4g) , and the other techs
-    - all technologies status [3g](Tech3g) [2g](Tech2g) [4g](Tech4g)
+    - check state for [2g](Tech2g) only
+    - provide status of [3g](Tech3g) 
+    - tell me what is state of [4g](Tech4g)
+    - all technologies status 
     - existing technologies  
-    - current technologies deployed in this site
-    - give the [4GFDD](Tech4g) state please
+    - current technologies 
     - supported technologies 
-    - what are the handled technologies in this site
-    - give me status of the entire site
+    - handled technologies
+    - give me status of all the site
     - tell me state of cells
     - what is the status of current site
 
 
 - intent: ask_session_extension
   examples: |
-    - [5](time) mins please 
-    - i need more [15](time)mns
-    - I would like a time extension of a [10](time) minutes
+    - 5 mins please 
+    - i need more 15 mns
+    - I would like a time extension of  10 minutes
     - Is it possible to get a time extension of a few minutes?
     - Can we extend the deadline by a few minutes?
-    - Could I have [20](time) extra minutes to finish?
+    - Could I have 20 extra minutes to finish?
     - I would like to request a time extension of a few minutes.
     - Is it possible to push back the deadline by a few minutes?
     - Can I have a short time extension?

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-0xuoa#4f=u)_pt^b-vglqiz3=p5w1gj3-u$al%%o(k5zqs+m1p
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.ngrok.io','fa62-41-104-164-140.ngrok-free.app', 'ee53-105-111-175-92.ngrok-free.app', os.environ.get('HOST_URL','localhost')]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.ngrok.io','fa62-41-104-164-140.ngrok-free.app', '88ca-105-99-199-116.ngrok-free.app', os.environ.get('HOST_URL','localhost')]
 
 
 # Application definition
@@ -73,7 +73,15 @@ TEMPLATES = [
         },
     },
 ]
-
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    },
+}
 WSGI_APPLICATION = 'rest_example.wsgi.application'
 
 

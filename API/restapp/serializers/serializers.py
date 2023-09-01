@@ -153,7 +153,9 @@ class SiteSerializer2(serializers.ModelSerializer):
        
         return mo
 
-
+class SessionExtensionSerializer(serializers.Serializer):
+    session_id=serializers.CharField()
+    time=serializers.IntegerField()
 
 
 

@@ -52,6 +52,7 @@ urlpatterns = [
     path('userinwhichgroup/<int:id>',GroupViewSet.as_view({'get': 'userinwhichgroup'})),
     path('dtsession/', DriveTestSessionViewSet.as_view({'get':'list'})),
     path('has_session/<str:site_id>',DriveTestSessionViewSet.as_view({'get':'has_session'})),
+    path('extendSession/',DriveTestSessionViewSet.as_view({'post':'extend_session'})),
     path('dtsession/g=<int:group_id>&t=<int:technician_id>/', DriveTestSessionViewSet.as_view({'get':'dtsessionsFiltered'})),
     path('dtsession/g=<int:group_id>/',DriveTestSessionViewSet.as_view({'get':'dtsessionsFilteredByGroup'})),
     path('dtsession/', DriveTestSessionViewSet.as_view({'post':'create'})),

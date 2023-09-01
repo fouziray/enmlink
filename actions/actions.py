@@ -672,24 +672,28 @@ class ActionLockSector(Action):
         elif(('1800' in bande4g) or ('2100' in bande4g)):
             sectors= manageCodeSiteSector(codeSite , bande4g ,sector_to_block)
             dispatcher.utter_message(text="this is site 4 "+str(sectors)) 
+            if ('1800' in bande4g ):
+                bande4g=0
+            else:
+                bande3g=1
 
             obj4gFDD = g4FDDCommand()
             if(sectors[0]):
-                get_s1 = obj4gFDD.get(sectors[0])
+                get_s1 = obj4gFDD.get(sectors[0],bande4g)
                 com.execute(get_s1)
                 set_s1 = obj4gFDD.set(sectors[0] , bande4g , 'BLOCKED')
                 com.execute(set_s1)
                 dispatcher.utter_message(text="Sector S1 bande "+bande4g+" for 4G is now BLOCKED") 
 
             if(sectors[1]):
-                get_s2 = obj4gFDD.get(sectors[1])
+                get_s2 = obj4gFDD.get(sectors[1],bande4g)
                 com.execute(get_s2)
                 set_s2 = obj4gFDD.set(sectors[1] , bande4g , 'BLOCKED')
                 com.execute(set_s2)
                 dispatcher.utter_message(text="Sector S2 bande "+bande4g+" for 4G is now BLOCKED") 
 
             if(sectors[2]):
-                get_s3 = obj4gFDD.get(sectors[2])
+                get_s3 = obj4gFDD.get(sectors[2],bande4g)
                 com.execute(get_s3)
                 set_s3 = obj4gFDD.set(sectors[2] , bande4g , 'BLOCKED')
                 com.execute(set_s3)
@@ -842,7 +846,13 @@ class ActionUnLockSector(Action):
 
 
 class ActionExtend(Action):
-   
+
+    def find_con(self,n, s):
+        result = re.search('\d{%s}'%n, s)
+        return result.group(0) if result else result
+    
+    def strr(self,s):
+        return [int(s) for s in re.findall(r'-?\d+\.?\d*',s)]
     def name(self) -> Text:
         return "action_extend_session"
 
@@ -850,30 +860,34 @@ class ActionExtend(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         
-        url = "https:-------------------" # api @
-
+        url = "http://localhost:8000/extendSession/" # api @
+        
 
         codeSite = tracker.get_slot("code_site")
         
-        if(codeSite is None):
-            dispatcher.utter_message("you haven't entered site code")
-            return[]
-
-        time = tracker.get_slot("time")
-        if(time is None):
-            
+        #if(codeSite is None):
+        #    dispatcher.utter_message("you haven't entered site code")
+        #    return[]
+        dispatcher.utter_message("this is sender"+str(tracker.current_state()['sender_id']  ))
+        
+        time = tracker.get_slot("duration")
+        if(time is None or time >30 ):
+        
 
             time = 15
 
             dispatcher.utter_message("Your session is extended by 15 mins")
         
         else:
-            dispatcher.utter_message("Your session is extended by "+time+ " mins")
+            
+            dispatcher.utter_message("Your session is extended by "+str(time)+ " mins")
         
-        data = {
-            "Sender": "walid",
-            "time": time
-        }
+        data ={
+	"session_id":2,
+	"time": time 
+}
+       
+
 
         try:
             response = requests.post(url, json=data)

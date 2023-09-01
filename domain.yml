@@ -42,6 +42,7 @@ entities:
   - Person
   - code_site
   - time
+  - duration
   - throughput:
       roles:
         - throughput_DL
@@ -229,6 +230,13 @@ slots:
     mappings: 
     - type: from_entity
       entity: time
+  
+  duration:
+    type: float
+    influence_conversation: true
+    mappings: 
+    - type: from_entity
+      entity: duration
 
 
 path2g:

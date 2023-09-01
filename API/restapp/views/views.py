@@ -1,11 +1,12 @@
 import datetime
+from datetime import datetime, timedelta
 import json
 from django.shortcuts import render
 
 #from django.contrib.auth.models import User 
 from django.http import Http404
 from restapp.serializers.eventSerializer import EventSerialize
-from restapp.serializers.serializers import ConvoSerializer, HelpProviderSerialize, ManagedObjectStateSerializer, ProfileSerializer, UserSerializer,SiteSerializer, TechnologySerializer , SiteSerializer2,GroupSerializer,DTSerializer, DTserializercreation, MessageRasaBotSerializer
+from restapp.serializers.serializers import ConvoSerializer, HelpProviderSerialize, ManagedObjectStateSerializer, ProfileSerializer, UserSerializer,SiteSerializer, TechnologySerializer , SiteSerializer2,GroupSerializer,DTSerializer, DTserializercreation, MessageRasaBotSerializer, SessionExtensionSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
@@ -26,6 +27,8 @@ from django.db.models import Max,F,Count, ExpressionWrapper, DateTimeField,Q;
 from rest_framework.pagination import LimitOffsetPagination
 from django.utils.timezone import now
 from rest_framework import pagination
+from rest_framework import generics
+
 async_mode = None
 import os
 from django.http import HttpResponse
@@ -46,7 +49,26 @@ def connection_bind(sid, data):
 @sio.on('disconnect')
 def test_disconnect(sid):
     pass
-class exchangeMessageRasa(APIView):
+class exchangeMessageRasa(generics.GenericAPIView):
+        permission_classes = (permissions.AllowAny,)
+        serializer_class=MessageRasaBotSerializer
+        queryset=Events.objects
+        def post(self, request, format=None):
+            api_url="http://localhost:5005/webhooks/rest/webhook"
+            serializer = MessageRasaBotSerializer(data=request.data)
+            if serializer.is_valid():
+                headers =  {"Content-Type":"application/json"}
+                try:
+                    response=requests.post(api_url, data=json.dumps(serializer.data),headers=headers)
+                except NameError:  
+                    print("hhh"+str(NameError))
+                    return Response(str(NameError))
+                return Response(response.json(), status=response.status_code)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class exchangeMessageRasaFrench(generics.GenericAPIView):
+        serializer_class=MessageRasaBotSerializer
+        queryset=Events.objects
         permission_classes = (permissions.AllowAny,)
         def post(self, request, format=None):
             api_url="http://localhost:5005/webhooks/rest/webhook"
@@ -57,20 +79,11 @@ class exchangeMessageRasa(APIView):
                 return Response(response.json(), status=response.status_code)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class exchangeMessageRasaFrench(APIView):
-        permission_classes = (permissions.AllowAny,)
-        def post(self, request, format=None):
-            api_url="http://localhost:5005/webhooks/rest/webhook"
-            serializer = MessageRasaBotSerializer(data=request.data)
-            if serializer.is_valid():
-                headers =  {"Content-Type":"application/json"}
-                response=requests.post(api_url, data=json.dumps(serializer.data),headers=headers)
-                return Response(response.json(), status=response.status_code)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-class UserList(APIView):
+class UserList(generics.GenericAPIView):
     permission_classes = (permissions.AllowAny,)
-
+    serializer_class=UserSerializer
+    queryset=User.objects.all()
+#    @swagger_auto_schema(responses={200: UserSerializer(many=True)})
     def get(self, request, format=None):
          users = User.objects.all()
          serializer = UserSerializer(users, many=True,fields=['id','username','first_name','last_name','email','last_login'])
@@ -96,10 +109,12 @@ class UserList(APIView):
             serializer.save()
             return Response(serializer.data)
     
-class UserDetail(APIView):
+class UserDetail(generics.GenericAPIView):
      """
      Retrieve, update or delete a user instance.
      """
+     serializer_class=UserSerializer
+     queryset=User.objects
      def get_object(self, pk):
          try:
              return User.objects.get(pk=pk)
@@ -127,15 +142,17 @@ class UserDetail(APIView):
         
 
 class Respond(APIView):
+    swagger_schema = None
     permission_classes = (permissions.AllowAny,)
 
     def get(self, request, act):
         return Response("this is "+str(act))
 
-class HelperDetail(APIView):
+class HelperDetail(generics.GenericAPIView):
     permission_classes = (permissions.AllowAny,)
    
-    
+    serializer_class=HelpProviderSerialize
+    queryset=HelpProvider.objects.all()
     def get_object(self, pk):
          try:
              return HelpProvider.objects.get(pk=pk)
@@ -202,6 +219,7 @@ class HelpProviderList(ReadOnlyModelViewSet):
         
 
 class ConvoList(APIView):
+    swagger_schema = None
     def get(self, request, format=None):
          users = Convo.objects.all()
          serializer = ConvoSerializer(users, many=True)
@@ -240,11 +258,12 @@ from django.http import JsonResponse
 """
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-class EventsList(APIView):
+class EventsList(generics.GenericAPIView):
+    serializer_class=EventSerialize
     authentication_classes = [TokenAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
     permission_classes = (permissions.AllowAny,)
-    
+    queryset=Events.objects.all()
     def get(self, request, format=None):
          users = Events.objects.distinct('type_name')
          serializer = EventSerialize(users, many=True)
@@ -257,9 +276,11 @@ class EventsList(APIView):
              cursor.execute(query)
              results= cursor.fetchall()
         return JsonResponse(results,safe=False)
-class SingleEvent(APIView):
+class SingleEvent(generics.GenericAPIView):
+    serializer_class=EventSerialize
     authentication_classes = [TokenAuthentication, BasicAuthentication]
     permission_classes = (permissions.AllowAny,)
+    queryset=Events.objects
     def get(self, request, convo_id ):
         events=Events.objects.filter(sender_id=convo_id).exclude(Q(action_name="action_listen") | Q(action_name="action_session_start")).order_by("timestamp")
 
@@ -270,6 +291,7 @@ class ManagedObjectState(APIView):
     authentication_classes = [TokenAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
     permission_classes = (permissions.AllowAny,)
+    swagger_schema = None
 
     def post(self, request, format=None):
          serializer = ManagedObjectStateSerializer(data=request.data)
@@ -281,7 +303,7 @@ class ManagedObjectState(APIView):
 class ProfileImage(APIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = [TokenAuthentication, BasicAuthentication]
-
+    
     """def post(self,request, format=None):
         profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if profile_form.is_valid():
@@ -483,12 +505,54 @@ class DriveTestSessionViewSet(ModelViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @action(detail=False)
+    def todays_sessions(self,request):
+        queryset=self.get_queryset().filter(start_time__gte=now()- datetime.timedelta(hours=12),start_time__lte=now()+datetime.timedelta(hours=12))
+        serializer= self.get_serializer(queryset, many=True)
+        newdict=serializer.data
+        if serializer.data:
+            newdict=[]
+            for i in range(len(serializer.data)):
+                print("_______________"+str(serializer.data[i]["technicien"]["id"]))
+                profile = Profile.objects.get(user=serializer.data[i]["technicien"]["id"])
+                newdict1 = ProfileSerializer(profile).data
+                newdict1.update(serializer.data[i])
+                newdict.append(newdict1)
+
+      
+        return Response(newdict, status=status.HTTP_200_OK)
+    
+    
     def post(self, request, format=None):
         serializer = DTserializercreation(data=request.data,many=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=False)
+    def extend_session(self,request):
+        serializer = SessionExtensionSerializer(data=request.data)
+        if serializer.is_valid():
+            print(serializer.data)
+            # ob=DtSession.objects.get(id=serializer.data["session_id"]).update(end_Time=F("start_time")+ timedelta(minutes=serializer.data["time"]))
+
+            ob=DtSession.objects.get(id=serializer.data["session_id"])
+            updatedDsessionserial=DTserializercreation(ob)
+            ob=updatedDsessionserial.data
+            currentdatetime=datetime.strptime(ob["endDate"], '%Y-%m-%dT%H:%M:%SZ')            
+            print(str(currentdatetime))
+
+            ob.update({"endDate": currentdatetime+timedelta(minutes=serializer.data["time"]) })
+            updatedDsessionserial=DTserializercreation(data=ob)
+            if updatedDsessionserial.is_valid(raise_exception=True):
+                updatedDsessionserial.save()
+                print("validdddd")
+                DtSession.objects.filter(pk=ob["id"]).update(end_Time=currentdatetime+timedelta(minutes=serializer.data["time"]))
+
+            return Response(ob, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class JoinUserGrpView(APIView):
     permission_classes = (permissions.AllowAny,)
