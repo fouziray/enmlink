@@ -8,27 +8,33 @@ from os.path import exists
 path =  ".store_rollback/"
 
 # this is a first draft of enm access and not yet integrated with actions server
-class Command:
+class Command(object):
+    
+
     def __init__(self):
+        #self.session=None
         pass
 
-    @abstractmethod
-    def get(siteId, uarfcnId, bande):
-        pass
-
-    @abstractmethod
-    def set(siteId, uarfcn, bande):
-        pass
+   
 
     def open(self, a, b, c):
        # self.session = enmscripting.open(a, b, c)
        # return self.session
+        print("opened")
         pass
     def closesession(self):
       #  enmscripting.close(self.session)
+        print("closed")
         pass
     def execute(self,command):
+        # if(self.session):
+        #   cmd=self.session.command()
+        #   cmd.execute(str(command))
+        # else: 
+        #   print("command is not executed")
+        msg="this is executed command"+str(command)
         print("this is executed command"+str(command))
+    
         return command
 
 
@@ -138,18 +144,18 @@ def manageCodeSiteSector(codeSite , bande , sector):
         if(site4gFDD):
             if ('1800' in bande):
                 if('1' in sector): 
-                    sector1_4g_b1 = site4gFDD + 'M'
+                    sector1_4g_b1 = 'M'.join(site4gFDD.rsplit(site4gFDD[-1:], 1)) 
                 if('2' in sector):
-                    sector2_4g_b1 = site4gFDD + 'N'
+                    sector2_4g_b1 = 'N'.join(site4gFDD.rsplit(site4gFDD[-1:], 1)) 
                 if('3' in sector):
-                    sector3_4g_b1 = site4gFDD + 'O'
+                    sector3_4g_b1 = 'O'.join(site4gFDD.rsplit(site4gFDD[-1:], 1)) 
             if ('2100' in bande):
                 if('1' in sector): 
-                    sector1_4g_b2 = site4gFDD + 'R'
+                    sector1_4g_b2 = 'R'.join(site4gFDD.rsplit(site4gFDD[-1:], 1)) 
                 if('2' in sector):
-                    sector2_4g_b2 = site4gFDD + 'S'
+                    sector2_4g_b2 = 'S'.join(site4gFDD.rsplit(site4gFDD[-1:], 1))  
                 if('3' in sector):
-                    sector3_4g_b2 = site4gFDD + 'T'
+                    sector3_4g_b2 = 'T'.join(site4gFDD.rsplit(site4gFDD[-1:], 1)) 
             #print("hehee4gfdd"+str([sector1_4g_b1 , sector2_4g_b1 , sector3_4g_b1 , sector1_4g_b2 , sector2_4g_b2 , sector3_4g_b2]))
             return[sector1_4g_b1 , sector2_4g_b1 , sector3_4g_b1 , sector1_4g_b2 , sector2_4g_b2 , sector3_4g_b2]
         #print("manageCodeSiteSector"+str(sites))
@@ -350,14 +356,15 @@ class g3NodeCommand(Command):
 
 class g4FDDCommand(Command):
     def get(self, siteId, bande):
-        cmd = "cmedit get " + siteId + " EutranCellFDD.(freqBand==" + bande + ",administrativeState,operationalState, availabilityStatus) -t"
+        cmd = "cmedit get " + str(siteId) + " EutranCellFDD.(freqBand==" + str(bande) + ",administrativeState,operationalState, availabilityStatus) -t"
+        print(cmd+"hehehehehihhihi")
         return cmd
 
     def set(self, siteId, bande, state):
         if bande!=0:
-            cmd = "cmedit set " + siteId + " EutranCellFDD.(freqBand==" + bande + ") administrativeState=" + state
+            cmd = "cmedit set " + str(siteId) + " EutranCellFDD.(freqBand==" + str(bande) + ") administrativeState=" + str(state)
         else:
-            cmd = "cmedit set * EutranCellFDD.(EutranCellFDDId=="+ siteId +") administrativeState=" + state
+            cmd = "cmedit set * EutranCellFDD.(EutranCellFDDId=="+ str(siteId) +") administrativeState=" + str(state)
         return cmd
 
     def rollback_4g(self, path4g):

@@ -32,6 +32,7 @@ urlpatterns = [
     path('users/<int:pk>/', UserDetail.as_view()),
     path('reponse/<act>',Respond.as_view()),
     path('helpproviders/',HelpProviderList.as_view({'get': 'list'})),
+    path('helpproviders/',HelpProviderList.as_view({'post': 'post'})),
     path('helpproviders/!<str:fonction>/',HelpProviderList.as_view({'get':'getByFunction'})),
     path('helpproviders/<int:pk>/', HelperDetail.as_view()),
     #path('message/',MessageList.as_view()),
@@ -53,8 +54,12 @@ urlpatterns = [
     path('dtsession/', DriveTestSessionViewSet.as_view({'get':'list'})),
     path('has_session/<str:site_id>',DriveTestSessionViewSet.as_view({'get':'has_session'})),
     path('extendSession/',DriveTestSessionViewSet.as_view({'post':'extend_session'})),
+    path('dtsession/<int:pk>', DriveTestSessionViewSet.as_view({'get':'retrieve'})),
+
     path('dtsession/g=<int:group_id>&t=<int:technician_id>/', DriveTestSessionViewSet.as_view({'get':'dtsessionsFiltered'})),
     path('dtsession/g=<int:group_id>/',DriveTestSessionViewSet.as_view({'get':'dtsessionsFilteredByGroup'})),
+    path('dtsession/t=<int:technician_id>/',DriveTestSessionViewSet.as_view({'get':'dtsessionsFilteredBytechnician'})),
+
     path('dtsession/', DriveTestSessionViewSet.as_view({'post':'create'})),
     path('dtsession/today/', DriveTestSessionViewSet.as_view({'get':'todays_sessions'})),
     path('isintimeframe/<int:id>',HelpProviderList.as_view({'get':'isTechnicianInTimeFrame'})),

@@ -249,13 +249,6 @@ stories:
   - action: utter_finishing_test
 
 
-- story: s throughput is good
-  steps:
-  - intent: inform_throughput/good
-  - action: utter_throughput_good
-
-
-
 - story: s throughput status
   steps:
   - intent: inform_throughput/bad

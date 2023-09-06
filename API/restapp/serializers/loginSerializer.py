@@ -53,7 +53,7 @@ class MyBackend(BaseBackend):
         except User.DoesNotExist:
             return False
         #if check_password(password, user.password):
-        if check_password(password, user.password):
+        if (check_password(password, user.password) and user.is_active):
         #set is_active to true if false inside user model
             return user
         else:

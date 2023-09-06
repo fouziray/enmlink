@@ -2,9 +2,9 @@ version: "3.9"
 
 services:
   djangoapp:
-    image: dontcarrotall/djangoapp:tag1
+    image: dontcarrotall/djangoapp:tagfinal # new image
     ports:
-      - "8000:8000"
+      - "8001:8000" # changes port for ducklingserver's default gateway
     environment:
       - PG_USER=postgres
       - PG_PASSWORD=postgres

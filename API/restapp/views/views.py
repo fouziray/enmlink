@@ -1,5 +1,5 @@
 import datetime
-from datetime import datetime, timedelta
+from datetime import timedelta
 import json
 from django.shortcuts import render
 
@@ -459,10 +459,11 @@ class DriveTestSessionViewSet(ModelViewSet):
     serializer_class = DTSerializer
     permission_classes = (permissions.AllowAny,)
     http_method_names = ["get","post"]    
-    def retrieve(self, request,  *args, **kwargs):
-        instance = self.get_object()
+    def getsingle(self, request,pk=None):
+        queryset = DtSession.objects.all()
+        single=get_object_or_404(queryset,pk=pk)
         # query = request.GET.get('query', None)  # read extra data
-        return Response(self.serializer_class(instance).data,
+        return Response(self.serializer_class(single).data,
                         status=status.HTTP_200_OK)
 
     def list(self, request):
@@ -477,10 +478,15 @@ class DriveTestSessionViewSet(ModelViewSet):
             return Response(serializer.data, status=status.HTTP_200_OK)
 
     @action(detail=False)
-    def dtsessionsFiltered(self,request,group_id, technician_id): # filtered using group id and technician id
-            queryset = self.get_queryset().filter(Q(dtTeam=group_id) | Q(technicien=technician_id))
+    def dtsessionsFilteredBytechnician(self,request,technician_id): # filtered using group id and technician id
+            queryset = self.get_queryset().filter(technicien=technician_id)
             serializer= self.get_serializer(queryset, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @action(detail=False)
+    def dtsessionsFiltered(self,request,group_id, technician_id): # filtered using group id and technician id
+            queryset = self.get_queryset().filter(Q(dtTeam=group_id) & Q(technicien=technician_id))
+            serializer= self.get_serializer(queryset, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
     
     @action(detail=False)
@@ -514,10 +520,18 @@ class DriveTestSessionViewSet(ModelViewSet):
             newdict=[]
             for i in range(len(serializer.data)):
                 print("_______________"+str(serializer.data[i]["technicien"]["id"]))
-                profile = Profile.objects.get(user=serializer.data[i]["technicien"]["id"])
-                newdict1 = ProfileSerializer(profile).data
-                newdict1.update(serializer.data[i])
-                newdict.append(newdict1)
+                try:
+                    profile = Profile.objects.get(user=serializer.data[i]["technicien"]["id"])
+                    newdict1 = ProfileSerializer(profile).data        
+                    newdict1.update(serializer.data[i])
+                    newdict.append(newdict1)
+                except:
+                    newdict1={"avatar":"/static/default.jpg"}
+                    newdict1.update(serializer.data[i])
+                    newdict.append(newdict1)
+                    print("exception no profile found")
+
+      
 
       
         return Response(newdict, status=status.HTTP_200_OK)

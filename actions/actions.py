@@ -1,9 +1,22 @@
 from typing import Any, Text, Dict, List
-from rasa_sdk.events import SlotSet  
-
+from rasa_sdk.events import SlotSet, EventType
+import datetime
+import json
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-
+from rasa.shared.core.constants import (
+    USER_INTENT_OUT_OF_SCOPE,
+    ACTION_LISTEN_NAME,
+    ACTION_RESTART_NAME,
+    ACTION_SESSION_START_NAME,
+    ACTION_DEFAULT_FALLBACK_NAME,
+    ACTION_DEACTIVATE_LOOP_NAME,
+    ACTION_REVERT_FALLBACK_EVENTS_NAME,
+    ACTION_DEFAULT_ASK_AFFIRMATION_NAME,
+    ACTION_DEFAULT_ASK_REPHRASE_NAME,
+    ACTION_BACK_NAME,
+    REQUESTED_SLOT,
+)
 from .commands import path, check_2g , check_3g , check_4gFDD , check_tilt , check_4gTDD , manageCodeSite , manageCodeSiteSector , format , buildCodeSite , Command , GsmCommand ,g3rncCommand , g3NodeCommand , g4FDDCommand , g4TDDCommand ,OptimCommand , RetCommand
 import pandas as pd 
 import matplotlib.pyplot as plt
@@ -12,6 +25,8 @@ import re
 from os.path import exists
 import os
 import requests
+from rasa_sdk.events import SessionStarted, ActionExecuted
+from threading import Timer
 
 
 file_dir = os.path.dirname(os.path.abspath(__file__))
@@ -20,6 +35,88 @@ csv_folder = 'store_rollback'
 
 
 com=Command()
+
+class manageSession(object):
+    nb=0
+    def __new__(cls):
+        
+        cls.nb+=1
+        print(cls.nb)
+        if not hasattr(cls, 'instance'):
+             cls.instance = super(manageSession, cls).__new__(cls)
+        if cls.nb==1:
+            com.open(os.environ.get('URL',''),os.environ.get('USERNAME',''),os.environ.get('PASSWORD',''))
+        return cls.instance
+    
+    @staticmethod
+    def delete():
+        manageSession.nb-=1
+        print(manageSession.nb)
+        print('Inside the destructor')
+        if(manageSession.nb==0):
+            com.closesession()
+    @staticmethod
+    def setTimeout(fn, ms, *args, **kwargs):
+        t = Timer(ms / 1000, fn, args=args, kwargs=kwargs)
+        t.start()
+        return t
+	
+class ActionSessionStart(Action):
+    def name(self) -> Text:
+        return "action_session_start"
+    @staticmethod
+    def fun( ):
+        manageSession.delete()
+    @staticmethod
+    def fetch_slots(tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
+        """Collect slots that contain the user's infos."""
+
+        slots = []
+        for key in list(domain['slots'].keys()):
+            value = tracker.get_slot(key)
+            if value is not None:
+                slots.append(SlotSet(key=key, value=value))
+                print(key,value)
+        return slots
+    def run(
+      self, dispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[Dict[Text, Any]]:
+        events = [SessionStarted()]
+        metadata = tracker.get_slot("session_started_metadata")
+    
+        events.extend(self.fetch_slots(tracker,domain))
+
+
+        
+        url = "http://localhost:8000/dtsession/" # api @
+
+
+        try:
+            response = requests.get(url+str(tracker.current_state()['sender_id']  ))
+
+            if response.status_code == 200:
+                print(response.text)
+                encodedRes=json.loads(response.text)
+                print(encodedRes["endDate"])
+                now=datetime.datetime.now()
+                currentdatetime=datetime.datetime.strptime(encodedRes["endDate"], '%Y-%m-%dT%H:%M:%SZ')
+                difference=(currentdatetime - now).total_seconds()
+                if( difference > 0):
+                    print(difference)
+                    c=manageSession()
+                    c.setTimeout(self.fun, 5000) # 5 seconds for testing / change with difference for real deployment
+                else:
+                    print("session is already done since "+str(difference)+" seconds")
+            else:
+                print(f"POST request failed with status code: {response.status_code}")
+        except Exception as exp:
+           print(f"An error occurred: {str(exp)}")
+       
+        print(tracker.get_slot("pathTilt"))
+        # the session should begin with a `session_started` event and an `action_listen`
+        # as a user message follows
+        events.append(ActionExecuted("action_listen"))
+        return events
 
 class ActionGreet(Action):
 
@@ -100,8 +197,8 @@ class ActionTechStatus(Action):
                 #save 2G status
                 path2g = path + str(site2g) + "_2g.json"
                 file_path = os.path.join(file_dir, csv_folder,  str(codeSite) + "_2g.json")
-
-                response2g.to_json(file_path , orient = 'records') 
+                if( not exists(file_path) ):
+                    response2g.to_json(file_path , orient = 'records') 
                 dispatcher.utter_message(text="status for 2G: "+' ,'.join(response2g[["GeranCellId", "state"]].to_string(header=False , index = False).split('\n')))
 
 
@@ -119,8 +216,8 @@ class ActionTechStatus(Action):
             else:
                 path3g = path + str(site3g) + "_3g.json"
                 file_path = os.path.join(file_dir, csv_folder,  str(codeSite) + "_3g.json")
-
-                response3g.to_json(file_path , orient = 'records') 
+                if( not exists(file_path) ):
+                    response3g.to_json(file_path , orient = 'records') 
                 dispatcher.utter_message(text="status for 3G: "+' ,'.join(response3g[["UtranCellId", "operationalState"]].to_string(header=False , index = False).split('\n')))
 
         if(("4" in message) and (tracker.get_slot("Tech4g")!= None) ):
@@ -136,11 +233,12 @@ class ActionTechStatus(Action):
                             #save 4G status
                 path4g = path + str(site4g) + "_4g.json"
                 file_path = os.path.join(file_dir, csv_folder,  str(codeSite) + "_4g.json")
-
-                response4g.to_json(file_path , orient = 'records') 
+                if( not exists(file_path) ):
+                    response4g.to_json(file_path , orient = 'records') 
                 dispatcher.utter_message(text="status for 4G: "+' ,'.join(response4g[["EUtranCellFDDId", "administrativeState"]].to_string(header=False , index = False).split('\n')))
 
         if(tracker.latest_message['intent'].get('check_all_techs')):
+
             response2g = check_2g(site2g)
             response3g = check_3g(site3g)
             response4g = check_4gFDD(site4g)
@@ -341,7 +439,7 @@ class Action_UnLock_tech(Action):
         if(site3g):
             g3_obj = g3rncCommand()
             
-            # recuperer la bande
+            # recuperer la ba}}nde
             bande = tracker.get_slot("Tech3g")
             if(bande == None):
                 dispatcher.utter_message("You need to specify which 3G band, or both")
@@ -602,9 +700,9 @@ class ActionLockSector(Action):
         bande4g=''        
         if (tracker.get_slot("Tech2g") is not None):
             bande2g = tracker.get_slot("Tech2g")
-        if (tracker.get_slot("Tech3g") is not None ):
+        if (tracker.get_slot("Tech3g") is not None):
             bande3g = tracker.get_slot("Tech3g")
-        if (tracker.get_slot("Tech4g") is not None ):
+        if (tracker.get_slot("Tech4g") is not None):
             bande4g = tracker.get_slot("Tech4g")
 
         
@@ -645,37 +743,50 @@ class ActionLockSector(Action):
             else:
                 bande3g="U2100"
             obj3g = g3rncCommand()
-            if(sectors[0]):
-                get_s1 = obj3g.get(sectors[0],bande3g)
+            if(sectors[0] or sectors[3]):
+                if(sectors[1]):
+                    sec=sectors[0]
+                else:
+                    sec=sectors[3]
+                get_s1 = obj3g.get(sec,bande3g)
                 com.execute(get_s1)
-                set_s1 = obj3g.set(sectors[0] , bande3g , 'BLOCKED')
+                set_s1 = obj3g.set(sec, bande3g , 'BLOCKED')
                 com.execute(set_s1)
-                dispatcher.utter_message(text="Sector S1 bande "+bande3g+" for 3G is now BLOCKED") 
+                dispatcher.utter_message(text="Sector S1 bande "+str(bande3g)+" for 3G is now BLOCKED") 
 
-            if(sectors[1]):
-                get_s2 = obj3g.get(sectors[1],bande3g)
+            if(sectors[1] or sectors[4]):
+                if(sectors[1]):
+                    sec=sectors[1]
+                else:
+                    sec=sectors[4]
+                
+                get_s2 = obj3g.get(sec,bande3g)
                 com.execute(get_s2)
-                set_s2 = obj3g.set(sectors[1] , bande3g , 'BLOCKED')
+                set_s2 = obj3g.set(sec , bande3g , 'BLOCKED')
                 com.execute(set_s2)
-                dispatcher.utter_message(text="Sector S2 bande "+bande3g+" for 3G is now BLOCKED") 
+                dispatcher.utter_message(text="Sector S2 bande "+str(bande3g)+" for 3G is now BLOCKED") 
 
-            if(sectors[2]):
-                get_s3 = obj3g.get(sectors[2],bande3g)
+            if(sectors[2] or sectors[5]):
+                if(sectors[1]):
+                    sec=sectors[2]
+                else:
+                    sec=sectors[5]
+                get_s3 = obj3g.get(sec,bande3g)
                 com.execute(get_s3)
-                set_s3 = obj3g.set(sectors[2] , bande3g , 'BLOCKED')
+                set_s3 = obj3g.set(sec, bande3g , 'BLOCKED')
                 com.execute(set_s3)
-                dispatcher.utter_message(text="Sector S3 bande "+bande3g+" for 2G is now BLOCKED") 
+                dispatcher.utter_message(text="Sector S3 bande "+str(bande3g)+" for 2G is now BLOCKED") 
 
             SlotSet("blocked_sector_slot" , sector_to_block)
             return[]
 
         elif(('1800' in bande4g) or ('2100' in bande4g)):
             sectors= manageCodeSiteSector(codeSite , bande4g ,sector_to_block)
-            dispatcher.utter_message(text="this is site 4 "+str(sectors)) 
+            #dispatcher.utter_message(text="this is site 4 "+str(sectors)) 
             if ('1800' in bande4g ):
                 bande4g=0
             else:
-                bande3g=1
+                bande4g=1
 
             obj4gFDD = g4FDDCommand()
             if(sectors[0]):
@@ -683,22 +794,40 @@ class ActionLockSector(Action):
                 com.execute(get_s1)
                 set_s1 = obj4gFDD.set(sectors[0] , bande4g , 'BLOCKED')
                 com.execute(set_s1)
-                dispatcher.utter_message(text="Sector S1 bande "+bande4g+" for 4G is now BLOCKED") 
+                dispatcher.utter_message(text="Sector S1 bande "+str(bande4g)+" for 4G is now BLOCKED") 
 
             if(sectors[1]):
                 get_s2 = obj4gFDD.get(sectors[1],bande4g)
                 com.execute(get_s2)
                 set_s2 = obj4gFDD.set(sectors[1] , bande4g , 'BLOCKED')
                 com.execute(set_s2)
-                dispatcher.utter_message(text="Sector S2 bande "+bande4g+" for 4G is now BLOCKED") 
+                dispatcher.utter_message(text="Sector S2 bande "+str(bande4g)+" for 4G is now BLOCKED") 
 
             if(sectors[2]):
                 get_s3 = obj4gFDD.get(sectors[2],bande4g)
                 com.execute(get_s3)
                 set_s3 = obj4gFDD.set(sectors[2] , bande4g , 'BLOCKED')
                 com.execute(set_s3)
-                dispatcher.utter_message(text="Sector S3 bande "+bande4g+" for 4G is now BLOCKED") 
-            
+                dispatcher.utter_message(text="Sector S3 bande "+str(bande4g)+" for 4G is now BLOCKED") 
+            if(sectors[3]):
+                get23 = obj4gFDD.get(sectors[3],bande4g)
+                com.execute(get23)
+              
+                com.execute(obj4gFDD.set(sectors[3] , bande4g , 'BLOCKED'))
+                dispatcher.utter_message(text="Sector S1 band "+str(bande4g)+" in 4G is now BLOCKED") 
+            if(sectors[4]):
+                get23 = obj4gFDD.get(sectors[4],bande4g)
+                com.execute(get23)
+              
+                com.execute(obj4gFDD.set(sectors[4] , bande4g , 'BLOCKED'))
+                dispatcher.utter_message(text="Sector S2 band "+str(bande4g)+" in 4G is now BLOCKED") 
+            if(sectors[5]):
+                get23 = obj4gFDD.get(sectors[5],bande4g)
+                com.execute(get23)
+              
+                com.execute(obj4gFDD.set(sectors[5] , bande4g , 'BLOCKED'))
+                dispatcher.utter_message(text="Sector S3 band "+str(bande4g)+" in 4G is now BLOCKED") 
+
             SlotSet("blocked_sector_slot" , sector_to_block)
             return[]
 
@@ -784,21 +913,24 @@ class ActionUnLockSector(Action):
             else:
                 bande3g="U2100"
             obj3g = g3rncCommand()
-            if(sectors[0]):
+            if(sectors[0] or sectors[3]):
+                sectors[0]=sectors[0] or sectors[3]
                 get_s1 = obj3g.get(sectors[0],bande3g)
                 com.execute(get_s1)
                 set_s1 = obj3g.set(sectors[0] , bande3g , 'UNBLOCKED')
                 com.execute(set_s1)
                 dispatcher.utter_message(text="Sector S1 bande "+bande3g+" for 3G is now UNBLOCKED") 
 
-            if(sectors[1]):
+            if(sectors[1] or sectors[4] ):
+                sectors[1]=sectors[1] or sectors[4]                
                 get_s2 = obj3g.get(sectors[1],bande3g)
                 com.execute(get_s2)
                 set_s2 = obj3g.set(sectors[1] , bande3g , 'UNBLOCKED')
                 com.execute(set_s2)
                 dispatcher.utter_message(text="Sector S2 bande "+bande3g+" for 3G is now UNBLOCKED") 
 
-            if(sectors[2]):
+            if(sectors[2] or sectors[5] ):
+                sectors[2]=sectors[2] or sectors[5]                
                 get_s3 = obj3g.get(sectors[2],bande3g)
                 com.execute(get_s3)
                 set_s3 = obj3g.set(sectors[2] , bande3g , 'UNBLOCKED')
@@ -811,28 +943,36 @@ class ActionUnLockSector(Action):
         elif(('1800' in bande4g) or ('2100' in bande4g)):
             sectors= manageCodeSiteSector(codeSite , bande4g ,sector_to_unblock)
             dispatcher.utter_message(text="this is site 4 "+str(sectors)) 
-
+            if ('1800' in bande4g ):
+                bande4g=0
+            else:
+                bande4g=1
+            
             obj4gFDD = g4FDDCommand()
-            if(sectors[0]):
-                get_s1 = obj4gFDD.get(sectors[0])
+            
+            if(sectors[0] or sectors[3]):
+                sectors[0]=sectors[0] or sectors[3]
+                get_s1 = obj4gFDD.get(sectors[0],bande4g)
                 com.execute(get_s1)
                 set_s1 = obj4gFDD.set(sectors[0] , bande4g , 'UNBLOCKED')
                 com.execute(set_s1)
-                dispatcher.utter_message(text="Sector S1 bande "+bande4g+" for 4G is now UNBLOCKED") 
+                dispatcher.utter_message(text="Sector S1 band "+bande4g+" for 4G is now UNBLOCKED") 
 
-            if(sectors[1]):
-                get_s2 = obj4gFDD.get(sectors[1])
+            if(sectors[1] or sectors[4]):
+                sectors[1]=sectors[1] or sectors[4]
+                get_s2 = obj4gFDD.get(sectors[1],bande4g)
                 com.execute(get_s2)
                 set_s2 = obj4gFDD.set(sectors[1] , bande4g , 'UNBLOCKED')
                 com.execute(set_s2)
-                dispatcher.utter_message(text="Sector S2 bande "+bande4g+" for 4G is now UNBLOCKED") 
+                dispatcher.utter_message(text="Sector S2 band "+bande4g+" for 4G is now UNBLOCKED") 
 
-            if(sectors[2]):
-                get_s3 = obj4gFDD.get(sectors[2])
+            if(sectors[2] or sectors[5]):
+                sectors[2]=sectors[2] or sectors[5]
+                get_s3 = obj4gFDD.get(sectors[2],bande4g)
                 com.execute(get_s3)
                 set_s3 = obj4gFDD.set(sectors[2] , bande4g , 'UNBLOCKED')
                 com.execute(set_s3)
-                dispatcher.utter_message(text="Sector S3 bande "+bande4g+" for 4G is now UNBLOCKED") 
+                dispatcher.utter_message(text="Sector S3 band "+bande4g+" for 4G is now UNBLOCKED") 
             
             SlotSet("unblocked_sector_slot" , sector_to_unblock)
             return[]
@@ -845,7 +985,7 @@ class ActionUnLockSector(Action):
 
 
 
-class ActionExtend(Action):
+class ActionExtend(Action): #executed each time the session is new due to it no being included in stories and being a mapping source for slot duration
 
     def find_con(self,n, s):
         result = re.search('\d{%s}'%n, s)

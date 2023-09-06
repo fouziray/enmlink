@@ -239,21 +239,21 @@ slots:
       entity: duration
 
 
-path2g:
+  path2g:
     type: text
     influence_conversation: false
     mappings: 
     - type: custom
       action: action_status_tech
 
-path3g:
+  path3g:
     type: text
     influence_conversation: false
     mappings: 
     - type: custom
       action: action_status_tech
 
-path4gFDD:
+  path4gFDD:
     type: categorical
     influence_conversation: false
     values:
@@ -264,12 +264,11 @@ path4gFDD:
     - type: custom
       action: action_status_tech
 
-pathTilt:
+  pathTilt:
     type: text
     influence_conversation: false
     mappings: 
     - type: custom
-
 responses:
   utter_greet:
   - text: "Hey! How are you?"
@@ -314,19 +313,19 @@ responses:
 
 
 actions: 
-- action_utter_greet # done
-- action_inform_site # done
-#- action_check_all_techs   handled in action_status_tech
-- action_lock_sector
-- action_unlock_sector
-- action_lock_tech # done
-- action_unlock_tech # done
-- action_set_tilt # done with get tilt and save initial state 
-- action_rollback # rollback all stored files (tech , sector , tilt)
-- action_extend_session
-- action_status_tech  # done
-- action_throughput_info #done
-
+  - action_utter_greet # done
+  - action_inform_site # done
+  #- action_check_all_techs   handled in action_status_tech
+  - action_lock_sector
+  - action_unlock_sector
+  - action_lock_tech # done
+  - action_unlock_tech # done
+  - action_set_tilt # done with get tilt and save initial state 
+  - action_rollback # rollback all stored files (tech , sector , tilt)
+  - action_extend_session
+  - action_status_tech  # done
+  - action_throughput_info #done
+  - action_session_start
 session_config:
-  session_expiration_time: 460
+  session_expiration_time: 60
   carry_over_slots_to_new_session: true
