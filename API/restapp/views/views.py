@@ -384,6 +384,23 @@ class Sites(ModelViewSet, LimitOffsetPagination):
   
 #         serializer = SiteSerializer(MosTechnologies, many=True)
 #         return Response(serializer.data)
+    
+    @action(detail=True, methods=['get'])       
+    def search_with_pagination(self, request, format=None):
+         request = self.request
+         query = request.GET.get('q', None)
+         #Technologies= Technology.objects.all()
+         #finaltech = TechnologySerializer(Technologies,many=True)
+         #MosTechnologies = ManagedObject.objects.prefetch_related('managedObject').all()
+         MosTechnologies= ManagedObject.objects.filter(Q(wilaya__icontains=query) |
+                         Q(site_id__icontains=query) |
+                         Q(UOP__icontains=query)
+                        )
+         result=self.paginate_queryset(MosTechnologies)
+         serializer = SiteSerializer(result, many=True) 
+         return self.get_paginated_response(serializer.data)
+
+    
     def post(self, request, format=None):
          site_serializer = SiteSerializer(data=request.data)
          if (site_serializer.is_valid(raise_exception=True)):

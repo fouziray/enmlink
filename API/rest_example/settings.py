@@ -83,7 +83,7 @@ SWAGGER_SETTINGS = {
     },
 }
 WSGI_APPLICATION = 'rest_example.wsgi.application'
-
+ASGI_APPLICATION = 'rest_example.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

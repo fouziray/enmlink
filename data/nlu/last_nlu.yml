@@ -115,8 +115,8 @@ nlu:
     - i need to unlock [U900](Tech3g)
     - i want to unlock [L2100](Tech4g)
     - unlock [s3](Sector) please
-    - Lock (sector 1)[Sector] please
-    - (Sector 2)[Sector] of [74156](code_site), please lock.
+    - unLock (sector 1)[Sector] please
+    - (Sector 2)[Sector] of [74156](code_site), please unlock.
 
 - intent: ask_Ret
   examples: |

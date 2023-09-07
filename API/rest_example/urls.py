@@ -44,6 +44,8 @@ urlpatterns = [
     path('api-token-auth/', views.obtain_auth_token),
     path('profile/', ProfileImage.as_view()),
     path('sites/', Sites.as_view({'get':'get_with_pagination'})),
+    path('sitesfiltered/', Sites.as_view({'get':'search_with_pagination'})),
+
     path('sites/all/', Sites.as_view({'get':'get_all'})),
     path('sites/lastsession/', Sites.as_view({'get':'get_last_test_per_site'})),
     path('DT_session/', SiteDT.as_view(),),

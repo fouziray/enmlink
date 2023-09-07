@@ -32,7 +32,6 @@ class Command(object):
         #   cmd.execute(str(command))
         # else: 
         #   print("command is not executed")
-        msg="this is executed command"+str(command)
         print("this is executed command"+str(command))
     
         return command
@@ -168,7 +167,6 @@ def manageCodeSiteSector(codeSite , bande , sector):
 def check_2g(site2g):
     g2_obj = GsmCommand()
     get_state_2G = g2_obj.get(site2g , 'G900 , G1800')
-        
     output2g = g2_obj.execute(get_state_2G)
     # this is a sample output from enm
     output2g=['SubNetwork,SubNetwork,MeContext,ManagedElement,BscFunction,BscM,GeranCellM,GeranCell', 'NodeId\tBscFunctionId\tBscMId\tGeranCellMId\tGeranCellId\tcSysType\tgeranCellId', 'BLDEVO2\t1\t1\t1\t09620D\tGSM1800\t09620D', 'BLDEVO2\t1\t1\t1\t09620E\tGSM1800\t09620E', 'BLDEVO2\t1\t1\t1\t09620F\tGSM1800\t09620F', 'SubNetwork,SubNetwork,MeContext,ManagedElement,BscFunction,BscM,GeranCellM,GeranCell,ChannelGroup', 'NodeId\tBscFunctionId\tBscMId\tGeranCellMId\tGeranCellId\tChannelGroupId\tconnectedG12Tg\tconnectedG31Tg\tstate', 'BLDEVO2\t1\t1\t1\t09620D\t0\tnull\tSubNetwork=ONRM_ROOT_MO,SubNetwork=GRAN,MeContext=BLDEVO2,ManagedElement=BLDEVO2,BscFunction=1,BscM=1,Bts=1,G31Tg=1020\tACTIVE', 'BLDEVO2\t1\t1\t1\t09620E\t0\tnull\tSubNetwork=ONRM_ROOT_MO,SubNetwork=GRAN,MeContext=BLDEVO2,ManagedElement=BLDEVO2,BscFunction=1,BscM=1,Bts=1,G31Tg=1120\tACTIVE', 'BLDEVO2\t1\t1\t1\t09620F\t0\tnull\tSubNetwork=ONRM_ROOT_MO,SubNetwork=GRAN,MeContext=BLDEVO2,ManagedElement=BLDEVO2,BscFunction=1,BscM=1,Bts=1,G31Tg=1220\tACTIVE', '', '6 instance(s)']
@@ -185,8 +183,9 @@ def check_2g(site2g):
 def check_3g(site3g):
     g3_obj = g3rncCommand()
     get_state_3G = g3_obj.get(site3g , 'U900')
-       
     output3g = g3_obj.execute(get_state_3G)
+    #get_state_3G = g3_obj.get(site3g , 'U2100')
+    #output3g = g3_obj.execute(get_state_3G)
     output3g=['SubNetwork,SubNetwork,SubNetwork,MeContext,ManagedElement,RncFunction,UtranCell', 'NodeId\tRncFunctionId\tUtranCellId\tadministrativeState\toperationalState\tuarfcnDl', 'RNCSTF\t1\t193020V\tUNLOCKED\tENABLED\t10563', 'RNCSTF\t1\t193020W\tUNLOCKED\tENABLED\t10563', 'RNCSTF\t1\t193020X\tUNLOCKED\tENABLED\t10588', 'RNCSTF\t1\t193020Y\tUNLOCKED\tENABLED\t10588', 'RNCSTF\t1\t193020U\tUNLOCKED\tENABLED\t10563', 'RNCSTF\t1\t193020Z\tUNLOCKED\tENABLED\t10588', '', '6 instance(s)']
     #output3g= ['', '0 instance(s)']
 
@@ -264,7 +263,7 @@ def buildCodeSite(codeSite) :
 class GsmCommand(Command):
 
     def get(self, siteId, bande):
-        if bande == "GSM900" or bande == "GSM1800":
+        if "900" in bande   or "1800" in bande:
             cmd = "cmedit get * Gerancell.(GeranCellId==" + str(siteId) + "*,cSysType=='" + str(
                 bande) + "'),ChannelGroup.(connectedG12Tg,connectedG31Tg,state) -t"
             return cmd
@@ -303,10 +302,10 @@ class g3rncCommand(Command):
     def set(self, siteId, band, state, file=None):
         if band == 'U900':
             cmd = "cmedit set * UtranCell.(UtranCellId==" + str(
-                siteId) + "*,uarfcnDl==3070) administrativeState=" + state
+                siteId) + "*,uarfcnDl==3070) administrativeState=" + str(state)
         elif band == 'U2100':
             cmd = "cmedit set * UtranCell.(UtranCellId==" + str(
-                siteId) + "*,uarfcnDl!=3070) administrativeState=" + state 
+                siteId) + "*,uarfcnDl!=3070) administrativeState=" + str(state) 
        # if (file != None):
        #     listcmd = []
        #     f1 = open(file)
@@ -346,18 +345,17 @@ class g3rncCommand(Command):
 
 class g3NodeCommand(Command):
     def get(self, siteId, uarfcnId, bande):
-        cmd = "cmedit get " + siteId + " Nodeblocalcell.operatingband==1;Rbslocalcell.operatingband==1 -t"
+        cmd = "cmedit get " + str(siteId) + " Nodeblocalcell.operatingband==1;Rbslocalcell.operatingband==1 -t"
         return cmd
 
     def set(self, siteId, uarfcn, bande, state):
-        cmd = "cmedit set " + siteId + " Nodeblocalcell.operatingband==8;Rbslocalcell.operatingband==8 administrativeState=" + state
+        cmd = "cmedit set " + str(siteId) + " Nodeblocalcell.operatingband==8;Rbslocalcell.operatingband==8 administrativeState=" + str(state)
         return cmd
 
 
 class g4FDDCommand(Command):
     def get(self, siteId, bande):
         cmd = "cmedit get " + str(siteId) + " EutranCellFDD.(freqBand==" + str(bande) + ",administrativeState,operationalState, availabilityStatus) -t"
-        print(cmd+"hehehehehihhihi")
         return cmd
 
     def set(self, siteId, bande, state):

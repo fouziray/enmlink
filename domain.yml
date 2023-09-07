@@ -119,7 +119,7 @@ slots:
     influence_conversation: true
     mappings: 
     - type: custom
-      action: action_unlock_tech
+      #action: action_unlock_tech
 
 
   blocked_tech_slot:
@@ -127,7 +127,7 @@ slots:
     influence_conversation: true
     mappings: 
     - type: custom
-      action: action_lock_tech
+      #action: action_lock_tech
 
 
 
@@ -146,7 +146,7 @@ slots:
     influence_conversation: true
     mappings: 
     - type: custom
-      action: action_unlock_sector
+      #action: action_unlock_sector
 
 
   blocked_sector_slot:
@@ -154,7 +154,7 @@ slots:
     influence_conversation: true
     mappings: 
     - type: custom
-      action: action_lock_sector
+      #action: action_lock_sector
 
 
 
@@ -244,14 +244,12 @@ slots:
     influence_conversation: false
     mappings: 
     - type: custom
-      action: action_status_tech
 
   path3g:
     type: text
     influence_conversation: false
     mappings: 
     - type: custom
-      action: action_status_tech
 
   path4gFDD:
     type: categorical
@@ -262,7 +260,6 @@ slots:
      - tilt.json
     mappings: 
     - type: custom
-      action: action_status_tech
 
   pathTilt:
     type: text

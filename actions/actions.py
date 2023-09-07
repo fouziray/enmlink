@@ -208,7 +208,7 @@ class ActionTechStatus(Action):
                     site3g='U'.join(codeSite.rsplit(codeSite[-1:], 1))
                 else:
                     site3g=codeSite+'U'
-                
+            print(site3g)  
             response3g = check_3g(site3g)
                             #save 3G status
             if(response3g.empty):
@@ -711,22 +711,24 @@ class ActionLockSector(Action):
             sectors = manageCodeSiteSector(codeSite , bande2g ,sector_to_block)
             dispatcher.utter_message(text="this is site "+str(sectors)) 
             obj2g = GsmCommand()
-            if(sectors[0]):
-                get_s1 = obj2g.get(sectors[0],"GSM900")
+            if(sectors[0] or sectors[3]):
+                sectors[0]= sectors[0] or sectors[3]
+                get_s1 = obj2g.get(sectors[0],bande2g)
                 com.execute(get_s1)
                 set_s1 = obj2g.set(sectors[0] , bande2g , 'UNACTIVE')
                 com.execute(set_s1)
                 dispatcher.utter_message(text="Sector S1 bande "+bande2g+" for 2G is now INACTIVE") 
 
-            if(sectors[1]):
-                get_s2 = obj2g.get(sectors[1],"GSM900")
+            if(sectors[1] or sectors[4]):
+                sectors[1]=sectors[1] or sectors[4]
+                get_s2 = obj2g.get(sectors[1],bande2g)
                 com.execute(get_s2)
                 set_s2 = obj2g.set(sectors[1] , bande2g , 'UNACTIVE')
                 com.execute(set_s2)
                 dispatcher.utter_message(text="Sector S2 bande "+bande2g+" for 2G is now INACTIVE") 
 
             if(sectors[2]):
-                get_s3 = obj2g.get(sectors[2],"GSM900")
+                get_s3 = obj2g.get(sectors[2],bande2g)
                 com.execute(get_s3)
                 set_s3 = obj2g.set(sectors[2] , bande2g , 'UNACTIVE')
                 com.execute(set_s3)
@@ -881,21 +883,24 @@ class ActionUnLockSector(Action):
             sectors = manageCodeSiteSector(codeSite , bande2g ,sector_to_unblock)
             dispatcher.utter_message(text="this is site "+str(sectors)) 
             obj2g = GsmCommand()
-            if(sectors[0]):
+            if(sectors[0] or sectors[3]):
+                sectors[0]=sectors[0] or sectors[3]
                 get_s1 = obj2g.get(sectors[0],"GSM900")
                 com.execute(get_s1)
                 set_s1 = obj2g.set(sectors[0] , bande2g , 'ACTIVE')
                 com.execute(set_s1)
                 dispatcher.utter_message(text="Sector S1 bande "+bande2g+" for 2G is now ACTIVE") 
 
-            if(sectors[1]):
+            if(sectors[1] or sectors[4]):
+                sectors[1]=sectors[1] or sectors[4]
                 get_s2 = obj2g.get(sectors[1],"GSM900")
                 com.execute(get_s2)
                 set_s2 = obj2g.set(sectors[1] , bande2g , 'ACTIVE')
                 com.execute(set_s2)
                 dispatcher.utter_message(text="Sector S2 bande "+bande2g+" for 2G is now ACTIVE") 
 
-            if(sectors[2]):
+            if(sectors[2] or sectors[5]):
+                sectors[2]= sectors[2] or sectors[5]
                 get_s3 = obj2g.get(sectors[2],"GSM900")
                 com.execute(get_s3)
                 set_s3 = obj2g.set(sectors[2] , bande2g , 'ACTIVE')
@@ -956,7 +961,7 @@ class ActionUnLockSector(Action):
                 com.execute(get_s1)
                 set_s1 = obj4gFDD.set(sectors[0] , bande4g , 'UNBLOCKED')
                 com.execute(set_s1)
-                dispatcher.utter_message(text="Sector S1 band "+bande4g+" for 4G is now UNBLOCKED") 
+                dispatcher.utter_message(text="Sector S1 band "+str(bande4g)+" for 4G is now UNBLOCKED") 
 
             if(sectors[1] or sectors[4]):
                 sectors[1]=sectors[1] or sectors[4]
@@ -964,7 +969,7 @@ class ActionUnLockSector(Action):
                 com.execute(get_s2)
                 set_s2 = obj4gFDD.set(sectors[1] , bande4g , 'UNBLOCKED')
                 com.execute(set_s2)
-                dispatcher.utter_message(text="Sector S2 band "+bande4g+" for 4G is now UNBLOCKED") 
+                dispatcher.utter_message(text="Sector S2 band "+str(bande4g)+" for 4G is now UNBLOCKED") 
 
             if(sectors[2] or sectors[5]):
                 sectors[2]=sectors[2] or sectors[5]
@@ -972,7 +977,7 @@ class ActionUnLockSector(Action):
                 com.execute(get_s3)
                 set_s3 = obj4gFDD.set(sectors[2] , bande4g , 'UNBLOCKED')
                 com.execute(set_s3)
-                dispatcher.utter_message(text="Sector S3 band "+bande4g+" for 4G is now UNBLOCKED") 
+                dispatcher.utter_message(text="Sector S3 band "+str(bande4g)+" for 4G is now UNBLOCKED") 
             
             SlotSet("unblocked_sector_slot" , sector_to_unblock)
             return[]
@@ -1008,7 +1013,7 @@ class ActionExtend(Action): #executed each time the session is new due to it no 
         #if(codeSite is None):
         #    dispatcher.utter_message("you haven't entered site code")
         #    return[]
-        dispatcher.utter_message("this is sender"+str(tracker.current_state()['sender_id']  ))
+        #dispatcher.utter_message("this is sender"+str(tracker.current_state()['sender_id']  ))
         
         time = tracker.get_slot("duration")
         if(time is None or time >30 ):
