@@ -26,8 +26,15 @@ pipeline:
   min_ngram: 1
   max_ngram: 4
 - name: DIETClassifier
-  epochs: 80
+  epochs: 90
+  drop_rate: 0.25
+  learning_rate: 0.005
+  num_transformer_layers: 1
   constrain_similarities: true
+  evaluate_on_number_of_examples: 40
+  evaluate_every_number_of_epochs: 5
+  tensorboard_log_directory: "./tensorboard"
+  tensorboard_log_level: "epoch"
 - name: "CRFEntityExtractor"
   # BILOU_flag determines whether to use BILOU tagging or not.
   "BILOU_flag": True

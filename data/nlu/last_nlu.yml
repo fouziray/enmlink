@@ -21,7 +21,6 @@ nlu:
     - hey dude
     - hey there
     - salam it's [Djamila](Person) 
-    - salut c'est [Aziz](Person) 
     - good afternoon
 
 - intent: goodbye
@@ -46,7 +45,10 @@ nlu:
     - not really
     - not available 
     - site is not planned 
-
+    - not at all
+    - not that
+    - not this
+    - absolutely not
 
 - intent: mood_great
   examples: |
@@ -58,13 +60,13 @@ nlu:
     - I am feeling very good
     - I am great
     - I am amazing
-    - I am going to save the world
     - super stoked
     - extremely good
     - so so perfect
     - so good
     - so perfect
-
+    - absolutely perfect
+    - incredible
 
 - intent: bot_challenge
   examples: |
@@ -86,7 +88,12 @@ nlu:
     - okey
     - done
     - is ok 
-
+    - definitely
+    - without a doubt
+    - very well
+    - all right
+    - agreed
+    - affirmative, no problem
  
 - intent: ask_lock
   examples: |
@@ -106,65 +113,80 @@ nlu:
     - can you lock [l1800](Tech4g)
     - can you lock [l2100](Tech4g)
     - lock [s3](Sector) please
+    - secure [S1](Sector)
+    - lock [S2](Sector) if possible
+    - ensure [G1800](Tech2g) is locked
+    - make sure [g1800](Tech2g) is locked
+    - I wish to lock [L2100](Tech4g)
 - intent: ask_unlock
   examples: |
     - unlock [S1](Sector)
     - can you unlock [S2](Sector)
     - please to unlock [S3](Sector)
     - can you unlock [G900](Tech2g)
+    - activate tech [G1800](Tech2g)
     - i need to unlock [U900](Tech3g)
+    - i need [U2100](Tech3g) activated
+    - unlock technology [g900](Tech2g)
+    - ublock technology [l2100]
     - i want to unlock [L2100](Tech4g)
     - unlock [s3](Sector) please
     - unLock (sector 1)[Sector] please
-    - (Sector 2)[Sector] of [74156](code_site), please unlock.
-
+    - [Sector 2](Sector) of [74156](code_site), please unlock.
+    - activate tech [L2100](Tech4g)
+    - activate [L1800](Tech4g)
+    - now activate the technology [L2100](Tech4g)
+    - kindly unlock [S3](Sector)
+    - open [s2](Sector)
+    - ensure [G1800](Tech2g) is unlocked
+    - make sure [g1800](Tech2g) is unlocked
+    - I wish to unlock [L2100](Tech4g)
 - intent: ask_Ret
   examples: |
-    - maxtilt [S1](Sector)
     - downtilt [S1](Sector)
+    - maxtilt [S1](Sector)
     - maxtilt [G900](Tech2g) [S1](Sector)
     - maxtilt [U2100](Tech3g) [S1](Sector)
     - maxtilt [L2100](Tech4g) [S1](Sector)
-
     - downtilt [G900](Tech2g) [S1](Sector)
     - downtilt [U2100](Tech3g) [S1](Sector)
     - downtilt [L2100](Tech4g) [S1](Sector)
-
     - maxtilt all [G900](Tech2g)
     - maxtilt all [U2100](Tech3g)
     - maxtilt all [L1800](Tech4g)
-
     - maxtilt all [G900](Tech2g)
     - maxtilt all [U2100](Tech3g)
     - maxtilt all [L1800](Tech4g)
- 
+    - tilt [S1](Sector) down
+    - tilt down [G900](Tech2g) [S1](Sector)
+    - tilt U2100 [S1](Sector) up
+    - ret up for tech [2g](Tech2g)
+    - force down the ret for technology [4g](Tech4g)
  
 - intent: ask_Optimisation
   examples: |
     - I didnt get the throughput  
     - throughput non atteint  
-    
-
-- intent: ask_Rollback
-  examples: |
-    - Rollback 
-    - done please rollback 
-    - rollback the site 
-    - rollback the status
-    - can I rollback the changes for [S1](Sector)
-    - please rollback the changes for [S3](Sector) 
-    - can I rollback the changes for [G900](Tech2g) , [S1](Sector)
-    - please rollback the changes for [L2100](Tech4g) [S3](Sector)
- 
-
-- intent: inform
-  examples: |
+    - what about csrf 
+    - Also issue of CSFB about the site [43155U](code_site)
+    - cell doesn't not basculate to other technology 
+    - ca not found 
+    - carrier agreggation not working 
+    - ca not
     - conditions of [Rsrp](conditions) and [Rsrq](conditions) aren't good
     - bad [RSRP](conditions) value detected
+    - A bad [RSRP](conditions) value has been detected
+    - [RSRP](conditions) and [RSRQ](conditions) values are below the required threshold
     - the site has congested
     - conditions are bad  
+    - The conditions are unfavorable
+    - The CA feature seems to be disabled
+    - CA is not operational.
+    - CA troubleshooting is required
+    - optimize [RSRP](conditions) and [RSRQ](conditions) settings to enhance network performance.
 
-- intent: Connection/cannotconnect
+
+- intent: Connection #/cannotconnect
   examples: |
     - failed to connect 
     - connection failed [s3](Sector)
@@ -172,14 +194,25 @@ nlu:
     - can't connect to [S2](Sector) and [L2100](Tech4g)    
     - i'm disconnected , can't reach cell
     - having difficulties connecting
- 
-- intent: Connection/connected
-  examples: |
-    - its activated i'm in 
-    - connecting 
-    - i’m connected 
-    - i'm in
-    - thanks you i'm connected now
+    - i can't connect
+    - unable to reach cells
+    - unable to establish connection
+    - I find myself disconnected and unable to reach the cell
+    - i'm currently having difficulties connecting
+    - unable to establish a connection
+    - Connection failure
+    - [S3](Sector) is experiencing connection problems
+    - connection issues
+    - Continuous disconnection and inability to connect.
+    - Connection problems persists.
+    - cells unreachable
+#- intent: Connection/connected
+#  examples: |
+#    - its activated i'm in 
+#    - connecting 
+#    - i’m connected 
+#    - i'm in
+#    - thanks you i'm connected now
     
 
 
@@ -198,13 +231,23 @@ nlu:
     - how do i reach drive test team
     - can i reach someone via call
     - can you provide phone number
-
-
+    - Could you provide me with the PCI?
+    - I'm looking for the PCI data.
+    - May I have the pci information?
+    - I require the pci details.
+    - pci info, please.
+    - Can you share the pci with me?
+    - I'm interested in the pci.
+    - Could you send over the pci?
+    - Please share the pci code.
+    - I'd like to know the PCI.
+    - Also, there's an issue with CSFB at site 43155U.
+    - The cell doesn't basculate to other technologies.
 - intent: ask_status
   examples: |
     - check the status of the network [2G](Tech2g) for me
     - what is the current status of all the existing technologies [2g](Tech2g)[3g](Tech3g) [4g](Tech4g)
-    - check state for [2g](Tech2g) only
+    - check state for  [3g](Tech3g) only
     - provide status of [3g](Tech3g) 
     - tell me what is state of [4g](Tech4g)
     - all technologies status 
@@ -215,7 +258,13 @@ nlu:
     - give me status of all the site
     - tell me state of cells
     - what is the status of current site
-
+    - Can you please verify the network status for 2G?
+    - What's the current condition of the network, including  [3g](Tech3g),  [3g](Tech3g) , and [4g](Tech4g)?
+    - Give me an overview of the status of all available technologies.
+    - What's the state of the cells in the network?
+    - I'm interested in knowing the status of the current site.
+    - Let me know the status of handled technologies.
+    - Provide me with the status of [3g](Tech3g) networks.
 
 - intent: ask_session_extension
   examples: |
@@ -235,7 +284,12 @@ nlu:
     - Can we get a short extension of a few minutes?
     - I need just a few minutes more to complete this
     - Can we have a brief time extension of a few minutes?
-    
+    - Could I have an extra 20 minutes to finish?
+    - Could I get a small deadline extension of a few minutes?
+    - I need a few more minutes to finish.
+    - Can we get a short extension of a few minutes?
+    - I need just a few minutes more to complete this.
+    - Can we have a brief time extension of a few minutes?    
 
 - intent: inform_site
   examples: |
@@ -250,11 +304,14 @@ nlu:
     - Currently assigned to site [42169U](code_site)
     - I'll be working at site [58665U](code_site)
     - Please take note that i'm at site [42169L](code_site)
-    - Quick update: I'll be at [34052U](code_site)
+    - Quick update I'll be at [34052U](code_site)
     - I'll be at [34052U](code_site)
     - At site [42169L](code_site)
     - I'm currently at [34025U](code_site)
     - Site [58664L](code_site) is my current location. Is there anything more specific you need from me there?
+    - Please take note that I'm at site 42169L.
+    - I'm going to be at [34052U](code_site).
+    - My current location is site [58664L](code_site).
 - intent: inform_throughput/low
   examples: |
     - bad throughput
@@ -300,7 +357,8 @@ nlu:
     - thrghpt is high
     - throughput is high
     - UL good results
-    
+    - i have good thrgpt here
+    - i got good thrpt  
 
 
 - intent: ask_Rollback
@@ -313,29 +371,35 @@ nlu:
     - please rollback the changes for [S3](Sector) and [U2100](Tech3g) 
     - can I rollback the changes for [G900](Tech2g) , [S1](Sector)
     - please rollback the changes for [L2100](Tech4g) [S3](Sector)
- 
+    - Reverse the changes, please.
+    - Can you initiate a rollback?
+    - I'd like to undo the recent changes.
+    - Rollback the modifications.
+    - Please, perform a rollback.
+    - Let's revert the changes.
+    - Can you start the rollback process?
+    - Initiating a rollback now.
+    - Undo the changes for [S1](Sector).
+    - Rollback [S3](Sector) and [U2100](Tech4g), please.
+    - Revert the [G900](Tech2g) changes and those in [S1](Sector).
+    - Please undo the modifications for [L2100](Tech4g) and [S3](Sector).
 
+#- intent: ask_csrf  # call the optimiser, this is our out of scope intent
+#  examples: |
+#    - what about csrf 
+#    - Also issue of CSFB about the site [43155U](code_site)
+#    - cell doesn't not basculate to other technology 
+#    - ca not found 
+#    - carrier agreggation not working 
+#    - ca 
 
-
-
-  
-
-- intent: ask_csrf  # call the optimiser, this is our out of scope intent
-  examples: |
-    - what about csrf 
-    - Also issue of CSFB about the site [43155U](code_site)
-    - cell doesn't not basculate to other technology 
-    - ca not found 
-    - carrier agreggation not working 
-    - ca 
-
-- intent: ask_pci
-  examples: |
-    - Please send me the pci 
-    - i need the pci 
-    - please i need the pci 
-    - pci please
-    - can you send me the pci 
+#- intent: ask_pci
+#  examples: |
+#    - Please send me the pci 
+#    - i need the pci 
+#    - please i need the pci 
+#    - pci please
+#    - can you send me the pci 
     
 - intent: ask_restart
   examples: |
@@ -345,6 +409,22 @@ nlu:
     - please to restart the sector [s1](Sector)
     - restart all technologies  
     - restart band [L1800](Tech4g)
+    - Could you initiate a restart
+    - If possible, restart the site.
+    - Can you perform a restart on the site?
+    - I request a restart for sector s1.
+    - Please restart all technologies.
+    - Consider restarting band L1800.
+    - restart.
+    - Can you carry out a restart process?
+    - Please proceed with the restart.
+    - Restart requested for sector [s1](Sector).
+    - Restart all technologies, if you can.
+    - Let's initiate a restart.
+    - restarting now.
+    - Begin the restart process.
+    - If it's possible, restart the sector [s1](Sector).
+    - I think a restart is necessary.
 
 - intent: finishing_test
   examples: |
@@ -354,3 +434,20 @@ nlu:
     - done with the site 
     - done thanks 
     - problems solved
+    - Testing completed successfully.	
+    - We're done here.	
+    - Site verification done (SSV).	
+    - Testing concluded.	
+    - Task accomplished.	
+    - Finished the job.	
+    - All tests executed.	
+    - Mission accomplished.	
+    - Site testing completed.	
+    - Work is finished.	
+    - Test results are in.	
+    - Testing phase is over.	
+    - Done with the assignment.	
+    - Site is now verified.	
+    - Testing task completed.	
+    - Testing phase concluded.	
+    - Verification process finished	

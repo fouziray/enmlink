@@ -323,6 +323,7 @@ actions:
   - action_status_tech  # done
   - action_throughput_info #done
   - action_session_start
+  - action_connection_troubleshoot
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

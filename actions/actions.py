@@ -136,6 +136,24 @@ class ActionGreet(Action):
           #  com.open('XXXX', 'xxxxxx', 'XXXXXXXXXX')
         return []
 
+class ActionConnectionTroubleshoot(Action):
+
+    def name(self) -> Text:
+        return "action_connection_troubleshoot"
+
+    def run(self, dispatcher: CollectingDispatcher,tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        codeSite = tracker.get_slot("code_site")
+        if(codeSite == None):
+            dispatcher.utter_message("you haven't entered a code site")
+            return[]
+        else:
+            o=OptimCommand()
+            com.execute(o.ping_issue())
+            dispatcher.utter_message(text="ping should be working now")
+            # ouverture session enm
+          #  com.open('XXXX', 'xxxxxx', 'XXXXXXXXXX')
+        return []
 
 
 class ActionInform(Action):

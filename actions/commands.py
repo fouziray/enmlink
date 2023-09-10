@@ -437,20 +437,26 @@ class OptimCommand(Command):
         return cmd
 
     def set_opt(self, siteId, param1, param2, param3):
-        cmd = "cmedit set " + str(
-            siteId) + " EUtranCellFDD pZeroNominalPucch= " + param1 + ";cmedit set EUtranCellFDD pZeroNominalPusch= " + param2 + ";cmedit set EUtranCellFDD noOfPucchSrUsers= " + param3
+        cmd=[]
+        cmd.append( "cmedit set " + str(siteId) + " EUtranCellFDD pZeroNominalPucch= " + param1 )
+        cmd.append("cmedit set EUtranCellFDD pZeroNominalPusch= " + param2) 
+        cmd.append("cmedit set EUtranCellFDD noOfPucchSrUsers= " + param3)
         return cmd
 
     def get_Feature_State(self, siteId, Feature_state_id):
+        Feature_state_id="CXC4011955"
         cmd = "cmedit get " + str(
             siteId) + " FeatureState.(FeatureStateID==" + Feature_state_id + ",LicenceState,FeatureState) -t"
         return cmd
 
     def set_Feature_State(self, siteId, Feature_state_id):
+        Feature_state_id="CXC4011955"
         cmd = "cmedit set " + str(
             siteId) + " FeatureState.FeatureStateID==" + Feature_state_id + "  FeatureState=ACTIVE"
         return cmd
     
+    def ping_issue(self):
+        return 'Deactivate CXC4010912'
 
     def format(l,tech):
         i = [row for row in range(len(l)) if 'SubNetwork' in l[row]]

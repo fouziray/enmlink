@@ -109,9 +109,9 @@ stories:
   steps:
   - intent: ask_unlock
     entities:
-    - Tech2g : "g1800"
+    - Tech2g : "G900"
   - slot_was_set:
-    - Tech2g: "g1800"
+    - Tech2g: "G900"
   - action: action_unlock_tech
 
 
@@ -268,9 +268,6 @@ stories:
     - throughput_DL_slot: "DL bad"
   - action: action_throughput_info
 
-
-
-
 - story: s ask status
   steps:
   - intent: ask_status
@@ -279,3 +276,8 @@ stories:
   - slot_was_set:
     - Tech4g: "4G"
   - action: action_status_tech
+
+- story: s troubleshoot
+  steps:
+  - intent: Connection
+  - action: action_connection_troubleshoot
