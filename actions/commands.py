@@ -1,9 +1,15 @@
 from abc import abstractmethod
 import pandas as pd
-from enmscripting import enmscripting        # module privé propre au système enm 
+import actions.enmscripting.enmscripting as enmscripting
 import json
 from os.path import exists
-
+from dotenv import load_dotenv
+import os
+load_dotenv()
+a= os.getenv("url")
+b= os.getenv("user")
+c =os.getenv("passsword")
+print(f"Password:{a, b,c}")
 
 path =  ".store_rollback/"
 
