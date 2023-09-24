@@ -237,11 +237,6 @@ stories:
 
 
 
-- story: s ask csrf 
-  steps:
-  - intent: ask_csrf 
-  - action: utter_csrf
-
 
 - story: s finishing test
   steps:
@@ -251,7 +246,7 @@ stories:
 
 - story: s throughput status
   steps:
-  - intent: inform_throughput/bad
+  - intent: inform_throughput
     entities:
     - throughput_slot : "75Mb/s"
   - slot_was_set:
@@ -261,7 +256,7 @@ stories:
 
 - story: s throughput DL status 
   steps:
-  - intent: inform_throughput/bad
+  - intent: inform_throughput
     entities:
     - throughput : "DL bad"
   - slot_was_set:
@@ -277,7 +272,32 @@ stories:
     - Tech4g: "4G"
   - action: action_status_tech
 
-- story: s troubleshoot
+- story: troubleshoot connection
   steps:
   - intent: Connection
   - action: action_connection_troubleshoot
+
+- story: troubleshoot connection
+  steps:
+  - intent: ask_Optimisation
+  - action: action_optimize
+
+- story: sad path 11
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: inform_throughput
+    entities:
+      - throughput_DL_slot : "75"
+  - or:
+      - slot_was_set:
+        - throughput_DL_slot: "80"
+      - slot_was_set:
+        - throughput_UL_slot: "35"
+      - slot_was_set:
+        - throughput_ca_slot: "44"
+      - slot_was_set:
+        - throughput_dyn_slot: "67"
+  - action: action_throughput_info
+  - intent: affirm
+  - action : action_optimize

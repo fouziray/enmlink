@@ -11,25 +11,26 @@ intents:
   - finishing_test
 #  - stop
   - ask_restart
-#  - ask_optimisation
+  - ask_optimisation
   - ask_lock
   - ask_unlock
   - ask_Ret
-  - inform
+#  - inform
   - Connection
 #  - test_done
   - ask_help
-  - check_request
+#  - check_request
   - ask_session_extension
   - inform_site
   - ask_Rollback
   - ask_status
 #  - check_all_techs
-  - ask_csrf
+#  - ask_csrf
  # - ask_pci
   - nlu_fallback
-  - inform_throughput/low
-  - inform_throughput/good
+  - inform_throughput
+ # - inform_throughput/low
+ # - inform_throughput/good
 entities:
   - Sector
   - Tech2g
@@ -43,12 +44,7 @@ entities:
   - code_site
   - time
   - duration
-  - throughput:
-      roles:
-        - throughput_DL
-        - throughput_UL
-        - throughput_dyn
-        - throughput_ca
+  - throughput
 
 
 
@@ -324,6 +320,7 @@ actions:
   - action_throughput_info #done
   - action_session_start
   - action_connection_troubleshoot
+  - action_optimize
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

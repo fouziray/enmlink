@@ -1,0 +1,34 @@
+[
+  {
+    "text": "bad throughput",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 1.0
+    }
+  },
+  {
+    "text": "same throughput",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 1.0
+    }
+  },
+  {
+    "text": "i had throughput problem",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 1.0
+    }
+  },
+  {
+    "text": "UL good results",
+    "intent_response_key_target": "inform_throughput/good",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/low",
+      "confidence": 1.0
+    }
+  }
+]

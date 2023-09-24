@@ -1,0 +1,16 @@
+version: "3.1"
+stories:
+- story: sad path 1 (data/stories.yml)
+  steps:
+  - intent: mood_unhappy
+  - action: utter_cheer_up  # predicted: action_status_tech
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+- story: sad path 2 (data/stories.yml)
+  steps:
+  - intent: mood_unhappy
+  - action: utter_cheer_up  # predicted: action_status_tech
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye

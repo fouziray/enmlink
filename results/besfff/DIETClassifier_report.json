@@ -1,0 +1,114 @@
+{
+  "throughput.throughput_dyn": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 3,
+    "confused_with": {
+      "throughput.throughput_DL": 2
+    }
+  },
+  "conditions": {
+    "precision": 1.0,
+    "recall": 0.5,
+    "f1-score": 0.6666666666666666,
+    "support": 8,
+    "confused_with": {}
+  },
+  "code_site": {
+    "precision": 0.8888888888888888,
+    "recall": 0.8,
+    "f1-score": 0.8421052631578948,
+    "support": 20,
+    "confused_with": {
+      "Tech3g": 1
+    }
+  },
+  "throughput.throughput_DL": {
+    "precision": 0.45454545454545453,
+    "recall": 0.7142857142857143,
+    "f1-score": 0.5555555555555556,
+    "support": 14,
+    "confused_with": {
+      "Tech3g": 1
+    }
+  },
+  "Sector": {
+    "precision": 0.8297872340425532,
+    "recall": 0.9512195121951219,
+    "f1-score": 0.8863636363636364,
+    "support": 41,
+    "confused_with": {}
+  },
+  "Tech2g": {
+    "precision": 0.8095238095238095,
+    "recall": 0.7727272727272727,
+    "f1-score": 0.7906976744186046,
+    "support": 22,
+    "confused_with": {
+      "Sector": 1
+    }
+  },
+  "throughput.throughput_UL": {
+    "precision": 0.5,
+    "recall": 0.3333333333333333,
+    "f1-score": 0.4,
+    "support": 3,
+    "confused_with": {
+      "throughput.throughput_DL": 1
+    }
+  },
+  "Tech4g": {
+    "precision": 0.8421052631578947,
+    "recall": 0.6153846153846154,
+    "f1-score": 0.7111111111111111,
+    "support": 26,
+    "confused_with": {
+      "Tech3g": 7
+    }
+  },
+  "Person": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 4,
+    "confused_with": {}
+  },
+  "Tech3g": {
+    "precision": 0.42857142857142855,
+    "recall": 0.5714285714285714,
+    "f1-score": 0.48979591836734687,
+    "support": 21,
+    "confused_with": {
+      "Tech2g": 4
+    }
+  },
+  "throughput.throughput_ca": {
+    "precision": 0.16666666666666666,
+    "recall": 0.1,
+    "f1-score": 0.125,
+    "support": 10,
+    "confused_with": {
+      "throughput.throughput_DL": 4
+    }
+  },
+  "micro avg": {
+    "precision": 0.6904761904761905,
+    "recall": 0.6744186046511628,
+    "f1-score": 0.6823529411764705,
+    "support": 172
+  },
+  "macro avg": {
+    "precision": 0.5381898859451542,
+    "recall": 0.4871253653958753,
+    "f1-score": 0.4970268932400741,
+    "support": 172
+  },
+  "weighted avg": {
+    "precision": 0.6862419654386893,
+    "recall": 0.6744186046511628,
+    "f1-score": 0.6681051016104103,
+    "support": 172
+  },
+  "accuracy": 0.9490632318501171
+}

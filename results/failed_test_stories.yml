@@ -3,54 +3,41 @@ stories:
 - story: sad path 1 (./API/restapp/venv/lib64/python3.8/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
   steps:
   - intent: greet
-  - action: utter_greet  # predicted: action_default_fallback
-  - action: action_listen  # predicted: action_block
-  - intent: mood_unhappy
-  - action: utter_cheer_up  # predicted: utter_ask_lock
-  - action: utter_did_that_help  # predicted: action_listen
+  - action: utter_greet  # predicted: action_utter_greet
+  - intent: mood_unhappy  # predicted: ask_Optimisation: not good
+  - action: utter_cheer_up
+  - action: utter_did_that_help
   - intent: affirm
   - action: utter_happy
 - story: sad path 2 (./API/restapp/venv/lib64/python3.8/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
   steps:
   - intent: greet
-  - action: utter_greet  # predicted: action_default_fallback
-  - action: action_listen  # predicted: action_block
-  - intent: mood_unhappy
-  - action: utter_cheer_up  # predicted: utter_ask_lock
-  - action: utter_did_that_help  # predicted: action_listen
+  - action: utter_greet  # predicted: action_utter_greet
+  - intent: mood_unhappy  # predicted: ask_Optimisation: not good
+  - action: utter_cheer_up
+  - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
 - story: sad path 3 (./API/restapp/venv/lib64/python3.8/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
   steps:
-  - intent: greet
-  - action: utter_greet  # predicted: action_default_fallback
-  - action: action_listen  # predicted: action_block
-  - intent: mood_unhappy
-  - action: utter_cheer_up  # predicted: utter_ask_lock
-  - action: utter_did_that_help  # predicted: action_listen
+  - intent: greet  # predicted: nlu_fallback: hi
+  - action: utter_greet  # predicted: action_utter_greet
+  - intent: mood_unhappy  # predicted: affirm: very terrible
+  - action: utter_cheer_up
+  - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
-- story: say goodbye (./API/restapp/venv/lib64/python3.8/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
-  steps:
-  - intent: goodbye
-  - action: utter_goodbye  # predicted: action_set_sector_accumulator
-- story: bot challenge (./API/restapp/venv/lib64/python3.8/site-packages/rasa/cli/initial_project/tests/test_stories.yml)
-  steps:
-  - intent: bot_challenge
-  - action: utter_iamabot  # predicted: action_default_fallback
 - story: happy path 1 (./tests/test_stories.yml)
   steps:
   - intent: greet
-  - action: utter_greet  # predicted: action_default_fallback
-  - action: action_listen  # predicted: action_block
+  - action: utter_greet  # predicted: action_utter_greet
   - intent: mood_great
-  - action: utter_happy  # predicted: action_reset_techs
+  - action: utter_happy  # predicted: utter_cheer_up
 - story: happy path 2 (./tests/test_stories.yml)
   steps:
   - intent: greet
-  - action: utter_greet  # predicted: action_default_fallback
-  - action: action_listen  # predicted: action_block
+  - action: utter_greet  # predicted: action_utter_greet
   - intent: mood_great
-  - action: utter_happy  # predicted: action_reset_techs
+  - action: utter_happy  # predicted: utter_cheer_up
   - intent: goodbye
-  - action: utter_goodbye  # predicted: action_set_sector_accumulator
+  - action: utter_goodbye

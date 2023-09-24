@@ -402,7 +402,7 @@ class Sites(ModelViewSet, LimitOffsetPagination):
 
     
     def post(self, request, format=None):
-         site_serializer = SiteSerializer(data=request.data)
+         site_serializer = SiteSerializer(data=request.data,many=True)
          if (site_serializer.is_valid(raise_exception=True)):
             try:
                 site = site_serializer.save()     
@@ -410,6 +410,8 @@ class Sites(ModelViewSet, LimitOffsetPagination):
                 return Response(site_serializer.data, status=status.HTTP_302_FOUND)       
             return Response(site_serializer.data, status=status.HTTP_201_CREATED)
          return Response(site_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
     """def post(self, request, format=None):
          serializer = ConvoSerializer(data=request.data)
          if serializer.is_valid():
@@ -515,6 +517,10 @@ class DriveTestSessionViewSet(ModelViewSet):
             serializer= self.get_serializer(current, many=True)
             taskprogress= DtSession.objects.order_by().values("site").distinct().count()
             numberofsites= ManagedObject.objects.count()
+            if(BeforeLastWeek==0):
+                BeforeLastWeek=1
+            if(numberofsites==0):
+                numberofsites=1
             return Response({"lastweek":LastWeek,"percentage":LastWeek*100/BeforeLastWeek,"testsPerUOP":queryset,"currentSessions":serializer.data, "taskProgress": (taskprogress/numberofsites)*100}, status=status.HTTP_200_OK)
     
     @action(detail=False)

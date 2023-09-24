@@ -1,6 +1,6 @@
 from abc import abstractmethod
 import pandas as pd
-#import enmscripting        # module privé propre au système enm 
+from enmscripting import enmscripting        # module privé propre au système enm 
 import json
 from os.path import exists
 
@@ -18,23 +18,23 @@ class Command(object):
    
 
     def open(self, a, b, c):
-       # self.session = enmscripting.open(a, b, c)
-       # return self.session
+        self.session = enmscripting.open(a, b, c)
+        return self.session
         print("opened")
         pass
     def closesession(self):
-      #  enmscripting.close(self.session)
+        enmscripting.close(self.session)
         print("closed")
         pass
     def execute(self,command):
-        # if(self.session):
-        #   cmd=self.session.command()
-        #   cmd.execute(str(command))
-        # else: 
-        #   print("command is not executed")
-        print("this is executed command"+str(command))
+         if(self.session):
+           cmd=self.session.command()
+           cmd.execute(str(command))
+         else: 
+           print("command is not executed")
+         print("this is executed command"+str(command))
     
-        return command
+         return command
 
 
 

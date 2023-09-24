@@ -27,12 +27,16 @@ pipeline:
   max_ngram: 4
 - name: DIETClassifier
   epochs: 90
-  drop_rate: 0.25
-  learning_rate: 0.005
-  num_transformer_layers: 1
+  drop_rate: 0.3
+  weight_sparsity: 0.7
+  num_transformer_layers: 2
+  transformer_size: 256
   constrain_similarities: true
+  #embedding_dimension: 30
+  batch_size: [64,256]
   evaluate_on_number_of_examples: 40
   evaluate_every_number_of_epochs: 5
+  hidden_layer_sizes: [512,128]
   tensorboard_log_directory: "./tensorboard"
   tensorboard_log_level: "epoch"
 - name: "CRFEntityExtractor"
@@ -66,6 +70,8 @@ pipeline:
   # Name of dense featurizers to use.
   # If list is empty all available dense features are used.
   "featurizers": []
+  tensorboard_log_directory: "./tensorboardcrf"
+  tensorboard_log_level: "epoch"
 - name: "DucklingEntityExtractor"
   url: "http://localhost:5333"
   dimensions: ["duration"]
@@ -89,11 +95,12 @@ policies:
 #   - name: UnexpecTEDIntentPolicy
 #     max_history: 5
 #     epochs: 100
-- name: RulePolicy
-  core_fallback_threshold: 0.4
-  core_fallback_action_name: "action_default_fallback"
-  enable_fallback_prediction: true
 - name: TEDPolicy
   max_history: 5
   epochs: 80
   constrain_similarities: true
+- name: RulePolicy
+  core_fallback_threshold: 0.4
+  core_fallback_action_name: "action_default_fallback"
+  enable_fallback_prediction: true
+

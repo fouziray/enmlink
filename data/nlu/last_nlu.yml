@@ -246,7 +246,7 @@ nlu:
 - intent: ask_status
   examples: |
     - check the status of the network [2G](Tech2g) for me
-    - what is the current status of all the existing technologies [2g](Tech2g)[3g](Tech3g) [4g](Tech4g)
+    - what is the current status of all the existing technologies [2g](Tech2g) [3g](Tech3g) [4g](Tech4g)
     - check state for  [3g](Tech3g) only
     - provide status of [3g](Tech3g) 
     - tell me what is state of [4g](Tech4g)
@@ -312,55 +312,88 @@ nlu:
     - Please take note that I'm at site 42169L.
     - I'm going to be at [34052U](code_site).
     - My current location is site [58664L](code_site).
-- intent: inform_throughput/low
+#- intent: inform_throughput/low
+#  examples: |
+#    - bad throughput
+#    - [25]{"entity" : "throughput", "role" : "throughput_DL"} Mb/s
+#    - [70]{"entity" : "throughput", "role" : "throughput_DL"} Mb/s
+#    - same throughput
+#    - still low results
+#    - low ca [40]{"entity" : "throughput", "role" : "throughput_ca"}
+#    - i had throughput problem
+#    - I get [153 mb ]{"entity" : "throughput", "role" : "throughput_DL"} avr 
+#    - [Ca avr 60 mb]{"entity" : "throughput", "role" : "throughput_ca"}
+#    - [ Avr ca 75]{"entity" : "throughput", "role" : "throughput_ca"}
+#    - i have a problem with ca Max [throughput 35]{"entity" : "throughput", "role" : "throughput_ca"}
+#    - Low throughput [DL]{"entity" : "throughput", "role" : "throughput_DL"}
+#    - Low throughput [UL]{"entity" : "throughput", "role" : "throughput_UL"}
+#    - i have a problem with [UL]{"entity" : "throughput", "role" : "throughput_UL"}
+#    - DL bad [25]{"entity" : "throughput", "role" : "throughput_DL"} all sectors
+#    - DL bad [10]{"entity" : "throughput", "role" : "throughput_DL"} sector 1
+#    - Dynamic DL [30]{"entity" : "throughput", "role" : "throughput_dyn"} is very low
+#    - UL bad results [50]{"entity" : "throughput", "role" : "throughput_UL"} 
+#    - Average [11]{"entity" : "throughput", "role" : "throughput_DL"} downlink 
+#    - All sectors DL bad 
+#    - [S3](Sector) low [30]{"entity" : "throughput", "role" : "throughput_DL"}
+#    - [S1](Sector) low [25]{"entity" : "throughput", "role" : "throughput_DL"}
+#    - [Dynamic 20]{"entity" : "throughput", "role" : "throughput_dyn"}
+#    - Low Thrghpt [DL average 50 Mbs]{"entity" : "throughput", "role" : "throughput_DL"} in both band
+#
+#- intent: inform_throughput/good
+#  examples: |
+#    - throughput good 
+#    - throughput dl better 
+#    - good throughput ca
+#    - hight throughput avg 
+#    - nice avg throughput 
+#    - better throughout 
+#    - I got throughput
+#    - all sectors throughput good 
+#    - best throughput
+#    - throughput is fine
+#    - i got good thrpt
+#    - thrpt is good
+#    - i have good thrgpt here
+#    - thrghpt is high
+#    - throughput is high
+#    - UL good results
+#    - i have good thrgpt here
+#    - i got good thrpt  
+#
+- intent: inform_throughput
   examples: |
     - bad throughput
     - [25]{"entity" : "throughput", "role" : "throughput_DL"} Mb/s
-    - [70]{"entity" : "throughput", "role" : "throughput_DL"} Mb/s
+    - [70] UL {"entity" : "throughput", "role" : "throughput_UL"} Mb/s
     - same throughput
+    - [45] ca {"entity" : "throughput", "role" : "throughput_ca"} Mb/s
+    - [60] dyn {"entity" : "throughput", "role" : "throughput_dyn"} Mb/s
     - still low results
+    - low throughput downlink [54]{"entity" : "throughput", "role" : "throughput_DL"}
+    - throughput Uplink [60]{"entity" : "throughput", "role" : "throughput_UL"} 
     - low ca [40]{"entity" : "throughput", "role" : "throughput_ca"}
-    - i had throughput problem
-    - I get [153 mb ]{"entity" : "throughput", "role" : "throughput_DL"} avr 
-    - [Ca avr 60 mb]{"entity" : "throughput", "role" : "throughput_ca"}
-    - [ Avr ca 75]{"entity" : "throughput", "role" : "throughput_ca"}
-    - i have a problem with ca Max [throughput 35]{"entity" : "throughput", "role" : "throughput_ca"}
-    - Low throughput [DL]{"entity" : "throughput", "role" : "throughput_DL"}
-    - Low throughput [UL]{"entity" : "throughput", "role" : "throughput_UL"}
-    - i have a problem with [UL]{"entity" : "throughput", "role" : "throughput_UL"}
+    - i had throughput problem ca [40]{"entity" : "throughput", "role" : "throughput_ca"}
+    - I get [105]{"entity" : "throughput", "role" : "throughput_DL"} avr 
+    - Carierr aggregation avr [60]{"entity" : "throughput", "role" : "throughput_ca"}
+    - Avr ca [75]{"entity" : "throughput", "role" : "throughput_ca"}
+    - i have a problem with ca Max throughput [35]{"entity" : "throughput", "role" : "throughput_ca"}
+    - Low throughput DL
+    - DL [80]{"entity" : "throughput", "role" : "throughput_DL"}
+    - ca [78]mb/s { "entity" : "throughput", "role" : "throughput_ca"}
+    - Low throughput UL
+    - i have a problem with UL
     - DL bad [25]{"entity" : "throughput", "role" : "throughput_DL"} all sectors
-    - DL bad [10]{"entity" : "throughput", "role" : "throughput_DL"} sector 1
+    - UL bad [10]{"entity" : "throughput", "role" : "throughput_UL"} sector 1
     - Dynamic DL [30]{"entity" : "throughput", "role" : "throughput_dyn"} is very low
     - UL bad results [50]{"entity" : "throughput", "role" : "throughput_UL"} 
     - Average [11]{"entity" : "throughput", "role" : "throughput_DL"} downlink 
     - All sectors DL bad 
     - [S3](Sector) low [30]{"entity" : "throughput", "role" : "throughput_DL"}
-    - [S1](Sector) low [25]{"entity" : "throughput", "role" : "throughput_DL"}
-    - [Dynamic 20]{"entity" : "throughput", "role" : "throughput_dyn"}
-    - Low Thrghpt [DL average 50 Mbs]{"entity" : "throughput", "role" : "throughput_DL"} in both band
-
-- intent: inform_throughput/good
-  examples: |
-    - throughput good 
-    - throughput dl better 
-    - good throughput ca
-    - hight throughput avg 
-    - nice avg throughput 
-    - better throughout 
-    - I got throughput
-    - all sectors throughput good 
-    - best throughput
-    - throughput is fine
-    - i got good thrpt
-    - thrpt is good
-    - i have good thrgpt here
-    - thrghpt is high
-    - throughput is high
-    - UL good results
-    - i have good thrgpt here
-    - i got good thrpt  
-
-
+    - [S1](Sector) low downlink [25]{"entity" : "throughput", "role" : "throughput_DL"}
+    - Dynamic [20]{"entity" : "throughput", "role" : "throughput_dyn"}
+    - Low Thrghpt DL average [50] Mbs{"entity" : "throughput", "role" : "throughput_DL"} in both band
+    - thrpt dynamic is low [42]{"entity" : "throughput", "role" : "throughput_dyn"}
+    - uplink throuput now is about [80]{"entity" : "throughput", "role" : "throughput_UL"}
 - intent: ask_Rollback
   examples: |
     - Rollback 

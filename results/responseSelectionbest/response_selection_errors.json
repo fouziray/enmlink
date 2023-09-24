@@ -1,0 +1,58 @@
+[
+  {
+    "text": "I got throughput",
+    "intent_response_key_target": "inform_throughput/good",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/low",
+      "confidence": 0.9059736728668213
+    }
+  },
+  {
+    "text": "all sectors throughput good",
+    "intent_response_key_target": "inform_throughput/good",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/low",
+      "confidence": 0.9998109936714172
+    }
+  },
+  {
+    "text": "throughput is fine",
+    "intent_response_key_target": "inform_throughput/good",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/low",
+      "confidence": 0.9996128678321838
+    }
+  },
+  {
+    "text": "same throughput",
+    "intent_response_key_target": "inform_throughput/low",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/good",
+      "confidence": 0.9998482465744019
+    }
+  },
+  {
+    "text": "throughput dl better",
+    "intent_response_key_target": "inform_throughput/good",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/low",
+      "confidence": 1.0
+    }
+  },
+  {
+    "text": "better throughout",
+    "intent_response_key_target": "inform_throughput/good",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/low",
+      "confidence": 1.0
+    }
+  },
+  {
+    "text": "best throughput",
+    "intent_response_key_target": "inform_throughput/good",
+    "intent_response_key_prediction": {
+      "name": "inform_throughput/low",
+      "confidence": 0.9999947547912598
+    }
+  }
+]

@@ -154,6 +154,29 @@ class ActionConnectionTroubleshoot(Action):
             # ouverture session enm
           #  com.open('XXXX', 'xxxxxx', 'XXXXXXXXXX')
         return []
+class ActionOptimize(Action):
+
+    def name(self) -> Text:
+        return "action_optimize"
+
+    def run(self, dispatcher: CollectingDispatcher,tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        codeSite = tracker.get_slot("code_site")
+        if(codeSite == None):
+            dispatcher.utter_message("you haven't entered a code site")
+            return[]
+        else:
+            o=OptimCommand()
+            list_of_cmd=o.set_opt(codeSite,"11","11","11")
+            try:
+                for cmd in list_of_cmd :
+                    com.execute(cmd)
+                dispatcher.utter_message(text="Optimization done, check for updates ")
+            except:
+                dispatcher.utter_message(text="Errors occured during optimization, check with human support")
+            # ouverture session enm
+          #  com.open('XXXX', 'xxxxxx', 'XXXXXXXXXX')
+        return []
 
 
 class ActionInform(Action):
@@ -656,7 +679,7 @@ class ActionRollback(Action):
         
 
 
-class ActionThroughput(Action):
+"""class ActionThroughput(Action):
 
     def name(self) -> Text:
         return "action_throughput_info"    
@@ -683,9 +706,82 @@ class ActionThroughput(Action):
                 dispatcher.utter_message("the throughput is Average")
             if (75<=throughput):
                 dispatcher.utter_message("the throughput is good")
-        return[]
+        return[]"""
+
+class ActionThroughput(Action):
+
+    def name(self) -> Text:
+        return "action_throughput_info"    
+
+    def run(self, dispatcher: CollectingDispatcher,tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        codeSite = tracker.get_slot("code_site")
+        if(codeSite == None):
+            dispatcher.utter_message("you haven't entered a code site")
+            return[]
+        
+        #throughput = tracker.get_slot("throughput_slot")
+        
+      #  SlotSet("throughput_DL_slot" , next(tracker.get_latest_entity_values("throughput" , "throughput_DL")))
+      #  SlotSet("throughput_UL_slot" , next(tracker.get_latest_entity_values("throughput" , "throughput_UL")))
+      #  SlotSet("throughput_ca_slot" , next(tracker.get_latest_entity_values("throughput" , "throughput_ca")))
+      #  SlotSet("throughput_dyn_slot" , next(tracker.get_latest_entity_values("throughput" , "throughput_dyn")))
+        throughput_ca=None
+        throughput_dl=None
+        throughput_ul=None
+        throughput_dyn=None 
+        if(tracker.get_slot("throughput_DL_slot" ) != None):
+            throughput_dl = int(tracker.get_slot("throughput_DL_slot" ))
+            if (throughput_dl < 50):
+                dispatcher.utter_message("the throughput downlink "+ str(throughput_dl) +" is bad , try to be closer to the cell")
+            if (50<=throughput_dl<75):
+                dispatcher.utter_message("the throughput downlink "+ str(throughput_dl) +" is Average , is that enough ?")
+            if (75<=throughput_dl):
+                dispatcher.utter_message("the throughput downlink "+ str(throughput_dl) +" is good")
+        elif(tracker.get_slot("throughput_UL_slot" ) != None):
+            throughput_ul = int(tracker.get_slot("throughput_UL_slot"))
+            if (throughput_ul < 50):
+                dispatcher.utter_message("the throughput uplink "+ str(throughput_ul) +" is bad , try to be closer to the cell")
+            if (50<=throughput_ul<75):
+                dispatcher.utter_message("the throughput uplink "+ str(throughput_ul) +" is Average , is that enough ?")
+            if (75<=throughput_ul):
+                dispatcher.utter_message("the throughput uplink  "+ str(throughput_ul) +" is good")
+
+        elif(tracker.get_slot("throughput_ca_slot" ) != None):
+            throughput_ca = int(tracker.get_slot("throughput_ca_slot"))
+            if (throughput_ca < 50):
+                dispatcher.utter_message("the ca throughput "+ str(throughput_ca) +" is bad , try to be closer to the cell")
+            if (50<=throughput_ca<75):
+                dispatcher.utter_message("the ca throughput "+ str(throughput_ca) +" is Average , is that enough ?")
+            if (75<=throughput_ca):
+                dispatcher.utter_message("the ca throughput "+ str(throughput_ca) +" is good")
+        
+        elif(tracker.get_slot("throughput_dyn_slot" ) != None):
+            throughput_dyn = int(tracker.get_slot("throughput_dyn_slot"))
+            if (throughput_dyn < 50):
+                dispatcher.utter_message("the dynamic throughput "+str(throughput_dyn)+" is bad , try to be closer to the cell")
+            if (50<=throughput_dyn<75):
+                dispatcher.utter_message("the dynamic throughput "+ str(throughput_dyn) +" is Average , is that enough ?")
+            if (75<=throughput_dyn):
+                dispatcher.utter_message("the dynamic throughput "+ str(throughput_dyn) +" is good")
+
+        if(throughput_dl == None and throughput_ul == None and throughput_ca == None and throughput_dyn == None):
+            dispatcher.utter_message("what is the value of the throughput you 've got ?")
+                   
+            
 
 
+            return[]
+       
+       # throughput=[ int(s) for s in  re.findall(r'\d+', throughput)]
+        #if (len(throughput)>0):
+            #throughput=throughput[0]
+        
+        
+        
+        
+
+        return[SlotSet("throughput_dyn_slot",None),SlotSet("throughput_UL_slot",None),SlotSet("throughput_DL_slot",None),SlotSet("throughput_ca_slot",None)]
         
 
 
@@ -965,7 +1061,7 @@ class ActionUnLockSector(Action):
 
         elif(('1800' in bande4g) or ('2100' in bande4g)):
             sectors= manageCodeSiteSector(codeSite , bande4g ,sector_to_unblock)
-            dispatcher.utter_message(text="this is site 4 "+str(sectors)) 
+            #dispatcher.utter_message(text="this is site 4 "+str(sectors)) 
             if ('1800' in bande4g ):
                 bande4g=0
             else:
